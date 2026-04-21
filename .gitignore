@@ -1,0 +1,62 @@
+# ─── Node ─────────────────────────────────────────────
+node_modules/
+dist/
+build/
+.svelte-kit/
+*.log
+.npm
+.pnpm-debug.log
+package-lock.json
+
+# ─── Python ───────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ─── Generated data ───────────────────────────────────
+# Source dictionaries (re-extracted from v1 or external sources)
+data/jsonl/
+data/indices/
+data/raw/
+
+# Built indices for web (regenerate via scripts/)
+public/indices/*.zst
+public/indices/*.fst
+public/indices/*.msgpack
+
+# v1 DB symlinks/copies if any
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+
+# ─── Editor / OS ──────────────────────────────────────
+.DS_Store
+.idea/
+.vscode/settings.json
+*.swp
+*~
+
+# ─── Secrets / config ─────────────────────────────────
+.env
+.env.local
+.env.production
+.dev.vars
+wrangler.toml.local
+
+# ─── Test artifacts ───────────────────────────────────
+coverage/
+playwright-report/
+test-results/
+*.lcov
+
+# ─── Claude Code ──────────────────────────────────────
+.claude/
+
+# ─── Internal docs (keep architecture/roadmap public) ─
+NOTES.md
+TODO.local.md

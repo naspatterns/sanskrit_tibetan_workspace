@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nighantu.haMsa.io/schema/entry.json",
+  "title": "Nighaṇṭu Dictionary Entry",
+  "description": "JSONL line schema. Each entry = one dictionary headword.",
+  "type": "object",
+  "required": ["id", "dict", "headword", "headword_norm", "lang"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*-[0-9]+$",
+      "description": "Stable globally unique ID. Format: {dict_slug}-{seq}. e.g., 'mw-00001'."
+    },
+    "dict": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "Source dictionary slug (matches data/sources/<slug>/)."
+    },
+    "headword": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Original headword as-is from source (with diacritics, Devanagari, etc.)."
+    },
+    "headword_norm": {
+      "type": "string",
+      "description": "Normalized search key. NFD + strip combining marks + lowercase, after script detection (Devanagari/HK→IAST). Used for exact lookup."
+    },
+    "headword_iast": {
+      "type": "string",
+      "description": "Headword in IAST form (with diacritics preserved). Useful for display."
+    },
+    "lang": {
+      "type": "string",
+      "enum": ["skt", "bo", "zh", "en", "de", "fr", "la", "pi", "ko"],
+      "description": "Headword language. skt=Sanskrit, bo=Tibetan, zh=Chinese, pi=Pali."
+    },
+    "tier": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 3,
+      "description": "Display tier. 1=primary (auto-expand), 2=secondary, 3=auxiliary (collapsed)."
+    },
+    "body": {
+      "type": "object",
+      "required": ["plain"],
+      "properties": {
+        "raw": {
+          "type": "string",
+          "description": "Original markup from source (HTML/XDXF/etc.). Optional, for archival."
+        },
+        "plain": {
+          "type": "string",
+          "description": "Plain text body for display + search."
+        },
+        "snippet_50": {
+          "type": "string",
+          "maxLength": 60,
+          "description": "Pre-computed 50-char snippet for Zone A. Avoids runtime SUBSTR."
+        },
+        "snippet_200": {
+          "type": "string",
+          "maxLength": 220,
+          "description": "Pre-computed 200-char snippet for Zone A summary."
+        },
+        "ko": {
+          "type": "string",
+          "description": "Korean translation (when available, e.g. for German/French/Latin sources)."
+        }
+      }
+    },
+    "license": {
+      "type": "string",
+      "description": "SPDX-style license identifier. e.g., 'public-domain', 'CC-BY-SA-4.0'."
+    },
+    "source_meta": {
+      "type": "object",
+      "description": "Source-specific metadata (page number, edition, entry_num, etc.). Free-form.",
+      "additionalProperties": true
+    },
+    "cross_refs": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Other entry IDs this entry references (cf., see, etc.). Used for frequency ranking."
+    }
+  },
+  "additionalProperties": false,
+  "examples": [
+    {
+      "id": "mw-00001",
+      "dict": "monier-williams",
+      "headword": "dharma",
+      "headword_norm": "dharma",
+      "headword_iast": "dharma",
+      "lang": "skt",
+      "tier": 1,
+      "body": {
+        "plain": "m. (rarely n.) that which is established or firm, steadfast decree, statute, ordinance, law; usage, practice, customary observance or prescribed conduct, duty; right, justice...",
+        "snippet_50": "m. that which is established or firm, steadfa…",
+        "snippet_200": "m. (rarely n.) that which is established or firm, steadfast decree, statute, ordinance, law; usage, practice, customary observance or prescribed conduct, duty; right…"
+      },
+      "license": "public-domain",
+      "source_meta": { "page": "510", "edition": "1899" },
+      "cross_refs": ["mw-00002", "mw-04521"]
+    }
+  ]
+}
