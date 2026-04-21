@@ -1,0 +1,18 @@
+{
+  "slug": "decl-b2",
+  "name": "Heritage Declension B-2 (Sanskrit → English)",
+  "short_name": "Decl-B2",
+  "v1_name": "decl-b2.apple",
+  "family": "heritage-decl",
+  "lang": "skt",
+  "target_lang": "en",
+  "direction": "skt-to-en",
+  "priority": 92,
+  "tier": 3,
+  "license": "unverified",
+  "source_format": "apple_dict",
+  "expected_entries": 30242,
+  "input_script": "iast",
+  "exclude_from_search": true,
+  "used_by": "declension-tab"
+}

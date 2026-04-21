@@ -1,0 +1,18 @@
+{
+  "slug": "mw-english-sanskrit",
+  "name": "Monier-Williams English-Sanskrit Dictionary",
+  "short_name": "MW-ES",
+  "v1_name": "mwes.dict",
+  "family": "mw",
+  "lang": "en",
+  "target_lang": "skt",
+  "direction": "en-to-skt",
+  "priority": 12,
+  "tier": 2,
+  "license": "public-domain",
+  "source_format": "xdxf",
+  "source_url": "https://www.sanskrit-lexicon.uni-koeln.de/scans/MW72Scan/",
+  "edition": "1851",
+  "expected_entries": 32503,
+  "input_script": "iast"
+}

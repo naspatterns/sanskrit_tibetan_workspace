@@ -1,0 +1,15 @@
+{
+  "slug": "computer-terms-sanskrit",
+  "name": "Computer Terms (Sanskrit)",
+  "short_name": "CompSkt",
+  "v1_name": "computer-skt.apple",
+  "lang": "skt",
+  "target_lang": "en",
+  "direction": "skt-to-en",
+  "priority": 89,
+  "tier": 3,
+  "license": "unverified",
+  "source_format": "apple_dict",
+  "expected_entries": 1499,
+  "input_script": "iast"
+}

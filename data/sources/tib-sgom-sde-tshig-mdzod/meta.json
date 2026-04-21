@@ -1,0 +1,16 @@
+{
+  "slug": "tib-sgom-sde-tshig-mdzod",
+  "name": "Sgom sde tshig mdzod chen mo",
+  "short_name": "SgomSde",
+  "v1_name": "tib_58-sgom_sde_tshig_mdzod_chen_mo",
+  "lang": "bo",
+  "target_lang": "bo",
+  "direction": "bo-to-bo",
+  "priority": 89,
+  "tier": 3,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://github.com/christiansteinert/tibetan-dictionary",
+  "expected_entries": 13409,
+  "input_script": "wylie"
+}

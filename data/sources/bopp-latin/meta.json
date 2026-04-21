@@ -1,0 +1,17 @@
+{
+  "slug": "bopp-latin",
+  "name": "Bopp Sanskrit-Latin Glossarium",
+  "short_name": "Bopp-L",
+  "v1_name": "boppsl.dict",
+  "lang": "skt",
+  "target_lang": "la",
+  "direction": "skt-to-la",
+  "priority": 54,
+  "tier": 2,
+  "license": "public-domain",
+  "source_format": "xdxf",
+  "source_url": "https://www.sanskrit-lexicon.uni-koeln.de/scans/BOPScan/",
+  "edition": "1847",
+  "expected_entries": 9006,
+  "input_script": "hk"
+}

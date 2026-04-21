@@ -17,10 +17,13 @@
 
 ---
 
-## Phase 1: 데이터 추출 + 검증 (1주)
+## Phase 1: 데이터 추출 + 검증 ✅ (2026-04-22 완료)
 
 **목표**: v1의 dict.sqlite → JSONL 변환 + 데이터 품질 검증.
 v1 데이터를 그대로 활용 (사전별 재파싱 안 함). 빠른 시작.
+
+**산출물**: 130 JSONL (3,364,487 entries, 5.4GB) · 130 meta.json · 0 schema errors.
+세부 리포트: `data/reports/` (duplicates, slug-mapping, translation-coverage, phase1-summary)
 
 ### 1.1 v1 → JSONL 추출
 - `scripts/extract_from_v1.py` 작성
@@ -53,21 +56,36 @@ v1 데이터를 그대로 활용 (사전별 재파싱 안 함). 빠른 시작.
 - 리포트: `data/reports/translation_coverage.md`
 - Phase 2에서 재번역 대상 식별
 
-### 1.6 JSON Schema 검증
+### 1.6 **역검색 데이터 준비 (FB-8)**
+- `scripts/lib/reverse_tokens.py`
+  - 영어 토크나이저: lowercase + 알파벳만 + stopword 제거 (학술 gloss 약어
+    `m. f. n. cf. esp. pl. sg.` 포함), 위치 가중치, 중복 제거, top 20
+  - 한국어 토크나이저: 공백 + 구두점 split, 한자 병기 `법(法)` → `[법, 法]` 둘 다 유지
+- `extract_from_v1.py`가 각 엔트리에 `reverse.en[]`, `reverse.ko[]` 자동 채움
+- 이미 역방향인 사전 3개 (Apte Eng→Skt, Borooah, MW Eng→Skt):
+  `meta.json.direction: "en-to-skt"` 명시, 평소 검색 경로로 편입
+- Phase 2에서 `build_reverse_index.py`가 이걸 모아 역인덱스 생성
+
+### 1.7 JSON Schema 검증
 - `scripts/verify.py`:
   - schema.json 준수
   - `headword_iast` 유효성 (허용 unicode 범위)
   - priority 중복/gap 체크
   - body 비어있는 엔트리 flag
+  - `reverse.en[]`: ASCII 알파벳, 최대 40개
+  - `reverse.ko[]`: 한글·한자, 최대 40개
+  - `meta.json.exclude_from_search=true` 사전 = declension family 검증
 - CI에서 자동 실행 (PR 게이트)
 
-### 1.7 산출물
-- 135개 사전 JSONL (~500MB raw, ~100MB zstd)
-- 135개 `meta.json` (priority 부여)
+### 1.8 산출물
+- 135개 사전 JSONL (~600MB raw incl. reverse tokens, ~120MB zstd)
+- 135개 `meta.json` (priority + direction)
 - 번역 coverage 리포트
 - 검증 스크립트 + 스키마
+- `LICENSES.md` (v1에서 복사, v2 배포 정책 추가)
 
-**완료 기준**: 모든 사전이 JSONL + meta.json 완비, `verify.py` 통과, 번역 coverage 리포트 생성.
+**완료 기준**: 모든 사전이 JSONL + meta.json 완비, `verify.py` 통과, 번역 coverage
+리포트 생성, 각 엔트리에 `reverse` 필드 채워짐 (body가 비어있지 않은 경우).
 
 ---
 
@@ -106,14 +124,25 @@ v1 데이터를 그대로 활용 (사전별 재파싱 안 함). 빠른 시작.
 - 입력: 1M 고유 headword
 - 출력: `public/indices/autocomplete.fst` (~3MB)
 
-### 2.4 벤치마크
+### 2.4 **역검색 인덱스 빌드 (FB-8)**
+- `scripts/build_reverse_index.py`
+- 입력: Phase 1에서 생성된 모든 JSONL의 `reverse.en[]`, `reverse.ko[]`
+- 출력:
+  - `public/indices/reverse_en.msgpack.zst` (~15MB, 토큰 → [(entry_id, weight)])
+  - `public/indices/reverse_ko.msgpack.zst` (~5MB)
+- 토큰당 상위 N개 엔트리만 유지 (priority 순)
+- 포함될 사전: 명시적 Eng→Skt 역방향 3개는 평소 인덱스로, 나머지는 역인덱스로
+
+### 2.5 벤치마크
 - 메모리 로드 시간 측정
 - 1000 무작위 쿼리 평균 응답 시간
 - 모바일 디바이스 테스트
+- 역검색 응답 시간 (Eng/Ko 입력 → 결과)
 
 **완료 기준**:
 - Tier 0 로드 <2s on 4G
 - 검색 응답 <50ms (캐시 hit)
+- 역검색 <100ms (Tier 0 인덱스 hit)
 
 ---
 
@@ -128,8 +157,11 @@ v1 데이터를 그대로 활용 (사전별 재파싱 안 함). 빠른 시작.
 - Playwright E2E
 
 ### 3.2 핵심 컴포넌트
-- `<SearchBar>`: 자동완성 (FST), HK/IAST/Devanagari 입력 호환
+- `<SearchBar>`: 자동완성 (FST), HK/IAST/Devanagari/한글/Latin 입력 호환
+  - **입력 문자 감지 (FB-8)**: Latin alphabet-only → 역검색 모드, 한글 → Ko
+    역인덱스, IAST/Devanagari/Wylie → 표제어 검색
 - `<ResultList>`: 4-zone 레이아웃 (A/B/D/C), **priority 순 정렬**
+  - 역검색 결과는 별도 섹션 ("영어/한국어 gloss로 찾음") (FB-8)
 - `<DictBlock>`: 사전별 엔트리
   - 표제어는 **항상 `headword_iast`** 표시 (FB-4)
   - 원본과 IAST가 다를 때만 "원본: ..." 작게 표시
@@ -375,3 +407,18 @@ v2가 안정화된 후 검토:
   - `Kosha` (कोश) — 대중 친숙도 중간
   - `Vidya`, `Shabda` 등 — 너무 광범위한 의미
 - **재검토 시점**: 공개 배포 직전 여론 검토
+
+### ADR-008: 역검색 (FB-8) — inline `reverse` 필드 + 별도 역인덱스
+- **결정**: Phase 1에서 각 JSONL 엔트리에 `reverse.en[]` + `reverse.ko[]`를 inline으로
+  채우고, Phase 2에서 `build_reverse_index.py`가 모아 별도 msgpack 역인덱스 생성.
+  명시적 Eng→Skt 사전 3개는 `direction: "en-to-skt"`로 표기해 정상 검색 경로로 편입.
+  티벳어 역검색은 body 토큰 추출에 전적으로 의존.
+- **이유**:
+  - v1에 Eng→Bo 사전이 없어 티벳어 역검색은 body 추출이 유일한 경로
+  - inline 저장: JSONL single source of truth 유지, 재빌드 시 데이터 일관성 보장
+  - 영어·한국어 토크나이저 Phase 1 완비 → Phase 2 인덱스는 순수 조합 작업
+- **대안 검토**:
+  - *전문 검색 (FTS5)만으로*: 노이즈 크고, Tier 0 캐시 불가 → 사용자 체감 느림
+  - *별도 역 JSONL 파일*: inline vs separate 논쟁 — inline이 재생성 편리
+  - *규칙 기반 추출 없이 raw body 저장*: 쿼리 시 토크나이징 부담, 브라우저에서 느림
+- **재검토 시점**: Phase 3 UI 완성 후 사용자 피드백 수집 (특히 한국어 조사 처리)

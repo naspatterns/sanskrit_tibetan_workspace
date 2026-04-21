@@ -1,0 +1,16 @@
+{
+  "slug": "tib-dung-dkar-tshig-mdzod",
+  "name": "Dung dkar tshig mdzod chen mo (native)",
+  "short_name": "DungDkar",
+  "v1_name": "tib_34-dung-dkar-tshig-mdzod-chen-mo-Tib",
+  "lang": "bo",
+  "target_lang": "bo",
+  "direction": "bo-to-bo",
+  "priority": 45,
+  "tier": 2,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://github.com/christiansteinert/tibetan-dictionary",
+  "expected_entries": 13310,
+  "input_script": "wylie"
+}

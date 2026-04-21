@@ -1,0 +1,16 @@
+{
+  "slug": "tib-tibetan-language-school",
+  "name": "Tibetan Language School",
+  "short_name": "TibLangSch",
+  "v1_name": "tib_68-tibetanlanguage-school",
+  "lang": "bo",
+  "target_lang": "en",
+  "direction": "bo-to-en",
+  "priority": 89,
+  "tier": 3,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://github.com/christiansteinert/tibetan-dictionary",
+  "expected_entries": 438,
+  "input_script": "wylie"
+}

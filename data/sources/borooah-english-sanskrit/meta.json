@@ -1,0 +1,17 @@
+{
+  "slug": "borooah-english-sanskrit",
+  "name": "Borooah English-Sanskrit Dictionary",
+  "short_name": "Borooah",
+  "v1_name": "bores.dict",
+  "lang": "en",
+  "target_lang": "skt",
+  "direction": "en-to-skt",
+  "priority": 13,
+  "tier": 2,
+  "license": "public-domain",
+  "source_format": "xdxf",
+  "source_url": "https://www.sanskrit-lexicon.uni-koeln.de/scans/BORScan/",
+  "edition": "1877-1887",
+  "expected_entries": 24608,
+  "input_script": "iast"
+}

@@ -1,0 +1,19 @@
+{
+  "slug": "monier-williams",
+  "name": "Monier-Williams Sanskrit-English Dictionary (1899)",
+  "short_name": "MW",
+  "v1_name": "mwse.dict",
+  "family": "mw",
+  "lang": "skt",
+  "target_lang": "en",
+  "direction": "skt-to-en",
+  "priority": 2,
+  "tier": 1,
+  "license": "public-domain",
+  "source_format": "xdxf",
+  "source_url": "https://www.sanskrit-lexicon.uni-koeln.de/scans/MWScan/",
+  "edition": "1899",
+  "expected_entries": 223501,
+  "input_script": "hk",
+  "sense_separator": ";|\\s-?\\d+[a-z]?\\s"
+}

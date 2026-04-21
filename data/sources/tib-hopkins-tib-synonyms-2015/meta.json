@@ -1,0 +1,18 @@
+{
+  "slug": "tib-hopkins-tib-synonyms-2015",
+  "name": "Hopkins Tibetan Synonyms 2015",
+  "short_name": "Hopkins-TSyn15",
+  "v1_name": "tib_17-Hopkins-TibetanSynonyms2015",
+  "family": "hopkins",
+  "lang": "bo",
+  "target_lang": "bo",
+  "direction": "bo-to-bo",
+  "priority": 86,
+  "tier": 3,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://github.com/christiansteinert/tibetan-dictionary",
+  "edition": "2015",
+  "expected_entries": 177,
+  "input_script": "wylie"
+}

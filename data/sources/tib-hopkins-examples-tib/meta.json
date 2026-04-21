@@ -1,0 +1,18 @@
+{
+  "slug": "tib-hopkins-examples-tib",
+  "name": "Hopkins Examples (Tibetan) 2015",
+  "short_name": "Hopkins-ExT",
+  "v1_name": "tib_14-Hopkins-Examples,Tib",
+  "family": "hopkins",
+  "lang": "bo",
+  "target_lang": "bo",
+  "direction": "bo-to-bo",
+  "priority": 85,
+  "tier": 3,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://github.com/christiansteinert/tibetan-dictionary",
+  "edition": "2015",
+  "expected_entries": 265,
+  "input_script": "wylie"
+}

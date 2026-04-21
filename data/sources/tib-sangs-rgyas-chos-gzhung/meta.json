@@ -1,0 +1,16 @@
+{
+  "slug": "tib-sangs-rgyas-chos-gzhung",
+  "name": "Sangs rgyas chos gzhung tshig mdzod",
+  "short_name": "SangsRG",
+  "v1_name": "tib_60-sngas_rgyas_chos_gzhung_tshig_mdzod",
+  "lang": "bo",
+  "target_lang": "bo",
+  "direction": "bo-to-bo",
+  "priority": 89,
+  "tier": 3,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://github.com/christiansteinert/tibetan-dictionary",
+  "expected_entries": 10977,
+  "input_script": "wylie"
+}

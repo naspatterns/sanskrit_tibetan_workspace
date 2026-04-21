@@ -1,0 +1,17 @@
+{
+  "slug": "tib-chandra-das-scan",
+  "name": "Chandra Das Tibetan-English (Scan)",
+  "short_name": "ChandraDas",
+  "v1_name": "tib_65-ChandraDas_Scan",
+  "lang": "bo",
+  "target_lang": "en",
+  "direction": "bo-to-en",
+  "priority": 70,
+  "tier": 3,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://github.com/christiansteinert/tibetan-dictionary",
+  "edition": "1902",
+  "expected_entries": 20773,
+  "input_script": "wylie"
+}

@@ -1,0 +1,18 @@
+{
+  "slug": "tib-hopkins-tib-synonyms-1992",
+  "name": "Hopkins Tibetan Synonyms 1992",
+  "short_name": "Hopkins-TSyn92",
+  "v1_name": "tib_17-Hopkins-TibetanSynonyms1992",
+  "family": "hopkins",
+  "lang": "bo",
+  "target_lang": "bo",
+  "direction": "bo-to-bo",
+  "priority": 86,
+  "tier": 3,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://github.com/christiansteinert/tibetan-dictionary",
+  "edition": "1992",
+  "expected_entries": 277,
+  "input_script": "wylie"
+}

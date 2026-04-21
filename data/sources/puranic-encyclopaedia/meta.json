@@ -1,0 +1,16 @@
+{
+  "slug": "puranic-encyclopaedia",
+  "name": "Purāṇic Encyclopaedia (Vettam Mani)",
+  "short_name": "PurEnc",
+  "v1_name": "pese.gretil",
+  "lang": "skt",
+  "target_lang": "en",
+  "direction": "skt-to-en",
+  "priority": 83,
+  "tier": 3,
+  "license": "academic-open",
+  "source_format": "gretil",
+  "source_url": "http://gretil.sub.uni-goettingen.de/gretil.html",
+  "expected_entries": 8832,
+  "input_script": "iast"
+}

@@ -1,0 +1,47 @@
+[project]
+name = "sanskrit-tibetan-workspace"
+version = "0.1.0"
+description = "Sanskrit-Tibetan-Chinese multi-dictionary search + declension + reader web workspace (v2)"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+license = { text = "MIT" }
+authors = [{ name = "haMsa", email = "naspatterns@gmail.com" }]
+
+dependencies = [
+    # JSONL / JSON Schema validation
+    "jsonschema>=4.21",
+    "fastjsonschema>=2.19",
+    # XDXF / HTML parsing (lxml for Sanskrit XDXF, beautifulsoup4 for Apple dict HTML)
+    "lxml>=5.2",
+    "beautifulsoup4>=4.12",
+    # Progress bars during long extracts
+    "tqdm>=4.66",
+    # Compression for Phase 2 indices (msgpack + zstd)
+    "msgpack>=1.0",
+    "zstandard>=0.22",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+    "ruff>=0.4",
+]
+
+[tool.uv]
+# Let uv manage the Python toolchain automatically per .python-version
+managed = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-ra --strict-markers"
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "UP", "B", "SIM"]
+ignore = ["E501"]  # line length handled by formatter

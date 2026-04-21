@@ -1,0 +1,16 @@
+{
+  "slug": "ashtadhyayi-anuvrtti",
+  "name": "Aṣṭādhyāyī (Anuvṛtti commentary)",
+  "short_name": "Aṣṭ-Anv",
+  "v1_name": "ashtadhyayi-anv.apple",
+  "family": "ashtadhyayi",
+  "lang": "skt",
+  "target_lang": "sa",
+  "direction": "skt-to-sa",
+  "priority": 65,
+  "tier": 2,
+  "license": "unverified",
+  "source_format": "apple_dict",
+  "expected_entries": 3983,
+  "input_script": "devanagari"
+}

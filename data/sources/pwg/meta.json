@@ -1,0 +1,19 @@
+{
+  "slug": "pwg",
+  "name": "Böhtlingk & Roth — Sanskrit-Wörterbuch (großes Wörterbuch)",
+  "short_name": "PWG",
+  "v1_name": "pwg.dict",
+  "family": "bothlingk",
+  "lang": "skt",
+  "target_lang": "de",
+  "direction": "skt-to-de",
+  "priority": 7,
+  "tier": 1,
+  "license": "public-domain",
+  "source_format": "xdxf",
+  "source_url": "https://www.sanskrit-lexicon.uni-koeln.de/scans/PWGScan/",
+  "edition": "1855-1875",
+  "expected_entries": 122730,
+  "input_script": "hk",
+  "sense_separator": ";"
+}

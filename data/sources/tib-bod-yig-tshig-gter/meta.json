@@ -1,0 +1,16 @@
+{
+  "slug": "tib-bod-yig-tshig-gter",
+  "name": "Bod yig tshig gter rgya mtsho",
+  "short_name": "BodYigGter",
+  "v1_name": "tib_62-bod_yig_tshig_gter_rgya_mtsho",
+  "lang": "bo",
+  "target_lang": "bo",
+  "direction": "bo-to-bo",
+  "priority": 28,
+  "tier": 2,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://github.com/christiansteinert/tibetan-dictionary",
+  "expected_entries": 81935,
+  "input_script": "wylie"
+}

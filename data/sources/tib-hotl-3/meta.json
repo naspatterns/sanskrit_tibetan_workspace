@@ -1,0 +1,17 @@
+{
+  "slug": "tib-hotl-3",
+  "name": "HOTL 3",
+  "short_name": "HOTL-3",
+  "v1_name": "tib_67-hotl3",
+  "family": "hotl",
+  "lang": "bo",
+  "target_lang": "en",
+  "direction": "bo-to-en",
+  "priority": 89,
+  "tier": 3,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://github.com/christiansteinert/tibetan-dictionary",
+  "expected_entries": 249,
+  "input_script": "wylie"
+}

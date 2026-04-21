@@ -1,0 +1,18 @@
+{
+  "slug": "decl-a03",
+  "name": "Heritage Declension A-03 (Sanskrit → English)",
+  "short_name": "Decl-A03",
+  "v1_name": "decl-a03.apple",
+  "family": "heritage-decl",
+  "lang": "skt",
+  "target_lang": "en",
+  "direction": "skt-to-en",
+  "priority": 90,
+  "tier": 3,
+  "license": "unverified",
+  "source_format": "apple_dict",
+  "expected_entries": 30080,
+  "input_script": "iast",
+  "exclude_from_search": true,
+  "used_by": "declension-tab"
+}

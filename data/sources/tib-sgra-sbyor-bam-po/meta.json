@@ -1,0 +1,16 @@
+{
+  "slug": "tib-sgra-sbyor-bam-po",
+  "name": "Sgra sbyor bam po gnyis pa",
+  "short_name": "SgraSbyor",
+  "v1_name": "tib_64-sgra-sbyor-bam-po-gnyis-pa",
+  "lang": "bo",
+  "target_lang": "bo",
+  "direction": "bo-to-bo",
+  "priority": 89,
+  "tier": 3,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://github.com/christiansteinert/tibetan-dictionary",
+  "expected_entries": 418,
+  "input_script": "wylie"
+}

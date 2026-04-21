@@ -1,0 +1,15 @@
+{
+  "slug": "amarakosa",
+  "name": "Amarakośa (Sanskrit thesaurus)",
+  "short_name": "Amarakośa",
+  "v1_name": "amara.apple",
+  "lang": "skt",
+  "target_lang": "sa",
+  "direction": "skt-to-sa",
+  "priority": 18,
+  "tier": 2,
+  "license": "unverified",
+  "source_format": "apple_dict",
+  "expected_entries": 3137,
+  "input_script": "devanagari"
+}

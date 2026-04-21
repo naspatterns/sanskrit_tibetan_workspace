@@ -1,0 +1,17 @@
+{
+  "slug": "tib-jaeschke-scan",
+  "name": "Jaeschke Tibetan-English Dictionary (Scan)",
+  "short_name": "Jaeschke",
+  "v1_name": "tib_66-Jaeschke_Scan",
+  "lang": "bo",
+  "target_lang": "en",
+  "direction": "bo-to-en",
+  "priority": 27,
+  "tier": 2,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://github.com/christiansteinert/tibetan-dictionary",
+  "edition": "1881",
+  "expected_entries": 154112,
+  "input_script": "wylie"
+}

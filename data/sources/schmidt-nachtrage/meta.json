@@ -1,0 +1,16 @@
+{
+  "slug": "schmidt-nachtrage",
+  "name": "Schmidt Nachträge zum Petersburger Wörterbuch",
+  "short_name": "Schmidt",
+  "v1_name": "schnzsw.dict",
+  "lang": "skt",
+  "target_lang": "de",
+  "direction": "skt-to-de",
+  "priority": 51,
+  "tier": 2,
+  "license": "public-domain",
+  "source_format": "xdxf",
+  "source_url": "https://www.sanskrit-lexicon.uni-koeln.de/scans/SCHScan/",
+  "expected_entries": 28751,
+  "input_script": "hk"
+}

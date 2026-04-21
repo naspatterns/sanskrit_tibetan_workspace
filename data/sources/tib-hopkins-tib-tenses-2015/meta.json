@@ -1,0 +1,18 @@
+{
+  "slug": "tib-hopkins-tib-tenses-2015",
+  "name": "Hopkins Tibetan Tenses 2015",
+  "short_name": "Hopkins-TTen",
+  "v1_name": "tib_19-Hopkins-TibetanTenses2015",
+  "family": "hopkins",
+  "lang": "bo",
+  "target_lang": "bo",
+  "direction": "bo-to-bo",
+  "priority": 87,
+  "tier": 3,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://github.com/christiansteinert/tibetan-dictionary",
+  "edition": "2015",
+  "expected_entries": 4846,
+  "input_script": "wylie"
+}

@@ -1,0 +1,16 @@
+{
+  "slug": "tib-gangs-can-mkhas-grub",
+  "name": "Gangs can mkhas grub rim byon ming mdzod",
+  "short_name": "GangsCan",
+  "v1_name": "tib_61-gangs_can_mkhas_grub_rim_byon_ming_mdzod",
+  "lang": "bo",
+  "target_lang": "bo",
+  "direction": "bo-to-bo",
+  "priority": 89,
+  "tier": 3,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://github.com/christiansteinert/tibetan-dictionary",
+  "expected_entries": 2242,
+  "input_script": "wylie"
+}

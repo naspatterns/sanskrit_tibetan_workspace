@@ -1,0 +1,16 @@
+{
+  "slug": "tib-bod-rgya-nang-don",
+  "name": "Bod rgya nang don rig pai tshig mdzod",
+  "short_name": "BodRgyaND",
+  "v1_name": "tib_54-bod_rgya_nang_don_rig_pai_tshig_mdzod",
+  "lang": "bo",
+  "target_lang": "bo",
+  "direction": "bo-to-bo",
+  "priority": 88,
+  "tier": 3,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://github.com/christiansteinert/tibetan-dictionary",
+  "expected_entries": 8947,
+  "input_script": "wylie"
+}

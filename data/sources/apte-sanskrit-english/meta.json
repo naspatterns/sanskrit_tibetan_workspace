@@ -1,0 +1,19 @@
+{
+  "slug": "apte-sanskrit-english",
+  "name": "Apte Practical Sanskrit-English Dictionary (1890)",
+  "short_name": "Apte",
+  "v1_name": "aptese.dict",
+  "family": "apte",
+  "lang": "skt",
+  "target_lang": "en",
+  "direction": "skt-to-en",
+  "priority": 1,
+  "tier": 1,
+  "license": "public-domain",
+  "source_format": "xdxf",
+  "source_url": "https://www.sanskrit-lexicon.uni-koeln.de/scans/AP90Scan/",
+  "edition": "1890",
+  "expected_entries": 31750,
+  "input_script": "hk",
+  "sense_separator": ";|\\s-\\s?\\d+[a-z]?\\s|\\s\\d+[a-z]?\\.\\s"
+}

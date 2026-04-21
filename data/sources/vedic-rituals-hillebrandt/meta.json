@@ -1,0 +1,15 @@
+{
+  "slug": "vedic-rituals-hillebrandt",
+  "name": "Vedic Rituals (Hillebrandt)",
+  "short_name": "VedRit",
+  "v1_name": "vedic-rituals.apple",
+  "lang": "skt",
+  "target_lang": "en",
+  "direction": "skt-to-en",
+  "priority": 82,
+  "tier": 3,
+  "license": "unverified",
+  "source_format": "apple_dict",
+  "expected_entries": 6176,
+  "input_script": "iast"
+}

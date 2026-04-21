@@ -1,0 +1,19 @@
+{
+  "slug": "macdonell",
+  "name": "A Practical Sanskrit Dictionary (Macdonell, 1924)",
+  "short_name": "Macdonell",
+  "v1_name": "macdse.dict",
+  "family": "macdonell",
+  "lang": "skt",
+  "target_lang": "en",
+  "direction": "skt-to-en",
+  "priority": 3,
+  "tier": 1,
+  "license": "public-domain",
+  "source_format": "xdxf",
+  "source_url": "https://www.sanskrit-lexicon.uni-koeln.de/scans/MDScan/",
+  "edition": "1924",
+  "expected_entries": 20787,
+  "input_script": "hk",
+  "sense_separator": ";|\\s-?\\d+[a-z]?\\s"
+}

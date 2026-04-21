@@ -1,0 +1,16 @@
+{
+  "slug": "tib-dag-tshig-gsar-bsgrigs",
+  "name": "Dag tshig gsar bsgrigs (native)",
+  "short_name": "DagTshig",
+  "v1_name": "tib_37-dag_tshig_gsar_bsgrigs-Tib",
+  "lang": "bo",
+  "target_lang": "bo",
+  "direction": "bo-to-bo",
+  "priority": 46,
+  "tier": 2,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://github.com/christiansteinert/tibetan-dictionary",
+  "expected_entries": 6938,
+  "input_script": "wylie"
+}

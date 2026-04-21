@@ -1,0 +1,17 @@
+{
+  "slug": "vacaspatyam",
+  "name": "Vācaspatyam (Tārānātha Tarkavācaspati)",
+  "short_name": "Vācaspatyam",
+  "v1_name": "vacaspatyam.apple",
+  "lang": "skt",
+  "target_lang": "sa",
+  "direction": "skt-to-sa",
+  "priority": 9,
+  "tier": 1,
+  "license": "unverified",
+  "source_format": "apple_dict",
+  "edition": "1873-1884",
+  "expected_entries": 48351,
+  "input_script": "devanagari",
+  "sense_separator": ";"
+}

@@ -1,0 +1,17 @@
+{
+  "slug": "tib-hopkins-comment",
+  "name": "Hopkins Comments",
+  "short_name": "Hopkins-Cmt",
+  "v1_name": "tib_06-Hopkins-Comment",
+  "family": "hopkins",
+  "lang": "bo",
+  "target_lang": "en",
+  "direction": "bo-to-en",
+  "priority": 85,
+  "tier": 3,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://github.com/christiansteinert/tibetan-dictionary",
+  "expected_entries": 1958,
+  "input_script": "wylie"
+}

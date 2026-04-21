@@ -239,6 +239,64 @@ v2에서의 구체적 해결 전략. Phase 1-3 구현 시 체크리스트로 활
 
 ---
 
+## FB-8. 역검색 — 영어/한국어로 산스크리트·티벳어 원어 찾기
+
+**증상**: v1은 표제어 방향으로만 검색 가능. 사용자가 "duty"를 영어로 치면
+`dharma`, `kartavya`, `vrata` 같은 산스크리트 원어를 찾을 수 없음 (Apte Eng→Skt
+등 몇몇 역방향 사전을 직접 지목해야 함). 티벳어는 Eng→Bo 사전이 아예 없어
+`byang chub sems dpa'` 같은 원어를 영어 gloss로부터 찾는 경로가 없음. 한국어도
+마찬가지 — `body.ko`가 있어도 그걸로 역검색이 안 됨.
+
+**v2 해결**:
+
+1. **이원화된 전략**
+   - **이미 역방향인 사전** (Apte Eng→Skt, Borooah, MW Eng→Skt): `meta.json`에
+     `direction: "en-to-skt"`로 표기. 정상 검색 경로로 편입. 표제어가 영어이므로
+     사용자가 영어를 치면 exact match로 즉시 반환.
+   - **본문 기반 역인덱스**: Skt→Eng, Bo→Eng 사전의 `body.plain`과 `body.ko`에서
+     gloss 토큰 추출 → 별도 역인덱스 생성.
+
+2. **Phase 1: 각 엔트리에 `reverse` 필드 채움** (schema.json)
+   ```json
+   {
+     "id": "mw-12345",
+     "headword_iast": "agni",
+     "body": { "plain": "m. fire; the god of fire; sacrificial fire; ..." },
+     "reverse": {
+       "en": ["fire", "god", "sacrificial"],
+       "ko": ["불", "화신"]
+     }
+   }
+   ```
+   토큰화는 `scripts/lib/reverse_tokens.py`가 담당:
+   - **영어**: lowercase, 알파벳만, stopword 제거 (`m. f. n. cf. esp. pl. sg. the a an of to from with by in on at`). 정의 앞쪽 30자 내 토큰 우선. 중복 제거, top 20.
+   - **한국어**: 공백 + 구두점 기준 split. 한자 병기 `법(法)`는 **두 토큰 모두 유지** (`법` + `法`). 사용자가 한자 학자일 수 있음. 조사는 Phase 1에서 무시 (Phase 2 `mecab-ko` 검토).
+
+3. **Phase 2: 역인덱스 빌드** — `scripts/build_reverse_index.py`
+   - 전체 JSONL 스캔 → `reverse.en` / `reverse.ko` 토큰 역맵 구성
+   - 출력: `public/indices/reverse_en.msgpack.zst`, `reverse_ko.msgpack.zst`
+   - 구조: `{token: [(entry_id, weight), ...]}` 토큰당 상위 N개 엔트리만
+   - 크기 예상: 영어 ~15MB, 한국어 ~5MB (압축 후)
+
+4. **Phase 3: UI 감지**
+   - 검색 바가 입력 문자 감지:
+     - Latin alphabet-only → `en-to-skt` 사전 우선 + 역인덱스 조회
+     - 한글 → `ko` 역인덱스 조회
+     - IAST/Devanagari/Wylie → 기존 표제어 검색
+   - 역검색 결과 섹션은 별도 "영어/한국어 gloss로 찾음" 라벨 표시 (원본과 구분)
+
+5. **커버리지 예상 (Phase 1 직후)**
+   - 영어 역검색: 모든 Skt→En, Bo→En 사전 (~100 사전) → **매우 넓음**
+   - 한국어 역검색: `body.ko` 있는 엔트리만 → Phase 2 재번역 전까지 30-50%,
+     이후 90%+
+
+6. **검증**
+   - `verify.py`: `reverse.en` 토큰 40개 이하, ASCII 알파벳만
+   - `reverse.ko` 토큰 40개 이하, 한글 또는 한자
+   - 빈 `reverse` 블록은 허용 (body가 숫자·코드뿐일 수 있음)
+
+---
+
 ## 반영 우선순위 (Phase 대응)
 
 | FB | Phase 1 | Phase 2 | Phase 3 | Phase 3.5 |
@@ -250,8 +308,9 @@ v2에서의 구체적 해결 전략. Phase 1-3 구현 시 체크리스트로 활
 | FB-5 Declension 탭 | exclude 플래그 | declension 빌드 | — | 탭 구현 |
 | FB-6 다크모드 | — | — | theme.css + store | — |
 | FB-7 이름 변경 | ✅ 완료 | — | — | — |
+| FB-8 역검색 | `reverse` 필드 + direction | 역인덱스 빌드 | 언어 감지 UI | — |
 
-Phase 1이 끝난 시점에 FB-1~5의 데이터 레이어가 완성되어 있어야 함.
+Phase 1이 끝난 시점에 FB-1~5, FB-8의 데이터 레이어가 완성되어 있어야 함.
 
 ---
 

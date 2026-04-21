@@ -1,0 +1,15 @@
+{
+  "slug": "jnu-tinanta",
+  "name": "Tiṅanta (JNU Verb Database)",
+  "short_name": "JNU-Tiṅ",
+  "v1_name": "jnu-tinanta.apple",
+  "lang": "skt",
+  "target_lang": "sa",
+  "direction": "skt-to-sa",
+  "priority": 67,
+  "tier": 2,
+  "license": "unverified",
+  "source_format": "apple_dict",
+  "expected_entries": 5630,
+  "input_script": "devanagari"
+}

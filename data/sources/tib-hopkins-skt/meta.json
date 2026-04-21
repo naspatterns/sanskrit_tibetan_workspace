@@ -1,0 +1,22 @@
+{
+  "slug": "tib-hopkins-skt",
+  "name": "Hopkins Sanskrit (2015, supersedes 1992)",
+  "short_name": "Hopkins-Skt",
+  "v1_name": "tib_15-Hopkins-Skt2015",
+  "family": "hopkins",
+  "lang": "bo",
+  "target_lang": "skt",
+  "direction": "bo-to-skt",
+  "priority": 43,
+  "tier": 2,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://github.com/christiansteinert/tibetan-dictionary",
+  "edition": "2015",
+  "expected_entries": 14757,
+  "input_script": "wylie",
+  "merged_from": [
+    "tib_15-Hopkins-Skt1992",
+    "tib_15-Hopkins-Skt2015"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "slug": "grassmann-vedic",
+  "name": "Grassmann Wörterbuch zum Rig-Veda",
+  "short_name": "Grassmann",
+  "v1_name": "grasg_a.dict",
+  "family": "grassmann",
+  "lang": "skt",
+  "target_lang": "de",
+  "direction": "skt-to-de",
+  "priority": 55,
+  "tier": 2,
+  "license": "public-domain",
+  "source_format": "xdxf",
+  "source_url": "https://www.sanskrit-lexicon.uni-koeln.de/scans/GRAScan/",
+  "edition": "1873-1875",
+  "expected_entries": 10778,
+  "input_script": "hk",
+  "merged_from": [
+    "grasg_a.dict",
+    "grasg_p.gretil"
+  ]
+}

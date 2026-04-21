@@ -1,0 +1,17 @@
+{
+  "slug": "tib-mahavyutpatti-skt",
+  "name": "Mahāvyutpatti Sanskrit (Steinert)",
+  "short_name": "MVY-Skt",
+  "v1_name": "tib_21-Mahavyutpatti-Skt",
+  "family": "mvy",
+  "lang": "bo",
+  "target_lang": "skt",
+  "direction": "bo-to-skt",
+  "priority": 44,
+  "tier": 2,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://github.com/christiansteinert/tibetan-dictionary",
+  "expected_entries": 9586,
+  "input_script": "wylie"
+}

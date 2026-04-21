@@ -1,0 +1,17 @@
+{
+  "slug": "tib-hackett-definitions",
+  "name": "Hackett Definitions (2015)",
+  "short_name": "Hackett",
+  "v1_name": "tib_05-Hackett-Def2015",
+  "lang": "bo",
+  "target_lang": "en",
+  "direction": "bo-to-en",
+  "priority": 32,
+  "tier": 2,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://github.com/christiansteinert/tibetan-dictionary",
+  "edition": "2015",
+  "expected_entries": 3184,
+  "input_script": "wylie"
+}

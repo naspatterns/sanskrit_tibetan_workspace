@@ -1,0 +1,18 @@
+{
+  "slug": "cappeller",
+  "name": "Cappeller Sanskrit-English Dictionary (1891)",
+  "short_name": "Cappeller",
+  "v1_name": "cappse.dict",
+  "lang": "skt",
+  "target_lang": "en",
+  "direction": "skt-to-en",
+  "priority": 5,
+  "tier": 1,
+  "license": "public-domain",
+  "source_format": "xdxf",
+  "source_url": "https://www.sanskrit-lexicon.uni-koeln.de/scans/CAEScan/",
+  "edition": "1891",
+  "expected_entries": 39872,
+  "input_script": "hk",
+  "sense_separator": ";"
+}

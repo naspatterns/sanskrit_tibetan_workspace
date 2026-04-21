@@ -1,0 +1,16 @@
+{
+  "slug": "dhatupatha-krsnacarya",
+  "name": "Dhātupāṭha (Kṛṣṇācārya commentary)",
+  "short_name": "Dhātu-Kṛ",
+  "v1_name": "dhatupatha-kr.apple",
+  "family": "dhatupatha",
+  "lang": "skt",
+  "target_lang": "sa",
+  "direction": "skt-to-sa",
+  "priority": 62,
+  "tier": 2,
+  "license": "unverified",
+  "source_format": "apple_dict",
+  "expected_entries": 2101,
+  "input_script": "devanagari"
+}

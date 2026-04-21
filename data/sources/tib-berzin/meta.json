@@ -1,0 +1,17 @@
+{
+  "slug": "tib-berzin",
+  "name": "Berzin Tibetan-English",
+  "short_name": "Berzin",
+  "v1_name": "tib_03-Berzin",
+  "family": "berzin",
+  "lang": "bo",
+  "target_lang": "en",
+  "direction": "bo-to-en",
+  "priority": 33,
+  "tier": 2,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://github.com/christiansteinert/tibetan-dictionary",
+  "expected_entries": 1197,
+  "input_script": "wylie"
+}

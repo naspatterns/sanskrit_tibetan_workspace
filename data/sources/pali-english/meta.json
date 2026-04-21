@@ -1,0 +1,16 @@
+{
+  "slug": "pali-english",
+  "name": "Pāli-English Dictionary",
+  "short_name": "Pāli-En",
+  "v1_name": "pali-en.apple",
+  "lang": "pi",
+  "target_lang": "en",
+  "direction": "pi-to-en",
+  "priority": 60,
+  "tier": 1,
+  "license": "unverified",
+  "source_format": "apple_dict",
+  "expected_entries": 49000,
+  "input_script": "iast",
+  "sense_separator": ";"
+}

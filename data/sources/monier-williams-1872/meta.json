@@ -1,0 +1,19 @@
+{
+  "slug": "monier-williams-1872",
+  "name": "Monier-Williams Sanskrit-English Dictionary (1872 edition)",
+  "short_name": "MW1872",
+  "v1_name": "mwse72.dict",
+  "family": "mw",
+  "lang": "skt",
+  "target_lang": "en",
+  "direction": "skt-to-en",
+  "priority": 14,
+  "tier": 2,
+  "license": "public-domain",
+  "source_format": "xdxf",
+  "source_url": "https://www.sanskrit-lexicon.uni-koeln.de/scans/MW72Scan/",
+  "edition": "1872",
+  "expected_entries": 55367,
+  "input_script": "hk",
+  "sense_separator": ";|\\s-?\\d+[a-z]?\\s"
+}

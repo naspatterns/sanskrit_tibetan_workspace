@@ -1,0 +1,15 @@
+{
+  "slug": "amarakosa-context",
+  "name": "Amarakośa with contextual annotations",
+  "short_name": "Amara-Ctx",
+  "v1_name": "amara-ctx.apple",
+  "lang": "skt",
+  "target_lang": "sa",
+  "direction": "skt-to-sa",
+  "priority": 19,
+  "tier": 2,
+  "license": "unverified",
+  "source_format": "apple_dict",
+  "expected_entries": 3790,
+  "input_script": "devanagari"
+}

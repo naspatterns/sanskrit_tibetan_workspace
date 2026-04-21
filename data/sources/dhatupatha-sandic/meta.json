@@ -1,0 +1,16 @@
+{
+  "slug": "dhatupatha-sandic",
+  "name": "Dhātupāṭha (SANDIC)",
+  "short_name": "Dhātu-SD",
+  "v1_name": "dhatupatha.sandic",
+  "family": "dhatupatha",
+  "lang": "skt",
+  "target_lang": "en",
+  "direction": "skt-to-en",
+  "priority": 61,
+  "tier": 2,
+  "license": "unverified",
+  "source_format": "sandic",
+  "expected_entries": 1159,
+  "input_script": "iast"
+}

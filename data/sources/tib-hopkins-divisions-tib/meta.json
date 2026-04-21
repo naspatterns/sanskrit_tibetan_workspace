@@ -1,0 +1,18 @@
+{
+  "slug": "tib-hopkins-divisions-tib",
+  "name": "Hopkins Divisions (Tibetan) 2015",
+  "short_name": "Hopkins-DivT",
+  "v1_name": "tib_12-Hopkins-Divisions,Tib2015",
+  "family": "hopkins",
+  "lang": "bo",
+  "target_lang": "bo",
+  "direction": "bo-to-bo",
+  "priority": 85,
+  "tier": 3,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://github.com/christiansteinert/tibetan-dictionary",
+  "edition": "2015",
+  "expected_entries": 178,
+  "input_script": "wylie"
+}

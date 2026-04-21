@@ -1,0 +1,17 @@
+{
+  "slug": "tib-84000-dict",
+  "name": "84000 Tibetan-English Dictionary",
+  "short_name": "84000",
+  "v1_name": "tib_43-84000Dict",
+  "family": "84000",
+  "lang": "bo",
+  "target_lang": "en",
+  "direction": "bo-to-en",
+  "priority": 22,
+  "tier": 1,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://84000.co/",
+  "expected_entries": 25356,
+  "input_script": "wylie"
+}

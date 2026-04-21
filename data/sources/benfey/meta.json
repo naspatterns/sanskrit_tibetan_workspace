@@ -1,0 +1,18 @@
+{
+  "slug": "benfey",
+  "name": "Benfey Sanskrit-English Dictionary (1866)",
+  "short_name": "Benfey",
+  "v1_name": "benfse.dict",
+  "lang": "skt",
+  "target_lang": "en",
+  "direction": "skt-to-en",
+  "priority": 17,
+  "tier": 2,
+  "license": "public-domain",
+  "source_format": "xdxf",
+  "source_url": "https://www.sanskrit-lexicon.uni-koeln.de/scans/BENScan/",
+  "edition": "1866",
+  "expected_entries": 17322,
+  "input_script": "hk",
+  "sense_separator": ";"
+}

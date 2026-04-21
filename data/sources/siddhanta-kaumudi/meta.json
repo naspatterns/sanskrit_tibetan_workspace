@@ -1,0 +1,15 @@
+{
+  "slug": "siddhanta-kaumudi",
+  "name": "Siddhānta Kaumudī",
+  "short_name": "Siddh-K",
+  "v1_name": "siddh-kaumudi.apple",
+  "lang": "skt",
+  "target_lang": "sa",
+  "direction": "skt-to-sa",
+  "priority": 66,
+  "tier": 2,
+  "license": "unverified",
+  "source_format": "apple_dict",
+  "expected_entries": 4815,
+  "input_script": "devanagari"
+}

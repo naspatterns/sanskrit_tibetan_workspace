@@ -1,0 +1,16 @@
+{
+  "slug": "tib-sera-textbook",
+  "name": "Sera Textbook Definitions",
+  "short_name": "Sera",
+  "v1_name": "tib_42-Sera-Textbook-Definitions",
+  "lang": "bo",
+  "target_lang": "en",
+  "direction": "bo-to-en",
+  "priority": 78,
+  "tier": 3,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://github.com/christiansteinert/tibetan-dictionary",
+  "expected_entries": 1223,
+  "input_script": "wylie"
+}

@@ -1,0 +1,17 @@
+{
+  "slug": "tib-84000-definitions",
+  "name": "84000 Definitions",
+  "short_name": "84000-Def",
+  "v1_name": "tib_44-84000Definitions",
+  "family": "84000",
+  "lang": "bo",
+  "target_lang": "en",
+  "direction": "bo-to-en",
+  "priority": 30,
+  "tier": 2,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://84000.co/",
+  "expected_entries": 26239,
+  "input_script": "wylie"
+}

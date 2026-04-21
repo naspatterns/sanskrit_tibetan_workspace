@@ -1,0 +1,16 @@
+{
+  "slug": "tib-computer-terms",
+  "name": "Computer Terms (Tibetan)",
+  "short_name": "CompTerms",
+  "v1_name": "tib_36-ComputerTerms",
+  "lang": "bo",
+  "target_lang": "en",
+  "direction": "bo-to-en",
+  "priority": 73,
+  "tier": 3,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://github.com/christiansteinert/tibetan-dictionary",
+  "expected_entries": 5683,
+  "input_script": "wylie"
+}

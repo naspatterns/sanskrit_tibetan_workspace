@@ -153,6 +153,26 @@ v1은 tier 1 (15개) 내부 순서가 무작위 → 사용자 불만.
 - 독해 탭은 Phase 6+에서 활성화 (초기엔 "Coming soon")
 - 탭 간 단어 공유: 검색 결과에 "곡용 보기 →" 크로스-링크
 
+### D18. 역검색 (Eng/Ko → 원어) **[FB-8으로 확정]**
+- **결정**:
+  - Phase 1에서 각 JSONL 엔트리에 `reverse.en[]` + `reverse.ko[]` 필드 inline 채움
+  - 명시적 Eng→Skt 사전 3개 (Apte, Borooah, MW): `meta.json.direction: "en-to-skt"`
+    표기 → 평소 검색 경로
+  - 티벳어는 Eng→Bo 사전 부재로 body 토큰 추출이 유일한 역검색 경로
+  - Phase 2에서 `build_reverse_index.py`가 `reverse.en/ko`를 모아 msgpack 역인덱스
+  - 한국어 토크나이저: 공백·구두점 split, 한자 병기 `법(法)` → `[법, 法]` 둘 다 유지
+  - stopword 리스트는 Claude가 제안 (사용자 승인 없이)
+- **이유**: 사용자가 영어 `duty`나 한국어 `의무`를 입력할 때 산스크리트 `dharma`,
+  티벳어 `chos` 찾기. v1에서 전혀 불가능했던 기능.
+- **대안 검토**:
+  - Phase 2 이후로 미루기 → 사용자 명시적 요청으로 Phase 1 포함
+  - FTS5만으로 → 노이즈 크고 Tier 0 캐시 불가
+- **범위 외**:
+  - 한국어 morphological analysis (조사 제거) — Phase 2 `mecab-ko` 검토
+  - 영어 stemming/lemmatization — Phase 2 검토
+  - Vedic/한문 원어 역검색 — Phase 6+ 영역
+- **재검토 시점**: Phase 3 UI 완성 후
+
 ---
 
 ## 결정 미정 시 영향
@@ -184,6 +204,10 @@ v1은 tier 1 (15개) 내부 순서가 무작위 → 사용자 불만.
 - D15 Declension 탭 = lookup-only MVP, 생성기는 v3+ (FB-5)
 - D16 다크모드 = OKLCH 3-state 토글 (FB-6)
 - D17 탭 라우팅 = 3-탭 독립 URL (FB-5)
+- D18 역검색 = Phase 1 inline reverse 필드 + Phase 2 인덱스 (FB-8)
 - 프로젝트 이름 = Sanskrit-Tibetan Workspace (FB-7)
+- 패키지 매니저 = `uv` + `pyproject.toml`
+- Git 배포 정책 = meta.json/reports 커밋, JSONL은 gitignore (LICENSES 참조)
+- HTML 파싱 = `lxml` (XDXF) + `beautifulsoup4` (Apple dict) 조합
 
-상세: `docs/v1-feedback.md`
+상세: `docs/v1-feedback.md`, `LICENSES.md`

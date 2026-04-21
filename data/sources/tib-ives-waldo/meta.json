@@ -1,0 +1,16 @@
+{
+  "slug": "tib-ives-waldo",
+  "name": "Ives Waldo Tibetan-English Glossary",
+  "short_name": "IvesWaldo",
+  "v1_name": "tib_08-IvesWaldo",
+  "lang": "bo",
+  "target_lang": "en",
+  "direction": "bo-to-en",
+  "priority": 25,
+  "tier": 2,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://github.com/christiansteinert/tibetan-dictionary",
+  "expected_entries": 120946,
+  "input_script": "wylie"
+}

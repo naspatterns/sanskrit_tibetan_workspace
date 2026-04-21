@@ -92,6 +92,25 @@
       },
       "additionalProperties": false
     },
+    "reverse": {
+      "type": "object",
+      "description": "Gloss tokens extracted from body for reverse search (FB-8). 'en' contains English words drawn from body.plain; 'ko' contains Korean words from body.ko. Used to build reverse_en/reverse_ko indices in Phase 2. Tokens are lowercased (English only), stopwords removed, and deduplicated. Max 20 tokens per language, preserved in order of appearance (earlier = higher weight at index time).",
+      "properties": {
+        "en": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "maxItems": 40,
+          "description": "English gloss tokens from body.plain. Lowercased ASCII only. Stopwords (m., f., n., cf., esp., the, a, of, ...) removed."
+        },
+        "ko": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "maxItems": 40,
+          "description": "Korean gloss tokens from body.ko. Split on whitespace/punctuation. Hanja bracketed annotations like '법(法)' yield both '법' and '法' tokens."
+        }
+      },
+      "additionalProperties": false
+    },
     "license": {
       "type": "string",
       "description": "SPDX-style license identifier. e.g., 'public-domain', 'CC-BY-SA-4.0'."
@@ -115,12 +134,15 @@
           "translation-low-quality",
           "snippet-truncated",
           "headword-script-mixed",
-          "body-empty"
+          "body-empty",
+          "body-markup-fallback",
+          "iast-conversion-failed"
         ]
       },
       "description": "QA flags for issues caught during build/verify. Shown as badges in UI or used for filtering."
     }
   },
+  "$comment": "Reverse token schema caps are 40; generator currently emits ≤20. Intentional: cap allows future tuning without schema change. verify.py warns at >40 to catch schema violations only.",
   "additionalProperties": false,
   "examples": [
     {
@@ -140,6 +162,10 @@
           { "num": "1", "text": "Religion; the customary observances..." },
           { "num": "2", "text": "Religious or moral merit, virtue..." }
         ]
+      },
+      "reverse": {
+        "en": ["religion", "observances", "caste", "sect", "law", "usage", "custom", "ordinance", "merit", "virtue", "righteousness", "duty"],
+        "ko": ["법", "法", "규범", "조례", "의무", "덕", "도덕"]
       },
       "license": "public-domain",
       "source_meta": { "edition": "1890" },

@@ -1,0 +1,16 @@
+{
+  "slug": "tib-bialek",
+  "name": "Bialek Tibetan-English",
+  "short_name": "Bialek",
+  "v1_name": "tib_53-Bialek",
+  "lang": "bo",
+  "target_lang": "en",
+  "direction": "bo-to-en",
+  "priority": 79,
+  "tier": 3,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://github.com/christiansteinert/tibetan-dictionary",
+  "expected_entries": 2145,
+  "input_script": "wylie"
+}

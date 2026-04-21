@@ -1,0 +1,16 @@
+{
+  "slug": "tib-mahavyutpatti-skt-tib",
+  "name": "Mahāvyutpatti (Skt↔Tib bilingual)",
+  "short_name": "MVY",
+  "v1_name": "mahavyutpatti",
+  "family": "mvy",
+  "lang": "skt",
+  "target_lang": "bo",
+  "direction": "mixed",
+  "priority": 49,
+  "tier": 1,
+  "license": "public-domain",
+  "source_format": "xdxf",
+  "expected_entries": 19069,
+  "input_script": "iast"
+}

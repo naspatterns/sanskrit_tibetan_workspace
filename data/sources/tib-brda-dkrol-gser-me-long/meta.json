@@ -1,0 +1,16 @@
+{
+  "slug": "tib-brda-dkrol-gser-me-long",
+  "name": "Brda dkrol gser gyi me long",
+  "short_name": "BrdaDkrol",
+  "v1_name": "tib_55-brda_dkrol_gser_gyi_me_long",
+  "lang": "bo",
+  "target_lang": "bo",
+  "direction": "bo-to-bo",
+  "priority": 88,
+  "tier": 3,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://github.com/christiansteinert/tibetan-dictionary",
+  "expected_entries": 7930,
+  "input_script": "wylie"
+}

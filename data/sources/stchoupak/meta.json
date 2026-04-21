@@ -1,0 +1,16 @@
+{
+  "slug": "stchoupak",
+  "name": "Stchoupak Dictionnaire Sanskrit-Français",
+  "short_name": "Stchoupak",
+  "v1_name": "stcsf.dict",
+  "lang": "skt",
+  "target_lang": "fr",
+  "direction": "skt-to-fr",
+  "priority": 52,
+  "tier": 2,
+  "license": "public-domain",
+  "source_format": "xdxf",
+  "source_url": "https://www.sanskrit-lexicon.uni-koeln.de/scans/STCScan/",
+  "expected_entries": 24574,
+  "input_script": "hk"
+}

@@ -1,0 +1,17 @@
+{
+  "slug": "tib-84000-synonyms",
+  "name": "84000 Synonyms",
+  "short_name": "84000-Syn",
+  "v1_name": "tib_45-84000Synonyms",
+  "family": "84000",
+  "lang": "bo",
+  "target_lang": "skt",
+  "direction": "bo-to-skt",
+  "priority": 48,
+  "tier": 2,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://84000.co/",
+  "expected_entries": 6029,
+  "input_script": "wylie"
+}

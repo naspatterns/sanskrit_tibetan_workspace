@@ -1,0 +1,15 @@
+{
+  "slug": "amarakosa-ontology",
+  "name": "Amarakośa (ontology view)",
+  "short_name": "Amara-Onto",
+  "v1_name": "amara-onto.apple",
+  "lang": "skt",
+  "target_lang": "sa",
+  "direction": "skt-to-sa",
+  "priority": 59,
+  "tier": 3,
+  "license": "unverified",
+  "source_format": "apple_dict",
+  "expected_entries": 11582,
+  "input_script": "devanagari"
+}

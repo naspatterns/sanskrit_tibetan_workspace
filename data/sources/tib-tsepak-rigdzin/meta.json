@@ -1,0 +1,16 @@
+{
+  "slug": "tib-tsepak-rigdzin",
+  "name": "Tsepak Rigdzin Tibetan-English",
+  "short_name": "TsepakRigdzin",
+  "v1_name": "tib_33-TsepakRigdzin",
+  "lang": "bo",
+  "target_lang": "en",
+  "direction": "bo-to-en",
+  "priority": 36,
+  "tier": 2,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://github.com/christiansteinert/tibetan-dictionary",
+  "expected_entries": 2695,
+  "input_script": "wylie"
+}

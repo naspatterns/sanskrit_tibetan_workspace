@@ -1,0 +1,17 @@
+{
+  "slug": "apte-bilingual",
+  "name": "Apte Bilingual Sanskrit Dictionary",
+  "short_name": "Apte-Bi",
+  "v1_name": "apte-bi.apple",
+  "family": "apte",
+  "lang": "skt",
+  "target_lang": "en",
+  "direction": "skt-to-en",
+  "priority": 10,
+  "tier": 2,
+  "license": "unverified",
+  "source_format": "apple_dict",
+  "expected_entries": 122555,
+  "input_script": "iast",
+  "sense_separator": ";|\\s-\\s?\\d+[a-z]?\\s|\\s\\d+[a-z]?\\.\\s"
+}

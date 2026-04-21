@@ -1,0 +1,16 @@
+{
+  "slug": "cappeller-german",
+  "name": "Cappeller Sanskrit-Deutsch Wörterbuch",
+  "short_name": "Cappeller-G",
+  "v1_name": "cappsg.dict",
+  "lang": "skt",
+  "target_lang": "de",
+  "direction": "skt-to-de",
+  "priority": 50,
+  "tier": 2,
+  "license": "public-domain",
+  "source_format": "xdxf",
+  "source_url": "https://www.sanskrit-lexicon.uni-koeln.de/scans/CAPDEU/",
+  "expected_entries": 30038,
+  "input_script": "hk"
+}

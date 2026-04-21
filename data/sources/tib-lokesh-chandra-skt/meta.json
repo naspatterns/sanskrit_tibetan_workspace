@@ -1,0 +1,16 @@
+{
+  "slug": "tib-lokesh-chandra-skt",
+  "name": "Lokesh Chandra Sanskrit",
+  "short_name": "Lokesh",
+  "v1_name": "tib_49-LokeshChandraSkt",
+  "lang": "bo",
+  "target_lang": "skt",
+  "direction": "bo-to-skt",
+  "priority": 41,
+  "tier": 2,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://github.com/christiansteinert/tibetan-dictionary",
+  "expected_entries": 15961,
+  "input_script": "wylie"
+}

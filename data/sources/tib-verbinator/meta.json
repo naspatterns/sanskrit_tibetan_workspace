@@ -1,0 +1,16 @@
+{
+  "slug": "tib-verbinator",
+  "name": "Verbinator (Tibetan verb paradigms)",
+  "short_name": "Verbinator",
+  "v1_name": "tib_26-Verbinator",
+  "lang": "bo",
+  "target_lang": "en",
+  "direction": "bo-to-en",
+  "priority": 77,
+  "tier": 3,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://github.com/christiansteinert/tibetan-dictionary",
+  "expected_entries": 4330,
+  "input_script": "wylie"
+}

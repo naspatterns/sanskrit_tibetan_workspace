@@ -1,0 +1,16 @@
+{
+  "slug": "tib-misc",
+  "name": "Tibetan Miscellaneous",
+  "short_name": "TibMisc",
+  "v1_name": "tib_47-Misc",
+  "lang": "bo",
+  "target_lang": "en",
+  "direction": "mixed",
+  "priority": 89,
+  "tier": 3,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://github.com/christiansteinert/tibetan-dictionary",
+  "expected_entries": 42,
+  "input_script": "wylie"
+}

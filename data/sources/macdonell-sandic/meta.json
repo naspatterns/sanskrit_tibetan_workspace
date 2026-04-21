@@ -1,0 +1,16 @@
+{
+  "slug": "macdonell-sandic",
+  "name": "Macdonell (SANDIC edition)",
+  "short_name": "Macdonell-SD",
+  "v1_name": "macdse.sandic",
+  "family": "macdonell",
+  "lang": "skt",
+  "target_lang": "en",
+  "direction": "skt-to-en",
+  "priority": 89,
+  "tier": 3,
+  "license": "unverified",
+  "source_format": "sandic",
+  "expected_entries": 17679,
+  "input_script": "iast"
+}

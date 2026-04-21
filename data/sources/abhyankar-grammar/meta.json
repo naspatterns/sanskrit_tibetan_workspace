@@ -1,0 +1,15 @@
+{
+  "slug": "abhyankar-grammar",
+  "name": "Abhyankar Dictionary of Sanskrit Grammar",
+  "short_name": "Abhyankar",
+  "v1_name": "abhyankar.apple",
+  "lang": "skt",
+  "target_lang": "en",
+  "direction": "skt-to-en",
+  "priority": 68,
+  "tier": 2,
+  "license": "unverified",
+  "source_format": "apple_dict",
+  "expected_entries": 4350,
+  "input_script": "iast"
+}

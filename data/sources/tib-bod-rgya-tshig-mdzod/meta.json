@@ -1,0 +1,19 @@
+{
+  "slug": "tib-bod-rgya-tshig-mdzod",
+  "name": "Bod rgya tshig mdzod chen mo",
+  "short_name": "BodRgya",
+  "v1_name": "bod-rgya.apple",
+  "lang": "bo",
+  "target_lang": "bo",
+  "direction": "bo-to-bo",
+  "priority": 24,
+  "tier": 1,
+  "license": "unverified",
+  "source_format": "apple_dict",
+  "expected_entries": 48488,
+  "input_script": "wylie",
+  "merged_from": [
+    "bod-rgya.apple",
+    "apple_bod_rgya_tshig_mdzod"
+  ]
+}

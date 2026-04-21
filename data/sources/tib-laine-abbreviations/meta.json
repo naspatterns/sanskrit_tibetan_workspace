@@ -1,0 +1,16 @@
+{
+  "slug": "tib-laine-abbreviations",
+  "name": "Laine Abbreviations",
+  "short_name": "Laine",
+  "v1_name": "tib_51-LaineAbbreviations",
+  "lang": "bo",
+  "target_lang": "en",
+  "direction": "bo-to-en",
+  "priority": 76,
+  "tier": 3,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://github.com/christiansteinert/tibetan-dictionary",
+  "expected_entries": 7468,
+  "input_script": "wylie"
+}

@@ -1,0 +1,16 @@
+{
+  "slug": "tib-negi-skt",
+  "name": "Negi Tibetan-Sanskrit Dictionary",
+  "short_name": "Negi",
+  "v1_name": "tib_50-NegiSkt",
+  "lang": "bo",
+  "target_lang": "skt",
+  "direction": "bo-to-skt",
+  "priority": 40,
+  "tier": 2,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://github.com/christiansteinert/tibetan-dictionary",
+  "expected_entries": 79293,
+  "input_script": "wylie"
+}

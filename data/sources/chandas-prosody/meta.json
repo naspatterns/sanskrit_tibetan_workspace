@@ -1,0 +1,15 @@
+{
+  "slug": "chandas-prosody",
+  "name": "Chandas (Sanskrit Prosody)",
+  "short_name": "Chandas",
+  "v1_name": "chandas.apple",
+  "lang": "skt",
+  "target_lang": "sa",
+  "direction": "skt-to-sa",
+  "priority": 69,
+  "tier": 2,
+  "license": "unverified",
+  "source_format": "apple_dict",
+  "expected_entries": 1199,
+  "input_script": "devanagari"
+}

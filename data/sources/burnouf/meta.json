@@ -1,0 +1,17 @@
+{
+  "slug": "burnouf",
+  "name": "Burnouf Dictionnaire classique Sanskrit-Français",
+  "short_name": "Burnouf",
+  "v1_name": "bursf.dict",
+  "lang": "skt",
+  "target_lang": "fr",
+  "direction": "skt-to-fr",
+  "priority": 53,
+  "tier": 2,
+  "license": "public-domain",
+  "source_format": "xdxf",
+  "source_url": "https://www.sanskrit-lexicon.uni-koeln.de/scans/BURScan/",
+  "edition": "1866",
+  "expected_entries": 19775,
+  "input_script": "hk"
+}

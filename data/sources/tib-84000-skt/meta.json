@@ -1,0 +1,17 @@
+{
+  "slug": "tib-84000-skt",
+  "name": "84000 Sanskrit",
+  "short_name": "84000-Skt",
+  "v1_name": "tib_46-84000Skt",
+  "family": "84000",
+  "lang": "bo",
+  "target_lang": "skt",
+  "direction": "bo-to-skt",
+  "priority": 42,
+  "tier": 2,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://84000.co/",
+  "expected_entries": 15705,
+  "input_script": "wylie"
+}

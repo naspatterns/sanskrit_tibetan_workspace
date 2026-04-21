@@ -1,0 +1,18 @@
+{
+  "slug": "tib-mahavyutpatti-scan-1989",
+  "name": "Mahāvyutpatti (Scan 1989)",
+  "short_name": "MVY-Scan",
+  "v1_name": "tib_63-Mahavyutpatti-Scan-1989",
+  "family": "mvy",
+  "lang": "bo",
+  "target_lang": "skt",
+  "direction": "mixed",
+  "priority": 74,
+  "tier": 3,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://github.com/christiansteinert/tibetan-dictionary",
+  "edition": "1989",
+  "expected_entries": 9583,
+  "input_script": "wylie"
+}

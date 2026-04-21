@@ -17,8 +17,10 @@ data/sources/<slug>/
   "slug": "apte-sanskrit-english",
   "name": "Apte Practical Sanskrit-English Dictionary",
   "short_name": "Apte",
+  "v1_name": "aptees.dict",
   "lang": "skt",
   "target_lang": "en",
+  "direction": "skt-to-en",
   "priority": 1,
   "tier": 1,
   "family": "apte",
@@ -36,8 +38,17 @@ data/sources/<slug>/
 ### 필드 설명
 - **slug**: URL-safe 식별자. 디렉터리명과 일치.
 - **name / short_name**: 표시명 (긴 / 짧은).
+- **v1_name** (선택): v1 dict.sqlite `dictionaries.name` 값. Phase 1 역추적용.
 - **lang**: 표제어 언어 (`skt`, `bo`, `zh`, `pi` 등).
 - **target_lang**: 정의문 언어 (`en`, `de`, `fr`, `la`, `ru`, `ko`, `mixed` 등).
+- **direction** (FB-8): 사전 방향성. 표제어 언어 → 정의문 언어 표기.
+  - `"skt-to-en"`, `"skt-to-de"`, `"skt-to-fr"`, `"skt-to-la"`, `"skt-to-sa"` — 산스크리트 해설
+  - `"bo-to-en"`, `"bo-to-bo"`, `"bo-to-skt"` — 티벳어 해설
+  - `"en-to-skt"` — Apte Eng→Skt, Borooah, MW Eng→Skt (역방향 사전, 표제어가 영어)
+  - `"pi-to-en"` — Pāli 해설
+  - `"mixed"` — Mahāvyutpatti, Amarakośa 같은 다언어
+  - UI에서 검색어 언어 감지로 어느 사전을 우선 호출할지 결정. 역검색 인덱스 생성 시도
+    `body → reverse` 대응 방향 판정에 사용.
 - **priority**: **1-100 정수. 낮을수록 검색 결과 상단**. Apte=1, MW=2, Macdonell=3, BHSD=4.
   UI 정렬의 1순위 키. tier와 독립 (tier는 펼침 여부, priority는 순서).
 - **tier**: 1(auto-expand) / 2(expand on match) / 3(collapsed). UI 펼침 상태.
@@ -61,8 +72,10 @@ data/sources/<slug>/
   "slug": "decl-a01",
   "name": "Heritage Declension (a-stem I)",
   "short_name": "Decl-a01",
+  "v1_name": "decl-a01.apple",
   "lang": "skt",
   "target_lang": "en",
+  "direction": "skt-to-en",
   "priority": 90,
   "tier": 3,
   "family": "heritage-decl",

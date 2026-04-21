@@ -1,0 +1,16 @@
+{
+  "slug": "vacaspatyam-xdxf",
+  "name": "Vācaspatyam (XDXF edition)",
+  "short_name": "Vācaspatyam-X",
+  "v1_name": "vcpss.dict",
+  "lang": "skt",
+  "target_lang": "sa",
+  "direction": "skt-to-sa",
+  "priority": 15,
+  "tier": 2,
+  "license": "public-domain",
+  "source_format": "xdxf",
+  "source_url": "https://www.sanskrit-lexicon.uni-koeln.de/scans/VCPScan/",
+  "expected_entries": 48370,
+  "input_script": "devanagari"
+}

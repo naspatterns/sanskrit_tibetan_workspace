@@ -1,0 +1,16 @@
+{
+  "slug": "tib-yogacarabhumi",
+  "name": "Yogācārabhūmi glossary",
+  "short_name": "YBh",
+  "v1_name": "tib_22-Yoghacharabhumi-glossary",
+  "lang": "bo",
+  "target_lang": "en",
+  "direction": "bo-to-en",
+  "priority": 47,
+  "tier": 2,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://github.com/christiansteinert/tibetan-dictionary",
+  "expected_entries": 16028,
+  "input_script": "wylie"
+}

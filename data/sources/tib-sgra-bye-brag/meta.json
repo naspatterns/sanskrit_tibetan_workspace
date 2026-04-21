@@ -1,0 +1,16 @@
+{
+  "slug": "tib-sgra-bye-brag",
+  "name": "Sgra bye brag tu rtogs byed chen mo",
+  "short_name": "SgraByeBrag",
+  "v1_name": "tib_59-sgra_bye_brag_tu_rtogs_byed_chen_mo",
+  "lang": "bo",
+  "target_lang": "bo",
+  "direction": "bo-to-bo",
+  "priority": 89,
+  "tier": 3,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://github.com/christiansteinert/tibetan-dictionary",
+  "expected_entries": 11156,
+  "input_script": "wylie"
+}

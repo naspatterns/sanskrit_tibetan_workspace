@@ -1,0 +1,17 @@
+{
+  "slug": "tib-hotl-1",
+  "name": "HOTL 1 (History of Tibet, vol. 1)",
+  "short_name": "HOTL-1",
+  "v1_name": "tib_67-hotl1",
+  "family": "hotl",
+  "lang": "bo",
+  "target_lang": "en",
+  "direction": "bo-to-en",
+  "priority": 89,
+  "tier": 3,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://github.com/christiansteinert/tibetan-dictionary",
+  "expected_entries": 622,
+  "input_script": "wylie"
+}

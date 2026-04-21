@@ -1,0 +1,16 @@
+{
+  "slug": "bopp-comparative",
+  "name": "Bopp Comparative Grammar (Sanskrit)",
+  "short_name": "Bopp-Comp",
+  "v1_name": "bopp.apple",
+  "family": "bopp",
+  "lang": "skt",
+  "target_lang": "en",
+  "direction": "skt-to-en",
+  "priority": 56,
+  "tier": 2,
+  "license": "unverified",
+  "source_format": "apple_dict",
+  "expected_entries": 8960,
+  "input_script": "iast"
+}

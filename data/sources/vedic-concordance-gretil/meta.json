@@ -1,0 +1,17 @@
+{
+  "slug": "vedic-concordance-gretil",
+  "name": "Vedic Concordance (GRETIL)",
+  "short_name": "VedConc",
+  "v1_name": "vedconc.gretil",
+  "family": "vedconc",
+  "lang": "skt",
+  "target_lang": "en",
+  "direction": "skt-to-en",
+  "priority": 81,
+  "tier": 3,
+  "license": "academic-open",
+  "source_format": "gretil",
+  "source_url": "http://gretil.sub.uni-goettingen.de/gretil.html",
+  "expected_entries": 80654,
+  "input_script": "hk"
+}

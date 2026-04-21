@@ -1,0 +1,17 @@
+{
+  "slug": "kalpadruma",
+  "name": "Śabdakalpadruma (Rādhākāntadeva)",
+  "short_name": "ŚKD",
+  "v1_name": "kalpadruma.apple",
+  "lang": "skt",
+  "target_lang": "sa",
+  "direction": "skt-to-sa",
+  "priority": 8,
+  "tier": 1,
+  "license": "unverified",
+  "source_format": "apple_dict",
+  "edition": "1886",
+  "expected_entries": 42200,
+  "input_script": "devanagari",
+  "sense_separator": ";"
+}

@@ -1,0 +1,16 @@
+{
+  "slug": "tib-thomas-doctor",
+  "name": "Thomas Doctor Tibetan-English",
+  "short_name": "ThomasDoctor",
+  "v1_name": "tib_35-ThomasDoctor",
+  "lang": "bo",
+  "target_lang": "en",
+  "direction": "bo-to-en",
+  "priority": 37,
+  "tier": 2,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://github.com/christiansteinert/tibetan-dictionary",
+  "expected_entries": 502,
+  "input_script": "wylie"
+}

@@ -1,0 +1,16 @@
+{
+  "slug": "sabda-kalpa-druma",
+  "name": "Śabda-kalpa-druma (XDXF edition)",
+  "short_name": "ŚKD-X",
+  "v1_name": "skdss.dict",
+  "lang": "skt",
+  "target_lang": "sa",
+  "direction": "skt-to-sa",
+  "priority": 16,
+  "tier": 2,
+  "license": "public-domain",
+  "source_format": "xdxf",
+  "source_url": "https://www.sanskrit-lexicon.uni-koeln.de/scans/SKDScan/",
+  "expected_entries": 42203,
+  "input_script": "devanagari"
+}

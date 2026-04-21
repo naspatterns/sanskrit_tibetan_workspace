@@ -1,0 +1,17 @@
+{
+  "slug": "bhsd",
+  "name": "Buddhist Hybrid Sanskrit Dictionary (Edgerton, 1953)",
+  "short_name": "BHSD",
+  "v1_name": "bhsd.apple",
+  "lang": "skt",
+  "target_lang": "en",
+  "direction": "skt-to-en",
+  "priority": 4,
+  "tier": 1,
+  "license": "unverified",
+  "source_format": "apple_dict",
+  "edition": "1953",
+  "expected_entries": 17807,
+  "input_script": "iast",
+  "sense_separator": ";|\\s\\(\\d+\\)\\s"
+}

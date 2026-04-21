@@ -1,0 +1,16 @@
+{
+  "slug": "ashtadhyayi-english",
+  "name": "Aṣṭādhyāyī (English translation)",
+  "short_name": "Aṣṭ-En",
+  "v1_name": "ashtadhyayi-en.apple",
+  "family": "ashtadhyayi",
+  "lang": "skt",
+  "target_lang": "en",
+  "direction": "skt-to-en",
+  "priority": 64,
+  "tier": 2,
+  "license": "unverified",
+  "source_format": "apple_dict",
+  "expected_entries": 3983,
+  "input_script": "iast"
+}

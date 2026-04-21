@@ -1,0 +1,15 @@
+{
+  "slug": "ekaksara",
+  "name": "Ekākṣaranāmamālā (monosyllabic thesaurus)",
+  "short_name": "Ekākṣara",
+  "v1_name": "ekaksara.apple",
+  "lang": "skt",
+  "target_lang": "sa",
+  "direction": "skt-to-sa",
+  "priority": 58,
+  "tier": 3,
+  "license": "unverified",
+  "source_format": "apple_dict",
+  "expected_entries": 391,
+  "input_script": "devanagari"
+}

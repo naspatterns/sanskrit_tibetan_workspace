@@ -1,0 +1,16 @@
+{
+  "slug": "apte-sandic",
+  "name": "Apte (SANDIC edition)",
+  "short_name": "Apte-SD",
+  "v1_name": "aptese.sandic",
+  "family": "apte",
+  "lang": "skt",
+  "target_lang": "en",
+  "direction": "skt-to-en",
+  "priority": 57,
+  "tier": 3,
+  "license": "unverified",
+  "source_format": "sandic",
+  "expected_entries": 44943,
+  "input_script": "iast"
+}

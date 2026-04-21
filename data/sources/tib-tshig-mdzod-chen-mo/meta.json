@@ -1,0 +1,16 @@
+{
+  "slug": "tib-tshig-mdzod-chen-mo",
+  "name": "Tshig mdzod chen mo (native Tibetan dictionary)",
+  "short_name": "TshigMdzod",
+  "v1_name": "tib_25-tshig-mdzod-chen-mo-Tib",
+  "lang": "bo",
+  "target_lang": "bo",
+  "direction": "bo-to-bo",
+  "priority": 23,
+  "tier": 1,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://github.com/christiansteinert/tibetan-dictionary",
+  "expected_entries": 51030,
+  "input_script": "wylie"
+}

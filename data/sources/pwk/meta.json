@@ -1,0 +1,19 @@
+{
+  "slug": "pwk",
+  "name": "Böhtlingk — Sanskrit-Wörterbuch in kürzerer Fassung",
+  "short_name": "PW",
+  "v1_name": "pwk.dict",
+  "family": "bothlingk",
+  "lang": "skt",
+  "target_lang": "de",
+  "direction": "skt-to-de",
+  "priority": 6,
+  "tier": 1,
+  "license": "public-domain",
+  "source_format": "xdxf",
+  "source_url": "https://www.sanskrit-lexicon.uni-koeln.de/scans/PWKScan/",
+  "edition": "1879-1889",
+  "expected_entries": 135776,
+  "input_script": "hk",
+  "sense_separator": ";"
+}

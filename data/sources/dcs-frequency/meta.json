@@ -1,0 +1,15 @@
+{
+  "slug": "dcs-frequency",
+  "name": "DCS (Digital Corpus of Sanskrit) Word Frequency",
+  "short_name": "DCS",
+  "v1_name": "dcs-freq.apple",
+  "lang": "skt",
+  "target_lang": "en",
+  "direction": "skt-to-en",
+  "priority": 84,
+  "tier": 3,
+  "license": "unverified",
+  "source_format": "apple_dict",
+  "expected_entries": 72804,
+  "input_script": "iast"
+}

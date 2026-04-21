@@ -1,0 +1,18 @@
+{
+  "slug": "tib-hopkins-def-2015",
+  "name": "Hopkins Definitions 2015",
+  "short_name": "Hopkins-Def",
+  "v1_name": "tib_05-Hopkins-Def2015",
+  "family": "hopkins",
+  "lang": "bo",
+  "target_lang": "en",
+  "direction": "bo-to-en",
+  "priority": 89,
+  "tier": 3,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://github.com/christiansteinert/tibetan-dictionary",
+  "edition": "2015",
+  "expected_entries": 237,
+  "input_script": "wylie"
+}

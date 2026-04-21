@@ -1,0 +1,16 @@
+{
+  "slug": "bloomfield-vedic-concordance",
+  "name": "Bloomfield Vedic Concordance",
+  "short_name": "Bloomfield",
+  "v1_name": "bloomfield.apple",
+  "family": "vedconc",
+  "lang": "skt",
+  "target_lang": "en",
+  "direction": "skt-to-en",
+  "priority": 80,
+  "tier": 3,
+  "license": "unverified",
+  "source_format": "apple_dict",
+  "expected_entries": 88837,
+  "input_script": "iast"
+}

@@ -1,0 +1,18 @@
+{
+  "slug": "tib-hopkins-2015",
+  "name": "Hopkins Tibetan-English Dictionary (2015)",
+  "short_name": "Hopkins",
+  "v1_name": "tib_01-Hopkins2015",
+  "family": "hopkins",
+  "lang": "bo",
+  "target_lang": "en",
+  "direction": "bo-to-en",
+  "priority": 21,
+  "tier": 1,
+  "license": "CC0",
+  "source_format": "xdxf",
+  "source_url": "https://github.com/christiansteinert/tibetan-dictionary",
+  "edition": "2015",
+  "expected_entries": 17720,
+  "input_script": "wylie"
+}
