@@ -49,6 +49,36 @@ data/sources/<slug>/
 - **expected_entries**: 검증용. parse.py 출력이 ±5% 벗어나면 실패.
 - **sense_separator** (선택): 정규식. body를 senses 배열로 파싱할 때 사용.
   MW/Apte 는 `;` + 번호 패턴. 없으면 sense 분리 생략.
+- **exclude_from_search** (선택, 기본 false): `true`면 이 사전은 검색 탭 인덱스에
+  포함되지 않음. Heritage declension 사전 20여 개가 해당.
+- **used_by** (선택): `"declension-tab"` 등. exclude_from_search=true일 때 어느 탭에서
+  쓰는지 명시.
+
+### declension 전용 사전 예시
+
+```json
+{
+  "slug": "decl-a01",
+  "name": "Heritage Declension (a-stem I)",
+  "short_name": "Decl-a01",
+  "lang": "skt",
+  "target_lang": "en",
+  "priority": 90,
+  "tier": 3,
+  "family": "heritage-decl",
+  "license": "GPL",
+  "source_format": "apple_dict",
+  "edition": "Heritage",
+  "import_script": "parse.py",
+  "expected_entries": 800,
+  "input_script": "iast",
+  "exclude_from_search": true,
+  "used_by": "declension-tab"
+}
+```
+
+이 사전은 `build_tier0.py` / `build_fst.py` / D1 import에서 스킵되며,
+`build_declension.py` 전용 처리 대상. 상세: `docs/declension-tab.md`.
 
 ### priority 가이드라인
 
@@ -70,13 +100,13 @@ data/sources/<slug>/
 # data/sources/<slug>/parse.py
 from pathlib import Path
 from typing import Iterator
-from nighantu.types import Entry  # 공통 타입
+from workspace.types import Entry  # 공통 타입
 
 def parse(source_path: Path, meta: dict) -> Iterator[Entry]:
     """원본 파일 → 표준 Entry 객체 generator.
     
     각 Entry는 schema.json에 부합해야 함.
-    headword_norm은 nighantu.normalize.normalize_headword()로 자동 생성됨.
+    headword_norm은 workspace.normalize.normalize_headword()로 자동 생성됨.
     """
     ...
 ```
@@ -88,13 +118,13 @@ parse.py는 raw 데이터 추출만 책임.
 
 ```bash
 # 단일 사전 빌드
-python3 -m nighantu.build monier-williams
+python3 -m workspace.build monier-williams
 
 # 전체 빌드
-python3 -m nighantu.build --all
+python3 -m workspace.build --all
 
 # 특정 사전만 재빌드 (다른 사전 영향 없음)
-python3 -m nighantu.build mvy --force
+python3 -m workspace.build mvy --force
 ```
 
 각 빌드는:
@@ -121,8 +151,8 @@ $EDITOR parse.py
 cp ~/Downloads/my-dict.xdxf source.xdxf
 
 # 5. 빌드 + 검증
-python3 -m nighantu.build my-new-dict
-python3 -m nighantu.verify my-new-dict
+python3 -m workspace.build my-new-dict
+python3 -m workspace.verify my-new-dict
 
 # 6. 인덱스 재생성
 python3 scripts/build_tier0.py     # 새 사전이 top-10K에 진입할 수 있음

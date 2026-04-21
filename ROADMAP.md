@@ -1,15 +1,17 @@
-# Nighaṇṭu — Roadmap
+# Sanskrit-Tibetan Workspace — Roadmap (v2)
 
-목표: 6주 안에 v1 사용자가 자연스럽게 v2로 넘어올 수 있는 상태 도달.
+목표: 7주 안에 v1 사용자가 자연스럽게 v2로 넘어올 수 있는 상태 도달.
 원칙: **각 Phase는 독립적으로 가치 있고, v1은 무중단 유지**.
 
 ---
 
-## Phase 0: 준비 (이번 세션 ✅)
+## Phase 0: 준비 ✅
 - [x] 프로젝트 디렉터리 + 뼈대
 - [x] README, ARCHITECTURE, ROADMAP 작성
-- [x] 명명 결정 (nighantu = 산스크리트 "용어집")
+- [x] 명명 결정: Sanskrit-Tibetan Workspace
 - [x] 기술 스택 결정 (Svelte 5 + Vite + Cloudflare)
+- [x] v1 피드백 7건 반영 (FB-1~7)
+- [x] Declension 탭 설계 초안
 
 산출물: 이 저장소.
 
@@ -145,15 +147,76 @@ v1 데이터를 그대로 활용 (사전별 재파싱 안 함). 빠른 시작.
 - Stale-while-revalidate for API
 - OPFS 캐시 (1GB까지)
 
-### 3.5 디자인
-- Light/dark mode
+### 3.5 **다크모드 (FB-6)**
+- `src/styles/theme.css`: OKLCH 기반 CSS 변수
+  - 라이트: `--bg: oklch(0.99 0 0)`, `--fg: oklch(0.18 0 0)` 등
+  - 다크: `--bg: oklch(0.18 0 0)`, `--fg: oklch(0.92 0 0)` 등
+  - 대비비 WCAG AAA (본문) / AA (보조)
+- `src/lib/stores/theme.ts`: Svelte store + localStorage 동기화
+  - `$state<'light' | 'dark' | 'auto'>`
+  - `prefers-color-scheme` media query 감지
+- `<ThemeToggle>`: 헤더 우상단 3-state 토글 (☀️/🌙/🔄)
+- 키보드 단축키 `Shift+D`
+- View Transitions API로 부드러운 전환
+- 산스크리트/티벳 diacritic 가독성 테스트 (모바일 + 다크)
+
+### 3.6 디자인 마무리
 - 모바일 우선 반응형
-- 한자 폰트, IAST 폰트, 티벳 폰트 적절히 로딩
+- 폰트 로딩: Noto Sans Devanagari/Tibetan system fallback, IAST는 Latin 기본 폰트
+- 한자 system fonts
+
+### 3.7 탭 네비게이션
+- 헤더에 3-탭 (검색 · 곡용 · 독해)
+- 독해 탭은 Phase 3에선 "Coming soon" placeholder
+- 검색/곡용 탭 간 쉬운 이동 (단어 공유)
 
 **완료 기준**:
-- v1과 동일한 검색 결과
+- v1과 동일한 검색 결과 (검색 탭)
 - 첫 로드 후 모든 검색 <100ms (Tier 0 hit)
+- 다크모드 토글 작동, localStorage 유지
 - Lighthouse Performance ≥ 90
+
+---
+
+## Phase 3.5: Declension 탭 (1주)
+
+**목표**: Heritage declension 사전을 전용 탭으로 분리. 검색 오염 제거 + 문법 참조 도구.
+
+### 3.5.1 데이터 빌드
+- `scripts/build_declension.py`
+- 입력: `data/jsonl/decl-*.jsonl` (Phase 1에서 추출됨)
+- BeautifulSoup으로 Apple .dictionary HTML 표 파싱
+- 출력:
+  - `public/declension/paradigms.json` (~40 클래스)
+  - `public/declension/words.json` (~3000 단어 → 클래스 매핑)
+  - `public/declension/generated.json.zst` (pre-rendered 표)
+- 24-cell 완전성 검증
+
+### 3.5.2 `/declension` 라우트 (Svelte)
+- `src/routes/declension/+page.svelte`
+- 단어 입력창 (검색 탭과 별도 state)
+- URL 동기화 (`/declension?q=deva&gender=m`)
+
+### 3.5.3 컴포넌트
+- `<DeclensionForm>`: 단어 + 성별 선택
+- `<DeclensionTable>`: 24-cell 테이블 렌더
+- `<ParadigmInfo>`: 클래스 + 예시 단어 표시
+- `<SandhiToggle>`: 표준/연성 전환
+
+### 3.5.4 검색 탭 연결
+- 검색 결과에 "곡용 보기 →" 링크 추가
+- Declension 셀 클릭 → 검색 탭 이동 (해당 form)
+
+### 3.5.5 빌드 파이프라인 분리 확인
+- `build_tier0.py` / `build_fst.py` / D1 import가 `exclude_from_search` 존중
+- `verify.py`에 "declension 사전이 검색 인덱스에 없음" 단정 추가
+
+**완료 기준**:
+- ~3000 단어 즉시 곡용표 조회
+- 검색 결과에 declension 사전 엔트리 절대 없음
+- Phase 3 다크모드와 호환
+
+상세: `docs/declension-tab.md`
 
 ---
 
@@ -163,8 +226,8 @@ v1 데이터를 그대로 활용 (사전별 재파싱 안 함). 빠른 시작.
 
 ### 4.1 배포
 - Cloudflare Pages 연결
-- 도메인 (선택): `nighantu.haMsa.io` 또는 비슷한
-- v1과 병렬 운영 (`/v2` 또는 별도 도메인)
+- 도메인 (선택): `workspace.haMsa.io` 또는 `skt-tib.pages.dev`
+- v1과 병렬 운영 (별도 도메인 또는 `/v2`)
 
 ### 4.2 CI/CD
 - GitHub Actions:
@@ -232,15 +295,16 @@ v2가 안정화된 후 검토:
 
 | Week | Phase | 산출물 |
 |------|-------|--------|
-| 0    | 0     | 뼈대 + 설계 (이번 세션) |
-| 1    | 1     | 135개 사전 JSONL + verify |
-| 2    | 2     | Tier 0 + FST |
-| 3-4  | 3     | Svelte UI 최소 |
-| 5    | 4     | 배포 + 모니터링 |
-| 6    | 5     | Edge API (희귀 단어) |
-| 7+   | 6     | 고급 기능 |
+| 0    | 0     | 뼈대 + 설계 + 피드백 반영 ✅ |
+| 1    | 1     | 135개 사전 JSONL + meta.json + verify |
+| 2-3  | 2     | Tier 0 + FST + 번역 batch |
+| 4-5  | 3     | Svelte UI (검색 + **다크모드**) |
+| 6    | 3.5   | **Declension 탭** |
+| 7    | 4     | 배포 + 모니터링 |
+| 8    | 5     | Edge API (희귀 단어) |
+| 9+   | 6     | Reader + Vocab 포팅 |
 
-**6주 후**: v2가 v1보다 빠르고 안정적. 사용자 자연 이전.
+**7주 후**: v2가 v1보다 빠르고 안정적 + Declension 탭 + 다크모드. 사용자 자연 이전.
 
 ---
 
@@ -284,3 +348,30 @@ v2가 안정화된 후 검토:
 - **이유**: v1에서 두 함수 불일치로 데이터 오염 발생함
 - **대안 검토**: Pyodide로 Python을 브라우저에서 직접 실행 (무거움), Rust 단일 구현 후 양쪽에서 사용 (복잡)
 - **재검토 시점**: Phase 2 완료 후 실측
+
+### ADR-005: Declension을 검색에서 분리 (FB-5)
+- **결정**: Heritage declension 사전 ~20개를 `exclude_from_search: true` 플래그로
+  검색 인덱스에서 제외, `/declension` 전용 탭에서 처리
+- **이유**: 검색 결과 오염 + 곡용표는 본질적으로 다른 UI 포맷 (표 vs 정의문) 요구
+- **대안 검토**:
+  - 유지 (현상태) — 오염 지속
+  - 사전 필터 UI 추가 — 사용자 부담
+  - 완전 삭제 — 데이터 손실
+- **재검토 시점**: Phase 3.5 완료 후 사용성 피드백
+
+### ADR-006: 다크모드 (FB-6)
+- **결정**: `light` / `dark` / `auto` 3-state, OKLCH 색 공간, View Transitions API
+- **이유**: 학자 장시간 사용 환경 배려 + 지각적 명도 일관성 (OKLCH)
+- **대안 검토**:
+  - 2-state (light/dark만) — 시스템 선호 무시
+  - HSL — 명도 비일관 (녹색 vs 파란색 같은 L 값이 달라 보임)
+- **재검토 시점**: Phase 3 완료 후
+
+### ADR-007: 프로젝트 이름 (FB-7)
+- **결정**: **Sanskrit-Tibetan Workspace**
+- **이유**: 명확, 검색 가능, v1과 연결성, 비전문가 친화
+- **대안 검토**:
+  - `Nighaṇṭu` (निघण्टु) — 학술적이지만 대중 친숙도 낮음
+  - `Kosha` (कोश) — 대중 친숙도 중간
+  - `Vidya`, `Shabda` 등 — 너무 광범위한 의미
+- **재검토 시점**: 공개 배포 직전 여론 검토

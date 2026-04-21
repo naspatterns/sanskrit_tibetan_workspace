@@ -157,16 +157,101 @@ v2에서의 구체적 해결 전략. Phase 1-3 구현 시 체크리스트로 활
 
 ---
 
+## FB-5. Heritage Declension 사전을 별도 탭으로
+
+**증상**: "dharma" 검색 → 실제 정의문 사이사이 곡용표 사전 엔트리가 섞여 나와
+결과 오염. Heritage declension 사전 약 20개 (decl-a01~a10, decl-b1~b3, etc.)는
+본질적으로 문법 참조 자료이지 정의 사전이 아님.
+
+**v2 해결**:
+
+1. **데이터 레이어**:
+   - `meta.json.exclude_from_search: true` 플래그 (신규)
+   - `build_tier0.py`, `build_fst.py`, D1 import에서 해당 사전 스킵
+   - `build_declension.py` 전용 파이프라인에서만 사용
+
+2. **UI**:
+   - 검색 탭 옆에 **`/declension` 탭 신설**
+   - 검색 결과 하단에 "곡용 보기 →" 크로스-네비 링크
+   - `/declension?q=deva` URL 직진입 가능
+
+3. **Declension 탭 기능** (Phase 3.5):
+   - 단어 입력 → 24-cell 곡용표 (3 numbers × 8 cases)
+   - 자동 성별 감지 + 수동 오버라이드
+   - 패러다임 클래스 표시 (a-stem m., i-stem n. 등)
+   - Cell 클릭 → 해당 형태로 검색 탭 이동
+   - Sandhi 토글 (표준형 vs 연성형)
+
+4. **데이터 재구조화**:
+   - Heritage 사전의 HTML 표 → `paradigms.json` + `words.json`으로 추출
+   - 약 3천 단어 완전 표 pre-render
+   - 미등록 단어는 규칙 기반 생성 (v3+)
+
+상세: `docs/declension-tab.md`
+
+---
+
+## FB-6. 다크모드 지원
+
+**증상**: v1에는 다크모드 없음. 산스크리트 학자들은 장시간 텍스트 작업하는데
+흰 배경은 눈 피로 유발. 특히 야간 도서관·집 작업 환경.
+
+**v2 해결**:
+
+1. **3-state 토글**: `light` / `dark` / `auto` (시스템 선택 추종)
+   - 기본: `auto` (`prefers-color-scheme`)
+   - localStorage로 사용자 선택 유지
+
+2. **OKLCH 색 공간**:
+   - 전통 HSL/sRGB 대신 OKLCH 사용 — 명도(L) 값이 지각적으로 일관됨
+   - 라이트/다크 테마가 자연스럽게 대칭
+   - 예: 배경은 `oklch(0.99 0 0)` → `oklch(0.18 0 0)`
+
+3. **구현**:
+   - `src/styles/theme.css`: CSS custom properties (`--bg`, `--fg`, `--accent`, ...)
+   - `src/lib/stores/theme.ts`: Svelte store + localStorage 동기화
+   - `<html data-theme="dark">` 속성 기반 CSS 스위칭
+   - View Transitions API로 부드러운 전환
+
+4. **접근성**:
+   - 대비비 WCAG AAA (7:1) 기본, AA (4.5:1) 최소
+   - 산스크리트/티벳 diacritics (ṛ, ṝ, ṁ, ś, ṣ) 가독성 특별 검토
+   - 의미 색상 (tier, priority 색)도 두 모드에서 구분 가능해야 함
+
+5. **UI 배치**:
+   - 헤더 우상단 아이콘 토글 (☀️ / 🌙 / 🔄 auto)
+   - 키보드 단축키: `Shift+D`
+
+---
+
+## FB-7. 프로젝트 이름 "Sanskrit-Tibetan Workspace"
+
+**증상**: v2 초기 제안 이름 "Nighaṇṭu"(निघण्टु)는 산스크리트어 고전 용어지만
+대중에게 지나치게 낯설고 발음도 어려움. 사용자/개발자 모두 부담.
+
+**v2 해결**:
+
+- **공식 이름**: **Sanskrit-Tibetan Workspace**
+  - 명확하고 검색 가능, v1과 자연스럽게 연결
+- **폴더/패키지**: `sanskrit-tibetan-workspace`
+- **짧은 코드네임** (내부용, 필요시): `stw` 또는 `workspace`
+- v1 (`sanskrit_tibetan_reading_workspace`)과 구분: "reading" 단어 제거
+
+---
+
 ## 반영 우선순위 (Phase 대응)
 
-| FB | Phase 1 | Phase 2 | Phase 3 |
-|----|---------|---------|---------|
-| FB-1 Smart snippet | schema 확정 | 빌드 구현 | Zone A UI |
-| FB-2 번역 coverage | audit 스크립트 | 재번역 batch | UI 배지 |
-| FB-3 priority 순서 | meta.json 스키마 | 정렬 규칙 | UI 반영 |
-| FB-4 IAST 표시 | schema 필수 승격 | 빌드 강제 | UI 치환 |
+| FB | Phase 1 | Phase 2 | Phase 3 | Phase 3.5 |
+|----|---------|---------|---------|-----------|
+| FB-1 Smart snippet | schema 확정 | 빌드 구현 | Zone A UI | — |
+| FB-2 번역 coverage | audit 스크립트 | 재번역 batch | UI 배지 | — |
+| FB-3 priority 순서 | meta.json 스키마 | 정렬 규칙 | UI 반영 | — |
+| FB-4 IAST 표시 | schema 필수 승격 | 빌드 강제 | UI 치환 | — |
+| FB-5 Declension 탭 | exclude 플래그 | declension 빌드 | — | 탭 구현 |
+| FB-6 다크모드 | — | — | theme.css + store | — |
+| FB-7 이름 변경 | ✅ 완료 | — | — | — |
 
-Phase 1이 끝난 시점에 이 문서의 모든 항목이 데이터 레이어에서 해결되어 있어야 함.
+Phase 1이 끝난 시점에 FB-1~5의 데이터 레이어가 완성되어 있어야 함.
 
 ---
 

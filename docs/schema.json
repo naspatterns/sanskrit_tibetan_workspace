@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://nighantu.haMsa.io/schema/entry.json",
-  "title": "Nighaṇṭu Dictionary Entry",
+  "$id": "https://sanskrit-tibetan-workspace.haMsa.io/schema/entry.json",
+  "title": "Sanskrit-Tibetan Workspace Dictionary Entry",
   "description": "JSONL line schema. Each entry = one dictionary headword.",
   "type": "object",
   "required": ["id", "dict", "headword", "headword_iast", "headword_norm", "lang", "body"],

@@ -1,4 +1,4 @@
-# Decisions Pending — Nighaṇṭu v2
+# Decisions Pending — Sanskrit-Tibetan Workspace v2
 
 다음 세션 시작 전에 사용자가 확정해야 할 결정들. ARCHITECTURE.md / ROADMAP.md
 의 ADR 섹션 보강용.
@@ -65,9 +65,9 @@
 ## Phase 4 결정
 
 ### D8. 도메인
-- **A**: `nighantu.haMsa.io` (서브도메인)
-- **B**: `nighantu.org` 또는 비슷한 신규 도메인
-- **C**: GitHub Pages 기본 도메인 + Cloudflare Pages 기본
+- **A**: `workspace.haMsa.io` 또는 `skt-tib.haMsa.io` (서브도메인)
+- **B**: `sanskrit-tibetan.org` 또는 비슷한 신규 도메인
+- **C**: Cloudflare Pages 기본 (`*.pages.dev`)
 - **추천**: C로 시작 (무료), 안정화 후 B.
 
 ### D9. v1 deprecation 일정
@@ -129,6 +129,30 @@ v1은 tier 1 (15개) 내부 순서가 무작위 → 사용자 불만.
 - `body.senses[]`: 구조화 사전에서 파싱 (Apte/MW 번호)
 - 사전별 `sense_separator` 정규식을 `meta.json`에 명시
 
+### D15. Declension 탭 범위 **[FB-5 관련, Phase 3.5 결정]**
+- **MVP 결정**: Lookup-only (Heritage 데이터에 있는 ~3000 단어만)
+- **Phase 6+ 확장 검토**:
+  - 규칙 기반 생성기 (미등록 단어)
+  - 복합어(compound) 분해
+  - 동사 활용(conjugation)
+  - Sandhi 적용 토글
+- **비범위**: 역조회(declined → lemma), Vedic sandhi
+- 상세: `docs/declension-tab.md`
+
+### D16. 다크모드 색 공간 **[FB-6으로 확정]**
+- **결정**: OKLCH 사용 (전통 HSL 대신)
+- **이유**: 지각적 명도 일관성 → 라이트/다크 자연스러운 대칭
+- 브라우저 호환성: Safari 15.4+, Chrome 111+, Firefox 113+ (2023년 기준 충분)
+- Fallback: `@supports (color: oklch(0.5 0 0))` 안에서만 적용, 미지원 시 sRGB fallback
+- 재검토: Phase 3 디자인 리뷰 시
+
+### D17. 탭 라우팅 전략 **[FB-5으로 확정]**
+- **결정**: 3개 메인 탭 (검색 / 곡용 / 독해)
+- 각 탭은 독립 URL 라우트 (`/`, `/declension`, `/reader`)
+- 헤더의 검색 입력창은 탭별 컨텍스트 감지
+- 독해 탭은 Phase 6+에서 활성화 (초기엔 "Coming soon")
+- 탭 간 단어 공유: 검색 결과에 "곡용 보기 →" 크로스-링크
+
 ---
 
 ## 결정 미정 시 영향
@@ -157,5 +181,9 @@ v1은 tier 1 (15개) 내부 순서가 무작위 → 사용자 불만.
 - D12 사전 우선순위 = Apte #1, MW #2 + priority 1-100 (FB-3)
 - D13 표제어 표시 = 항상 IAST, 원본은 토글 (FB-4)
 - D14 스니펫 = 문장 경계 기반 short/medium/senses (FB-1)
+- D15 Declension 탭 = lookup-only MVP, 생성기는 v3+ (FB-5)
+- D16 다크모드 = OKLCH 3-state 토글 (FB-6)
+- D17 탭 라우팅 = 3-탭 독립 URL (FB-5)
+- 프로젝트 이름 = Sanskrit-Tibetan Workspace (FB-7)
 
 상세: `docs/v1-feedback.md`
