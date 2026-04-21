@@ -18,13 +18,14 @@
 - **B**: Vite + Svelte SPA. 정적 사이트, 단순.
 - **추천**: A. SvelteKit의 prerender + cloudflare-pages adapter가 깔끔.
 
-### D3. 한국어 번역 어떻게?
-- v1은 DE/FR/LA 사전 9종 → Anthropic API로 번역해서 `body_ko` 저장
-- v2도 같은 방식?
-- **A**: v1 결과 그대로 재사용 (JSONL에 `body.ko` 포함)
-- **B**: 처음부터 다시 번역 (Claude Sonnet 4.5? 더 정확)
-- **C**: 번역 생략, 원문만 표시
-- **추천**: A. 추가 비용 없음. v3에서 재번역 검토.
+### D3. 한국어 번역 어떻게? **[FB-2로 확정]**
+- v1의 DE/FR/LA 번역이 **불완전**하다는 사용자 피드백 있음 (FB-2)
+- **결정: A + B 혼합** — v1 번역 재사용 + 빈 것만 신규 번역
+  - 이미 있는 `body.ko`는 재사용 (비용 0)
+  - 빈 것은 Claude Sonnet 4.5 batch API로 재번역 (50% 할인)
+  - 러시아어 자료 있으면 신규 추가
+- 자세한 절차: `docs/v1-feedback.md` §FB-2
+- coverage 목표: 95%+
 
 ---
 
@@ -98,12 +99,35 @@ top-10K 단어 결정 기준:
 - **결정**: 어떤 weight로 합칠지?
 - **추천**: Phase 2에서 실험. 초기엔 단순 cross-ref count.
 
-### D12. 사전 우선순위 재조정
-v1의 tier 1 (15개) 그대로? 재검토?
-- MW, BHSD, Macdonell — 합의된 핵심
-- Tibetan Hopkins, RangjungYeshe — 합의됨
-- 84000 — Buddhist 특화
-- **추천**: v1 유지. 사용 데이터 보고 조정.
+### D12. 사전 우선순위 재조정 **[FB-3로 확정]**
+v1은 tier 1 (15개) 내부 순서가 무작위 → 사용자 불만.
+- **결정**: `priority` 1-100 명시적 도입 (각 사전 meta.json)
+- **초기 순서 (사용자 확정)**:
+  1. Apte — 가장 정확, 학술 표준
+  2. Monier-Williams
+  3. Macdonell
+  4. BHSD
+  5. Cappeller
+  6. PW kürzer / groß
+  7-10. Sanskrit-Sanskrit 사전
+  20-29. Tibetan 주요
+- 자세한 테이블: `docs/v1-feedback.md` §FB-3
+- 사용자 개인화: localStorage + URL param
+
+### D13. 표제어 표시 형식 **[FB-4로 확정]**
+- **결정**: 모든 산스크리트 표제어 UI는 IAST (`headword_iast`)
+- 원본 (HK `ajJa`, Devanagari `धर्म`) 은 노출 안 함
+- "원본 보기" 토글로만 확인 가능
+- 티벳어 = Wylie 유지 (IAST는 산스크리트 전용)
+- 한자 = 원본 유지
+- 빌드 시 강제 생성, verify에서 검증
+
+### D14. 스니펫 추출 전략 **[FB-1로 확정]**
+- **결정**: 문자 수 고정 자르기 폐기. 문장 경계 기반.
+- `snippet_short` (~120자): 첫 완전 정의
+- `snippet_medium` (~400자): 첫 2-3 senses
+- `body.senses[]`: 구조화 사전에서 파싱 (Apte/MW 번호)
+- 사전별 `sense_separator` 정규식을 `meta.json`에 명시
 
 ---
 
@@ -124,3 +148,14 @@ v1의 tier 1 (15개) 그대로? 재검토?
 - v1 tier 유지 (D12)
 
 이 기본값으로 진행해도 충분히 동작. 실제 데이터 보고 변경.
+
+---
+
+## ✅ 확정된 결정 (사용자 피드백 기반)
+
+- D3 한국어 번역 = v1 재사용 + 신규 batch 보완 (FB-2)
+- D12 사전 우선순위 = Apte #1, MW #2 + priority 1-100 (FB-3)
+- D13 표제어 표시 = 항상 IAST, 원본은 토글 (FB-4)
+- D14 스니펫 = 문장 경계 기반 short/medium/senses (FB-1)
+
+상세: `docs/v1-feedback.md`

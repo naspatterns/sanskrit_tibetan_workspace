@@ -277,7 +277,43 @@ v2 해결:
 
 ---
 
-## 11. v1과 차이 한 줄
+## 11. Content Quality (v1 피드백 반영)
+
+v1 사용자 피드백 4건을 데이터 레이어와 UI에서 모두 해결. 상세는 `docs/v1-feedback.md`.
+
+### 11.1 Smart Snippets (FB-1)
+- 50자 고정 잘림 → **문장 경계 감지 기반 분절**
+- `body.snippet_short` (~120자): 첫 완전 정의 (Zone A 기본)
+- `body.snippet_medium` (~400자): 첫 2-3 senses (Zone A 더 보기)
+- `body.senses[]`: 구조화된 의미 단위 (Apte/MW 등 번호 매김 사전)
+- 빌드 시 `sense_separator` 정규식(meta.json)으로 파싱
+
+### 11.2 Translation Coverage (FB-2)
+- v1에서 미완성된 DE/FR/LA/RU 사전 번역 체계적 보완
+- Claude Sonnet 4.5 batch API (비용 절감)
+- `scripts/audit_translations.py`: coverage 리포트
+- `verify.py`: 번역률 <95%면 CI 경고
+- UI: `body.ko` 없으면 "원문만" 배지 + 원문 표시
+
+### 11.3 Dictionary Priority (FB-3)
+- **Apte #1, MW #2**가 기본 (사용자 요청)
+- `meta.json.priority` (1-100) 명시적 순서
+- 정렬: priority → tier → entry_count → alphabetical
+- 사용자 오버라이드: URL `?pin=...`, localStorage 개인화
+
+### 11.4 IAST Display Normalization (FB-4)
+- 모든 산스크리트 엔트리에 `headword_iast` **필수 필드**
+- UI는 항상 `headword_iast` 표시 (HK `ajJa` / Devanagari `धर्म` 절대 노출 금지)
+- 원본 `headword`는 archival + "원본 보기" 토글 전용
+- 티벳어는 Wylie 유지 (IAST는 산스크리트 전용)
+- 빌드 시 `transliterate.detect_and_convert_to_iast()` 자동 적용
+- `verify.py`: IAST 유효성 검증 (허용 유니코드 범위)
+
+---
+
+## 12. v1과 차이 한 줄
 
 > v1: "브라우저에서 2GB SQLite를 HTTP Range로 쿼리"
 > v2: "데이터는 JSONL, 검색은 edge, 캐시는 tier별, UI는 streaming"
+
+v1에서 기술적 성능을 고쳐도 콘텐츠 품질 문제가 남음 — v2는 §11에서 이 부분도 체계적으로 해결.

@@ -25,8 +25,13 @@ v2는 다음 원칙으로 재설계:
 6. **URL-as-State** — 완전한 상태 복원
 7. **Plugin Architecture** — 사전 하나 추가 = 디렉터리 하나 추가
 
-상세 설계: `ARCHITECTURE.md`
-단계별 로드맵: `ROADMAP.md`
+또한 v1 사용자 피드백 4건을 데이터 레이어에서 해결:
+- **Smart snippets** — 문장 경계 기반 (50자 잘림 문제)
+- **Translation coverage** — DE/FR/LA/RU 재번역 batch
+- **Priority ordering** — Apte #1, MW #2 명시적 순서
+- **IAST 표시 강제** — 모든 산스크리트 UI에 IAST (HK/Devanagari 노출 금지)
+
+상세 설계: `ARCHITECTURE.md` · 로드맵: `ROADMAP.md` · 피드백 대응: `docs/v1-feedback.md`
 
 ---
 

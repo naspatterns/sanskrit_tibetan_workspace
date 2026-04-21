@@ -25,39 +25,77 @@ v1 데이터를 그대로 활용 (사전별 재파싱 안 함). 빠른 시작.
 - 입력: `../sanskrit_tibetan_reading_workspace/build/dict.sqlite`
 - 출력: `data/jsonl/{dict_name}.jsonl` (135개)
 - 스키마: ARCHITECTURE.md §4.1
-- snippet 50/200 미리 계산 (런타임 SUBSTR 제거)
 
-### 1.2 정규화 통합
-- v1의 `transliterate.py` 재사용 (이미 IAST/HK/Devanagari 처리)
-- 정규화 결과를 JSONL에 미리 저장 → 런타임 부담 0
+### 1.2 **Smart Snippets 생성 (FB-1)**
+- `scripts/lib/snippet.py` — 문장/정의 경계 감지
+- 각 사전 `meta.json.sense_separator` 정규식 존중
+- `body.snippet_short` (~120자) + `body.snippet_medium` (~400자)
+- 구조화 가능한 사전(Apte/MW/Macdonell)은 `body.senses[]`도 생성
 
-### 1.3 JSON Schema 검증
-- `scripts/verify.py`: 모든 JSONL이 schema.json 만족 확인
+### 1.3 **IAST 표제어 강제 (FB-4)**
+- `transliterate.detect_and_convert_to_iast()` 모든 엔트리에 적용
+- `headword_iast` 필드 필수 생성
+- Sanskrit 엔트리 중 IAST 생성 실패 시 빌드 에러
+- Tibetan은 Wylie 유지, Chinese는 원본 유지
+
+### 1.4 **사전 meta.json 작성 (FB-3)**
+- v1 `dictnames.js` 135개 → 개별 `data/sources/<slug>/meta.json`
+- `priority` 수동 할당:
+  - 1=Apte, 2=MW, 3=Macdonell, 4=BHSD, ...
+  - v1-feedback.md §FB-3 초기값 테이블 참조
+- 타입 체크 + 중복/누락 검증
+
+### 1.5 **번역 Coverage Audit (FB-2)**
+- `scripts/audit_translations.py`
+- 사전별 `body.ko` 유/무 카운트
+- 리포트: `data/reports/translation_coverage.md`
+- Phase 2에서 재번역 대상 식별
+
+### 1.6 JSON Schema 검증
+- `scripts/verify.py`:
+  - schema.json 준수
+  - `headword_iast` 유효성 (허용 unicode 범위)
+  - priority 중복/gap 체크
+  - body 비어있는 엔트리 flag
 - CI에서 자동 실행 (PR 게이트)
 
-### 1.4 산출물
+### 1.7 산출물
 - 135개 사전 JSONL (~500MB raw, ~100MB zstd)
+- 135개 `meta.json` (priority 부여)
+- 번역 coverage 리포트
 - 검증 스크립트 + 스키마
 
-**완료 기준**: 모든 사전이 JSONL이고 verify.py 통과.
+**완료 기준**: 모든 사전이 JSONL + meta.json 완비, `verify.py` 통과, 번역 coverage 리포트 생성.
 
 ---
 
-## Phase 2: Tier 0 인덱스 + FST (1주)
+## Phase 2: Tier 0 인덱스 + FST + 번역 보완 (1-2주)
 
-**목표**: 상위 10K 단어를 메모리에서 즉시 검색.
+**목표**: 상위 10K 단어를 메모리에서 즉시 검색 + 번역 미완성 엔트리 재번역.
 
 ### 2.1 빈도 결정
 - v1 `body` 안의 cross-reference 카운트
 - DCS Sanskrit corpus frequency 활용
 - 결과: `data/top10k.txt` (정렬된 headword_norm 리스트)
 
-### 2.2 Tier 0 인덱스 빌드
+### 2.2 **번역 배치 재번역 (FB-2)**
+- `scripts/translate_batch.py`
+- Phase 1.5의 coverage 리포트 기반
+- Claude Sonnet 4.5 batch API (50% 비용 절감)
+- 원본 언어별 프롬프트 템플릿:
+  - DE → KO (Böhtlingk-Roth, Bopp, Cappeller 독, Böhtlingk kürzer, Schmidt)
+  - FR → KO (Burnouf, Stchoupak, Renou)
+  - LA → KO (Vedic concordance)
+  - RU → KO (있으면)
+- v1 번역 재사용 (비용 절감)
+- 번역 품질 플래그 (길이/반복 휴리스틱)
+
+### 2.3 Tier 0 인덱스 빌드
 - `scripts/build_tier0.py`
-- 입력: 모든 사전 JSONL + top10k.txt
+- 입력: 모든 사전 JSONL + top10k.txt + priority (meta.json)
 - 출력: `public/indices/tier0.msgpack.zst` (~30MB)
-- 형식: msgpack (JSON보다 작고 빠름)
-- 내용: 각 단어별 모든 사전 등재 + 50자/200자 snippet
+- **priority 순으로 정렬 저장** — UI에서 re-sort 불필요
+- 내용: 각 단어별 사전 등재 (priority ASC) + `snippet_short` + `snippet_medium`
 
 ### 2.3 FST 자동완성
 - `scripts/build_fst.py`
@@ -88,10 +126,14 @@ v1 데이터를 그대로 활용 (사전별 재파싱 안 함). 빠른 시작.
 - Playwright E2E
 
 ### 3.2 핵심 컴포넌트
-- `<SearchBar>`: 자동완성 (FST), 다국어 IME 호환
-- `<ResultList>`: 4-zone 레이아웃 (A/B/D/C)
-- `<DictBlock>`: 사전별 엔트리 표시
-- `<EntryFull>`: 본문 전체 보기
+- `<SearchBar>`: 자동완성 (FST), HK/IAST/Devanagari 입력 호환
+- `<ResultList>`: 4-zone 레이아웃 (A/B/D/C), **priority 순 정렬**
+- `<DictBlock>`: 사전별 엔트리
+  - 표제어는 **항상 `headword_iast`** 표시 (FB-4)
+  - 원본과 IAST가 다를 때만 "원본: ..." 작게 표시
+  - `body.ko` 없으면 "원문만" 배지 (FB-2)
+- `<ZoneA>`: `snippet_short` 기본 → "더 보기" 클릭 시 `snippet_medium` (FB-1)
+- `<EntryFull>`: 본문 전체 보기 + "원본 보기" 토글
 
 ### 3.3 상태 관리
 - nanostores: `searchTerm`, `results`, `loadingState`

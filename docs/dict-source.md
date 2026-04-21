@@ -14,34 +14,55 @@ data/sources/<slug>/
 
 ```json
 {
-  "slug": "monier-williams",
-  "name": "Monier-Williams Sanskrit-English Dictionary",
-  "short_name": "MW",
+  "slug": "apte-sanskrit-english",
+  "name": "Apte Practical Sanskrit-English Dictionary",
+  "short_name": "Apte",
   "lang": "skt",
   "target_lang": "en",
+  "priority": 1,
   "tier": 1,
-  "family": "mw",
+  "family": "apte",
   "license": "public-domain",
   "source_format": "xdxf",
-  "source_url": "https://www.sanskrit-lexicon.uni-koeln.de/",
-  "edition": "1899",
+  "source_url": "https://www.sanskrit-lexicon.uni-koeln.de/scans/AP90Scan/",
+  "edition": "1890",
   "import_script": "parse.py",
-  "expected_entries": 161000,
-  "input_script": "iast"
+  "expected_entries": 60000,
+  "input_script": "iast",
+  "sense_separator": ";|-[0-9]+|\\s[0-9]+\\.\\s"
 }
 ```
 
 ### 필드 설명
 - **slug**: URL-safe 식별자. 디렉터리명과 일치.
 - **name / short_name**: 표시명 (긴 / 짧은).
-- **lang**: 표제어 언어 (`skt`, `bo`, `zh` 등).
-- **target_lang**: 정의문 언어 (`en`, `de`, `ko`, `mixed` 등).
-- **tier**: 1(주요) / 2(전문) / 3(보조). UI 기본 펼침 결정.
+- **lang**: 표제어 언어 (`skt`, `bo`, `zh`, `pi` 등).
+- **target_lang**: 정의문 언어 (`en`, `de`, `fr`, `la`, `ru`, `ko`, `mixed` 등).
+- **priority**: **1-100 정수. 낮을수록 검색 결과 상단**. Apte=1, MW=2, Macdonell=3, BHSD=4.
+  UI 정렬의 1순위 키. tier와 독립 (tier는 펼침 여부, priority는 순서).
+- **tier**: 1(auto-expand) / 2(expand on match) / 3(collapsed). UI 펼침 상태.
 - **family**: 같은 사전의 다른 판본 그룹 (예: `mw`, `apte`, `heritage-decl`).
 - **license**: SPDX. 공개 가능 여부 결정.
 - **source_format**: `xdxf`, `csv`, `apple_dict`, `gretil_html`, `sandic_xml` 등.
-- **input_script**: `iast`, `hk`, `devanagari`, `wylie`, `mixed` — parse.py가 알아야 하는 정보.
+- **input_script**: `iast`, `hk`, `devanagari`, `wylie`, `mixed`.
+  parse.py가 IAST 변환 시 참조. `mixed` 인 경우 per-entry 감지.
 - **expected_entries**: 검증용. parse.py 출력이 ±5% 벗어나면 실패.
+- **sense_separator** (선택): 정규식. body를 senses 배열로 파싱할 때 사용.
+  MW/Apte 는 `;` + 번호 패턴. 없으면 sense 분리 생략.
+
+### priority 가이드라인
+
+```
+ 1- 9:  Sanskrit-English/German 주요 학술 사전 (Apte, MW, Macdonell, BHSD, ...)
+10-19:  Sanskrit-Sanskrit 사전 (Kalpadruma, Vacaspatyam, ...)
+20-29:  Tibetan 주요 (RangjungYeshe, Hopkins, 84000, tshig-mdzod-chen-mo)
+30-49:  Tibetan 전문 + Pali + 기타 언어
+50-69:  Sanskrit tier 2 (전문 분야별)
+70-89:  Declension tables, morphology, 파생 자료
+90-99:  Archival, 중복, low-quality
+```
+
+같은 priority 허용. 동점 시 tier → entry_count → alphabetical 순.
 
 ## parse.py 인터페이스
 
