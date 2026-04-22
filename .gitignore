@@ -60,3 +60,4 @@ test-results/
 # ─── Internal docs (keep architecture/roadmap public) ─
 NOTES.md
 TODO.local.md
+data/translations/

@@ -19,6 +19,8 @@ dependencies = [
     # Compression for Phase 2 indices (msgpack + zstd)
     "msgpack>=1.0",
     "zstandard>=0.22",
+    # Phase 2: translation batch (Sonnet 4.5 Batch API for FB-2 expansion)
+    "anthropic>=0.39",
 ]
 
 [dependency-groups]
