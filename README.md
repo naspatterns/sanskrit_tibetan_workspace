@@ -98,7 +98,7 @@ sanskrit-tibetan-workspace/
 
 - [x] Phase 0: 프로젝트 뼈대 + 설계 문서
 - [x] Phase 1: 데이터 추출 파이프라인 (v1 → JSONL, 130 dicts, 3.36M entries)
-- [ ] Phase 2: Tier 0 인덱스 + FST + 번역 보완
+- [x] Phase 2: Tier 0 인덱스 + FST + 역인덱스 (49 MB, cold load <700ms)
 - [ ] Phase 3: Svelte UI (검색 + 다크모드)
 - [ ] Phase 3.5: Declension 탭
 - [ ] Phase 4: 배포

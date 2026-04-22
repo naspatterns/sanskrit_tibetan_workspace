@@ -89,9 +89,13 @@ v1 데이터를 그대로 활용 (사전별 재파싱 안 함). 빠른 시작.
 
 ---
 
-## Phase 2: Tier 0 인덱스 + FST + 번역 보완 (1-2주)
+## Phase 2: Tier 0 인덱스 + FST + 번역 보완 ✅ (2026-04-22 / 23 완료)
 
 **목표**: 상위 10K 단어를 메모리에서 즉시 검색 + 번역 미완성 엔트리 재번역.
+
+**산출물**: 4 compressed indices (48.9 MB total) · Tier 0 cold load 606-641ms · hit lookup 0.2µs.
+Top-10K Ko 번역 POC 100/9,995 (나머지는 subagent spawn_task 또는 batch API).
+세부 리포트: `data/reports/phase2-summary.md`, `phase2-benchmark.md`.
 
 ### 2.1 빈도 결정
 - v1 `body` 안의 cross-reference 카운트
