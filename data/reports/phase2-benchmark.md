@@ -13,7 +13,7 @@
 
 - Headwords: **10,000**
 - Total entries: **355,648** (avg 35.6/hw)
-- **Cold load (decompress + msgpack): 600.3 ms**
+- **Cold load (decompress + msgpack): 593.6 ms**
 
 - Hit lookup median: **0.1 µs**  (p95 0.2 µs)
 - Miss lookup median: **0.1 µs**
@@ -21,15 +21,15 @@
 ## Reverse index (English → Sanskrit/Tibetan)
 
 - Tokens: **318,221**
-- Cold load: **335.7 ms**
-- Hit lookup median: **0.3 µs**  (p95 1.0 µs)
+- Cold load: **398.5 ms**
+- Hit lookup median: **0.4 µs**  (p95 0.9 µs)
 - Example: `fire` → 100 entries, first: `apte-sanskrit-english-031577`
 - Example: `duty` → 100 entries
 
 ## Reverse index (Korean → original)
 
 - Tokens: **532** (limited — expands after Phase 2 En→Ko batch)
-- Cold load: **1.6 ms**
+- Cold load: **1.7 ms**
 - Example: `법` → 100 entries
 
 ## Grand total
@@ -41,5 +41,5 @@
 | Metric | Target | Actual |
 |---|---|---|
 | Tier 0 size | ~30 MB | 28.62 MB |
-| Tier 0 cold load | <2s on 4G | 600 ms local |
+| Tier 0 cold load | <2s on 4G | 594 ms local |
 | Search response (cache hit) | <50 ms | 0.1 µs |
