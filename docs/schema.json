@@ -6,6 +6,12 @@
   "type": "object",
   "required": ["id", "dict", "headword", "headword_iast", "headword_norm", "lang", "body"],
   "properties": {
+    "role": {
+      "type": "string",
+      "enum": ["definition", "equivalents", "thesaurus", "declension"],
+      "default": "definition",
+      "description": "Functional role of this entry. 'definition' = standard dictionary entry → Zone C/D. 'equivalents' = cross-language mapping (e.g., Mvy, Negi) → Zone B. 'thesaurus' = synonym set (e.g., Amarakosa) → Zone B. 'declension' = grammatical paradigm → /declension tab (typically combined with meta.json.exclude_from_search). Optional; absence implies 'definition' for backward compatibility."
+    },
     "id": {
       "type": "string",
       "pattern": "^[a-z0-9]+(-[a-z0-9]+)*-[0-9]+$",
@@ -88,6 +94,21 @@
             }
           },
           "description": "Parsed senses when source structure is detectable (Apte, MW numbered senses). Optional — empty array if not parseable."
+        },
+        "equivalents": {
+          "type": "object",
+          "description": "Cross-language equivalents row (for role=equivalents). Used by Zone B. Each field optional; at least one of skt_iast/tib_wylie/zh should be non-empty.",
+          "properties": {
+            "skt_iast": { "type": "string", "description": "Sanskrit IAST." },
+            "skt_slp1": { "type": "string", "description": "Sanskrit SLP1 (optional, for legacy compatibility)." },
+            "tib_wylie": { "type": "string", "description": "Tibetan Wylie." },
+            "zh": { "type": "string", "description": "Chinese (Hanzi). Traditional or simplified as in source." },
+            "ko": { "type": "string", "description": "Korean equivalent (term-level, not full translation)." },
+            "en": { "type": "string", "description": "English gloss for the equivalent term." },
+            "category": { "type": "string", "description": "Source-specific category/chapter (e.g., Mvy '【如來名號】')." },
+            "note": { "type": "string", "description": "Source-specific note." }
+          },
+          "additionalProperties": false
         }
       },
       "additionalProperties": false

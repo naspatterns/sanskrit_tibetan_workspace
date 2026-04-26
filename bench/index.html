@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Sanskrit-Tibetan Workspace · Cold Load Benchmark</title>
+<style>
+  body { font-family: -apple-system, ui-sans-serif, sans-serif; max-width: 720px; margin: 2rem auto; padding: 0 1rem; line-height: 1.6; }
+  h1 { font-size: 1.3rem; margin-bottom: 0.3rem; }
+  h2 { font-size: 1rem; margin-top: 1.5rem; color: #555; }
+  table { border-collapse: collapse; width: 100%; margin-top: 0.5rem; }
+  td, th { padding: 0.4rem 0.6rem; border-bottom: 1px solid #eee; text-align: left; }
+  th { background: #f7f7f7; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .ok { color: #060; }
+  .warn { color: #960; }
+  .bad { color: #c00; }
+  pre { background: #f7f7f7; padding: 0.6rem; overflow: auto; font-size: 0.85rem; }
+  button { padding: 0.5rem 1rem; font-size: 1rem; cursor: pointer; }
+  #log { white-space: pre-wrap; }
+</style>
+</head>
+<body>
+<h1>Cold Load Benchmark — Tier 0 + Reverse Indices</h1>
+<p>측정 환경: 브라우저 fetch + fzstd decompress + msgpack decode. <code>performance.memory</code>(Chromium)로 JS heap 측정.</p>
+<button id="run" disabled>Loading modules…</button>
+<div id="results"></div>
+<h2>Console</h2>
+<div id="log"></div>
+
+<script>
+const earlyLog = (msg) => {
+  const el = document.getElementById('log');
+  if (el) el.textContent += msg + '\n';
+  console.log(msg);
+};
+window.addEventListener('error', (e) => earlyLog('window.error: ' + e.message + (e.filename ? ` @ ${e.filename}:${e.lineno}` : '')));
+window.addEventListener('unhandledrejection', (e) => earlyLog('unhandledrejection: ' + (e.reason?.message ?? String(e.reason))));
+</script>
+
+<script type="module">
+async function loadDeps() {
+  const sources = [
+    {
+      name: 'esm.sh',
+      fzstd: 'https://esm.sh/fzstd@0.1.1',
+      msgpack: 'https://esm.sh/@msgpack/msgpack@2.8.0',
+    },
+    {
+      name: 'unpkg',
+      fzstd: 'https://unpkg.com/fzstd@0.1.1/index.mjs',
+      msgpack: 'https://unpkg.com/@msgpack/msgpack@2.8.0/dist.es5+esm/index.mjs',
+    },
+    {
+      name: 'jsdelivr',
+      fzstd: 'https://cdn.jsdelivr.net/npm/fzstd@0.1.1/index.mjs',
+      msgpack: 'https://cdn.jsdelivr.net/npm/@msgpack/msgpack@2.8.0/dist.es5+esm/index.mjs',
+    },
+  ];
+  let lastErr;
+  for (const s of sources) {
+    try {
+      console.log(`trying ${s.name}…`);
+      const [fz, mp] = await Promise.all([import(s.fzstd), import(s.msgpack)]);
+      console.log(`✓ loaded from ${s.name}`);
+      document.getElementById('log').textContent += `modules loaded from ${s.name}\n`;
+      return { decompress: fz.decompress, decode: mp.decode };
+    } catch (e) {
+      console.warn(`× ${s.name}: ${e.message}`);
+      document.getElementById('log').textContent += `× ${s.name}: ${e.message}\n`;
+      lastErr = e;
+    }
+  }
+  throw lastErr ?? new Error('no CDN worked');
+}
+
+let decompress, decode;
+try {
+  ({ decompress, decode } = await loadDeps());
+  const btn = document.getElementById('run');
+  btn.disabled = false;
+  btn.textContent = 'Run benchmark';
+} catch (e) {
+  document.getElementById('log').textContent += 'FATAL: ' + e.message + '\n';
+  document.getElementById('run').textContent = 'Module load failed — see log';
+}
+
+const log = (msg) => {
+  const el = document.getElementById('log');
+  el.textContent += msg + '\n';
+  console.log(msg);
+};
+
+const fmtMs = (ms) => ms.toFixed(1) + ' ms';
+const fmtMB = (bytes) => (bytes / 1024 / 1024).toFixed(2) + ' MB';
+
+const targets = [
+  { name: 'tier0',       path: '/public/indices/tier0.msgpack.zst',       msgpack: true },
+  { name: 'reverse_en',  path: '/public/indices/reverse_en.msgpack.zst',  msgpack: true },
+  { name: 'reverse_ko',  path: '/public/indices/reverse_ko.msgpack.zst',  msgpack: true },
+  { name: 'headwords',   path: '/public/indices/headwords.txt.zst',       msgpack: false },
+];
+
+async function benchOne(target) {
+  const heapBefore = performance.memory?.usedJSHeapSize ?? 0;
+
+  const t0 = performance.now();
+  const resp = await fetch(target.path, { cache: 'no-store' });
+  if (!resp.ok) throw new Error(`fetch ${target.path}: ${resp.status}`);
+  const compressed = new Uint8Array(await resp.arrayBuffer());
+  const t1 = performance.now();
+
+  const raw = decompress(compressed);
+  const t2 = performance.now();
+
+  let parsed = null;
+  if (target.msgpack) {
+    parsed = decode(raw);
+  } else {
+    parsed = new TextDecoder('utf-8').decode(raw);
+  }
+  const t3 = performance.now();
+
+  // give GC a chance? no — measure what's live
+  const heapAfter = performance.memory?.usedJSHeapSize ?? 0;
+
+  let entryCount = null;
+  let headwordCount = null;
+  if (target.name === 'tier0' && parsed && typeof parsed === 'object') {
+    headwordCount = Object.keys(parsed).length;
+    entryCount = Object.values(parsed).reduce((s, v) => s + (v?.entries?.length ?? 0), 0);
+  } else if (target.name === 'headwords' && typeof parsed === 'string') {
+    headwordCount = parsed.split('\n').filter(Boolean).length;
+  } else if (parsed && typeof parsed === 'object') {
+    entryCount = Object.keys(parsed).length;
+  }
+
+  return {
+    name: target.name,
+    compressedSize: compressed.length,
+    decompressedSize: raw.length,
+    fetchMs: t1 - t0,
+    decompressMs: t2 - t1,
+    decodeMs: t3 - t2,
+    totalMs: t3 - t0,
+    heapDeltaBytes: heapAfter - heapBefore,
+    headwordCount,
+    entryCount,
+    parsed, // keep alive so heap delta is meaningful
+  };
+}
+
+async function runAll() {
+  document.getElementById('results').innerHTML = '<p><em>측정 중…</em></p>';
+  document.getElementById('log').textContent = '';
+  log('User-Agent: ' + navigator.userAgent);
+  log('Connection: ' + (navigator.connection?.effectiveType ?? 'unknown'));
+  log('performance.memory available: ' + Boolean(performance.memory));
+
+  const results = [];
+  const liveRefs = [];
+  for (const target of targets) {
+    log(`\n→ ${target.name} (${target.path})`);
+    try {
+      const r = await benchOne(target);
+      results.push(r);
+      liveRefs.push(r.parsed);
+      log(`  fetch=${fmtMs(r.fetchMs)}  decompress=${fmtMs(r.decompressMs)}  decode=${fmtMs(r.decodeMs)}  total=${fmtMs(r.totalMs)}`);
+      log(`  compressed=${fmtMB(r.compressedSize)}  decompressed=${fmtMB(r.decompressedSize)}  heap+=${fmtMB(r.heapDeltaBytes)}`);
+      if (r.headwordCount != null) log(`  headwords=${r.headwordCount}`);
+      if (r.entryCount != null) log(`  entries=${r.entryCount}`);
+    } catch (e) {
+      log(`  ERROR: ${e.message}`);
+      results.push({ name: target.name, error: e.message });
+    }
+  }
+
+  // Aggregate
+  const totalFetch = results.reduce((s, r) => s + (r.fetchMs ?? 0), 0);
+  const totalDecompress = results.reduce((s, r) => s + (r.decompressMs ?? 0), 0);
+  const totalDecode = results.reduce((s, r) => s + (r.decodeMs ?? 0), 0);
+  const totalCold = results.reduce((s, r) => s + (r.totalMs ?? 0), 0);
+  const totalCompressed = results.reduce((s, r) => s + (r.compressedSize ?? 0), 0);
+  const totalDecompressed = results.reduce((s, r) => s + (r.decompressedSize ?? 0), 0);
+  const totalHeap = results.reduce((s, r) => s + (r.heapDeltaBytes ?? 0), 0);
+
+  const tier0 = results.find(r => r.name === 'tier0');
+
+  let html = `
+    <h2>Per-file</h2>
+    <table>
+      <tr><th>file</th><th class="num">compressed</th><th class="num">decompressed</th><th class="num">fetch</th><th class="num">decompress</th><th class="num">decode</th><th class="num">total</th><th class="num">heap +</th></tr>
+  `;
+  for (const r of results) {
+    if (r.error) {
+      html += `<tr><td>${r.name}</td><td colspan="7" class="bad">${r.error}</td></tr>`;
+      continue;
+    }
+    html += `<tr>
+      <td>${r.name}</td>
+      <td class="num">${fmtMB(r.compressedSize)}</td>
+      <td class="num">${fmtMB(r.decompressedSize)}</td>
+      <td class="num">${fmtMs(r.fetchMs)}</td>
+      <td class="num">${fmtMs(r.decompressMs)}</td>
+      <td class="num">${fmtMs(r.decodeMs)}</td>
+      <td class="num"><strong>${fmtMs(r.totalMs)}</strong></td>
+      <td class="num">${fmtMB(r.heapDeltaBytes)}</td>
+    </tr>`;
+  }
+  html += `</table>`;
+
+  // ROADMAP target check (just for tier0)
+  let tier0Check = '';
+  if (tier0 && !tier0.error) {
+    const cls = tier0.totalMs < 2000 ? 'ok' : tier0.totalMs < 4000 ? 'warn' : 'bad';
+    tier0Check = `<p>Tier 0 cold load: <strong class="${cls}">${fmtMs(tier0.totalMs)}</strong> (목표 &lt;2 s on 4G — local fetch이므로 4G 시뮬은 별도)</p>`;
+  }
+
+  html += `
+    <h2>Totals (all 4 indices, sequential)</h2>
+    <p>compressed download: <strong>${fmtMB(totalCompressed)}</strong> · decompressed: <strong>${fmtMB(totalDecompressed)}</strong></p>
+    <p>fetch=${fmtMs(totalFetch)} · decompress=${fmtMs(totalDecompress)} · decode=${fmtMs(totalDecode)} · <strong>total cold=${fmtMs(totalCold)}</strong></p>
+    <p>JS heap delta (sum): <strong>${fmtMB(totalHeap)}</strong></p>
+    ${tier0Check}
+  `;
+
+  document.getElementById('results').innerHTML = html;
+
+  // Stash globally so user can poke in DevTools
+  window.__BENCH__ = { results, totals: { totalFetch, totalDecompress, totalDecode, totalCold, totalCompressed, totalDecompressed, totalHeap } };
+  log('\n결과는 window.__BENCH__ 로도 접근 가능');
+}
+
+document.getElementById('run').addEventListener('click', runAll);
+</script>
+</body>
+</html>

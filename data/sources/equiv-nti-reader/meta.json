@@ -1,0 +1,12 @@
+{
+  "slug": "equiv-nti-reader",
+  "name": "NTI Reader Buddhist Dictionary (Sanskrit-Chinese, Fo Guang Shan)",
+  "lang": "skt",
+  "tier": 1,
+  "priority": 30,
+  "role": "equivalents",
+  "direction": "skt-to-zh",
+  "license": "CC-BY-SA-4.0",
+  "source": "v1 bilex.sqlite/equiv table",
+  "entry_count": 8155
+}

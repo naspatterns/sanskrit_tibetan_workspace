@@ -1,0 +1,12 @@
+{
+  "slug": "equiv-hopkins",
+  "name": "Hopkins Tibetan-Sanskrit Dictionary (2015)",
+  "lang": "bo",
+  "tier": 1,
+  "priority": 29,
+  "role": "equivalents",
+  "direction": "tib-to-skt",
+  "license": "research-use",
+  "source": "v1 bilex.sqlite/equiv table",
+  "entry_count": 19625
+}

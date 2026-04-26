@@ -1,0 +1,12 @@
+{
+  "slug": "equiv-mahavyutpatti",
+  "name": "Mahāvyutpatti (翻譯名義大集)",
+  "lang": "skt",
+  "tier": 1,
+  "priority": 25,
+  "role": "equivalents",
+  "direction": "skt-to-tib",
+  "license": "public-domain",
+  "source": "v1 bilex.sqlite/equiv table",
+  "entry_count": 12281
+}

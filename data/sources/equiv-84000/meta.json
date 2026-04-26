@@ -1,0 +1,12 @@
+{
+  "slug": "equiv-84000",
+  "name": "84000 Tibetan-Sanskrit Glossary",
+  "lang": "bo",
+  "tier": 1,
+  "priority": 28,
+  "role": "equivalents",
+  "direction": "tib-to-skt",
+  "license": "CC-BY-4.0",
+  "source": "v1 bilex.sqlite/equiv table",
+  "entry_count": 19065
+}

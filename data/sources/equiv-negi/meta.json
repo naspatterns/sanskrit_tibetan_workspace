@@ -1,0 +1,12 @@
+{
+  "slug": "equiv-negi",
+  "name": "Negi Tibetan-Sanskrit Dictionary (16-vol)",
+  "lang": "bo",
+  "tier": 1,
+  "priority": 26,
+  "role": "equivalents",
+  "direction": "tib-to-skt",
+  "license": "research-use",
+  "source": "v1 bilex.sqlite/equiv table",
+  "entry_count": 38513
+}
