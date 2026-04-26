@@ -1,0 +1,12 @@
+{
+  "slug": "equiv-yogacara-index",
+  "name": "Yogācārabhūmi Tibetan-Chinese-Sanskrit Index (티베탄딕셔너리-유가사지론색인)",
+  "lang": "bo",
+  "tier": 2,
+  "priority": 28,
+  "role": "equivalents",
+  "direction": "tib-to-zh-skt",
+  "license": "unknown",
+  "source_path": "haMsa CODE/Sanskrit_Tibetan_Reading_Tools/티베탄딕셔너리-유가사지론색인.pdf",
+  "row_count": 54452
+}
