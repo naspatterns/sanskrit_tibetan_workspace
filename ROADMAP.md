@@ -426,3 +426,36 @@ v2가 안정화된 후 검토:
   - *별도 역 JSONL 파일*: inline vs separate 논쟁 — inline이 재생성 편리
   - *규칙 기반 추출 없이 raw body 저장*: 쿼리 시 토크나이징 부담, 브라우저에서 느림
 - **재검토 시점**: Phase 3 UI 완성 후 사용자 피드백 수집 (특히 한국어 조사 처리)
+
+### ADR-009: 사전 Pareto + `role` 필드 + Tier 0 사전 shard
+- **결정**:
+  1. `meta.json.role` + entry 최상위 `role` 필드 도입 — `definition` / `equivalents` / `thesaurus` / `declension`
+  2. Tier 0를 사전별 shard로 분할: `tier0-core` (언어별 top-3 정의 사전) + `tier0-rest/{slug}` (priority≥4 lazy)
+  3. `role=equivalents` + `role=thesaurus` 사전은 별도 인덱스 `equivalents.msgpack.zst` (Zone B 전용)
+  4. 산스크리트 top-3 = Apte/MW/BHSD, 티벳 top-3 = RY/Hopkins/84000 (입력 문자 감지로 prefetch 결정)
+- **이유**:
+  - 2026-04-26 cold load 측정 (`bench/index.html`): tier0 단독 JS heap **428 MB** 폭증 → 모바일 OOM 위험
+  - 학자 사용 패턴 — 한 검색에서 진짜 정독하는 사전은 언어별 top-3 (Pareto 분포)
+  - 추정 효과: 압축 28.6 MB → ~5 MB, JS heap 428 MB → ~60 MB
+  - v1의 "사전 균등 처리" 결함 (FB-3에서 priority 정렬만 했지만 데이터 레이어는 그대로) 데이터 레이어에서 해결
+- **대안 검토**:
+  - hot/warm 분할 (top-1K vs 1K-10K) — *headword* Pareto만 다룸. 사전 Pareto에 둔감. 효과 적음.
+  - 클라이언트 sql.js (IndexedDB/OPFS) — ceiling 가장 높지만 모바일 hydration 미지수 + 1-2주 작업
+  - 변경 없음 (v1처럼) — 모바일에서 즉사 (heap 428 MB)
+- **재검토 시점**: spawn_task의 `Sanskrit_Tibetan_Reading_Tools` 발굴 결과 통합 후 + Phase 3 LCP 재측정. Zone B 비대 시 `equivalents.msgpack.zst`도 source별 shard 검토.
+
+### ADR-010: Zone 재설계 — Zone A 제거 + 순서 (Header → B → C → D)
+- **결정**:
+  1. v1의 Zone A 통째 제거 — 1줄 header strip("검색어 · 정의 카운트 · 대응어 카운트 · 매칭 모드")로 대체
+  2. Zone 순서: header strip → Zone B (equivalents) → Zone C (정의 top-3, prefetched) → Zone D (추가 사전 lazy)
+  3. v1의 A → B → D → C 패턴 폐기. 검색 결과 정의가 부분→전체가 아닌 즉시→토글 패턴.
+- **이유**:
+  - v1 Zone A는 두 역할 — (1) bilex 즉시 도착 + body lazy load의 *buffer*, (2) 사전 *navigation aid* (`wireZoneALinks`).
+    ADR-009의 top-3 prefetch로 (1) buffer 역할 사라짐. (2) navigation은 한 화면에 3 사전 다 보여서 가치 약함.
+  - v1이 D를 C 위에 둔 이유는 lazy body load. v2는 즉시 prefetch라 정합성 잃음.
+  - 학술 사용 패턴 — 검색의 본질이 "대응어 + 정의" 첫 시각, equivalents는 dense reference (한 줄당 4언어).
+- **대안 검토**:
+  - Zone A 유지 — buffer 역할 없는데 화면 점유. redundant.
+  - Zone C 위 B — 검색의 primary가 정의이므로 합리적. 다만 v1 사용자(=현 사용자)가 B 위 패턴을 선호한 패턴 + 학자 dense reference 가치 무시.
+  - 단일 zone (모두 Zone C 안에 평탄화) — 시각적 분리 잃음, equivalents가 정의 사이 끼어 v1과 같은 결과 오염 (FB-5 패턴 재발).
+- **재검토 시점**: Phase 3 UX 테스트 (특히 모바일 좁은 화면). Zone B 비대 시 (예: 단어당 1000+ 매핑) collapse 정책 + source 그룹 토글.
