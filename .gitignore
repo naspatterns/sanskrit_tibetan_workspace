@@ -61,3 +61,6 @@ test-results/
 NOTES.md
 TODO.local.md
 data/translations/
+
+# ─── Project-local (never push) ────────────────────────
+CLAUDE.md
