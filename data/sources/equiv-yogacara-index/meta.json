@@ -8,5 +8,7 @@
   "direction": "tib-to-zh-skt",
   "license": "unknown",
   "source_path": "haMsa CODE/Sanskrit_Tibetan_Reading_Tools/티베탄딕셔너리-유가사지론색인.pdf",
-  "row_count": 54452
+  "row_count": 54452,
+  "exclude_from_search": true,
+  "superseded_by": "equiv-yogacarabhumi-idx"
 }
