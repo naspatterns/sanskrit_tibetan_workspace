@@ -1,0 +1,13 @@
+{
+  "slug": "equiv-bodkye-hamsa",
+  "name": "haMsa의 Tibetan 사전 (사용자 정리, Bodkye)",
+  "lang": "bo",
+  "tier": 1,
+  "priority": 35,
+  "role": "equivalents",
+  "direction": "tib-to-skt-eng-ko",
+  "license": "personal-CC-BY-NC",
+  "source_path": "Sanskrit_Tibetan_Reading_Tools/Bodkye/haMsa의 Tibetan 사전.docx",
+  "row_count": 32,
+  "extraction_note": "Personal study notes; small but high-quality 4-language entries with Tibetan examples."
+}

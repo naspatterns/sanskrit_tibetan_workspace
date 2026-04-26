@@ -21,6 +21,11 @@ dependencies = [
     "zstandard>=0.22",
     # Phase 2: translation batch (Sonnet 4.5 Batch API for FB-2 expansion)
     "anthropic>=0.39",
+    "openpyxl>=3.1.5",
+    "python-docx>=1.2.0",
+    "pdfplumber>=0.11.9",
+    "pypdf>=6.10.2",
+    "xlrd<2",
 ]
 
 [dependency-groups]

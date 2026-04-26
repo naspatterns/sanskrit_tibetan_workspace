@@ -1,0 +1,12 @@
+{
+  "slug": "equiv-karashima-lotus",
+  "name": "A Glossary of Kumārajīva's Lotus Sutra Translation (Karashima 妙法蓮華經詞典)",
+  "lang": "zh",
+  "tier": 2,
+  "priority": 32,
+  "role": "equivalents",
+  "direction": "zh-to-skt",
+  "license": "CC-BY-SA-4.0",
+  "source_path": "haMsa CODE/Sanskrit_Tibetan_Reading_Tools/Karashima 라집역 연화경 glossary.pdf",
+  "row_count": 2320
+}
