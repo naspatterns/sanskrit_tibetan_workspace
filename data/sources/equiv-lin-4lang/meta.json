@@ -1,0 +1,13 @@
+{
+  "slug": "equiv-lin-4lang",
+  "name": "Common Chinese-Tibetan-Sanskrit-English Buddhist Terminology (常用漢藏梵英佛學術語, 林崇安 2008)",
+  "lang": "zh",
+  "tier": 1,
+  "priority": 30,
+  "role": "equivalents",
+  "direction": "zh-to-tib-skt-eng",
+  "license": "unknown",
+  "source_path": "Sanskrit_Tibetan_Reading_Tools/[#haMsa TIBETAN]/상용한장범영불학술어_2008.pdf",
+  "row_count": 2411,
+  "extraction_note": "Tibetan column contains (cid:NNN) glyph fallbacks where the PDF font lacked Tibetan Unicode mappings. Wylie conversion deferred to downstream pipeline."
+}

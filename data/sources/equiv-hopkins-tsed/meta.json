@@ -1,0 +1,13 @@
+{
+  "slug": "equiv-hopkins-tsed",
+  "name": "Jeffrey Hopkins' Tibetan-Sanskrit-English Dictionary (DDBC)",
+  "lang": "bo",
+  "tier": 1,
+  "priority": 26,
+  "role": "equivalents",
+  "direction": "tib-to-skt-eng",
+  "license": "CC-BY-SA-4.0",
+  "source_path": "Sanskrit_Tibetan_Reading_Tools/[#haMsa TIBETAN]/hopkins.ddbc.pdf",
+  "row_count": 18600,
+  "extraction_note": "Multi-source consolidated: {Hopkins}, {C}=Conze, {MSA}=Mahāyānasūtrālaṃkāra, {L}=Lalitavistara, {LCh}=Lokesh Chandra, {PH}=Padmakara Hackett, etc."
+}
