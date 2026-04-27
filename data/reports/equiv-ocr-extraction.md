@@ -11,29 +11,23 @@
 - **OCR 도구**: Tesseract 5.5.2 + Poppler (모두 brew, 무료/OSS)
 - **Python 의존성 추가**: `pytesseract`, `pdf2image`, `pillow` (uv add)
 - **신규 모듈**: `scripts/ocr/lib.py` — pdftoppm + tesseract 직접 호출, 페이지별 디스크 캐시, 6 worker 병렬, 2-칼럼 자동 분리
-- **처리 결과** (4 source · 약 **120K rows committed** · 추가 OCR 백그라운드 진행 중):
+- **처리 결과** (4 source · **159,755 rows committed** · 모든 OCR 완료):
 
-| Slug | Source | Pages (total / OCR'd) | Rows committed | Mean Conf | 비고 |
+| Slug | Source | Pages | Rows | Mean Conf | 비고 |
 |---|---|---:|---:|---:|---|
-| `equiv-hirakawa` | Hirakawa Buddhist Chinese-Sanskrit Dict | 1506 / **1506 ✅** | **16,851** | 70.5 | 한자→Skt, 새 자료, 완료 |
-| `equiv-bonwa-daijiten` | 梵和大辭典 (Ogiwara) | 1666 / **1666 ✅** | **100,253** | 72.9 | Skt→일본어, **v2에 첫 일본어 자료**, 완료 |
-| `equiv-turfan-skt-de` | Turfan SWB v1 + v2 | 696 + 612 / **1308 ✅** | **11,762** | 85.4 | **v1+v2 완전 완료**, 4개 source 중 가장 깨끗 |
-| `equiv-tib-chn-great` | 藏漢大辭典 (dKon-mchog) | 3338 / **3205 (96%)** | **30,845** | 68.4 | Tib→중국어, **OCR 거의 완료** (133p 남음) |
+| `equiv-hirakawa` | Hirakawa Buddhist Chinese-Sanskrit Dict | 1506 ✅ | **16,851** | 70.5 | 한자→Skt, 새 자료 |
+| `equiv-bonwa-daijiten` | 梵和大辭典 (Ogiwara) | 1666 ✅ | **100,253** | 72.9 | Skt→일본어, **v2에 첫 일본어 자료** |
+| `equiv-turfan-skt-de` | Turfan SWB (Bechert) v1 + v2 | 696+612 = 1308 ✅ | **11,762** | 85.4 | Skt→독일어, 4개 source 중 가장 깨끗 |
+| `equiv-tib-chn-great` | 藏漢大辭典 (dKon-mchog) | 3338 ✅ | **30,889** | 68.0 | Tib→중국어 (Wylie 변환 후속 권장) |
 | ~~`equiv-amarakoza`~~ | Amarakośa TSS 1914-17 4vols | 1121 | **skip** | n/a | Sanskrit verse+commentary, 구조 파싱 불가; v1에 이미 있음 |
 
-**부분 처리 사유** (Turfan, Tib_Chn):
-- 이 spawn 진행 중 사용자가 별도로 ~3개의 `ocrmypdf` 프로세스를 (Sanskrit 텍스트 OCR) 시작. CPU 4-5개가 user's 작업에 점유됨 → 본 spawn의 OCR 속도 ~3-5 pages/min (정상의 1/3).
-- Turfan v1 (696p) ETA: 사용자 작업 완료 후 ~30-60분
-- Tib_Chn (3338p) ETA: 사용자 작업 완료 후 ~5-7시간
+**총 OCR 처리**: **7,818 페이지** (Hirakawa 1506 + Bonwa 1666 + Turfan 1308 + Tib_Chn 3338).
 
-**OCR 캐시 보존**: 모든 OCR'd 페이지가 `data/ocr_cache/{slug}/p{NNNNN}.{txt,json}`에 남아 있음 (.gitignore). 사용자/후속 spawn이 OCR 완료 후 다음 명령으로 즉시 추가 row 추출 가능:
+**OCR 캐시 보존**: 모든 OCR'd 페이지가 `data/ocr_cache/{slug}/p{NNNNN}.{txt,json}`에 남아 있음 (.gitignore). 파서 개선 시 `--from-cache`로 즉시 재추출 가능 (OCR 안 함).
 
 ```bash
-uv run python -m scripts.extract_equiv_turfan --from-cache  # Turfan
-uv run python -m scripts.extract_equiv_tibchn --from-cache  # Tib_Chn
+uv run python -m scripts.extract_equiv_<slug> --from-cache  # 캐시 재파싱
 ```
-
-`--from-cache` 모드는 OCR 스킵 + 캐시된 페이지만 파싱 → 즉시 JSONL 갱신.
 
 **중요**:
 - 모든 row에 `source_meta.ocr_conf` (0-100) + `source_meta.raw` (원 OCR 텍스트) 보존 → 사용자 후속 검증 가능
@@ -152,12 +146,11 @@ def ocr_pdf_parallel(slug, pdf_path, pages, langs, psm=4, dpi=300, workers=6, co
 
 **가치**: v2에 일본어 사전 미수록. **100K rows of Sanskrit→Japanese mapping은 큰 추가**.
 
-### 2.3 藏漢大辭典 Tib_Chn_Dict (3338p, 138 MB) — **부분 (200/3338p, 6%)**
+### 2.3 藏漢大辭典 Tib_Chn_Dict (3338p, 138 MB) — **완료 ✅**
 
 - **Setting**: `bod+chi_sim+chi_tra`, psm 4, dpi 300, **2 columns**
-- **Output (partial)**: 1,691 rows from 200 pages
-- **추정 full output**: ~28,000 rows (8.5 entries/page)
-- **Mean conf**: 66.9 (143/200p < 70 — Tibetan 문자 OCR 어려움)
+- **Output**: 30,889 rows from 3338 pages (~9.3 entries/page)
+- **Mean conf**: 68.0 (2153/3338p < 70 — Tibetan 문자 OCR 어려움)
 
 **Sample row (p100, conf ~66)**:
 ```json
@@ -182,12 +175,11 @@ def ocr_pdf_parallel(slug, pdf_path, pages, langs, psm=4, dpi=300, workers=6, co
 
 **가치**: v1에 Tibetan-Chinese mapping 없음. 약 26K 새 항목 가능.
 
-### 2.4 Turfan Sanskrit-Wörterbuch (vol 1: 696p, vol 2: 612p; total 1308p) — **부분 (155/1308p, 12%)**
+### 2.4 Turfan Sanskrit-Wörterbuch (vol 1: 696p, vol 2: 612p; total 1308p) — **완료 ✅**
 
 - **Setting**: `eng+san+deu`, psm 4, dpi 300, **2 columns**
-- **Output (partial, vol 1만)**: 1,527 rows from 155 pages
-- **추정 full output**: ~16,000 rows (10 entries/page)
-- **Mean conf**: 87.8 (excellent! 인쇄본 품질 좋음, 6개 source 중 가장 깨끗)
+- **Output**: 11,762 rows from 1308 pages (9.0 entries/page)
+- **Mean conf**: 85.4 (excellent! 인쇄본 품질 좋음, 4개 source 중 가장 깨끗)
 
 **Sample row (p200, conf 85)**:
 ```json
@@ -328,59 +320,69 @@ def ocr_pdf_parallel(slug, pdf_path, pages, langs, psm=4, dpi=300, workers=6, co
 ## 8. raw counts (committed)
 
 ```
-equiv-hirakawa.jsonl          :  16,851 rows ·  11 MB  (DONE — full 1506p)
-equiv-bonwa-daijiten.jsonl    : 100,253 rows ·  62 MB  (DONE — full 1666p)
-equiv-turfan-skt-de.jsonl     :  11,762 rows · 7.5 MB  (v1+v2 DONE — 1308/1308 ✅)
-equiv-tib-chn-great.jsonl     :  30,845 rows · 20 MB   (PARTIAL — 3205/3338p, 96%)
+equiv-hirakawa.jsonl          :  16,851 rows ·  11 MB  (DONE — full 1506p ✅)
+equiv-bonwa-daijiten.jsonl    : 100,253 rows ·  62 MB  (DONE — full 1666p ✅)
+equiv-turfan-skt-de.jsonl     :  11,762 rows · 7.5 MB  (DONE — full 1308p ✅)
+equiv-tib-chn-great.jsonl     :  30,889 rows · 20 MB   (DONE — full 3338p ✅)
 ─────────────────────────────────────────────────────────────────
-TOTAL (committed)             : 159,711 rows · 102 MB
+TOTAL (committed)             : 159,755 rows · 102 MB · 7,818 pages
 ```
-
-**OCR 백그라운드 진행 중** — 사용자 다른 ocrmypdf 작업이 끝나면 자연스럽게 가속.
-캐시는 `data/ocr_cache/{slug}/`에 누적. 추출 갱신은 `--from-cache` 옵션으로 즉시 가능.
 
 JSONL은 `.gitignore`로 제외 (CLAUDE.md §9 정책 준수). meta.json + extract scripts만 commit.
 OCR cache (`data/ocr_cache/`)도 `.gitignore` 추가 (gigabytes per source, regenerable).
 
 ---
 
-**보고서 작성**: 2026-04-27 by Claude Opus 4.7
-**관련 commits**:
-- `0a2d426` OCR 추출 (1/N): Hirakawa 한자-Skt → 16,851 rows (전체)
-- `9eb1287` OCR 추출 (2/N): 梵和大辭典 → 100,253 rows (전체)
-- `(다음)` OCR 추출 (3/N): Turfan + Tib_Chn 부분 → 3,218 rows (백그라운드 OCR 진행 중)
+**보고서 작성**: 2026-04-27 ~ 2026-04-28 by Claude Opus 4.7
+**관련 commits** (28개 incremental — `git log --oneline | grep "OCR 추출"`):
+- `0a2d426` (1) Hirakawa 한자-Skt → 16,851
+- `9eb1287` (2) 梵和大辭典 → 100,253
+- `22b5457`..`d024069` (3-27) Turfan + Tib_Chn incremental from-cache 갱신
+- `63f9022` (28) Tib_Chn 96% (3205p)
+- `(다음)` (29 final) Tib_Chn 100% 완료 + 보고서 최종 → 159,755 rows
 
 ---
 
-## 11. 후속 spawn / 사용자 액션 가이드
+## 11. 후속 액션 가이드 (모든 OCR 완료)
 
-이 spawn은 conversation context 한도로 인해 Turfan + Tib_Chn 전체 OCR 완료 전 wrap-up.
-백그라운드 OCR 프로세스는 계속 진행 중 (사용자가 별도로 kill하지 않으면).
+본 spawn은 모든 4 source의 OCR을 완료. 후속 작업 (메인 세션 또는 follow-up spawn):
 
-**사용자 옵션**:
-
-1. **백그라운드 OCR이 자연 완료되면**:
+1. **메인 세션 통합** (가장 즉시):
    ```bash
-   cd .../sanskrit-tibetan-workspace
-   uv run python -m scripts.extract_equiv_turfan --from-cache  # 새 row 수만큼 갱신
-   uv run python -m scripts.extract_equiv_tibchn --from-cache  # 동일
-   git add data/sources/equiv-turfan-skt-de/meta.json data/sources/equiv-tib-chn-great/meta.json
-   git commit -m "OCR 추출 (final): Turfan + Tib_Chn full → N rows"
+   # data/jsonl/equiv-*.jsonl, data/sources/equiv-*/meta.json 모두 갖춰져 있음
+   # build pipeline에 추가 → equivalents.msgpack.zst 빌드
    ```
 
-2. **OCR 일찍 멈추고 싶다면**:
+2. **schema 확장** (verify 통과 위해):
+   - `body.equivalents.ja` 필드 추가 (Bonwa 일본어용; 현재 `note: "ja: ..."` prefix)
+   - `body.equivalents.de` 필드 추가 (Turfan 독일어용; 현재 `note: "de: ..."` prefix)
+   - 또는 본 spawn output을 reshape하여 schema 호환
+
+3. **Tib_Chn Wylie 변환** (Tibetan unicode → Wylie):
    ```bash
-   pkill -f "extract_equiv"  # 현재 실행 중인 OCR 프로세스 종료
-   ```
-   OCR 캐시 (`data/ocr_cache/`)는 보존됨. 언제든지 `--from-cache`로 그 시점의 row 추출 가능.
-
-3. **별도 spawn으로 마저 처리**:
-   ```
-   /spawn (or Agent tool) "Continue OCR extraction:
-   Run from-cache extraction for equiv-turfan-skt-de + equiv-tib-chn-great.
-   Restart background OCR if cache shows incomplete pages.
-   Update data/reports/equiv-ocr-extraction.md final stats and commit."
+   pip install pyewts
+   # equiv-tib-chn-great rows의 headword Tibetan unicode →
+   # body.equivalents.tib_wylie 채우기 + headword_iast 갱신
    ```
 
-4. **메인 세션 통합**:
-   본 4 source의 meta.json + JSONL을 그대로 사용 가능. Schema 호환을 위해 `body.equivalents.{ja, de}` 필드 추가 후 verify 권장 (§4).
+4. **품질 필터링** (선택):
+   - `ocr_conf >= 60` 필터: Hirakawa 노이즈 페이지 제거 (~109 rows)
+   - `len(headword) <= 8` 필터: 비정상 long headword 제거
+
+5. **OCR 캐시 정리** (디스크 절약, ~50 MB):
+   ```bash
+   rm -rf data/ocr_cache/  # 모두 재생성 가능 (시간 cost 큼: ~10시간)
+   ```
+
+**미처리 / 사용자 결정 필요**:
+
+1. **Amarakośa** — Sanskrit verse+commentary, 구조 파싱 별도 NLP 작업 필요. v1에 이미 있으니 skip.
+2. **불광사전워.pdf (2GB)** — Vision API 권장 (한자 OCR 정확도). Tesseract 시도 시 ~12+ hours.
+3. **梵語佛典의硏究.PDF (62MB)** — 사전이 아닌 연구서. 검토 필요.
+
+**별도 spawn 시 prompt 예** (reference):
+   ```
+   /spawn (or Agent tool) "Continue OCR work:
+   Extract Amarakośa via Sanskrit NLP, OR
+   OCR 불광사전워 with Google Vision API ($3 estimated)"
+   ```
