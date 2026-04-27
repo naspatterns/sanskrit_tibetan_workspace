@@ -262,3 +262,36 @@ def assert_tools_available() -> None:
     for tool in ("pdftoppm", "tesseract", "pdfinfo"):
         if shutil.which(tool) is None:
             raise RuntimeError(f"{tool} not on PATH — install poppler/tesseract")
+
+
+def load_cached_pages(slug: str, max_page: int | None = None) -> list[PageOCR]:
+    """Read all cached pages for a slug, in page-number order.
+
+    Useful for re-parsing without re-OCRing (e.g. parser tweak; or extracting
+    partial results from an interrupted OCR run).
+    """
+    cache_dir = CACHE_ROOT / slug
+    if not cache_dir.exists():
+        return []
+    out: list[PageOCR] = []
+    for txt_file in sorted(cache_dir.glob("p*.txt")):
+        page = int(txt_file.stem.lstrip("p"))
+        if max_page is not None and page > max_page:
+            continue
+        conf_file = txt_file.with_suffix(".json")
+        if not conf_file.exists():
+            continue
+        try:
+            meta = json.loads(conf_file.read_text())
+            text = txt_file.read_text(encoding="utf-8")
+            out.append(
+                PageOCR(
+                    page=page,
+                    text=text,
+                    conf=meta.get("conf", 0.0),
+                    n_words=meta.get("n_words", 0),
+                )
+            )
+        except (json.JSONDecodeError, KeyError, OSError):
+            continue
+    return out
