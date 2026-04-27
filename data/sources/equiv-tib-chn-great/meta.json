@@ -16,10 +16,10 @@
     "columns": 2,
     "pages_processed": [
       1,
-      2000
+      2200
     ],
-    "n_pages_processed": 2000,
+    "n_pages_processed": 2200,
     "from_cache": true
   },
-  "row_count": 19195
+  "row_count": 21206
 }
