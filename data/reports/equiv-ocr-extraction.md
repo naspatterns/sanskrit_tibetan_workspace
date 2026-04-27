@@ -17,8 +17,8 @@
 |---|---|---:|---:|---:|---|
 | `equiv-hirakawa` | Hirakawa Buddhist Chinese-Sanskrit Dict | 1506 / **1506 ✅** | **16,851** | 70.5 | 한자→Skt, 새 자료, 완료 |
 | `equiv-bonwa-daijiten` | 梵和大辭典 (Ogiwara) | 1666 / **1666 ✅** | **100,253** | 72.9 | Skt→일본어, **v2에 첫 일본어 자료**, 완료 |
-| `equiv-turfan-skt-de` | Turfan SWB (Bechert) v1 | 696 / **197 (28%)** | **1,963** | 87.3 | Skt→독일어, **부분 — OCR 백그라운드 계속**, 가장 깨끗 |
-| `equiv-tib-chn-great` | 藏漢大辭典 (dKon-mchog) | 3338 / **227 (7%)** | **1,946** | 67.0 | Tib→중국어, **부분 — OCR 백그라운드 계속** |
+| `equiv-turfan-skt-de` | Turfan SWB (Bechert) v1 | 696 / **~325 (47%)** | **3,206** | ~87 | Skt→독일어, **부분 — OCR 백그라운드 계속**, 가장 깨끗 |
+| `equiv-tib-chn-great` | 藏漢大辭典 (dKon-mchog) | 3338 / **301 (9%)** | **2,700** | 67.2 | Tib→중국어, **부분 — OCR 백그라운드 계속** |
 | ~~`equiv-amarakoza`~~ | Amarakośa TSS 1914-17 4vols | 1121 | **skip** | n/a | Sanskrit verse+commentary, 구조 파싱 불가; v1에 이미 있음 |
 
 **부분 처리 사유** (Turfan, Tib_Chn):
@@ -330,10 +330,10 @@ def ocr_pdf_parallel(slug, pdf_path, pages, langs, psm=4, dpi=300, workers=6, co
 ```
 equiv-hirakawa.jsonl          :  16,851 rows ·  11 MB  (DONE — full 1506p)
 equiv-bonwa-daijiten.jsonl    : 100,253 rows ·  62 MB  (DONE — full 1666p)
-equiv-turfan-skt-de.jsonl     :   1,963 rows · 1.2 MB  (PARTIAL — 197/696p of vol1)
-equiv-tib-chn-great.jsonl     :   1,946 rows · 1.2 MB  (PARTIAL — 227/3338p)
+equiv-turfan-skt-de.jsonl     :   3,206 rows · 2.0 MB  (PARTIAL — ~325/696p of vol1)
+equiv-tib-chn-great.jsonl     :   2,700 rows · 1.7 MB  (PARTIAL — 301/3338p)
 ─────────────────────────────────────────────────────────────────
-TOTAL (committed)             : 121,013 rows ·  76 MB
+TOTAL (committed)             : 123,010 rows ·  77 MB
 ```
 
 **OCR 백그라운드 진행 중** — 사용자 다른 ocrmypdf 작업이 끝나면 자연스럽게 가속.
