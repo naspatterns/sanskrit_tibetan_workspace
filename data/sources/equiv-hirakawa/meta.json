@@ -1,0 +1,22 @@
+{
+  "slug": "equiv-hirakawa",
+  "name": "Buddhist Chinese-Sanskrit Dictionary (Hirakawa Akira 平川彰 1997)",
+  "lang": "zh",
+  "tier": 2,
+  "priority": 30,
+  "role": "equivalents",
+  "direction": "zh-to-skt",
+  "license": "research-use",
+  "source_path": "haMsa CODE/Sanskrit_Tibetan_Reading_Tools/Hirakawa Akira-Buddhist-Chinese-Sanskrit-Dictionary.pdf",
+  "extraction": {
+    "method": "tesseract-ocr",
+    "langs": "chi_tra+eng+san",
+    "psm": 4,
+    "dpi": 300,
+    "pages": [
+      1,
+      1506
+    ]
+  },
+  "row_count": 16851
+}
