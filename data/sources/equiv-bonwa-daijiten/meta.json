@@ -1,0 +1,23 @@
+{
+  "slug": "equiv-bonwa-daijiten",
+  "name": "Bonwa Daijiten 梵和大辭典 (Ogiwara Unrai 荻原雲來 1979 reprint)",
+  "lang": "skt",
+  "tier": 2,
+  "priority": 31,
+  "role": "equivalents",
+  "direction": "skt-to-ja",
+  "license": "research-use",
+  "source_path": "haMsa CODE/Sanskrit_Tibetan_Reading_Tools/[DICS] SANSKRIT/梵和大辭典.pdf",
+  "extraction": {
+    "method": "tesseract-ocr",
+    "langs": "eng+san+jpn",
+    "psm": 4,
+    "dpi": 300,
+    "columns": 2,
+    "pages": [
+      1,
+      1666
+    ]
+  },
+  "row_count": 100253
+}

@@ -23,6 +23,8 @@ venv/
 data/jsonl/
 data/indices/
 data/raw/
+# OCR cache (regenerable per-page text + conf JSON; gigabytes for 5+ scanned PDFs)
+data/ocr_cache/
 
 # Built indices for web (regenerate via scripts/)
 public/indices/*.zst

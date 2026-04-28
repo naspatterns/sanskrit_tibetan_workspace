@@ -443,6 +443,11 @@ v2가 안정화된 후 검토:
   - 클라이언트 sql.js (IndexedDB/OPFS) — ceiling 가장 높지만 모바일 hydration 미지수 + 1-2주 작업
   - 변경 없음 (v1처럼) — 모바일에서 즉사 (heap 428 MB)
 - **재검토 시점**: spawn_task의 `Sanskrit_Tibetan_Reading_Tools` 발굴 결과 통합 후 + Phase 3 LCP 재측정. Zone B 비대 시 `equivalents.msgpack.zst`도 source별 shard 검토.
+- **진행 (2026-04-28)**:
+  - spawn 1 (`crazy-yalow-912f7c`) — 텍스트/xlsx/docx 발굴 5 sources · 77,815 rows · commit `2e54c8a`.
+  - spawn 2 (`compassionate-rosalind-d663ca`) — 스캔 PDF OCR 5 sources · 160,874 rows · commits `e25c39a`/`16fec77` (+ 28 incremental). Hirakawa/Bonwa/Turfan/Tib_Chn/Amarakośa 모두 완료. schema 확장 (body.equivalents.{ja, de}) + Tib_Chn Wylie 자동변환 포함.
+  - **메인 세션 잔여**: `scripts/build_equivalents_index.py` 신규 + `equivalents.msgpack.zst` 빌드 → `data/reports/equiv-pending-tasks.md` 참조.
+  - 누적 약 445K rows · 17 source dicts (role=equivalents 16 + role=thesaurus 1).
 
 ### ADR-010: Zone 재설계 — Zone A 제거 + 순서 (Header → B → C → D)
 - **결정**:

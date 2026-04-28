@@ -1,0 +1,22 @@
+{
+  "slug": "equiv-turfan-skt-de",
+  "name": "Sanskrit-Wörterbuch der buddhistischen Texte aus den Turfan-Funden (Bechert et al. 1973-)",
+  "lang": "skt",
+  "tier": 2,
+  "priority": 33,
+  "role": "equivalents",
+  "direction": "skt-to-de",
+  "license": "research-use",
+  "source_paths": [
+    "haMsa CODE/Sanskrit_Tibetan_Reading_Tools/[DICS] SANSKRIT/sanskrit-wortebuch 1 (Turfan).pdf",
+    "haMsa CODE/Sanskrit_Tibetan_Reading_Tools/[DICS] SANSKRIT/sanskrit-wortebuch 2 k-dh (Turfan).pdf"
+  ],
+  "extraction": {
+    "method": "tesseract-ocr",
+    "langs": "eng+san+deu",
+    "psm": 4,
+    "dpi": 300,
+    "columns": 2
+  },
+  "row_count": 11762
+}

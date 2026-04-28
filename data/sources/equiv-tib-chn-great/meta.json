@@ -1,0 +1,30 @@
+{
+  "slug": "equiv-tib-chn-great",
+  "name": "Great Tibetan-Chinese Dictionary 藏漢大辭典 (dKon-mchog tshul-khrims 2004)",
+  "lang": "bo",
+  "tier": 2,
+  "priority": 32,
+  "role": "equivalents",
+  "direction": "tib-to-zh",
+  "license": "research-use",
+  "source_path": "haMsa CODE/Sanskrit_Tibetan_Reading_Tools/[#haMsa TIBETAN]/[DICS] TIBETAN/Tib_Chn_Dict.pdf",
+  "extraction": {
+    "method": "tesseract-ocr",
+    "langs": "bod+chi_sim+chi_tra",
+    "psm": 4,
+    "dpi": 300,
+    "columns": 2,
+    "pages_processed": [
+      1,
+      3338
+    ],
+    "n_pages_processed": 3338,
+    "from_cache": true
+  },
+  "row_count": 30889,
+  "postprocess": {
+    "wylie_converter": "scripts.lib.tibetan_wylie.to_wylie",
+    "wylie_kind": "approximate-ewts (root-letter not detected, end-of-syllable 'a')",
+    "rows_with_wylie": 30851
+  }
+}
