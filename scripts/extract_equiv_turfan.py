@@ -293,12 +293,9 @@ def main() -> int:
                         "zh": "",
                         "ko": "",
                         "en": "",
+                        "de": de_def[:280] if de_def else "",
                         "category": "skt-de-turfan",
-                        "note": (
-                            f"de: {de_def[:280]}"
-                            if de_def
-                            else "Turfan SWB OCR (de def empty)"
-                        ),
+                        "note": "Turfan SWB OCR (eng+san+deu, ä→ā normalized in headword)",
                     },
                 },
                 "license": "research-use",

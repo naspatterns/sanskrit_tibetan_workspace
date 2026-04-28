@@ -105,6 +105,8 @@
             "zh": { "type": "string", "description": "Chinese (Hanzi). Traditional or simplified as in source." },
             "ko": { "type": "string", "description": "Korean equivalent (term-level, not full translation)." },
             "en": { "type": "string", "description": "English gloss for the equivalent term." },
+            "ja": { "type": "string", "description": "Japanese equivalent (e.g. Bonwa Daijiten 梵和大辭典 → equiv-bonwa-daijiten)." },
+            "de": { "type": "string", "description": "German equivalent (e.g. Turfan SWB Sanskrit-Wörterbuch → equiv-turfan-skt-de)." },
             "category": { "type": "string", "description": "Source-specific category/chapter (e.g., Mvy '【如來名號】')." },
             "note": { "type": "string", "description": "Source-specific note." }
           },

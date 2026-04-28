@@ -21,5 +21,10 @@
     "n_pages_processed": 3338,
     "from_cache": true
   },
-  "row_count": 30889
+  "row_count": 30889,
+  "postprocess": {
+    "wylie_converter": "scripts.lib.tibetan_wylie.to_wylie",
+    "wylie_kind": "approximate-ewts (root-letter not detected, end-of-syllable 'a')",
+    "rows_with_wylie": 30851
+  }
 }
