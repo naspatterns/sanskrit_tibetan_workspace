@@ -477,6 +477,15 @@ v2가 안정화된 후 검토:
 - **재검토 시점**: Phase 3 UI 완성 후 사용자 피드백 수집 (특히 한국어 조사 처리)
 
 ### ADR-009: 사전 Pareto + `role` 필드 + Tier 0 사전 shard
+
+> **SUPERSEDED 2026-04-29 by ADR-011 (D)** — Phase 2.5b 종결 후 측정 (Chromium
+> bench/index.html): equivalents 단독 heap +109.79 MB, 5 indices 합 +793 MB.
+> 사전 shard 분할 시 lazy fetch latency가 발생하여 사용자가 정한 "검색 query
+> latency 최우선" 원칙과 충돌. 데스크톱 우선 + Service Worker precache 채택.
+> 아래 본문은 historical record로 유지. `role` 필드 도입(1번 항목)과 equivalents
+> 별도 인덱스(3번 항목)는 ADR-011에서도 그대로 유지됨. 2번 (Tier 0 shard)과
+> 4번 (lang별 top-3 prefetch)만 폐기.
+
 - **결정**:
   1. `meta.json.role` + entry 최상위 `role` 필드 도입 — `definition` / `equivalents` / `thesaurus` / `declension`
   2. Tier 0를 사전별 shard로 분할: `tier0-core` (언어별 top-3 정의 사전) + `tier0-rest/{slug}` (priority≥4 lazy)
@@ -513,3 +522,32 @@ v2가 안정화된 후 검토:
   - Zone C 위 B — 검색의 primary가 정의이므로 합리적. 다만 v1 사용자(=현 사용자)가 B 위 패턴을 선호한 패턴 + 학자 dense reference 가치 무시.
   - 단일 zone (모두 Zone C 안에 평탄화) — 시각적 분리 잃음, equivalents가 정의 사이 끼어 v1과 같은 결과 오염 (FB-5 패턴 재발).
 - **재검토 시점**: Phase 3 UX 테스트 (특히 모바일 좁은 화면). Zone B 비대 시 (예: 단어당 1000+ 매핑) collapse 정책 + source 그룹 토글.
+
+### ADR-011: All-eager 인덱스 + Service Worker precache (supersedes ADR-009 사전 shard)
+- **결정**:
+  1. 모든 5 indices (tier0 + equivalents + reverse_en + reverse_ko + headwords)를 page load 시 eager fetch + decompress(fzstd) + decode(msgpack) → JS heap에 resident.
+  2. Service Worker가 5 indices를 precache (`stw-indices-v1` cache) → 두 번째 방문은 즉시 cold start.
+  3. tier0/equivalents 모두 단일 파일 유지 — 사전 shard 분할 안 함. 클라이언트가 priority별 정렬/필터.
+  4. ADR-009의 (1) `role` 필드 + (3) equivalents 별도 인덱스는 그대로 유효. (2) Tier 0 shard와 (4) lang별 top-3 prefetch만 폐기.
+  5. 모바일은 graceful degradation — 데스크톱이 주요 form factor. 모바일 사용 비율 측정 후 Phase 4+에 UA-detect lazy 옵션 검토.
+- **이유**:
+  - 사용자 우선순위(2026-04-29 명시): 검색 query latency가 최우선. 데스크톱 주요.
+  - 측정 (2026-04-28, Chromium `bench/index.html`): tier0 +427 MB · equivalents +109 MB · 5 indices 합 +793 MB heap. 모바일 60 MB target 초과지만 데스크톱은 충분.
+  - 사전 shard 시 일부 query에 lazy fetch + decode latency 50-1000 ms 추가. in-memory hash lookup만이 <1 ms 보장.
+  - SW precache로 cold start 비용을 1회로 amortize (subsequent visit 즉시 ~50ms).
+- **대안 검토**:
+  - **(B+A) priority-tier eager + sharded source lazy** — 모바일 친화이지만 일부 query에 lazy fetch latency. 사용자 기준(검색 latency 최우선)과 충돌.
+  - **(C) language-channel shard** (skt/tib/zh) — channel별 fetch latency, cross-language search 시 multiple fetch.
+  - **All-eager + WASM FST** — 진짜 ms 단위 가능, 그러나 구현 복잡도 큼. Phase 3에서는 vanilla msgpack 우선.
+- **수치**:
+  - cold load (5 indices, sequential): ~3.5 s (LAN), 4G 환경은 별도 측정 필요
+  - SW cached subsequent visit: ~50 ms (browser cache hit)
+  - query latency: <1 ms (Map.get, 모든 채널)
+  - heap: ~793 MB total (데스크톱 OK, 모바일 한계)
+- **재검토 시점**: Phase 3 사용자 피드백. 모바일 사용 비율이 예상보다 높으면 graceful degradation 강화 (UA-detect lazy shard fallback).
+- **5 default 결정 (2026-04-29)**:
+  1. CSS 전략: Vanilla CSS modules (Tailwind 안 함, 학술 도구 단순성)
+  2. 번역 머지: `build_tier0.py --translations data/translations.jsonl` 재실행 → JSONL `body.ko` join
+  3. SW precache 범위: 5 indices 모두 (~64 MB compressed)
+  4. 인덱스 포맷: msgpack + zstd 그대로
+  5. decode 위치: 메인스레드 (jank 측정 후 worker 옵션)

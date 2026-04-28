@@ -350,11 +350,18 @@ v2의 검색 탭 UI 골격을 정의함. ADR-009/010 참조.
 
 #### 11.8.1 사전 Pareto — 4번 안 (Tier 0 사전 shard)
 
+> **SUPERSEDED 2026-04-29 by ADR-011 (D)**. 측정 결과 (Chromium bench) equivalents
+> 단독 heap +109 MB · 5 indices 합 +793 MB. 사전 shard 분할 시 일부 query에 lazy
+> fetch + decode latency 50-1000 ms 추가 발생 → 사용자가 검색 query latency를 최
+> 우선으로 정함 (데스크톱 주요 form factor). 단일 인덱스 + Service Worker precache
+> 채택. 본 §의 기술 본문은 historical reference로 유지. 자세한 내용은 ROADMAP.md
+> ADR-011 참조.
+
 **관찰**: 학자가 한 검색에서 진짜로 정독하는 사전은 언어별 4-5개. v1은 130 사전을
 priority 정렬만 하고 데이터 레이어에서는 *균등* 처리 → tier0 단독으로 JS heap 428 MB
 점유 (모바일 OOM 위험).
 
-**결정**: Tier 0를 *사전별 shard*로 분할.
+**원래 결정**: Tier 0를 *사전별 shard*로 분할.
 - `public/indices/tier0-core.msgpack.zst` — top-10K headword × **언어별 top-3 정의 사전**
   - 산스크리트: Apte(1) / MW(2) / BHSD(4) ※ Macdonell(3) 건너뛰고 BHSD까지 — 불교 학자 가정
   - 티벳어: RY(20) / Hopkins(21) / 84000(22)
@@ -392,8 +399,8 @@ priority 정렬만 하고 데이터 레이어에서는 *균등* 처리 → tier0
 │  MW:    that which is firmly...                  │
 │  BHSD:  Buddhist usage: teaching, doctrine       │
 ├─────────────────────────────────────────────────┤
-│ Zone D — 추가 사전 (▽ 더 보기, lazy)              │  ← tier0-rest/* (priority 4+)
-│  Macdonell, Cappeller, PWK, ... (125개)          │     사전당 토글
+│ Zone D — 추가 사전 (▽ 더 보기, in-memory)         │  ← tier0 priority≥4 (ADR-011)
+│  Macdonell, Cappeller, PWK, ... (127개)          │     사전당 UI 토글, fetch 0
 └─────────────────────────────────────────────────┘
 ```
 
@@ -412,16 +419,15 @@ data/sources/{slug}/meta.json
 data/jsonl/{slug}.jsonl
    role 필드 inline (entry 최상위)
             ↓
-public/indices/
-   tier0-core.msgpack.zst         ← role=definition + priority≤3, lang별
-   tier0-rest/{slug}.msgpack.zst  ← role=definition + priority≥4 (사전당 1 shard)
-   equivalents.msgpack.zst        ← role=equivalents + thesaurus 통합
-   reverse_*.zst, headwords.txt.zst (기존)
-            ↓
+public/indices/                    ※ ADR-011 (D): 모두 Service Worker precache, in-memory resident
+   tier0.msgpack.zst              ← role=definition (모든 priority, 단일 파일)
+   equivalents.msgpack.zst        ← role=equivalents + thesaurus 통합 (단일 파일)
+   reverse_en.msgpack.zst, reverse_ko.msgpack.zst, headwords.txt.zst (기존)
+            ↓ (page load 시 5 indices 병렬 fetch + fzstd + msgpack decode)
 UI:
-   Zone B ← equivalents.msgpack.zst (즉시)
-   Zone C ← tier0-core.msgpack.zst (즉시)
-   Zone D ← tier0-rest/*.msgpack.zst (사용자 토글 시 fetch)
+   Zone B ← equivalents.msgpack.zst Map.get (in-memory)
+   Zone C ← tier0.msgpack.zst Map.get → entries 중 priority≤3 (클라이언트 필터)
+   Zone D ← tier0.msgpack.zst Map.get → entries 중 priority≥4 (UI 토글, fetch 0)
    /declension 탭 ← 별도 파이프라인 (변경 없음)
 ```
 

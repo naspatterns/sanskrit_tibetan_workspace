@@ -247,6 +247,7 @@ v1은 tier 1 (15개) 내부 순서가 무작위 → 사용자 불만.
 - D18 역검색 = Phase 1 inline reverse 필드 + Phase 2 인덱스 (FB-8)
 - D10c equiv frequency = (c) frequency.py 무관, 별 채널 (2026-04-28)
 - D10d 불광사전 OCR = (b) 보류, Phase 3 후 재검토 (2026-04-28)
+- ADR-011 = all-eager 인덱스 + Service Worker precache, 사전 shard 분할 안 함 (2026-04-29; supersedes ADR-009 B+A 하이브리드). 데스크톱 우선 + 검색 query latency <1ms 목표. Phase 3 5 default: (1) Vanilla CSS modules, (2) build_tier0.py --translations 머지, (3) SW 5 indices precache, (4) msgpack+zstd 유지, (5) main thread decode.
 - 프로젝트 이름 = Sanskrit-Tibetan Workspace (FB-7)
 - 패키지 매니저 = `uv` + `pyproject.toml`
 - Git 배포 정책 = meta.json/reports 커밋, JSONL은 gitignore (LICENSES 참조)
