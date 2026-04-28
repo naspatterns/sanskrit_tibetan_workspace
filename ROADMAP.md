@@ -150,7 +150,7 @@ Top-10K Ko 번역 POC 100/9,995 (나머지는 subagent spawn_task 또는 batch A
 
 ---
 
-## Phase 2.5: Zone B 대응어 데이터 + 빌드 (✅ 데이터 / ⏭️ 빌드 next)
+## Phase 2.5: Zone B 대응어 데이터 + 빌드 (✅ 완료, 2026-04-29)
 
 **목표**: cross-language equivalents (산-티-한-일-독-한-영) 통합 + Zone B 단일 인덱스 빌드.
 
@@ -177,20 +177,25 @@ Top-10K Ko 번역 POC 100/9,995 (나머지는 subagent spawn_task 또는 batch A
 - `data/reports/equiv-ocr-extraction.md` (spawn 2 OCR)
 - `data/reports/equiv-pending-tasks.md` (메인 세션 작업 체크리스트) ⭐
 
-### 2.5b Zone B 빌드 파이프라인 ⏭️ (즉시 다음)
+### 2.5b Zone B 빌드 파이프라인 ✅ (commit `519c2ca`, 2026-04-28)
 
-| # | 작업 | 시간 | 비고 |
-|---|---|---|---|
-| 1 ⭐ | `scripts/build_equivalents_index.py` 신규 | 4-6h | 17 dict → `public/indices/equivalents.msgpack.zst`. v1 `mergeBilexResults` 패턴 참조 (`docs/app.js:254-336, 815-`) |
-| 2 | `scripts/build_meta.py` 동기화 | 1h | 직접 작성된 5 새 slug meta.json *덮어쓰지 않기* |
-| 3 | `scripts/frequency.py` 검토 | 2-3h | equiv rows 빈도 가중치 — **D10c 결정 필요** |
-| 4 | `scripts/verify.py` 재실행 | 10m | 0 errors 확인 (현재 통과) |
-| 5 | `bench/index.html` 갱신 + 측정 | 1h | **ADR-009 재검토 트리거**: heap ≤60MB이면 단일 OK, 초과면 source shard |
+| # | 작업 | 결과 |
+|---|---|---|
+| 1 ⭐ | `scripts/build_equivalents_index.py` 신규 | 14 active equiv 사전 → `equivalents.msgpack.zst` **13 MB compressed** (예상 30-40 MB의 ⅓) · 110 MB decompressed · 498K keys · 344K unique rows. dedup D10b/(b): cross-source `(skt_iast, tib_wylie, zh)`, 정보량 많은 row keep + sources merge. 키 채널 3 (IAST norm / Wylie norm / 한자) |
+| 2 | `scripts/build_meta.py` 동기화 | 변경 없음 — equiv 메타는 build_meta DICTS 외부 영역, 충돌 없음 |
+| 3 | `scripts/frequency.py` 검토 | **D10c (c) 채택** — `role in {equivalents, thesaurus}` skip. equiv는 top-10K 빈도 무관 |
+| 4 | `scripts/verify.py` 재실행 | **0 errors / 148 dicts / 3.81M entries** (FB-5 dedup-superseded 인정 + spawn1 schema 후처리 후) |
+| 5 | `bench/index.html` 갱신 + 측정 | 5 indices cold ~3.5 s · heap +793 MB · equivalents 단독 +109.79 MB → **60 MB target × 1.8 초과**. ADR-009 재검토 → ADR-011 (D) 채택 |
 
-**완료 기준**:
-- `equivalents.msgpack.zst` 생성 (~30-40 MB compressed 추정 → decompressed ~250 MB → JS heap ~50-100 MB 추정)
-- `verify.py` 0 errors
-- bench 결과로 단일 인덱스 vs source shard 결정
+### 2.5c 후속 spawn 머지 ✅ (3 commits, 2026-04-29)
+
+| spawn | commit | 결과 |
+|---|---|---|
+| Tib_Chn Wylie pyewts | `b686c8d` | 표준 EWTS 변환 (root-letter 식별) — `bstna` → `bstan`. norm mismatch warning 감소, "byang chub" 검색 매칭 회복 |
+| Amarakośa verse-level NLP | `dd7013a` | heuristic phase A: 1,119 raw rows → 1,082 verse-level synonym groups (평균 9.9 syn/group) · `body.equivalents.synonyms[]` schema field 추가 · 신규 slug `equiv-amarakoza-synonyms` |
+| Hirakawa OCR 노이즈 필터 | `e470356` | conf<60 + len(headword)>8 drop · 16,851 → 16,484 rows (367 drop, 2.18%) |
+
+빌드 영향: dicts 14 → 15, unique rows +410, compressed 13.0 → 13.2 MB.
 
 ---
 
