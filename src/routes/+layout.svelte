@@ -5,6 +5,8 @@
 	import { setIndexBundle, isIndexLoaded } from '$lib/indices/store';
 	import type { LoadProgress } from '$lib/indices/types';
 	import SplashScreen from '$lib/components/SplashScreen.svelte';
+	import '$lib/../styles/theme.css';
+	import { applyTheme, getStoredTheme } from '$lib/stores/theme';
 
 	let { children } = $props();
 
@@ -13,6 +15,9 @@
 	let error = $state<string | null>(null);
 
 	onMount(async () => {
+		// Apply persisted theme immediately so the splash uses the right colors.
+		applyTheme(getStoredTheme());
+
 		if (isIndexLoaded()) {
 			loaded = true;
 			return;
