@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>Sanskrit-Tibetan Workspace · Cold Load Benchmark</title>
+<title>Sanskrit-Tibetan Workspace · Cold Load Benchmark (Tier 0 + Equivalents + Reverse)</title>
 <style>
   body { font-family: -apple-system, ui-sans-serif, sans-serif; max-width: 720px; margin: 2rem auto; padding: 0 1rem; line-height: 1.6; }
   h1 { font-size: 1.3rem; margin-bottom: 0.3rem; }
@@ -20,7 +20,8 @@
 </style>
 </head>
 <body>
-<h1>Cold Load Benchmark — Tier 0 + Reverse Indices</h1>
+<h1>Cold Load Benchmark — Tier 0 + Equivalents + Reverse Indices</h1>
+<p>ADR-009 재검토 입력: <strong>equivalents 단독 heap ≤ 60 MB</strong>이면 Zone B 단일 인덱스 OK; 초과 시 source-shard 분할 검토.</p>
 <p>측정 환경: 브라우저 fetch + fzstd decompress + msgpack decode. <code>performance.memory</code>(Chromium)로 JS heap 측정.</p>
 <button id="run" disabled>Loading modules…</button>
 <div id="results"></div>
@@ -94,10 +95,11 @@ const fmtMs = (ms) => ms.toFixed(1) + ' ms';
 const fmtMB = (bytes) => (bytes / 1024 / 1024).toFixed(2) + ' MB';
 
 const targets = [
-  { name: 'tier0',       path: '/public/indices/tier0.msgpack.zst',       msgpack: true },
-  { name: 'reverse_en',  path: '/public/indices/reverse_en.msgpack.zst',  msgpack: true },
-  { name: 'reverse_ko',  path: '/public/indices/reverse_ko.msgpack.zst',  msgpack: true },
-  { name: 'headwords',   path: '/public/indices/headwords.txt.zst',       msgpack: false },
+  { name: 'tier0',         path: '/public/indices/tier0.msgpack.zst',         msgpack: true },
+  { name: 'equivalents',   path: '/public/indices/equivalents.msgpack.zst',   msgpack: true },
+  { name: 'reverse_en',    path: '/public/indices/reverse_en.msgpack.zst',    msgpack: true },
+  { name: 'reverse_ko',    path: '/public/indices/reverse_ko.msgpack.zst',    msgpack: true },
+  { name: 'headwords',     path: '/public/indices/headwords.txt.zst',         msgpack: false },
 ];
 
 async function benchOne(target) {

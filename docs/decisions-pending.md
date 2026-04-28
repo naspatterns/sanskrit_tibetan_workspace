@@ -108,27 +108,27 @@
 - Amarakośa verse-level NLP (산스 thesaurus 동의어 group 구조 추출)
 - 불광사전워.pdf 2GB OCR — Vision API 별도 spawn 권장
 
-### D10c. equiv rows 빈도 가중치 (frequency.py 동작)
+### D10c. equiv rows 빈도 가중치 (frequency.py 동작) **[확정: (c) — 2026-04-28]**
 
 Phase 2.5b의 `scripts/frequency.py` 갱신 시점 결정. `role=equivalents`/`role=thesaurus` rows를 top-10K headword 빈도 계산에 어떻게 반영할지.
 
 **옵션**:
-- **(a)** equiv 빈도 무관 (어휘 자체이므로 모든 row 동일 weight)
-- **(b)** source priority 따라 가중치 (Apte/MW의 cross-ref와 같이 합산)
-- **(c)** equiv는 frequency.py에 *전혀 반영 안 함* — 별 채널이라 top-10K 결정에 영향 zero, 단순
+- (a) equiv 빈도 무관 (어휘 자체이므로 모든 row 동일 weight)
+- (b) source priority 따라 가중치 (Apte/MW의 cross-ref와 같이 합산)
+- **✅ (c)** equiv는 frequency.py에 *전혀 반영 안 함* — 별 채널이라 top-10K 결정에 영향 zero, 단순
 
-**추천**: **(c)**. equiv는 Zone B 별 채널이고 top-10K (Tier 0 정의) 빈도와 분리하는 게 깔끔.
+**확정**: **(c)**. equiv는 Zone B 별 채널이고 top-10K (Tier 0 정의) 빈도와 분리. 함의: `scripts/frequency.py`는 `role in ('equivalents', 'thesaurus')` rows를 skip — Phase 2.5b Step 3는 "코드 추가" 아닌 "필터 confirm"으로 축소.
 
-### D10d. 불광사전워.pdf 2GB OCR — Vision API 별도 spawn
+### D10d. 불광사전워.pdf 2GB OCR — Vision API 별도 spawn **[확정: (b) — 2026-04-28]**
 
 `Sanskrit_Tibetan_Reading_Tools/불광사전워.pdf` (2 GB, 한자 불교 대사전). Tesseract는 시간 + 정확도 우려 (12+ hours, 한자 정확도 critical). Google Cloud Vision API 권장.
 
 **옵션**:
-- **(a)** 별도 spawn 띄우고 진행 (~$3, GCP 인증 + 비용 사용자 컨펌)
-- **(b)** 보류 — Phase 3 완성 후 재검토
-- **(c)** Skip 영원히 — v2 Zone B에 한자 불교는 이미 Hirakawa 16K rows + NTI Reader 8K rows로 일부 cover
+- (a) 별도 spawn 띄우고 진행 (~$3, GCP 인증 + 비용 사용자 컨펌)
+- **✅ (b)** 보류 — Phase 3 완성 후 재검토
+- (c) Skip 영원히 — v2 Zone B에 한자 불교는 이미 Hirakawa 16K rows + NTI Reader 8K rows로 일부 cover
 
-**추천**: **(b)** 보류. 현재 한자 cover 충분 (Hirakawa + NTI + Tib-Chn 大辭典). 불광은 Phase 3 사용자 피드백 후 재검토.
+**확정**: **(b)** 보류. 현재 한자 cover 충분 (Hirakawa 16K + NTI 8K + Tib-Chn 159K). 불광은 Phase 3 사용자 피드백 후 재검토 — 한자 검색 부족이 실제로 드러나면 그때 spawn.
 
 ### D11. 빈도 데이터 출처
 top-10K 단어 결정 기준:
@@ -245,6 +245,8 @@ v1은 tier 1 (15개) 내부 순서가 무작위 → 사용자 불만.
 - D16 다크모드 = OKLCH 3-state 토글 (FB-6)
 - D17 탭 라우팅 = 3-탭 독립 URL (FB-5)
 - D18 역검색 = Phase 1 inline reverse 필드 + Phase 2 인덱스 (FB-8)
+- D10c equiv frequency = (c) frequency.py 무관, 별 채널 (2026-04-28)
+- D10d 불광사전 OCR = (b) 보류, Phase 3 후 재검토 (2026-04-28)
 - 프로젝트 이름 = Sanskrit-Tibetan Workspace (FB-7)
 - 패키지 매니저 = `uv` + `pyproject.toml`
 - Git 배포 정책 = meta.json/reports 커밋, JSONL은 gitignore (LICENSES 참조)

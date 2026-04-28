@@ -6,8 +6,8 @@ mahaa
 dur
 para
 prati
-go
 deva
+go
 lii
 ma
 na
@@ -30,16 +30,16 @@ hari
 sva
 vi
 tvam
-da
 tad
+da
 kara
 vara
 sita
 saha
 agnih
 as
-padma
 maha
+padma
 sara
 aatman
 vana
@@ -53,12 +53,12 @@ vasa
 bala
 yat
 vas
-ni
 yo
+ni
 madhya
 nu
-ga
 vajra
+ga
 ta
 sarva
 satya
@@ -88,9 +88,9 @@ kasa
 vasu
 sata
 yam
-dus
 pata
 dhara
+dus
 sarana
 dhruva
 vimala
@@ -115,9 +115,9 @@ vrtta
 guru
 apara
 ghata
-mi
 sana
 dha
+mi
 krsna
 kamala
 dru
@@ -129,8 +129,8 @@ jaya
 yatha
 lavana
 vinaya
-rta
 pravara
+rta
 yogah
 arthah
 kapila
@@ -150,7 +150,6 @@ plava
 suta
 sthira
 dandah
-ri
 yuj
 pavana
 pinda
@@ -159,6 +158,7 @@ madhura
 sukha
 bhas
 antar
+ri
 lokah
 janya
 karman
@@ -169,8 +169,8 @@ bahula
 sas
 vada
 lohita
-kas
 isa
+kas
 suvarna
 ayam
 ra
@@ -183,15 +183,14 @@ nila
 madana
 indrah
 surabhi
-pad
-cha
 patala
 ud
 rama
 candra
+pad
 phalam
 avara
-las
+cha
 sala
 bhuuta
 yathaa
@@ -201,6 +200,7 @@ div
 mata
 ahi
 mandala
+las
 harita
 arati
 samana
@@ -214,40 +214,40 @@ mangala
 hima
 kalaka
 r
-nas
 yatra
 khanda
 arka
+nas
 pr
 tattva
-kha
 sada
-sad
 vasana
 vasita
 chanda
 giri
-dhi
+kha
 pralamba
+sad
 gada
 laghu
 anta
+dhi
 ananta
-katha
 prabhu
+katha
 upa
 chitra
 bhu
 grhya
 kulya
 mahendra
-man
 jata
-du
 nada
 vakra
+man
 amara
 shrii
+du
 usa
 vanam
 aham
@@ -290,8 +290,8 @@ aga
 yu
 rasa
 adya
-varana
 sarasa
+varana
 avi
 mangalya
 kana
@@ -299,11 +299,11 @@ ras
 eva
 ayana
 anga
-bhuj
 lalita
+bhuj
 naaga
-ksama
 asta
+ksama
 punar
 bhavya
 asana
@@ -345,8 +345,8 @@ punya
 mahat
 vr
 so
-chyu
 sri
+chyu
 mus
 dama
 vamana
@@ -400,7 +400,6 @@ hata
 tejas
 bhinna
 iti
-chad
 samvid
 patha
 hala
@@ -421,7 +420,7 @@ ali
 ru
 pums
 anya
-ci
+chad
 niila
 aha
 tripura
@@ -431,6 +430,7 @@ dina
 visva
 mohana
 van
+ci
 magadha
 ad
 malla
@@ -477,13 +477,11 @@ divya
 rudra
 jathara
 sasa
-la
 varaka
 khah
 kal
 adana
 visala
-dam
 baddha
 dhur
 dharma
@@ -498,9 +496,11 @@ vidura
 angam
 tula
 babhru
+dam
 svana
 samya
 vardhana
+la
 bandhura
 madhuka
 prajna
@@ -540,8 +540,8 @@ santa
 suci
 naya
 mrd
-prakrta
 zveta
+prakrta
 bodhana
 pati
 snigdha
@@ -580,7 +580,6 @@ abhaya
 vyaagulii
 ida
 puskara
-gam
 dura
 viloma
 viruddha
@@ -589,6 +588,7 @@ avyakta
 vikala
 apana
 ahan
+gam
 li
 om
 bhaga
@@ -630,8 +630,8 @@ vitta
 gadha
 vyanjana
 pinga
-ap
 vicitra
+ap
 anjana
 jagat
 imam
@@ -652,9 +652,7 @@ chaya
 marica
 samanta
 vidhana
-rus
 dvis
-pha
 krshna
 maitra
 gana
@@ -675,28 +673,29 @@ vasaka
 mud
 daksina
 apada
-sru
 suparna
+sru
 vayas
 kula
-harit
 ramya
+harit
 bhauma
 jya
-ksara
+rus
+pha
 vishva
+ksara
 dara
 snu
 vapa
-me
 pan
 khad
 ghora
 pratyaya
 samstha
 datta
-japa
 vani
+japa
 dhavala
 vasi
 kaksa
@@ -715,10 +714,9 @@ isika
 jangala
 anuka
 varuna
+me
 saadhana
-sus
 chandra
-sha
 agnim
 sumukha
 khaga
@@ -741,10 +739,11 @@ avyaya
 yena
 gaya
 abhika
+sus
 bhuu
 kavi
-alasa
 drona
+alasa
 jus
 chala
 lala
@@ -757,11 +756,12 @@ namas
 gavya
 pratika
 vyaya
+sha
 tarana
 kalmasa
 khada
-udvaha
 yata
+udvaha
 kasika
 guna
 ca
@@ -771,11 +771,11 @@ karka
 grahah
 tada
 guha
-ghataka
 vibudha
+ghataka
 ahara
-ayoga
 sattvam
+ayoga
 graha
 sraddha
 nasya
@@ -787,7 +787,6 @@ dyut
 asvina
 malina
 ju
-rna
 indram
 tapas
 kapala
@@ -810,8 +809,9 @@ tur
 kutapa
 tap
 sakrt
-dana
+rna
 surah
+dana
 duhkha
 vilasa
 zuci
@@ -820,8 +820,8 @@ tamra
 sahaja
 mantha
 kalana
-sarala
 vivrta
+sarala
 kulika
 nirvapana
 vidala
@@ -832,7 +832,6 @@ udvega
 asrava
 janana
 dhira
-nad
 abadha
 vasanta
 agha
@@ -846,12 +845,12 @@ gahvara
 yan
 kan
 pathya
-sankha
 angana
+sankha
 o
-arista
-lava
 gad
+lava
+arista
 nirasta
 vari
 aindra
@@ -863,8 +862,9 @@ mura
 radha
 indro
 avasa
-cira
 atho
+cira
+nad
 parvan
 sasanka
 catura
@@ -875,12 +875,12 @@ protha
 anaya
 mrgah
 kuhana
-grah
 dhrta
+grah
 gup
 abja
-nandi
 manika
+nandi
 somah
 baala
 sevya
@@ -891,15 +891,15 @@ svasti
 sukara
 grahana
 kutha
-nam
 garbhah
-viparyaya
 savana
+viparyaya
 ananda
 prasu
 samartha
 satha
 vidhura
+nam
 eta
 rasika
 cuda
@@ -917,8 +917,8 @@ gala
 bodha
 nama
 bhojya
-amsa
 bhaskara
+amsa
 parigrahah
 suksma
 matsara
@@ -929,21 +929,20 @@ vidh
 sani
 badha
 tiixna
-vyatikara
 sidh
+vyatikara
 dala
 kakubha
 janman
 mahisa
 tantra
 gir
-sna
 kriyaa
-asara
 strii
-jyestha
-agama
+asara
 gopa
+agama
+jyestha
 ruksa
 palala
 pis
@@ -956,8 +955,8 @@ yadi
 makha
 nud
 aho
-raivata
 samvara
+raivata
 pusa
 kulaka
 vidyut
@@ -984,32 +983,32 @@ tatra
 kut
 shash
 bhata
+sna
 vena
 carya
 gandhah
 samsthaa
 vaisvanara
-alam
 yogin
+alam
 saraka
 uurdhva
 khata
 zam
 kaya
 zakti
-lag
 lekhana
 sakara
 susa
-can
 upama
 trika
 tamisra
 jr
 hava
 tika
-matra
 rucaka
+matra
+can
 savya
 raksa
 dhanada
@@ -1023,16 +1022,17 @@ balhika
 katuka
 tapasya
 sthita
-vira
 sina
+vira
 yaj
-bhedana
 ekapada
+bhedana
 kit
 sakha
 pacana
 kanda
 e
+lag
 srava
 sambhava
 sarani
@@ -1052,8 +1052,8 @@ sthaanam
 katara
 bhadraka
 masi
-anupa
 sundara
+anupa
 kaka
 prasada
 soma
@@ -1077,12 +1077,11 @@ tuj
 avas
 samkhya
 dah
-lus
 varya
 bhojana
 paura
-ganga
 surasa
+ganga
 videha
 varnaka
 sahasram
@@ -1090,15 +1089,14 @@ vaach
 sitala
 varata
 camara
-kun
 huta
 ah
 chata
 ksema
 varnah
 ayasa
-vartaka
 vaari
+vartaka
 amla
 hrdya
 sarika
@@ -1116,7 +1114,6 @@ vrsni
 ruj
 phal
 pitaka
-nya
 ganah
 budh
 sagara
@@ -1130,21 +1127,22 @@ upahita
 ksaya
 asthi
 yajniya
+lus
 barhis
-mukhya
 pratipa
+mukhya
 lola
 zubha
 nida
 vad
-maksika
 dip
 isana
-snang ba
+maksika
+kun
 dirgha
 yavasa
-guhya
 purna
+guhya
 caraka
 aloka
 sthuula
@@ -1158,6 +1156,7 @@ apad
 samdhi
 chidra
 tilaka
+nya
 tikta
 virodha
 ksap
@@ -1175,29 +1174,28 @@ gandhara
 marman
 nana
 yamaka
-mu
 marut
 raja
 manava
 himsra
-saugandhika
 lr
+saugandhika
 l
-kutila
-dhava
 vidheya
-utpala
+dhava
+kutila
 haima
+utpala
 kamana
-atata
-sodha
 svartha
+sodha
+atata
 sarira
-nandin
 pri
 tivra
-bhand
+nandin
 brahmana
+bhand
 prasa
 akarana
 vikara
@@ -1205,13 +1203,14 @@ usana
 tigma
 gal
 duh
-sampanna
 radh
+sampanna
 suka
 labdha
 jivana
 nivrt
 prasaha
+snang ba
 karnika
 sudhaa
 pakva
@@ -1219,12 +1218,13 @@ ananga
 shrutih
 sarpa
 kalyana
+mu
 laksa
 svid
 chagala
 abhyantara
-tusa
 dharuna
+tusa
 naigama
 prajapatya
 vati
@@ -1246,9 +1246,7 @@ amatra
 darzana
 arana
 stu
-dga' ba
 kanaka
-sku
 kandara
 setu
 adhika
@@ -1258,9 +1256,9 @@ marici
 masa
 sindhu
 ghatika
-muh
 vibhuti
 vainava
+muh
 parisara
 vihita
 vyanga
@@ -1271,8 +1269,8 @@ sunanda
 nabha
 lad
 prayas
-tapasvin
 savitra
+tapasvin
 apam
 calana
 dandin
@@ -1285,14 +1283,14 @@ krti
 kamboja
 narayana
 upasad
-druta
 vijana
 kaarya
+druta
 gupta
 sarvatas
-pramukha
 aneka
 patram
+pramukha
 ghatana
 pratisara
 karin
@@ -1308,35 +1306,33 @@ viti
 bhautika
 manih
 shuchi
+pratikula
 dhanaka
 kanistha
-pratikula
 sarava
 astha
 ksa
 pratibha
 vasin
 vish
-lam
 taijasa
+rupa
 avasita
 raudra
-rupa
 adhivasa
+sku
+dga' ba
 zukra
 dardura
-gar
 apo
 kuja
 ksiti
 kathaka
 amala
-zas
 parna
 hanu
 vedi
 itara
-chos
 astra
 prahara
 kram
@@ -1344,8 +1340,8 @@ tunda
 asadha
 manduka
 sumitra
-pathin
 dhvan
+pathin
 niraja
 mandana
 vidyadhara
@@ -1353,8 +1349,8 @@ pavamana
 samita
 vodhr
 bhiru
-mrdu
 vidha
+mrdu
 us
 kandu
 usna
@@ -1366,33 +1362,34 @@ puurna
 paaka
 danu
 muulam
-astaka
 kesara
-ahata
+astaka
 aadi
+ahata
 daru
 pota
 sit
-paravata
 grha
+paravata
 upadhi
 ksudra
 abhisara
 suuxma
-vraja
 pravacana
+gar
+vraja
 prasava
 rajan
 ahuta
 bhima
 labh
-kambu
 samika
 jambuka
+kambu
 sahasa
 bhedah
-cana
 arani
+cana
 sahasra
 sukrta
 arha
@@ -1407,19 +1404,18 @@ ruta
 luta
 vihara
 bheda
-dhvajin
 masina
+dhvajin
 math
 saindhava
 dantah
+zas
 badara
 parana
-yoga
 manth
+yoga
 cataka
-rtog pa
 ayata
-gzugs
 vitana
 paka
 uma
@@ -1436,20 +1432,21 @@ mahabala
 vrj
 abala
 sap
-gokarna
 rr
-rud
+gokarna
 salaka
+rud
 luth
 narya
+lam
 samasta
-mahanada
-mukhara
-prasita
 mitra
+mahanada
+prasita
+mukhara
+sadhya
 alaya
 krtrima
-sadhya
 naika
 aranya
 jambhaka
@@ -1458,7 +1455,6 @@ dvipa
 prapana
 vaidya
 kup
-chud
 antariksa
 ayati
 vaya
@@ -1471,31 +1467,32 @@ pratistha
 pavaka
 yudh
 jur
-sanna
 kinnara
+sanna
 tanka
 ambhas
 samdhana
 satra
 daman
 pradosa
-ila
-amogha
+chos
 cita
+ila
 no
+amogha
 kah
 karbura
 visvarupa
 pasa
-tuda
 malaya
-damana
+tuda
 pravrt
+damana
 laksmana
-mithuna
 adhvan
-vrnda
+mithuna
 mil
+vrnda
 vyoman
 samskrta
 lada
@@ -1504,14 +1501,13 @@ rajas
 arava
 zikhin
 subahu
-bde ba
 dvitiya
-mayu
 avana
+mayu
 muc
-avama
 dhita
 matsya
+avama
 hrd
 garga
 sajjana
@@ -1521,8 +1517,8 @@ prakrtih
 annam
 are
 druh
-puti
 rai
+puti
 divi
 rikta
 visara
@@ -1531,8 +1527,8 @@ nabhya
 santi
 varaha
 akala
-susena
 mahita
+susena
 skhalita
 sakhi
 smara
@@ -1547,8 +1543,8 @@ vishama
 kotha
 trtiya
 gomaya
-anantara
 hrada
+anantara
 nistha
 goda
 yasya
@@ -1556,19 +1552,21 @@ suvrata
 nau
 langh
 saaranga
+chud
 dasra
 vipaksa
 gharma
 goraksa
 svarupa
-avaha
 bharadvaja
+avaha
 vac
 malaka
 bhumi
-nivartana
-tra
+gzugs
 vacana
+tra
+nivartana
 gras
 kavara
 has
@@ -1576,26 +1574,26 @@ dravida
 uttarana
 aurva
 kunth
-payas
 sona
+payas
 badh
 kantha
-khanaka
 ekanta
 lasa
+rtog pa
+khanaka
 vahnih
-jha
 barh
-dra
+jha
 asakta
-komala
+dra
 marka
+komala
 pani
-lha
 bhavin
 pancala
-laj
 pathika
+laj
 sarvatobhadra
 dhurya
 ujjvala
@@ -1604,15 +1602,16 @@ khandana
 pranada
 vasra
 parthiva
+bde ba
 bhan
-preman
 vista
+preman
 candala
 prabhuta
 vaka
 vanin
-atibala
 varsika
+atibala
 lut
 rocana
 susira
@@ -1623,12 +1622,12 @@ apasya
 dusya
 caya
 dhanus
-nakta
 adara
+nakta
 aditya
+udita
 abda
 kud
-udita
 tarpana
 upasthita
 svad
@@ -1636,7 +1635,6 @@ samjna
 khila
 pusta
 vijaya
-re
 ghat
 cakrika
 mauli
@@ -1651,8 +1649,8 @@ vrshah
 sarat
 bhramana
 tasya
-citi
 dos
+citi
 saranga
 mis
 upara
@@ -1660,31 +1658,31 @@ agastya
 chita
 avaya
 khecara
-ko
 yaksa
 vidarbha
 plavana
 kampana
+lha
 janapada
 suratha
 drs
 damara
 siva
 samba
+ko
 isvara
 manusya
 mandra
 akrta
 gandhika
 mathura
-stan
 agrayana
 anda
-tus
 javana
-dhav
+tus
 valuka
 kamsa
+dhav
 pras
 vyadha
 ajagara
@@ -1710,24 +1708,23 @@ mama
 musa
 yauvana
 etad
-ris
 chit
 avis
 khala
 prakrti
 vidruma
-vizoka
 cheda
+vizoka
 cat
 dava
 karya
 phana
 prthak
-tati
 bud
+tati
 devata
-garbha
 jas
+garbha
 dhaaraa
 asava
 virata
@@ -1736,33 +1733,34 @@ viraja
 naraka
 dundubha
 asanga
-utpata
 visesana
+utpata
+re
 vihvala
-mayura
 vipaka
+mayura
 udumbara
 varanga
-vibhakta
 karmuka
+vibhakta
 grasa
 nispanda
-anrta
 chur
+anrta
 siddhih
 kaalika
 urdhva
 manita
 kava
-vatara
 sphur
+vatara
 kakud
 putika
 pratikara
 shabdah
 jambha
-bahuka
 kumbha
+bahuka
 jihma
 yajna
 bali
@@ -1781,39 +1779,41 @@ vela
 valka
 gostha
 vici
+ris
 sena
 daraka
 parasara
 jvalana
-samsthita
-syandana
 saman
 pramita
+syandana
+samsthita
 ksvid
+stan
 vami
 vidu
 dravya
 dalana
 mudra
 caksusa
-pinjara
 rambha
-varanasi
+pinjara
 patira
-sadman
+varanasi
 vrjina
+sadman
 prsni
 niyata
 vandana
 aniruddha
-svaira
 alika
+svaira
 evam
 kambala
 cal
-samvrta
-rava
 sukumara
+rava
+samvrta
 sevaka
 akula
 alasya
@@ -1825,9 +1825,9 @@ dhanvin
 akrama
 kamya
 vyagra
-aguru
-advaita
 cut
+advaita
+aguru
 cancu
 skandhah
 arj
@@ -1839,7 +1839,6 @@ apita
 lamb
 acara
 amanda
-dal
 udbhid
 bhagah
 lekhya
@@ -1850,28 +1849,28 @@ bhrtya
 vip
 randa
 sista
-vaikrta
 snih
+vaikrta
 janah
-amavasya
 manu
+amavasya
 nandaka
 kraunca
 lanj
-avyatha
 puskala
 bhi
-parampara
+avyatha
 mathara
+parampara
 murch
 vedana
-dhvana
 apta
+dhvana
 mrs
 susima
+anubhava
 ibhya
 nibhrta
-anubhava
 bhogah
 virala
 irya
@@ -1879,7 +1878,6 @@ varada
 nirasana
 devana
 prthivi
-tha snyad
 mahadeva
 samyat
 pratyagra
@@ -1890,16 +1888,16 @@ drshta
 nishaa
 viparita
 vyasana
-chi
 au
+chi
 ashtan
 accha
 graamah
 suutram
 piita
 cakrin
-raktaka
 smr
+raktaka
 marga
 balin
 svadha
@@ -1914,28 +1912,27 @@ bad
 it
 prayuj
 paravara
-sgra
 mrga
-pratiyatna
 anusara
+pratiyatna
+phulla
 suda
 kul
-phulla
-pranihita
 samparaya
+pranihita
 prath
 jvara
-vitata
 raj
+vitata
 apatha
 sampurna
 alu
 manojava
 vam
 ira
-rahasya
 raksasa
 pandara
+rahasya
 arghya
 avrtti
 mur
@@ -1945,9 +1942,10 @@ samsarga
 ba
 siddhartha
 sayana
-gava
 kroda
+gava
 tulya
+dal
 bhanj
 rajaka
 arnava
@@ -1957,10 +1955,10 @@ visada
 bharana
 nanda
 sarata
-arus
+karala
 nabhasa
 phat
-karala
+arus
 krudh
 bhuri
 kutsa
@@ -1968,26 +1966,25 @@ vidara
 sarvartha
 kath
 hota
-mandalin
 niyama
-siksa
-pratihara
+mandalin
 mandapa
+pratihara
+siksa
 vahya
-prayata
 peru
-vedhas
-padaka
+prayata
 svan
+padaka
+vedhas
 katham
 pallava
 prasara
 sahita
 lih
-phu
-skanda
 gramya
-zhi ba
+skanda
+phu
 kirata
 sic
 valaka
@@ -1999,13 +1996,12 @@ bhraj
 prayukta
 vai
 prakata
-dbang po
 daxina
 vardhamana
-pravrtta
 kriya
-vaja
+pravrtta
 tank
+vaja
 nikrti
 haridra
 valmika
@@ -2019,15 +2015,15 @@ diti
 apaga
 vaizvadeva
 lohitaka
-sandha
 ala
+sandha
 jalaka
 jri
 praach
 catu
 ojas
-kauta
 kheda
+kauta
 laxmii
 ksana
 mula
@@ -2035,32 +2031,32 @@ hamsah
 bana
 bhavita
 dipa
-roha
 sac
+roha
 xetram
 yanyah
 atharvana
 pravata
 caturtha
+pro
 digdha
 tarika
-pro
 shilaa
 kola
 prastuta
 viz
 chaga
-mrsa
 sravaka
+mrsa
 chara
 daxa
 kutumba
 shiita
 argha
 upacara
-jayin
 citta
 vapra
+jayin
 bhukta
 mantra
 saumanasa
@@ -2073,14 +2069,14 @@ guh
 sasana
 abhimukha
 gardabha
-sahaya
 klp
+sahaya
 ima
 plaksa
 amati
 utsedha
-anuja
 vina
+anuja
 pramatha
 rudhira
 dvija
@@ -2093,16 +2089,15 @@ utkara
 durga
 agneya
 bhram
-sambhara
 vyalika
 day
+sambhara
 prastara
-tshogs
 asma
 dhanvan
 srj
-jahaka
 puspa
+jahaka
 jatuka
 bhagin
 pranaya
@@ -2112,37 +2107,38 @@ mahina
 samgata
 vrsabha
 unnata
-rju
-sma
 svatantra
+sma
+rju
 sattva
-hataka
 vadha
+hataka
 akalpa
 masura
 taru
 pudgala
+zhi ba
 agara
 namasya
 ghr
-dugdha
+sgra
 vizvezvara
-aditi
 kamuka
+dugdha
+aditi
 paurusa
-kuni
 mr
+kuni
 dhru
-klu
 svacchanda
 sanga
 nivasana
 syamaka
+avedya
 vidya
 aruja
-avedya
-kutaka
 mahodaya
+kutaka
 kancana
 vasava
 vayasa
@@ -2157,22 +2153,21 @@ kunapa
 samdigdha
 kadara
 labha
-dran pa
-dvaidha
 nibandhana
+tha snyad
 jambu
+dvaidha
 var
 upaga
-alola
 nipuna
+alola
 sapatna
-nam mkha'
 kruura
-sahacara
 amba
-avartana
 he
 kand
+sahacara
+avartana
 darshana
 samvatsara
 yamuna
@@ -2184,39 +2179,38 @@ tiirtham
 gautama
 dhisana
 kuntha
+kundala
 sahas
 ayava
-kundala
-kun tu bzang po
 ut
+lekha
 pravarana
 varnin
-lekha
 ksipra
-prasanga
 zikharin
+prasanga
 sulabha
 kuzala
 nabh
 suuchaka
 amra
-byams pa
-bhama
 lunth
 preta
+bhama
 krodhana
-bhauta
 naksatra
+bhauta
 samsad
 aji
 karta
 pluta
 sapta
-mati
 muda
+mati
 dada
-atyaya
+dbang po
 nija
+atyaya
 praja
 hatha
 vanda
@@ -2227,28 +2221,26 @@ patti
 harana
 upodha
 vatsaka
+tshogs
 kusmanda
 rathya
-gtso bo
 abhoga
 kudya
+damya
 pinja
 vedin
-damya
 hotra
 dhan
-vayu
 avarana
 ganaka
+vayu
 mani
 yuga
 trapusa
-lta ba
-sems
 hina
 pratyaksa
-saudha
 vidhu
+saudha
 rangah
 vatula
 jihva
@@ -2271,24 +2263,25 @@ sucaka
 haya
 dari
 agada
+klu
 mardana
 agasti
-akarman
 madya
+akarman
 sphatika
 ghasa
 stambh
-yutaka
+kun tu bzang po
 roma
+yutaka
 sarkara
 skhal
-shes rab
 pariksita
 shuddha
 srams
+nabhi
 nimna
 prayojaka
-nabhi
 pratishthaa
 urja
 avanti
@@ -2296,30 +2289,32 @@ marjana
 vrdh
 kratha
 rauhina
-dih
 tras
+dih
 devanam
 vijnana
-kaushika
 vikr
+kaushika
 lalama
 nastika
 havya
 narah
-udanta
 hastah
+udanta
 virajas
 amita
 isti
+nam mkha'
+udadhi
 kedara
 manthana
-udadhi
 haa
 ganja
 upakarana
-srotas
 rah
+srotas
 jyeshtha
+dran pa
 kasana
 prajaa
 aru
@@ -2330,33 +2325,33 @@ coda
 laya
 hiranyam
 ghosa
-kantaka
 vijita
+kantaka
 vaarah
-hana
-hasa
 gola
+hasa
 paraka
+hana
 nakha
 sham
 khandika
 cikura
 upagata
-zuc
 apaya
 srni
+zuc
 agni
 manjula
 atyantika
 jarjara
 sthanu
-dhatu
 gatih
+dhatu
 paarshva
 gan
 bhasana
-nivasa
 prayana
+nivasa
 brahmani
 audarika
 bhala
@@ -2374,22 +2369,24 @@ vaktavya
 itvara
 stupa
 prabodhana
+byams pa
 pesi
 nivid
 ayoni
 pradhi
 haripriya
-svanta
 bhagna
-kaulika
+svanta
 ksatra
 vali
+kaulika
 namah
+gtso bo
 vigata
 ratnam
-dravaka
 gud
 sis
+dravaka
 girija
 bhaksa
 dhumra
@@ -2401,73 +2398,68 @@ kahala
 yac
 vapus
 paribhava
-rgyal ba
 asurya
 jrmbhita
 vimati
 zubh
 ubha
-bhavika
 utpatana
-antaka
+bhavika
 samprati
+antaka
 dharanidhara
 haimana
-brtson 'grus
 sammata
 alaksya
-pratipana
-samsrava
 svagata
+pratipana
 atyanta
-jita
+samsrava
 sal
+jita
 dvika
-dharani
 susma
 aplava
+dharani
 tavisa
-bzod pa
 kanthah
 taka
 vinna
+nipatana
 dhanu
 arna
-nipatana
 aghata
 nihsarana
 kuhu
 vasati
 samudaya
 pravada
-dbang phyug
 karambha
 abaddha
-parimandala
 viddha
+parimandala
 sudeva
 nat
 krtaka
-asamana
-gnas pa
-sadha
 sil
+sadha
+asamana
 krura
 vilapana
-manasvin
 samrddha
+manasvin
 tundi
-adhvara
 kalita
-khandaka
+adhvara
 sipra
+khandaka
 yada
 vikranta
-haimavata
 yantr
+haimavata
 nyasta
-samvrt
 induh
+samvrt
 haritaka
 atana
 avadya
@@ -2483,10 +2475,11 @@ parikara
 ghrna
 karabha
 tami
-stri
 maraka
-anudara
+stri
 yasti
+anudara
+shes rab
 durbala
 manojna
 ksam
@@ -2494,10 +2487,10 @@ pravartaka
 asaya
 jaghanya
 balih
-diz
-prayojya
 sthapana
 bhasita
+prayojya
+diz
 tatas
 patakin
 repha
@@ -2506,26 +2499,25 @@ vyala
 amanas
 yamala
 axara
-rgyu
 kubja
 trs
 aagneya
-yugma
 adhana
+yugma
 chedana
 bhaavana
-praapta
 gajah
+praapta
 abhijit
 pancama
 vand
-salila
 smi
-sangs rgyas
-jurni
-seva
+salila
 dipana
+jurni
 kil
+seva
+sems
 raagah
 samdhaa
 trikala
@@ -2540,6 +2532,7 @@ vapana
 prakaasha
 avidya
 barha
+lta ba
 sunya
 parapara
 vikarman
@@ -2551,33 +2544,29 @@ jaitra
 atapa
 sidhma
 sesa
+pankaja
 rudha
 ghrni
-pankaja
+kandala
 vadana
 rajani
-gnas
-kandala
 syona
-cuta
 sparza
 ghanta
-bhogya
+cuta
 ksapana
-patya
+bhogya
 anna
 mrta
+patya
 asra
 samanjasa
 vidita
 nivata
-rlung
-dge ba
 raghu
 vaza
 bhanjana
 nica
-sra
 martya
 peya
 vidhi
@@ -2586,157 +2575,156 @@ pratapa
 pratijna
 prapa
 rasita
-uti
-bhandi
-dasarna
 rti
-jaladhara
-zaka
-dharadhara
+uti
+dasarna
+bhandi
 durlabha
+jaladhara
+dharadhara
+zaka
 krmi
 tvis
 jami
 marana
+rgyal ba
 kvana
 madhukara
 vatsala
 upada
 vipatha
-vivasana
 masika
+vivasana
 par
 iyam
 tuna
-avya
 nirmala
+avya
 tanti
 daha
+pandita
 parinata
 udagra
 yauna
-pandita
 dehah
 valkala
-inga
 lud
 zaiva
+inga
 ardana
 vratya
 dhuni
 pracara
+netram
 nisa
 bhandila
-netram
-dharman
 krama
+dharman
 stavaka
 sthapati
+til
 samsita
 anka
-mandaka
-til
 ani
-nahusa
-karu
-anukta
+mandaka
 galita
 utka
+anukta
+karu
+nahusa
 putah
 arama
-'od gsal
-sgrub pa
 paramesthin
-sosa
-bharita
 tumula
-samvaha
+bharita
+dbang phyug
+sosa
 bhuti
-naz
-sambandha
-agraha
-char
-rgyas pa
+samvaha
 ruc
+sambandha
+naz
+agraha
 vyavaharika
+gnas pa
 anunaya
 snapana
 anas
-vipluta
 lap
-haha
+vipluta
 gocara
+haha
 um
-anantya
 aye
+anantya
 asuya
 kira
 devaka
 vindu
 ardhika
 caksusya
-iddha
 jan
+iddha
 darada
-apratikara
 bhrukuti
+apratikara
 meghanada
 samghata
 palaka
-sdom pa
-sutya
 lu
+sutya
 sarvabhauma
 sphara
-srid pa
 nari
+keta
+bhagavat
 sunu
 vyasta
-bhagavat
-keta
 abhaga
 jayah
+bzod pa
 tadaga
-ven
 duli
-mchod pa
+ven
 matr
 utpataka
 gudha
+brtson 'grus
 ai
-kuttima
 vinayaka
+kuttima
+kalka
 pratara
 putriya
-kalka
 varsman
 candana
+sra
 ankah
-akasa
 ksip
-amisa
+akasa
 pancanga
-parikarman
+amisa
 tila
 bodhi
+parikarman
 bhalluka
-avarna
 kaksya
+avarna
 vadanya
 pracya
-arsa
 samvartaka
+arsa
 vainayika
 vahika
 anurudh
 rup
 sadara
 cucuka
-khani
 arch
+khani
 traya
-parihara
 rathah
+parihara
 praudha
 upakr
 aagamah
@@ -2750,14 +2738,13 @@ vathara
 panasa
 uddhata
 xudra
-yami
-prasakta
 kallola
+prasakta
+yami
 prapanca
 vikrti
 prabhanjana
-'dod pa
-dri ma med pa
+gnas
 kapa
 sambhu
 vadya
@@ -2765,103 +2752,100 @@ vinasa
 raya
 bhrnga
 pac
+sangs rgyas
 varala
-urva
-aphala
 lasaka
-arishta
+aphala
+urva
 vedah
+arishta
 arthya
 indragni
+vikalpa
 kakini
 payasya
-vikalpa
 chinna
 stava
+char
 ajaya
 pratyanga
 vibhinna
-aksi
 yatas
+aksi
 abhidha
 trnam
-kalila
 vividha
-za
+kalila
 dharmin
 vaidala
 gah
 sammada
-zla ba
-bhrams
 udyata
+bhrams
 rat
-vesa
 pindaka
-edha
+vesa
 gulma
+edha
 ahuti
 rbhu
-partha
 pratiloma
-sajja
+partha
 panna
+sajja
 gira
 marya
 lip
 vivarna
-'dun pa
-vitatha
 karata
-sammita
-dar
+vitatha
 bhaavita
-svadana
+sammita
 trp
+svadana
+za
 vidhih
 yaja
 usriya
 huhu
 cyu
-gsal ba
-sarga
 pas
+sarga
 kavasa
 prayogah
-astika
-de
 udanya
+astika
+mchod pa
 tvaca
 kapi
-gamin
-svaraj
 paksin
 tanaya
+svaraj
 anuttara
+gamin
 kasin
-padika
-prada
 stoka
-mos pa
+prada
+padika
 paapa
 anagha
 prabhakara
 smera
 talah
 kva
-kupya
 khela
+kupya
 avagraha
+dar
 usman
 grahanam
 gramina
 pratana
-ajagava
 ina
-sruta
+ajagava
 taya
-bhatta
 gati
+bhatta
 kasta
 pratima
 anala
@@ -2870,12 +2854,12 @@ namra
 praya
 tip
 puskarin
-aptya
 khaja
-urna
+aptya
 abhitas
 lalatika
 skandha
+urna
 mahavrata
 maithuna
 cyut
@@ -2889,13 +2873,15 @@ sikhandin
 triguna
 asika
 kri
+rgyu
 sugriva
-vatayana
 marmara
+vatayana
+rgyas pa
+srid pa
+upadhana
 daivata
 valaya
-upadhana
-bdud rtsi
 kostha
 pravrajita
 bhangura
@@ -2904,26 +2890,26 @@ jisnu
 bhur
 agnidhra
 nandimukha
-uparama
 yuvan
+uparama
 sarvabhuta
-asthana
 vasudha
 aka
+asthana
 dundubhi
 aksika
-apadana
 pratyayita
+apadana
 vijrmbhita
 acala
-khams
 saras
-naranga
 phanin
+naranga
 samgrahah
 dadhika
 masara
 yamana
+sdom pa
 malava
 dhenuka
 hastika
@@ -2932,15 +2918,19 @@ tatha
 jarayu
 kalata
 vasti
-ruja
 samhanana
+zla ba
+ruja
 spr
-rukma
+sgrub pa
 cud
+rukma
 rajana
-dadhi
-karusa
 vallabha
+dadhi
+dge ba
+karusa
+rlung
 samdhih
 vairata
 anji
@@ -2951,138 +2941,136 @@ pratipattih
 channa
 anti
 jambunada
-antra
 mugdha
+antra
 prapad
-shes pa
 manjistha
 chaayaa
 vishesha
-karkara
 samkirna
+karkara
 nrt
+'od gsal
 vrana
 yavan
+marakata
 pava
 abhimana
 abhisu
 krtsna
-marakata
 laxanam
 pushkaram
 samnyaa
 suuryah
-paratas
 tarasvin
-phung po
+paratas
+'dod pa
 vanita
+arbhaka
 dharin
 pratigraha
-arbhaka
 paz
 prajanana
-asama
 ned
+asama
 vartula
+in
 pravira
 samsarana
-in
 tulaa
 bata
 sammukha
 krs
-vaidurya
 tun
+vaidurya
+pul
 asan
 dvidha
 paravat
-pul
 sanat
 catuska
 ushna
-kanina
 sitaka
+sruta
+kanina
 nasta
-grub pa
 sarasvata
 ganita
 kaccha
 rtasya
 syava
-bhagya
-btang snyoms
 khal
-vastuka
+bhagya
+dri ma med pa
 aritra
+vastuka
 kosa
 pratiyogin
-sula
 kurca
 mandira
-parjanya
-visayin
+sula
 krtanta
+parjanya
 urasya
+visayin
 srama
 vap
 jaata
 vrtra
 abhu
-med
 amata
-zasta
-vimukha
 zambhu
+vimukha
 vipad
-khana
+zasta
 kramana
 laksmi
 siti
+khana
 bhavaka
 trivrt
 duracara
 manmatha
-sems pa
 samgita
 loman
-parsva
 sadharana
-adeya
+parsva
+de
 bhisma
-talina
 gandah
-kardama
+adeya
+talina
 varenya
-'dus pa
-alinga
+kardama
 utthita
+alinga
 vegah
-vyavahita
 bhasad
-srang
+vyavahita
 tah
 bhurij
 kutta
+'dun pa
 nakra
 vaitanika
 bhisaj
 madhula
-'dul ba
 darbha
 nemi
-saurika
 dvaya
+saurika
 praghana
 sanka
-kanjika
-gamya
+gsal ba
 jaratha
-samira
 syamala
 vardhaka
+gamya
+samira
+kanjika
 ksveda
-dhrti
 raktapuspa
+dhrti
 ranj
 mrdh
 nighna
@@ -3092,59 +3080,56 @@ tas
 arthin
 tvac
 ghatin
-lasika
 svr
-sakhya
+lasika
 brahmadatta
 hetu
+sakhya
 adaya
-drang srong
 ukta
 agnihotra
-rdul
 madayitnu
-datra
 kanana
-paca
+datra
 prota
-lung
+paca
 alin
 kundah
+bdud rtsi
 vadhu
 naimisa
 akta
 raga
 asri
-caitya
 lubh
-daksinya
+caitya
 paurnamasa
-amukta
-ir
 recaka
+daksinya
+ir
+amukta
 viphala
 gambhira
 matanga
-'dzin pa
 parinaya
 samyukta
-ajiva
 ih
 pancaratra
 ura
-yajya
+ajiva
+mos pa
 utkarsa
 samayah
-mdzes pa
+yajya
 bhudhara
-vibhasa
 kopana
+vibhasa
 samkula
 bhasaka
-mahakula
-dhaya
 kartr
+mahakula
 matula
+dhaya
 si ta
 granthika
 ahina
@@ -3157,42 +3142,38 @@ parigraha
 varistha
 mukha
 upanayana
-ma rig pa
 urvi
-dandika
 krand
+dandika
 jhilli
 niskuta
 dohana
-jiiva
 jangama
+jiiva
 vajin
 paa
-nihsara
 sudhanvan
+nihsara
 tapaniya
 vasura
-mkhas pa
 anasa
-karsa
 sali
-aupayika
-kusumbha
 tim
+aupayika
+karsa
+kusumbha
 puurana
 sukanasa
 prahita
 aasthaa
 chitta
-kuvalaya
 car
-pattana
 sthavara
+kuvalaya
+pattana
 sulika
 kaulina
 grama
-bcom ldan 'das
-'gro ba
 panah
 aashrayah
 baahuh
@@ -3203,384 +3184,382 @@ sthaa
 udaanah
 vidhaanam
 atas
+yugya
 bandha
-kuttaka
 markata
 udgraha
-yugya
+kuttaka
+arh
 grdhra
 sakuna
-arh
 upapad
 bodhaka
 didhi
 sphotana
+karbu
 sudhi
 kaja
-karbu
-sambhrta
 naagara
+sambhrta
 madhyamdina
-rnam shes
 bhangah
 yuvam
-aina
 sambara
 stubh
 vikaca
-yon tan
+aina
 parivaha
-ambarisa
 bhugna
-bherunda
+ambarisa
 mrja
-rdo rje
-rgya mtsho
+bherunda
 prasahya
 ghuna
 ash
-prayoga
 bhujisya
-uks
 kalaa
-cetana
-vastra
-krcchra
+prayoga
+uks
 manohara
+krcchra
+cetana
 bhuuti
-alinda
-bibhatsa
+vastra
 visnu
+bibhatsa
+alinda
 presya
-pali
 vipanna
+pali
+samsaya
 vrha
 abhinna
-mantrita
-samsaya
 visrj
+mantrita
 narendra
-brahmi
-dharmya
 drp
-tarka
+dharmya
+brahmi
+drang srong
 tvarita
+tarka
 vistha
 makaranda
 toyadhara
 grahya
 kapalin
 paripana
-don
-adhikara
+khams
 ksapa
+adhikara
 vantha
+prapanna
 cina
 jatin
-prapanna
 dhurta
 pravahana
-avika
 rtuh
+avika
 hiranya
 stabdha
 tuni
+phung po
 kaliya
 sabda
 samvarta
-nataka
+btang snyoms
 bus
-dhvaja
+nataka
 lingam
-dung
+dhvaja
+tuhina
 garta
 haituka
-tuhina
 ksudh
-kuru
 udvahana
+kuru
 atani
-arti
 svayamvara
+arti
 rahas
+srang
 apala
 kharva
-mar
+vraj
 arata
 rc
-vraj
 dipta
-upayana
 gauda
 uddhr
+upayana
 sadyas
 suprabha
-zhi gnas
 agnaye
+sems pa
 turi
 ratri
 zodhana
 aslesa
 anudita
-bhogavat
 bandhah
+bhogavat
+rddha
 kamatha
 kanci
 nuda
-rddha
-didivi
 uddhrta
+didivi
 suvira
 jirna
 vidhuta
 khadga
+med
 abhiyuj
 angirasa
 uri
-sunda
 vanga
+sunda
 ayus
-antarita
-rupaka
-geya
 krp
 pinj
+rupaka
+antarita
+geya
+grub pa
+lung
 dhusara
-sucika
+'dul ba
 karnaka
+sucika
 kuvara
-vataka
 asrj
+vataka
 patni
-grahaka
 vaisnava
+grahaka
 nid
-dhanvana
 raksas
-rupya
 val
+dhanvana
+rupya
+visista
+mantrin
+bhasman
 pramudita
 upanta
-visista
-bhasman
-mantrin
-surana
 prabhinna
-mandura
+surana
 tryambaka
-audarya
-hira
+'dus pa
+mandura
 lipta
 upagraha
 zalya
+audarya
 tattvam
-darad
+hira
 rathanga
+mdzes pa
+darad
 adatta
+rdul
 asis
 kudmala
 anyatra
 svapada
 cesta
-daruna
-kalinda
 vidarana
+daruna
 nigama
+kalinda
 stambhana
-astapada
 parisad
-viha
-adbhuta
+astapada
 nirukta
-wa ra na si
+adbhuta
+viha
 devi
 patih
 pracina
 sakam
 rasayana
-rtse mo
+'dzin pa
 adhama
-atimukta
 niyamah
+atimukta
 gandhari
 iisha
 avita
 raurava
 alarka
 udvasa
+shes pa
 saru
 parijata
-samtapana
 sakula
+samtapana
 pun
-dmyal ba
-ston pa
 hud
-kaula
 mut
+kaula
 apyayana
+mkhas pa
 atisara
 kuthara
 bhedaka
-matali
-narada
-vasudhara
 mrganka
-surapana
+vasudhara
+matali
 mecaka
-nati
+narada
+surapana
 kratuh
+nati
 vrttih
-amutra
 abhyudaya
-krsara
+amutra
 pratyarthin
 rucira
-sthandila
+krsara
 utphulla
-pathaka
 shithila
-curna
+sthandila
+bcom ldan 'das
+pathaka
+'gro ba
 huda
+curna
 dhiti
 bhaas
 nishtha
 vidhaa
 yaa
 bhisana
-upadha
 saptan
+upadha
 vrkah
+dung
+ma rig pa
 mahii
-dag pa
 esana
-nyi ma
-zad
 maanah
 paarah
 shankuh
 vika
 kamarupa
-manaka
 medura
+manaka
 musala
 duhkhita
-abhijana
 nisanta
-renu
+abhijana
 anupada
+renu
+yon tan
 saadhu
 shuunya
 druna
 tusta
 dhamani
-reg pa
 pratyaxa
+supta
+rdo rje
 anavastha
 langula
-supta
+rgya mtsho
 bhuvana
+vizva
+nipat
+upakantha
+dhavana
 gandi
 seka
 vallari
-vizva
-dhavana
 kanka
-pad ma
-upakantha
-nipat
-son
 bharya
 az
+stanita
 asanka
 kashaaya
-stanita
 aroga
-balisa
 kharu
-me tog
+balisa
 karma
-blo
-nges pa
 svasa
 simha
-janu
 pamara
-jiri
-apaha
+janu
+rnam shes
 citraka
+apaha
+jiri
 manusa
 talaka
 bharga
-pastya
 saranya
 zikhara
-ksan
+pastya
 paurava
-sbyin pa
+ksan
 koti
 ve
+don
 mih
-bdud
+mar
 udghata
-candraka
-sariraka
-nyubja
-rtogs pa
 nivi
+sariraka
+candraka
+nyubja
+surendra
 dandadhara
 prayoktr
-surendra
 arbuda
 asattva
 sikha
 sadguna
+son
 ajnata
-rig pa
 mayi
 bahurupa
-satta
+virudh
 saranyu
 valgu
-'og min
-virudh
+satta
 amitra
-phenila
 pinjala
+phenila
+krtin
 samdha
 anarta
-kari
 kaumara
-krtin
-phyogs
-khura
+kari
 prakhya
+khura
 vipra
 durmada
-syamika
 jrmbhana
 samkata
 vivara
-rang bzhin
-ting nge 'dzin
+syamika
 susama
 tanuja
 il
-anapta
 trivikrama
+anapta
 ajnana
 svapana
-sdig pa
 stuta
-ela
 nilakantha
-phalita
+ela
 lambana
-piva
+phalita
 pru
+piva
 maula
-parabhava
+zhi gnas
 prasr
+parabhava
 lauha
 setuh
 mahodara
@@ -3593,215 +3572,197 @@ cheka
 savara
 bhidura
 pangu
-catustaya
-mahamaya
 srestha
-ananya
-dngos po
+catustaya
 ghur
-bhela
-hamsa
-turiya
-uddharana
+mahamaya
+ananya
 pramana
 vyath
-dpa' bo
+hamsa
+bhela
+turiya
+uddharana
+janus
 mahabhoga
 saurabha
-janus
-the tshom
+aruh
 dayita
 kanyakubja
-aruh
-rkyen
 halya
 upala
 praroha
-sevita
 sasra
+sevita
 pariksa
 samucchraya
 upari
-vacya
 andhra
+vacya
 ksu
-mchod sbyin
 kuhara
-mahasattva
-tandra
 trpa
 viyat
-durgandha
-daseraka
-ganda
+mahasattva
+tandra
+wa ra na si
 samahita
+durgandha
+ganda
+daseraka
+dhauta
 zizira
 abhinava
-dhauta
+modaka
 asru
 sadh
-stong
-mchog
-modaka
 vimukta
 ahu
-yul
-gnod sbyin
 laksya
 shaila
-rgyud
+varutha
 aviddha
 rohina
-varutha
-rab tu dga' ba
-lhag mthong
+manin
 anukara
 kapalika
-manin
 padata
-virasa
 pratipanna
+virasa
 matih
 nandika
-svayambhuva
-gandhavaha
-nivaha
-vallura
 dga' bo
-dkyil 'khor
+gandhavaha
 nisadha
 nyagrodha
+svayambhuva
+nivaha
 sphurita
-rigs pa
+vallura
 paramartha
 apratyaya
 bhrkuti
 saikata
-angara
 irin
 praleya
+angara
 khasa
+pratipaksa
 tiktaka
+pilu
 vijna
 kudi
-pilu
-pratipaksa
-vivasa
 avarodhana
+vivasa
 somapa
 sainya
 upalambha
-dad pa
 havis
-kaitava
-bandhya
-kuzika
 sainika
+bandhya
+kaitava
+kuzika
+gadgada
 narasimha
 nayana
 drsta
-gadgada
-samyamana
 ruddha
+samyamana
 karanda
 urvasi
 asphota
 palika
-asanna
+khid
 atavi
 karpura
-khid
+asanna
 brh
 prabuddha
-salva
 udgata
-phan
+salva
 vivartana
+ksubh
+prasrava
+salmali
 harin
 parvatiya
-prasrava
-ksubh
-salmali
-rasya
 kumud
 parvana
+rasya
 stheya
 upacarya
-bsam gtan
-sgrib pa
 pratirupa
 viraga
-prii
-anana
-roka
 nihita
-apurana
-pancanada
-vaa
-mehana
+prii
+roka
+anana
 prakirna
-ser skya
+bdud
+pancanada
+apurana
 vasara
-paricara
-virana
+mehana
+vaa
 jhillika
+paricara
 pratibaddha
-parsad
+virana
+nirnij
 avasana
 payya
-bla ma
-nirnij
-drag po
+parsad
 jantu
+pad ma
 divo
 madra
 vyay
-adhikarana
+'og min
 papa
-lo
-bhiiru
+adhikarana
 karenu
+rtse mo
+bhiiru
 shaanta
 shaarada
 udbhata
-skye mched
 mandah
 gunin
-khams gsum
 naimittika
-caratha
-dharmika
 nirgrantha
 nisacara
 paras
+caratha
+dharmika
+dag pa
 sakatika
 tiivra
+nyi ma
 sunasira
 vyada
 avatarana
-adhyatmika
-karika
+ston pa
 truti
+adhyatmika
 graamya
 hiina
+karika
 kaxya
-pratibhaa
 kumbhah
-churika
+pratibhaa
 doha
 antaraya
-bzang po
+churika
 yamika
-snying rje
-ardra
-tundila
 agamya
-stana
+ardra
 shikhin
+stana
+tundila
+dmyal ba
+dabha
 ambara
 bhrami
-dabha
-samajna
 biijam
 charanah
 pramaanam
@@ -3809,750 +3770,754 @@ sambhuu
 samdhyaa
 shaastram
 shariiram
+samajna
+bandhuh
 vrddhi
 grath
-bandhuh
-asapatna
 darpa
-vrsan
-ded dpon
-gali
-nibha
-prameya
-siimaa
 sprs
-brtan pa
+vrsan
+asapatna
+prameya
+nibha
+siimaa
+gali
 naka
 akupara
-vamsika
-puri
 stena
+puri
+vamsika
 mal
 apsu
 damsa
 lomaza
-samaka
 vyanjaka
+samaka
+me tog
 kutas
-avila
-tisya
+bru
 udatta
 utsuka
-bru
 pancan
 pratyayana
-dhiira
-ksanta
-sarin
+tisya
+avila
 khud
+ksanta
+dhiira
+nges pa
+zad
+sarin
 andhaka
-sman
+virocana
 anagni
 dola
 hetha
 vanka
-virocana
 dambh
 andaja
-thig le
 veni
-sudana
-darpana
+sbyin pa
 vilagna
+darpana
+sudana
 kancuka
 naman
-yojana
 maayaa
+yojana
 chadman
 duvas
 gairika
 tadit
-anumata
 nartaka
 prus
-romaza
 push
-thob pa
+romaza
+anumata
 nirvaana
+mchod sbyin
 zubhra
 praguna
+reg pa
 vilasita
-sdug bsngal
-skye ba
 gaurava
-sananda
 likh
-dgra bcom pa
-catula
-rajika
-dasarha
+sananda
 pratyanc
+rajika
+catula
 samsa
+dasarha
+hetuh
 mahanila
 sanatana
-hetuh
 ajira
 dhura
 durmukha
-tshor ba
-samala
 sthuna
+samala
 gang ga
 itas
-vikasin
-jaks
+lhag mthong
 jval
+jaks
 muni
+ting nge 'dzin
+vikasin
 nayaka
-madira
 pralaya
+madira
 pratyayah
 surupa
-avapana
 nidarzana
 rtviya
+avapana
+sdig pa
 azoka
 pacaka
 upaya
+rtogs pa
 avadha
-len pa
 mitrayu
-tarksya
-uttana
 sidhra
-usas
+uttana
+tarksya
 apriya
-dravana
 kausalya
-vicara
+usas
+dravana
 ganika
+vicara
 subhru
 dhanin
-panika
 pihita
 vamsa
-mtshan nyid
-mi g.yo ba
-airavata
-nag po
-stim
-vihrta
+panika
 slis
+stim
+airavata
+vihrta
 raka
-ankura
 dhuta
 narman
-nasika
-valli
 vesya
-srona
+valli
+ankura
+nasika
 vartman
+srona
 asme
-astara
-bsod nams
 kiyat
+astara
+sev
 vyusta
 lataa
-sev
+gnod sbyin
 hetuka
-abhidheya
 dinakara
-kharika
+abhidheya
+phyogs
 srngara
+kharika
 dvita
+samjaya
 anjasa
 darana
-samjaya
-ham
-paulastya
 praharana
+paulastya
 rajasvala
 sthitih
 tulika
 daivya
 pratihata
 ruci
-gcig
+dkyil 'khor
 vedha
 kutira
 munih
+ser skya
 dhata
-abha
-chadana
-dhavaka
 kundalin
-rnga
+abha
+dhavaka
 galana
+chadana
 musta
 bhoktr
 tarya
+blo
+kalusa
 visanka
 ghatta
-kalusa
 anuga
-tarna
 ling
 mrj
 sudanta
+tarna
 vidhatr
-carca
-daitya
 dyuta
 toyam
-bkod pa
+carca
+daitya
+stong
+mchog
 talpa
 somo
-udvartana
 dasma
 prasangah
+udvartana
 sastha
-saragha
 dan
+saragha
 madhusrava
 mrdula
 gatha
-shu
-spyi
 namya
 svadu
+dpa' bo
 zru
-bsam pa
-akhya
 asiddha
+rigs pa
+akhya
 dvara
 manorama
-tari
 dambha
-mchod rten
+tari
 yajata
+khel
 linga
 srngin
-khel
 nirvrti
 casa
 japya
 bhaksya
-zasya
 karnin
 lubdha
-pravasa
+zasya
 unnayana
+pravasa
+drag po
+rig pa
+yavah
+abhava
 chalana
 garha
 kantara
 narmada
-yavah
-abhava
 nikrta
 praharin
 pravrajya
 vikatthana
-phrag dog
+patrin
 citya
 pataha
-patrin
 kezava
 ho
 ksud
+phan
 gita
+rgyud
+shu
 svaja
-edhas
+rab tu dga' ba
 abhivrta
 yugam
+edhas
+prakr
 akarna
 mogha
-prakr
 pranud
-trna
 vaidheya
 gangaa
 kalyaana
+trna
 utthaana
+thig le
+rang bzhin
 udaka
 gunja
-sbyor ba
 akalya
-adeva
 anupad
 gayatra
-lan
+adeva
 nilaya
-nivezana
-vanara
 dhanamjaya
+nivezana
 prahi
+vanara
 varuni
 harihara
-prasarana
 vicaksana
+prasarana
+bla ma
 lat
 tuttha
+dad pa
 pravartana
 ambastha
+lo
 chand
-samasya
 kanada
+samasya
 spaz
 tiras
 anvita
 cup
-karaja
 svarna
+karaja
 tandula
 kalama
 aurabhra
-gaadha
 yayavara
-thos pa
 yoni
+gaadha
 adanta
 arvacina
 arc
-diipta
 pravrttih
+diipta
 rte
+khu
+snying rje
 apavrtta
 upakrta
-abhasa
 ac
 tuvara
+bzang po
 vedika
-khu
-mo
-ajata
+abhasa
 rugna
+ajata
 puraa
 rej
-nihara
 raks
-dusana
-dharaka
+nihara
 bhartr
+yojanam
+dusana
 maatr
 nitala
-yojanam
+dharaka
 tay
-vrka
 ukthya
-tsha ba
+vrka
+ded dpon
 aruj
+yul
 harya
-kakutstha
 pramathin
-upapada
+kakutstha
 maargah
 raatrih
+upapada
 panca
 zastra
 suca
-'phags pa
 zuddha
-zruti
 kasara
+zruti
 etarhi
-svada
+khams gsum
 yus
+svada
+dhvams
 prajana
+sphata
 vartta
 yavaka
-dhvams
-sphata
+bsod nams
+dista
+sman
+snehana
+atri
 havana
 nistrimsa
-atri
+rkyen
 carita
-dista
-snehana
-pratyanika
 sarvakama
-bauddha
+pratyanika
 upapanna
-ahnika
+bauddha
 amsala
+ahnika
 nirjara
-skyes pa
 samasa
 khoda
 yatu
-mun pa
+bsam gtan
 prakiirna
 arala
 maitreya
-pratigha
 parivara
 sadhaka
+pratigha
 vadin
-dga' ldan
-kumbhaka
-ankusa
 bahukara
-samaana
-singhana
 ghu
-srin po
+kumbhaka
+rnga
+samaana
+ankusa
+singhana
+dgra bcom pa
 devayu
 karmara
-gser
+sdug bsngal
 avapa
-stong pa nyid
-'khor ba
 agata
-ghantika
 granthila
-kulina
-sraj
 sanj
-ninada
+sraj
+kulina
+ghantika
 rohini
 aroka
-rodha
-amanusa
 niyuj
-ruha
-trilocana
-nges 'byung
+ninada
+amanusa
+rodha
 rathin
+trilocana
+ruha
 talita
 tava
 balaja
 margana
 vartin
-zvas
 dagh
+zvas
 konkana
-rgod pa
-lha ma yin
+the tshom
 chalita
-parivedana
 kuca
+parivedana
 pazu
 dheya
-kuh
 nagari
+ham
+kuh
+sgrib pa
 avastu
 dhvamsana
+mchod rten
 prarthana
-bag chags
 pratisarana
 sadi
 apasara
-de bzhin nyid
-adhiratha
-priyamvada
+thob pa
 kuj
-mdo
+priyamvada
+adhiratha
+skye ba
 mantavya
+apyaya
 svadhiti
 upanaya
-apyaya
 mahiman
 visti
-blo gros
-gaha
+brtan pa
+ghatt
 jalpa
 nirmana
 samhara
 sautra
 varasana
-ghatt
+gaha
 apamarga
-zaya
 kathora
 medas
+zaya
 vidhra
-rgyun
 candramasa
 kalaza
 kazyapa
+nag po
 atya
-bindu
 parasika
+bindu
+dngos po
 akra
+tshor ba
 jalada
+patatrin
+uttapta
+musika
 pizuna
 samcara
-uttapta
 uttha
-musika
-patatrin
-jagala
 argala
+jagala
 madhyastha
+skye mched
 agati
-rnam pa
 suma
 sarvani
 puraskrta
-aksata
 majjana
 nimitta
+aksata
 patin
 udha
+analah
 gshin rje
 oja
-analah
-jasa
-pista
 acarya
 anc
-dvaipa
-jalasaya
+jasa
+pista
 manjari
 asraya
+dvaipa
+jalasaya
 satina
+len pa
 uktha
 mrsta
 niyamana
 ittham
 laukika
 acha
-arusa
 irana
+arusa
 anista
 bhati
 pandura
-vadi
 rut
+vadi
+adrih
 atharvan
 glai
-adrih
+mi g.yo ba
+ramh
 godha
 karavira
-sabha
-urana
-daka
-ghati
 kunti
 pattah
-ramh
 ranah
+sabha
+ghati
+urana
+daka
 pratita
+avarodha
 ghanaghana
 govinda
 rada
-avarodha
-vimarga
+tuja
 abhibhu
-dhanuska
+jush
+kalpaka
 padmaka
 pathana
-tsan dan
-tuja
-kalpaka
-jush
+vimarga
+dhanuska
 cakradhara
 mahakala
-kapotaka
 ripu
 vayasya
+kapotaka
 madhva
-rten
 vanij
-codana
 kanya
 ghasmara
+codana
 hali
 bharjana
+bsam pa
 sambhavya
 nigha
+mo
 prasthika
 lajja
 vaidika
 vitasta
 astama
-kaleya
 labhya
 udvrtta
-karsapana
+kaleya
+tsha ba
 trana
+karsapana
 apakva
+parivartana
+susita
 gadi
 mallika
-parivartana
 raha
-susita
 bhus
 dhenu
-navaka
 krodha
 lot
+navaka
 parisesa
-pankti
 pravrta
 sasvata
 vilambita
+pankti
 kuli
 sighra
 ksira
 pratimukha
+bkod pa
+srimat
 prazasta
-aranyaka
 bahala
+aranyaka
 dhamana
 jharjhara
 sidhu
-srimat
-dam tshig
 sveccha
-rang
 dvandvam
 sattvika
 trpra
 klama
 aksama
-upasara
 bhrta
 pancanakha
+upasara
 satala
-mishra
 lupta
-sahasrin
 anubandha
+mishra
+sahasrin
 josa
-'dod chags
-raama
-sadvala
 drsya
 khanjana
-bdag
-ldog pa
+raama
+sadvala
 yastika
-byis pa
 paridhi
 patta
-kairata
 asrama
-avadana
 dabhra
-deha
+kairata
 samuttha
+deha
 shukla
+avadana
 patuka
+lan
 pivara
 pradhanya
 sunrta
+tairthika
 vizada
+vizruta
 anuradha
 pautra
-tairthika
-vizruta
-irma
-angada
 hantr
 lal
+irma
 samyama
-rnam rtog
-agamin
+angada
+stong pa nyid
 suranga
-ii
 upazaya
-pariharya
+agamin
+ii
 tark
+pariharya
 zi
 sahana
 data
-aida
 jivala
-niz
-nyasa
+aida
 prasavya
 suparvan
+niz
+nyasa
 avirala
+phrag dog
 bila
 pravarga
-nyan thos
-tshad ma
+agrima
+yana
 jambira
 mekhala
-yana
-agrima
-ring
 sumana
 anvaya
-dindira
+devala
 kampila
 panda
-psa
-rdzas
 samanga
 vahni
-devala
-rigs
-tathya
-xi
+dindira
+psa
 prabudh
+tathya
 sabhaa
+xi
 asidhara
-jivita
+sbyor ba
 dahra
 kohala
 krakaca
 prthuka
-madotkata
+jivita
 cay
-samamsa
+madotkata
+parivartin
+niruddha
+paunarbhava
 atura
 khat
-niruddha
-parivartin
-paunarbhava
 manyu
-daaru
+samamsa
 stimita
 cho
+daaru
 dhuna
 vadava
-paachana
-shobhana
-shatha
-sthaga
+dga' ldan
 vesana
-vaama
+paachana
+shatha
+shobhana
+sthaga
+srin po
 paduka
 paribhavin
+vaama
 karatala
 amatya
-citti
 hims
+bandhula
+citti
 rebha
 vatu
 vii
-bandhula
 ukha
 yajus
 agantu
 bhavaniya
-uddyota
 pataccara
-duskara
+uddyota
+ang
 ajara
+duskara
+virakta
 mudraa
-nga rgyal
 samaadhaa
 shikhaa
-udaara
-virakta
-vyavasthaa
-ang
-sgyu ma
 svarah
+udaara
 vadhah
-kikasa
+vyavasthaa
 medhavin
-sugata
 abhra
 aryaman
-siman
+kikasa
+sugata
 sris
+siman
 matrka
+spyi
 vayuna
-midha
-rtsa
-kandarpa
-sevana
 aaruh
 daayah
 dhaatuh
+kandarpa
+midha
 nyaanam
 pashuh
 shalyam
@@ -4561,1679 +4526,1647 @@ vaajah
 vamshah
 vishayah
 vyavahaarah
-indu
+sevana
 ragh
+indu
 kalpanam
-kamacara
-karsya
+thos pa
+lha ma yin
 niyukta
 dantura
-krud
+karsya
 sarasana
-ro
+kamacara
+krud
 asina
-suparsva
-vihasta
 jam
+suparsva
 kanti
+vihasta
 pattika
 mukula
-pratiipa
-ratna
-rsya
-varttika
 parigata
-vasas
+ratna
+varttika
+pratiipa
+rsya
 ard
-dhma
 unnaya
 upadhaa
-mkha' 'gro
+vasas
+dhma
 baijika
 bakula
+de bzhin nyid
 karnata
-sprul sku
 sadyaska
 zara
 dhanyaka
-gang zag
+gser
 abheda
 khan
 sar
-pishuna
-parada
+'khor ba
 vanaprastha
+parada
+pishuna
 vitti
 vaivasvata
-upadana
 ullasa
+upadana
+'phags pa
 guudha
 malya
 saamaanya
-de nyid
+taks
+nisarga
 paritapa
 kvatha
-nisarga
-taks
+tsan dan
 kirmira
 prahva
-smita
 tantu
-bhaima
-nibandha
+smita
 samsrsta
-vanijya
+bhaima
+yavanah
 gaurii
 nadya
-sa la
-yavanah
-zita
+nibandha
 tundika
-vardha
+vanijya
+zita
 nairrta
+upavartana
+vardha
 kambuka
 kanduka
-upavartana
+ramhas
 ekartha
 kuddala
-ramhas
+avanata
 prajnana
 animan
-avanata
-satkarman
 naidhana
+satkarman
 khataka
+purvapara
 vajrin
 nadvala
-purvapara
+aj
+bag chags
 prakasya
 uparakta
-aj
+rgyun
+mun pa
 ajihma
 megha
 udya
+mdo
+vimsa
+malli
+okas
 pareta
 vibhisana
-vimsa
 bhagiratha
-okas
-malli
-dusta
-gabhasti
 ej
+gabhasti
+dusta
 matsarin
 amlika
-gadu
-garhya
 nagah
-thub pa
+gadu
+blo gros
 dardara
+garhya
 rsabha
 ahaha
 ropa
 arat
 mlai
-sprul pa
 vasuka
 vyasa
-sel
-tshangs pa
 prastava
 vicarana
 agnika
 urvara
 ksatriya
 namata
-gzhon nu
 siddhi
+dam tshig
+srasta
 didhisu
 parikha
-srasta
 udaja
 uras
 udra
-aruni
 avahita
-bhojaka
-tiraskara
 vrs
-bran
-sudaman
-lohitaksa
+bhojaka
+aruni
+tiraskara
 ratih
+lohitaksa
+mrtyuh
+rgod pa
+sudaman
+upaskara
 saroja
+vatsara
 vija
 khatika
-mrtyuh
-upaskara
-vatsara
-stobs
-snying po
+skyes pa
 tams
 kuzezaya
+bhandira
 zvasana
 andhas
 aupadhika
-bhandira
 malika
-dhurv
 tyajas
-gang
-langala
+dhurv
 skanna
-avayaj
 vrtti
+avayaj
+langala
 madaka
-kutra
 drsad
-rtag pa
+kutra
+mtshan nyid
 sarati
 murdhan
+avyanga
+bandhuka
 dazama
 prsthya
-bandhuka
-dhariman
 agu
-avyanga
 devika
-anuttama
+dhariman
 dravyam
-dbu ma
-kun rdzob bden pa
+anuttama
 ukhya
 artava
 vrkna
-bahya
 abhijna
-chags pa
+bahya
 sarvam
-capa
 styai
 nisvana
+capa
+animisa
 bhada
 bhuman
-animisa
 karisa
 kamam
 kasya
 abhakta
+gauna
 lutha
 narasamsa
-samkrama
-gauna
-lepa
 nil
-khri
 vasya
 vrddhih
+lepa
+samkrama
 simhala
+rnam pa
 adhipa
 chas
-sadanga
-triputa
 parivarta
 pratighata
+sadanga
+triputa
 sairika
-yuva
 sahasraksa
-chad pa
+yuva
+gcig
 valika
-tribhuvana
 kanah
+tribhuvana
 kausumbha
 satyaka
 kanyaka
-drupada
 krathana
+drupada
 gatra
 pran
 pratimana
 zama
-viveka
 anuvrt
+rnam rtog
 sasti
 sutanu
-prabha
-adhita
+viveka
 aratni
 grantha
 palvala
+prabha
 svarita
-dadha
-rgyal
 zal
+adhita
+dadha
 cyuta
 navan
-pramoda
 rodhas
+pramoda
 snuh
-drapsa
 dad
+drapsa
+mrdha
+maru
 tarsa
 udahara
-bsgrub bya
 kiri
-maru
-mrdha
 sattram
+res
 vairocana
 amantra
-res
-bum pa
-alabu
 pramrta
 samudita
+alabu
 rasna
+samb
 pakya
 parasava
-samb
-savaka
 prasuta
-mulya
-cikkana
-visvanc
+savaka
+rang
 vyadh
-jatya
-natha
-saikatika
-'byung po
-adas
+cikkana
+mulya
+visvanc
+unmukha
 eda
 hiruk
-unmukha
+jatya
+natha
 parisrava
-sna tshogs
-khacara
-pithara
-amedhya
-baladeva
-gantu
+saikatika
+adas
 kesa
-sphura
+ro
+amedhya
+khacara
 toka
+baladeva
+pithara
+gantu
+sphura
 pratigrahah
-karmakara
-chardis
-kusula
 utsrj
+chardis
+karmakara
 asira
-kalakuta
-dud 'gro
-vikankata
+kusula
+byis pa
 nal
+kalakuta
+vikankata
+upagam
 devasura
 akhila
+arthika
 kusuma
 samtanika
-upagam
-arthika
-bsam gyis mi khyab pa
-kukkuta
-abhihita
+mkha' 'gro
 padmakara
+abhihita
 granthi
-nagnaka
+kukkuta
 trapu
+nagnaka
 kundaka
-vitaana
 brahmacarin
 parvati
-iksa
-paricaya
 samsakta
+vitaana
+paricaya
 varti
-caracara
-gatu
+iksa
+cam
 damsana
 vit
-cam
+caracara
 meda
+gatu
+sutara
 ragin
 saadhya
-sutara
-golaka
 samdhita
-ucchvasita
+golaka
 glaha
 thah
+ucchvasita
 patika
-sman pa
 vyartha
 vanus
-yi dwags
 abhira
+kutt
+hnu
 satyavrata
 tatpara
-vyavasita
-bkra shis
-hnu
-kutt
-salina
 udvejana
+vyavasita
+salina
+arhana
+aviveka
+kakuda
+naipuna
 sarvari
 anukula
-arhana
-kakuda
+nyan thos
 abhicara
-aviveka
-naipuna
 kapisthala
 vaktr
-kutaja
-una
 vanjula
-parartha
+ring
+una
+kutaja
+rten
 avirata
+parartha
+rigs
 bhandana
-tshul khrims
 antariksam
 citranga
 pranc
 krivi
 ropana
+tuntuka
 gabhira
 svath
+'dod chags
 acit
 sucita
-tuntuka
 badhira
 karanja
+bdag
+dkon mchog 'byung gnas
 bradhna
 pusya
-dkon mchog 'byung gnas
-tapta
 gtor ma
-jabala
-pancalaka
-shuura
+tapta
 galah
+jabala
+shuura
+pancalaka
 masaka
-puna
-rtags
-vapusa
 himsaka
+puna
+vapusa
+gaunika
 kaizika
 gandhi
-gaunika
 mantrika
-mi rtag pa
 parivrtta
 purvaja
-samnata
-alohita
 vasta
-'byung ba
+alohita
+samnata
+tshangs pa
 sahasana
-zakala
-prakirnaka
 svapna
-utkala
 dyuna
-sems can
+prakirnaka
+utkala
+zakala
 grathita
 nandivardhana
 ramaka
 tira
+pratipada
 vamaka
 basta
 gonasa
-pratipada
 mahezvara
-bhanu
-panjara
 vihayas
-alaksana
 ar
+bhanu
 glau
-rgyal po
-vairaja
+alaksana
+panjara
+rtsa
 siv
+vairaja
 svanga
 vitapa
 bhanumat
-bimba
-karkaza
-raksoghna
 buddhi
+raksoghna
+bimba
+bran
 dhakka
-gandika
+karkaza
 mulaka
 pratishthita
 darita
+gandika
+rdzas
 avasanna
-zambara
-ayajyu
-byang chub
 divam
+ayajyu
 maatraa
-vyakula
-'du ba
+zambara
 balavat
 jal
+avalagna
 kledana
 niramaya
-'bras bu
-avalagna
+vyakula
 yajyu
 abhikhya
-kaurava
-sahakara
+kutapah
 sarit
 shona
-svabhu
-yuja
-akampita
-kutapah
-pramud
 aahr
 aakaashah
 bhaandam
-dkar po
 jaatih
 kaandah
+kaurava
 paatram
+pramud
 samaadhih
 samskaarah
+svabhu
 upasthaa
 vaayuh
+yuja
+akampita
+sahakara
 srota
-bden pa
 smrti
+sprul sku
 sutraman
-chu
-svaadu
 hema
 prtha
-vitanka
+svaadu
 avira
+vitanka
 kams
-ayu
 kurd
-theg pa
 vyatha
-dpe
+ayu
 pantha
-sel ba
 nrmna
-kathaa
 cham
-hikka
-lhun po
+kathaa
 samiti
+dbu ma
+hikka
 sarja
 gomukha
 krandana
-prabhaa
 arbha
 dalah
+prabhaa
 vaprah
 cata
 sanaka
 nihan
 paroksa
 vaira
+nga rgyal
 pranayana
-kamsya
 paramezvara
-bandhu
-pamsu
 puth
-tshigs su bcad pa
+sul
 varnakah
+bandhu
+kamsya
+pamsu
+pratinyaa
 hasana
 malati
-ngan pa
-pratinyaa
-sul
+edh
 plihan
 savitr
-dam pa
-edh
-jataka
-anastha
 aprati
-viita
-viniita
+anastha
+jataka
+sa la
 avinaya
 pare
-ramati
-yahva
-dpyod pa
-turaga
 tvaya
+viita
+viniita
+yahva
+ramati
+turaga
+kuc
 aavrt
 avasthaa
-urj
-kuc
 rma bya
+urj
 atara
-yatr
-anuloma
 dravina
-hradin
 karmin
 kautsa
 kuhaka
 nirnaya
-aparna
 ramaniyaka
+yatr
+anuloma
+aparna
+hradin
 samastha
-pit
 paitrka
+pit
 visrava
-gramani
-nirbhaya
 pratigrah
-rasi
 virodhin
 visvam
+gramani
+nirbhaya
+rasi
 karpata
 mul
-piti
 vivas
-mngon par dga' ba
 har
-brgya byin
-mkhan po
-piccha
-rocaka
+piti
+yajin
 ajapa
 catuspada
-dul ba
+piccha
+rocaka
 trasana
 uddharsa
 valgita
 vrti
-yajin
 ittha
-tvastra
+ksal
 aindava
 phalakin
-ksal
 riti
+tvastra
 pratyak
+apratiratha
 draksa
 mahadhana
-apratiratha
-cho ga
+nges 'byung
 nihsneha
-nirmalya
+sprul pa
 udyama
+nirmalya
 nirbheda
+de nyid
+kutika
 nisyanda
 palasin
-kutika
+sgyu ma
 suyajna
+gzhon nu
 asmakam
 asuta
 hiranmaya
 locana
 tamala
+'byung po
 payodhara
 vahin
 sankhika
+agadha
 rohin
 yukti
-agadha
-zhe sdang
-ghut
-ksura
 agrya
-alina
-dri za
-yaji
+ghut
 ghus
+ksura
+alina
+yaji
+ldog pa
+stobs
 parivrajya
+snying po
 pathi
 zri
+bsam gyis mi khyab pa
+upanah
 abhirupa
 kosala
-upanah
-vrsala
-madraka
-gsang sngags
 kamandalu
-paitra
 tithi
+madraka
+paitra
+vrsala
+gang
+grdhnu
 subrahmanya
 gambhirya
-grdhnu
+kartana
 keli
 paratantra
-kartana
-khyab 'jug
 vrsya
 mahesvara
 suvrtta
+vandya
 hrdaya
 kusala
-vandya
 khalina
+bsgrub bya
 durva
 purohita
 sambuka
-mar me
+aguna
 saivala
 upasti
 visra
-aguna
 prabandha
-saptaka
-sauvarna
-sravistha
+sman pa
 jinv
+sauvarna
+tshad ma
+saptaka
+sravistha
 ksoda
-'jam pa
-pradhva
 satyavat
+tij
 anguli
 kapiza
-khro ba
+pradhva
 rtu
-rusa
-tij
+upayogin
 zaila
 bharanda
-upayogin
-vaidyanatha
-hasita
+rusa
 tak
+vaidyanatha
+chags pa
+hasita
 vimata
 bhaya
-durdhara
-rajiva
-khyab pa
 milita
 pratyutpanna
-rnal 'byor
-atala
+durdhara
+rajiva
 sthalam
-anava
-parinama
-talika
-upavrt
-des pa
-dngos grub
+atala
 karsika
-chidura
+parinama
+upavrt
+anava
+talika
 jetr
+khri
+chidura
 kerala
+udakya
 nicaya
 saparya
-udakya
-baleya
-manuja
 abhinanda
+manuja
+baleya
 gundra
 prapaka
 vipina
 bhat
-ghrana
 karkotaka
+ghrana
 torana
 vaikuntha
 svaccha
 kapatika
 satana
 uc
+mela
+asakti
+gang zag
 kapinjala
 parisada
-asakti
-avigna
-mela
-surpa
 vikraya
 yavanika
-kataksa
-anubandhah
-padanta
+avigna
+surpa
 utsava
-vadhaka
+anubandhah
+kataksa
 kanera
 kumbhila
-brtul zhugs
-vaitasa
+padanta
+vadhaka
 varanam
 rap
 ujjrmbha
+vaitasa
+lok
+rgyal
+sudra
+svap
+sud
+sulin
+syala
 vivada
 bhavila
 kuza
-lok
-sudra
-sulin
-svap
-syala
-sud
 pracanda
-samadana
 vrdha
 maricika
+samadana
 anukrama
 samsara
-sarsapa
 kaustubha
+sarsapa
 bhasin
 dayaka
 mahila
+vyuha
 alamba
+animitta
+sarj
+asambadha
 dvisa
 rastriya
-vyuha
-animitta
-asambadha
-sarj
 smrtih
-vrsti
 aineya
-apaci
 karsaka
 prc
+vrsti
 ulbana
+apaci
 kanthaka
 tridiva
-vaksana
-abodha
-ajani
 chavi
-sram
+abodha
+vaksana
+ajani
 lulita
+sram
+sna tshogs
+udbhava
 valita
 pracaya
-udbhava
-juta
-acaksus
 nyaya
+acaksus
+juta
 annada
-dug
-samuddhata
-'khor
 prahasita
+samuddhata
 sitikantha
+dud 'gro
 ksati
 kavaca
 madhulaka
+gagana
 kisa
 samitra
-gagana
-rgyan
-prasuna
-mamaka
 parigrah
 nikata
-samgrahana
-daksayana
+prasuna
+mamaka
 dva
+samgrahana
 udbhida
+daksayana
 viraha
 vyavastha
 avahana
-vaidarbha
 valg
+kukkura
+lhun po
+vaidarbha
 araru
 ayuj
-kukkura
-nyams
-madhyamaka
-mtho ris
+kalaha
 ninda
-sarvada
-sut
 vettr
 anapatya
-kalaha
+madhyamaka
+sarvada
 pramanas
-vrscika
-bar
-busa
+sut
+sel
+thub pa
 samstava
-pratibodha
 valabhi
-asevana
-sphota
+vrscika
+busa
+pratibodha
+ulba
 vairin
 parva
 samudrika
-ulba
+asevana
+sphota
 varatra
-ngo tsha shes pa
 paisaca
+bkra shis
 saranda
-bye brag
-naabhi
-paavana
+turv
+drud
 gangeya
 grasta
-khur
+naabhi
+paavana
+abhisava
 parimana
 puspaka
-turv
-abhisava
-drud
 zap
-suzarman
-vilocana
 vipat
 campa
-rnam mkhyen
-amiksa
-culla
-daxinaa
-kulmasa
-pratna
-shalaakaa
-ausadha
-lalata
+suzarman
+vilocana
 phalin
+pratna
+amiksa
+ausadha
+daxinaa
+lalata
+shalaakaa
+culla
+kulmasa
 sampata
+tshul khrims
 nard
-girika
-mahanasa
 prayascitta
 vivadha
+girika
+mahanasa
 nihsanga
-mtha' yas
+chad pa
 hamsapada
 meru
-niyati
 upamanyu
+niyati
 varnika
+dul
+mudita
 sutirtha
 abhipraya
 aradhana
-dul
-mudita
 sroni
 vy
-sulocana
-ting nge 'dzin gsum
 prasadhana
+sulocana
 roda
 yatavya
 jud
-mi mthun pa
 tubara
-abhirama
 abhyadhika
 abhyudita
 avadhi
+bum pa
+theg pa
+abhirama
 azana
-pracchanna
-rtsod pa
-jatala
 kampa
 ketu
-subhasita
-kratu
-samghatika
-anitya
-didhiti
-gamana
+pracchanna
+jatala
+brgya byin
 heti
+kratu
+anitya
+gamana
 prayuta
-vibhajya
+subhasita
+didhiti
 parisyanda
-sukhada
-abhimati
+samghatika
+vibhajya
 garj
 pittala
 rabh
+abhimati
+mrgaya
+sukhada
 vacika
 varandaka
-mrgaya
-skyes bu
 pingaksa
 dhvanita
-iccha
 sakhin
 sartha
+iccha
 subhanga
 medhas
 nirghata
+sems can
 supattra
-krsana
-pratipurusa
-vyadhi
 apavarga
+vyadhi
+pratipurusa
+krsana
 vrsana
+yi dwags
+yudhma
 ksayana
+paurastya
 purta
 snehin
-yudhma
-dbang
-paurastya
 enas
-ruuxa
-tripad
 ksauma
 manoratha
-sgra gcan
-taksa
 netra
+ruuxa
+taksa
+tripad
+rgyal po
 visarana
-shiitala
 sarnga
 upapattih
 vyasanam
-gdugs
+shiitala
+dri za
 patah
 shukra
 samavaya
 laksanya
-rgyal po'i khab
+'du ba
 braahma
 dhaa
 ruchaka
-tejana
 apakrama
-vrndavana
-acita
+byang chub
+tejana
 avasthita
+vrndavana
 cela
 madhava
+mi rtag pa
 parnin
+acita
 asvattha
+kapola
 mamh
+meghah
 senaa
 shaasana
-sprin
 adhina
 atireka
-kapola
+gsang sngags
 kunjara
-meghah
 pundra
-thabs
 adharmika
-pil
 sargah
-tridhaman
-khanja
+pil
 aparigraha
-udana
-visarada
-lavaka
+khanja
+tridhaman
+bden pa
 pratibhaya
 ratnakara
-khong khro
+visarada
 natya
-pattrin
-preyas
+udana
+lavaka
 savah
-sikara
-upaka
 antima
 doshah
-kun tu 'od
 nivish
+pattrin
+preyas
 prshtham
+sikara
 varshah
 vishnuh
 yashtih
-prasadana
-prabhavana
-pratha
+'byung ba
+upaka
+prapada
 rch
 sakuntala
+mar me
+prasadana
+pratha
 sphira
-lug
-prapada
-picchila
-puraka
+prabhavana
+cho ga
 urd
 nigraha
+picchila
+puraka
 dvadasa
 suga
 apida
-ausira
-chura
-kitava
 sambhavah
 samidh
+ausira
+avakara
+chura
+kitava
+medhi
 sutvan
 trpala
 yayu
-avakara
-medhi
 asih
 laghiman
 madhupa
-rgyags pa
+ngan pa
 abhipanna
+tshigs su bcad pa
+vanch
 chikka
 uttejita
-vanch
 lopa
 pradhanika
-nabhasya
+rnal 'byor
+dam pa
 ascarya
-dri
-jrmbha
-rang rig
+nabhasya
 upasarga
+jrmbha
 pancasa
-pims
-rohana
-varman
 bhakti
+pims
+varman
+rohana
 haryaksa
-khadika
 prayojana
 sphurj
+khadika
 uddama
 jalp
+prathita
 samgrah
 praghasa
-prathita
-mi sdug pa
-karayika
+rtag pa
 sag
+karayika
 tvasta
 lavali
 mrtyu
+kun rdzob bden pa
 bhaarata
-shyaama
-skyon
-visakha
-'gog pa
 druma
 ganana
-prahasa
-sthali
-unmadana
+shyaama
 gadh
+sthali
+visakha
 parivrtti
-dbang po lnga
+prahasa
+unmadana
 bul
-pitu
+sel ba
+khyab 'jug
 pravrtti
 upayama
+pitu
+dpe
 nagaraka
-rnam par shes pa
-spros pa
 dhaman
-sumangala
-grags pa
 samunnaddha
+sumangala
 avatr
-dri ma
-ksipa
 rtvij
 sameta
 sapadi
 vidruta
 yadrccha
-'gal ba
+ksipa
 duta
-sahasraka
-sankhya
 anaddha
 avrt
 kajjala
+sahasraka
+sankhya
 uddanda
 atula
-romaka
 samadhika
-srana
+kauza
+romaka
 drughana
 garmut
-kauza
-atreya
+srana
 ajaneya
-bhadrapada
 garut
 hastinapura
 jut
-kaulya
-kun mkhyen
 nidhi
 pratyanta
 prthula
+viguna
+atreya
+bhadrapada
+kaulya
 rajasa
 sitakara
-viguna
+atyayika
+avali
 jhasa
 saphala
 tirita
 vikriya
-atyayika
-avali
 camikara
-pindi
 visucika
-svatva
-nigadita
-gya nom snang ba
-kirita
-pratarana
+zhe sdang
+pindi
 sadas
+dpyod pa
+kirita
+nigadita
+svatva
+pratarana
 des na
-kasyapa
 nilaka
-zin pa
 dasta
-kulira
+dug
 pratyeka
+udayana
+kasyapa
+kulira
+revata
 samarya
 usma
-revata
-udayana
 abhram
 kamra
-tapus
 vaijayanta
-yayin
 yonih
 dhaureya
 parusya
-yid
+yayin
+tapus
 dvirada
-ajamidha
-janitva
 jatru
 pranata
 ucchraya
+ajamidha
 hingula
+janitva
+mith
 niska
 ksetra
-mith
-zuka
-bakura
-kakara
 pradaksina
 vithi
+bakura
+kakara
+zuka
+dul ba
 adhikr
-amoda
-asambaddha
-bram ze
-sagotra
-samudranta
-vikramin
 anjali
+asambaddha
+rtags
+sagotra
+vikramin
+amoda
+samudranta
 khuraka
 zardha
-ahalya
-pasana
 srgala
 vimanas
+ahalya
 vyaja
 aniti
-indivara
-mtshan ma med pa
-visalaksa
-dga' byed
+pasana
+mkhan po
 rod
-prapta
-sbyar ba
-ahri
+visalaksa
+indivara
+'jam pa
 caturhotra
 tarj
 uluka
+ahri
+prapta
 bhrguh
-chos can
-aghosa
 kumbhin
 vellita
-kranta
+aghosa
 prasarah
 kun dga' bo
-ramatha
-samadhi
+parirambha
 samvah
 uttarottara
-parirambha
+kranta
+ramatha
+samadhi
 siks
-nivarana
-vaihayasa
 advaya
 darvi
-mi 'khrugs pa
+khur
+nivarana
+vaihayasa
 patara
 yajana
 yajnika
-kalapaka
-nrtu
+asuti
+des pa
 samit
 asistha
-asuti
 dhra
-sanita
-simhah
-'jig rten
-avasara
-kuda
-nabhaka
+nrtu
+'bras bu
+kalapaka
 nirbhara
-nyams pa
-prach
-sakantaka
+simhah
+avasara
+chu
+sanita
 tanmaya
 upagama
+kuda
+prach
+sakantaka
+nabhaka
 bahlika
-etaza
-kokanada
-mahaphala
 samas
 akalika
 aramati
+etaza
+mahaphala
 yuvati
+kokanada
 garh
 apakara
 nalini
 yadva
-dogdhr
-mathita
 plavaga
-acetana
-parinah
+dogdhr
 krunc
-khyad par
-grdhu
+acetana
+mathita
+parinah
+prakampana
 mida
 pataniya
-prakampana
 sruti
+grdhu
 makarah
-nirata
 adhyaya
-apramada
-khyu mchog
 kuntala
+nirata
 vadh
-'jug pa
+apramada
 dhvajah
 svastikah
 tatah
-antargata
 jagdha
 krodhin
+antargata
+pannaga
 satvata
 sitamsu
-pannaga
 jarita
-bdag med
 duhsaha
+kirana
 murkha
 antama
 bhuji
-kirana
 aali
 bhaktih
-codaka
-garva
 padati
 ravih
-sruva
+codaka
 jaradgava
-pratisedha
+sruva
+garva
+mngon par dga' ba
 alakta
-araksa
-bhrastra
 graiva
-ullala
+pratisedha
+araksa
 aticara
-apasavya
-avasatha
+bhrastra
+ullala
+arnas
 kunja
 samutpat
-tarus
 varivas
-arnas
+apasavya
+avasatha
 parisamvatsara
+tarus
 bhayam
-btags pa
-indhana
-'od dpag med
 abhibhava
 binduh
-nirodha
-paripanthika
-phani
-puroga
-raddha
+indhana
+khro ba
 savitri
 vask
+nirodha
+puroga
+paripanthika
+phani
+raddha
+retas
+ngo tsha shes pa
 nitamba
 pratikarman
 prestha
-retas
-ser sna
 ambhrna
+dngos grub
 kimkara
+karsana
 prakarsana
 sakya
-karsana
 upalabhya
 chal
-dmigs pa
-karva
 pravrddha
 avrka
-gdung ba
-bya
+karva
+had
 dantaka
+sattra
 likhita
 sahodha
-sgo
-had
 madhyamika
-sattra
+mask
 payasa
 trap
-mask
 pramanika
-rgyal mtshan
 todana
 utkula
 varidhara
-yod pa
-marsa
+ting nge 'dzin gsum
+'khor
 rsi
-spardha
-sthura
 upeya
 niramitra
+spardha
+sthura
+marsa
 tandaka
+jabh
+arada
 barhina
 bit
-anama
-arada
-asasya
 garjita
-jabh
-laba
 sauva
+sprin
+asasya
+laba
 vatsya
+anama
 snava
+samkasuka
+brtul zhugs
+chedi
 gopya
 javin
-khor yug
-samkasuka
-chedi
-dang ba
+dkar po
 palya
-navama
-sabara
 asatya
 garutmata
+navama
+sabara
 kaurma
-le lo
 prkta
 sabala
-smig rgyu
 yatana
+kun tu 'od
 murchana
 reva
-rgya
-thod rgal
-pradha
 tirtha
-asambhava
+pradha
 avasya
+asambhava
 avitatha
 azvin
-sya
+lug
+nyams
 asmin
-bhida
-maitravaruna
-puspadanta
+sya
+gadin
 ugragandha
 ekayana
-gadin
-tadaka
-thar pa
+maitravaruna
+puspadanta
+bhida
 vanika
-abhisanga
-apanga
-byed pa
+tadaka
 damstra
 dvipada
+apanga
 itya
-ngo bo
 pakti
+pratikasa
+abhisanga
 bhariman
 matya
-pratikasa
-dri med
+avabhrtha
+rgyags pa
 sadagati
 aprakrta
-avabhrtha
 avastha
 naddha
 nan
-pitta
-ulka
 cumb
-seng ge
+pitta
 sitiman
-ravi
+ulka
 anuvrata
 dimbha
-indha
+dri
 kankana
+indha
 lila
 parivrta
+ravi
 somam
-variyas
 abhiyukta
+variyas
 gandaka
 majja
 virava
 zatapattra
-mahattara
-shesha
+rnam mkhyen
 apakrta
-nadeya
+mahattara
 nibaddha
 nirdahana
 rikthin
-star
+shesha
+mandalika
+nadeya
 virama
 zcut
-mandalika
-stong pa
 alata
+smarana
 anadara
 jalasa
-smarana
-braahmana
+mtha' yas
 aghnya
 avajna
+braahmana
+svarga
 koraka
 maharastra
 parinaha
 pay
 samirana
-srog
-svarga
-thal ba
 sukala
-krsnasara
-priyamkara
+harmya
 upeta
+krsnasara
+patola
+prenkha
+priyamkara
+utsarga
 yapana
 bidala
-harmya
 khalati
-patola
 paundra
-prenkha
-utsarga
-vibhavana
-badhaka
 lunt
-saskuli
 thud
-upeksa
+badhaka
 dimba
 sanatkumara
+saskuli
+upeksa
 vasna
+vibhavana
 jaghana
-durjaya
-prathamakalpika
+rgyan
 upakrama
+durjaya
+mi mthun pa
+prathamakalpika
+rtsod pa
 ahna
-adyatana
-pha rol tu phyin pa
-kapittha
-miti
 ujjh
+adyatana
 vardhita
 devo
-mizra
+kapittha
+miti
 amhas
 candrakanta
 ketana
-vancaka
+mizra
 vidula
+vancaka
+nasatya
+satakumbha
 aksaya
 jvalita
-nasatya
-saluka
-sambaddha
-satakumbha
-cikka
 martanda
+sambaddha
+vastavya
+cikka
 puspasara
 putana
-sha za
+saluka
 titibha
 varsuka
-vastavya
-anuguna
+mtho ris
+kirti
 hind
 karmatha
-kirti
 rayi
+anuguna
 rosana
-tadi
 udaharana
 upasana
 vyakarana
+tadi
 pranayah
-avisa
-chos sku
 gadah
 priyadarzana
-katika
+avisa
 udayin
+katika
+klinna
+sambhrama
 adhyapaka
 catur
-klinna
-patanjala
-sambhrama
-sandilya
 dandaka
+sandilya
 urari
-gti mug
-dus gsum
-krap
+patanjala
 anavasara
 aniyata
 daa
-khatta
+dbang
+krap
 virudha
+khatta
 avarodhah
-dpal
+yut
 gatvara
-grol ba
-khang pa
 kustha
 pippala
+star
 vatanda
-rnam par snang mdzad
-yut
-saurya
-skra
-anadya
+gdugs
 kayastha
-samasana
+saurya
 svamin
-ksala
+anadya
+samasana
 mantr
-mgo
+rgyal po'i khab
 samvrtta
 svedana
-adhikaranam
+mgo
+ksala
 avaso
+adhikaranam
 jangha
-bde ba can
 bhargava
 cakraka
-uparata
-azman
 bhamin
 isu
 nirrti
 titiksa
 upagana
-aasura
+uparata
+yid
+azman
 buddhih
-vasumdhara
-gunakara
+aasura
 mundin
 puratas
-repa
 tusara
 vaana
+vasumdhara
+gunakara
+repa
 avagrahah
-gnyid
 nigrahah
-nye bar zhi ba
 trita
 dyuti
 kautuka
 mauna
-vidrava
 tuli
+vidrava
+yantram
 aapad
+dbang po lnga
 dushta
 iishvara
-taaraa
-yantram
-khyim
 mayin
 saurabheya
+taaraa
+thod rgal
 avisvasa
-yajamana
 bhal
+yajamana
 dhvanta
 gomin
+kamp
 parivrdha
 prakarsa
 samagra
-kamp
 charita
+jambhah
+prama
 shishta
 tathaa
-jambhah
-mdzod spu
-prama
 heya
 kona
+rang rig
 nirudha
-'phel ba
-chos nyid
 kathita
-vaarttaa
 pasupata
-sastika
 utsanga
+vaarttaa
 zamana
+sastika
+skyes bu
 anyatara
-byang chub sems dpa'
-carman
+dri ma
+pelava
 svaamin
 vidhrta
 ayogava
-kusita
-pelava
+carman
 rambh
+kusita
 sanku
 vrtha
 aashayah
 akrodha
 anasuya
+bar
 daanam
 keshah
 ksata
@@ -6248,94 +6181,96 @@ prabhuu
 visham
 samstara
 vidambana
+gariman
+kuksi
 atavika
 dhustura
-gariman
 ksut
-kuksi
-anurupa
-btsun pa
-kuna
+khyab pa
 satata
+yun
+anurupa
+asaha
+kuna
 susthu
 tuccha
-yun
-asaha
 harivamsa
-sanmukha
 vinidra
-bhandika
 bisa
 jalpaka
-mtshan ma
 paripakva
-rnam thar
+sanmukha
 tunna
+bhandika
+gya nom snang ba
 nij
 patalam
 potr
 sampaka
 danava
-don grub
-mesa
-zeva
-abhighata
-asvara
-mukunda
+sgra gcan
 nayanam
+asvara
+mesa
+mukunda
+abhighata
 taluna
-aila
+zeva
 ksanada
-locaka
-sarvaga
-skad cig
-sumantu
-adu
-arpana
-holaka
-mangalika
 marisa
-nisara
+sarvaga
+sumantu
+aila
+arpana
+locaka
+mi sdug pa
 vakula
 vipana
-vanmaya
+adu
+holaka
+mangalika
+nisara
 gla
 nirvinna
 udvij
+vanmaya
+sran
+'gog pa
 ayi
 payu
-sran
 zami
-lte ba
-trisavana
+skyon
 apavrt
+trisavana
 pramaya
-slaksna
 suuta
 uchcha
 viyuj
-'jigs byed
 abdhi
 apraja
-dudhi
+bram ze
+khong khro
 niranjana
+rnam par shes pa
+slaksna
 vedas
-bstod pa
+dudhi
 rangh
-sitetara
+gurd
 hadi
+sitetara
 visravana
 devam
-gurd
-udicya
-gzhol ba
-haryazva
 candika
 itaretara
 jaivatrka
-parihasa
-vismaya
 potra
+udicya
+vismaya
+haryazva
+mtshan ma med pa
+parihasa
+grags pa
 abhipat
 dehin
 sarasara
@@ -6343,227 +6278,219 @@ valana
 dhatri
 karoti
 damodara
-maagadha
-surapriya
 katth
+maagadha
 paksika
 parigha
-lolupa
-sngags
+surapriya
+'od dpag med
+mi 'khrugs pa
 vidharma
 dhairya
-dkon mchog gsum
+lolupa
 audbhida
 haihaya
 yaugika
 darodara
 parinam
 sunitha
-balika
+btsun pa
 dindima
 kavita
 sarvarasa
 stambhin
-bde 'gro
+balika
 dai
-dambholi
 patat
 pyai
 tris
-vitapin
-pasanda
 uth
-rajanya
+vitapin
+dambholi
+gdung ba
+pasanda
 xema
-dadru
-kadambaka
 praruh
+rajanya
 sprha
 yazas
+dadru
+kadambaka
 bharatah
-maskarin
-nirantara
-balahaka
 lakh
+maskarin
+balahaka
+nirantara
 sriv
-vasika
 zilpa
-saccidananda
-lag pa
+zin pa
+vasika
 padavi
 parisrut
 pauruseya
-pratira
-skyabs
-valmiki
+saccidananda
 anusuka
-gtum mo
+pratira
+valmiki
 dge rgyas
 kurpara
 sarasvati
-gzhan 'phrul dbang byed
-paranmukha
 ahruta
 durmati
-nirakara
 pancalika
+paranmukha
+smig rgyu
+tapodhana
+nirakara
 praha
 puratana
-sred pa
-tapodhana
 apathya
 satyavac
+sbyar ba
+spros pa
 suvaha
 yajvan
+rgya
 avalambita
 lalasa
-mang
-mig gi dbang po
-grong khyer
-ka ba
-rum
-sosana
-vikarna
-ajeya
-parivraj
-sthana
 unmanas
+ajeya
+dga' byed
+parivraj
+sosana
+sthana
 vasman
+vikarna
+bye brag
 bhramah
 dhrsnu
-drod
+hrad
 kuruvinda
 tripada
-vibhrama
 yautaka
 harisa
-hrad
 kina
 lota
 pres
 sarayu
 sarvasaha
+vibhrama
 bhavitavya
 caitra
+chos can
 ghasra
 girisa
-jaha
 pajra
 pracetas
 stuti
+jaha
+dri med
 anarha
 aparaspara
-sa bon
 vismapana
 vyangya
 ulupin
-morata
-putrin
-sridh
-tomara
-akhana
+seng ge
 gandiva
-kamandha
-nistarana
 nunam
+putrin
+tomara
+kamandha
+morata
+nistarana
+sridh
+akhana
 kalih
 maghavan
-vajradhara
-bhallata
 gunya
 styana
+vajradhara
+bhallata
+asvasa
+nyams pa
+parabhrta
+sankara
 sthanaka
 tiryanc
-asvasa
-parabhrta
-parasu
 trikakud
-sankara
+'jig rten
+parasu
 samudayah
+kundina
 bhranta
 svabhava
-canga
-kundina
 vihavya
+canga
 alpaka
 katipaya
+thal ba
 unnidra
-dngos
-rucya
 samsr
 samvr
 spar
+rucya
+tuvi
 vizvakarman
 ogha
-tuvi
 layah
 nigamah
-gamaka
-nyon mongs
 samnaddha
 saptama
 alabhya
-nges par 'byung ba
+gamaka
+khyad par
 pragatha
 sampada
-ekagra
 nikrntana
 suvidatra
 alaukika
 atigraha
+ekagra
 prsata
-apratibha
 srambh
-sngon
-rung ba
-'du byed
-dbang phyug chen po
-de kho na nyid
-mi zad pa
-saurastra
-vararoha
-katakata
+apratibha
+khyu mchog
 prage
 pud
-sukrtya
+saurastra
+katakata
+vararoha
 vyuta
-chos kyi 'khor lo
-nus pa
-sukula
-vyasanin
+sukrtya
+thabs
 vipsa
+vyasanin
+bdag med
+sukula
+kramika
+apurva
 ekavali
+land
 mandu
 saunda
-apurva
-kramika
-land
-rtsa ba
 janiman
 otu
-saketa
 sapaksa
 uddhama
-vicetana
 apitva
-pancavata
+rum
+saketa
 svani
+vicetana
+pancavata
 anilah
-lhan skyes
-bandhaka
-samyamin
-bhagala
 rddhi
+samyamin
+bandhaka
 vilamba
+bhagala
 patanam
 arogya
 avasyaka
+manahsila
 muka
 saririn
-manahsila
-de nas
 dvitaya
-dbyings
 paridhih
 cola
 kraya
@@ -6572,309 +6499,316 @@ kathika
 vasanam
 adhiruh
 harsana
-huti
 vaktra
-de bzhin gshegs pa
-krtnu
+huti
 ksiv
+krtnu
 pramatta
 pranava
-reka
 taksasila
 vidana
 visana
+reka
 dyumat
-chos kyi dbyings
 dhik
 sprsh
 vetra
 nabhaga
 vardhra
-gong ma
 naama
-atithya
 dhraj
-masya
-nali
-samayika
 tokma
 vaptr
 angika
+atithya
 dahuka
-vrnta
-zaileya
+masya
+nali
+rgyal mtshan
+samayika
+bde ba can
+kokila
 bhedin
 carsani
-kokila
 nivasin
-parasa
-rdzu 'phrul
 stamba
+vrnta
+zaileya
+parasa
 bhavat
-prasakha
 alokya
 gundala
-ma mo
+ka ba
+prasakha
 kravyada
+rakh
+mithya
+niravadya
+udarka
+dang ba
 ekaka
 gudaka
 jaina
-mithya
-niravadya
-rakh
-udarka
+carc
 manimat
 vegavat
 anavasthita
-apaharana
-carc
 dhvr
-gcer bu pa
-udghatana
-paricarana
 sakalya
 samada
+udghatana
 usha
+apaharana
+paricarana
 tamkara
 nandih
 apartu
+ardhya
 cora
 ekanga
 stambha
+vya
 tanva
 usira
-vya
-ardhya
-phul
-bud med
-kurpasa
-sonita
+sahadeva
 supratistha
 vel
 abhyarna
-bye ba
 dyota
 harika
+kurpasa
 papi
-sahadeva
 sinja
-avela
+sonita
 bharts
 kvan
+avela
+dhya
 sneha
+thar pa
 utpanna
 vidhunana
-dhya
-amangala
-bilva
-prakasaka
-pulina
-vazin
-abhivadana
-repas
 srdh
-rang rgyal
+amangala
+chos sku
+pulina
+repas
+abhivadana
+bilva
+btags pa
+byang chub sems dpa'
+prakasaka
+vazin
 akriya
 anghri
 ekata
-pallavita
-bsngo ba
 es
-kinasa
-zhing
+pallavita
 adhyaksa
 hasra
 jagmi
+kinasa
 nirghosa
+rnam par snang mdzad
 sindhuh
-bhesaja
-gtsug tor
+kun mkhyen
 abhuti
+bhesaja
+gti mug
+ser sna
 cand
 vidusaka
 avalipta
-darza
 hvr
 kamika
-khanitra
-nirarthaka
 rad
 sankukarna
+darza
+khanitra
+nirarthaka
 zukta
-parzu
+don grub
 sayin
+parzu
+stong pa
+hary
+jvar
+sapti
 akrsta
 ghrtaci
 pakala
-sapti
-hary
-jvar
+srog
 yadu
-mdo sde pa
 pivan
 karpana
 zravas
 arjava
 tantava
 tavat
-nor
-sbrang rtsi
 yamini
 idaa
-kopa
+apsaras
+lte ba
 nakhin
 parivartaka
-apsaras
+khor yug
+kopa
 nispad
 ayama
 prasthita
-sa ga
 sodasa
 tvach
-vega
-xaara
-dali
 ubh
+xaara
+sa ga
+vega
+'jigs byed
+dali
 ullekha
 hrdayam
 hve
 jitya
-ksetriya
 pindita
-dngos gzhi
+ksetriya
 mahallaka
 phutkara
 arpita
-slob dpon
 akrti
-rasabha
+sha za
 upahvara
 upastambha
-hidimba
-man ngag
-samyuga
+gzhol ba
+rasabha
 sridhara
-yi ge
-dgon pa
-ltung ba
+hidimba
 nihsanka
+samyuga
 antarena
 bhrasta
-dhanistha
 kapardin
 keza
 ksepa
 ranka
 sauvira
+dhanistha
 gayatri
-anujna
 hay
-salagrama
-bharika
 ingita
+salagrama
+sngags
+anujna
+bharika
 pracyavana
-gsang ba
-dga' ba bzhi
-kalpana
 lokya
+dus gsum
 osadhi
 toda
-trijata
-bde byed
 vardh
-rten 'brel
-nalaka
-prayatna
+bde byed
+dga' ba bzhi
+dkon mchog gsum
+kalpana
+trijata
 vismita
 asarana
+dmigs pa
 jivaniya
-sarasi
+khang pa
+prayatna
+rnam thar
 sarka
-tali
 zrava
+nalaka
+sarasi
+tali
 stambhah
-cakravartin
-dyumna
-koka
 nivapa
 sahasya
 ahva
+bya
+cakravartin
+dyumna
+koka
 patavya
-rdzogs ldan
-bye brag smra ba
+skra
+pramad
 apva
+campaka
+sarvajna
 vamsya
 virodhana
-campaka
-pramad
-sarvajna
-avibhakta
-bsdus pa
-cetas
-nyuna
 pal
+avibhakta
+klam
 satt
 valguka
 vasha
-asadana
-klam
+cetas
+nyuna
 vrajya
-jatarupa
-mrgendra
+asadana
 zreyas
-bhruna
+jatarupa
 kadala
+mrgendra
 pamsula
-tantrika
-vahita
-asmaka
 prajahita
 pravraj
-blo ldan
-kavata
-mi'am ci
+skyabs
+vahita
+asmaka
+bhruna
+lag pa
+tantrika
 rdh
 xama
 ganya
-mar me mdzad
-aharana
-bhasanta
-saktika
+kavata
 shasta
-thug pa
+aharana
+gnyid
+matka
 unnati
 amhati
 apanaya
-matka
+bhasanta
+gzhan 'phrul dbang byed
+nye bar zhi ba
+saktika
+thug pa
 uccata
+adri
+khyim
 ksoni
 nidana
-vratin
-adri
-rin chen 'byung gnas
+pha rol tu phyin pa
 ruma
+vratin
+'jug pa
+rin chen 'byung gnas
 sgra gcan 'dzin
+dhupa
 krtartha
 meya
+vinud
+zruta
+asecana
+hrniya
+phut
 saleya
 vitarana
 vrksa
-zruta
-asecana
-dhupa
-hrniya
-phut
-vinud
 rayas
+kaanta
 catuspatha
 eraka
-kaanta
-prasavitr
-vidhava
 kuvala
+prasavitr
 suyavasa
 tanc
+vidhava
 damah
+'phel ba
 autsargika
 gandhadhya
 rjisa
@@ -6882,54 +6816,51 @@ sabhika
 bhiima
 diipaka
 laxya
-pacata
 samyam
-sdud pa
 taamra
 kalatra
+pacata
 smarta
+apakarman
 jiivana
+sattrin
+byed pa
 jnana
 kausuma
 kundika
-nipata
-sattrin
-acyuta
-apakarman
 misa
+ngo bo
+nipata
+acyuta
 saca
-'jig pa
 chyautna
 dashaa
-longs spyod
 maaruta
 raxaa
-sarasvat
 vaasanta
 visargah
 agraja
 asamanjasa
 bhayanaka
-brda
+grol ba
 nirmita
 paktr
 pratardana
-rnal 'byor spyod pa
+sarasvat
 tarhi
 maluka
 sarpah
+bhuuyas
+smrta
+yod pa
+apanika
 asesa
 avadhya
-bhuuyas
-g.yo
-kalaya
-ral pa can
-sakti
-smrta
-apanika
 bhrtaka
 isira
 khya
+sakti
+kalaya
 chakrin
 dhaaman
 kaamin
@@ -6938,133 +6869,125 @@ nidhaa
 pranii
 shiras
 jadiman
-nipatya
-nyes pa
-surmi
-svastika
 tyad
 vilasin
+dpal
 irsya
+nipatya
+surmi
+svastika
+mtshan ma
+alekhya
 baanah
 dhuumah
 drshtih
 kachchah
 niitih
 paribhuu
-pidana
 potah
 praaptih
 shuddhih
 upachaarah
+valh
 xayah
-alekhya
-anaduha
 canca
 carin
 gosa
-valh
+pidana
+sgo
+anaduha
 ambaram
+chapala
 kautukam
 bhusana
-chapala
-dman pa
 jivri
 paritas
 rajju
 tantri
-bcu
+skad cig
 bhrukumsa
 dvyaha
 mastu
-phye ba
 pradara
 pusan
 bhah
-sa bcu
-brjod pa
 camu
+vagnu
 dhartarastra
 paripanthin
 tr
-vagnu
-padu
 uddhana
 vasira
-madri
+padu
 bhasvara
 kaladhauta
 kisku
-pampa
+madri
 pratidivan
 pravayas
+smil
 udvarta
 vagmin
+gtum mo
 mari
-smil
-bhuyas
-pen
-rin po che
+pampa
 cun
 hariman
 parijman
+pen
+bhuyas
 tvara
+dbang phyug chen po
 bandhakah
 mithyaa
-mi gdung ba
+chos kyi 'khor lo
 punarukta
 srtvan
 varga
-yan lag
-brgya
-'dren pa
-rang mtshan
-shes rab kyi pha rol tu phyin pa
-trisula
+bstod pa
 kanthya
 pravrs
-don spyi
+trisula
+le lo
+'gal ba
 koza
+lepya
 moca
 nivas
+sakthi
+yos
+artana
 phalaka
 pradus
-sakthi
 sasyaka
-artana
-lepya
-yos
-mi dge ba
-asahana
-hotr
 sumanas
-vyabhicara
 aphena
+asahana
 astrta
+drod
+hotr
 svavrtti
 vahala
+vyabhicara
 aahata
+pulinda
+sunabha
 avadarana
 gadadhara
 kaitabha
-pulinda
-rkang pa
 rodas
-sunabha
-sgyu
 adambara
 praksalana
-rohi
 sarvavedasa
-spyan
 upanisad
+rohi
+sa bon
 dradhiman
-gso ba
 mausala
 saattvika
 sambhinna
 sanaatana
 upaakrta
-zang zing
 adhikrta
 alapana
 guvaka
@@ -7074,386 +6997,375 @@ atithi
 citrangada
 ullekhana
 daseya
-mtshan
+de bzhin gshegs pa
 susavi
-kun rdzob
-samjata
-bde bar gshegs pa
 durodara
 graaha
-parimala
 jap
+parimala
+samjata
+bde 'gro
 pisanga
 ujjha
 vasantaka
 grhastha
-'od
 nigrahana
 pragadha
 pravat
 talin
 yakrt
-darzaka
-sukarman
-utsanna
-vacaka
-'dres pa
 anehas
+darzaka
 edhatu
 malimasa
 marj
 putra
+sukarman
+utsanna
+vacaka
 virya
 visanna
 godhana
-gshol mda' 'dzin
 lapana
 vaikhanasa
 yatna
-aprahata
+gshol mda' 'dzin
 ameya
+aprahata
+gcer bu pa
 angula
-ksanika
-mya ngan las 'das pa
-sambadha
-skyon med
-sucarita
 citkara
+ksanika
+sambadha
+sucarita
 trapa
-sugandhika
-apayin
-arsabha
-paryas
+sred pa
 cetaka
-jabha
-karavi
 krsanu
 nirvahana
-rgyal rigs
+paryas
+sugandhika
 visankata
+arsabha
+jabha
+karavi
+apayin
+mang
 avayava
 bhramaraka
-kazmala
-trsna
 harsa
+kazmala
 sukta
+trsna
 maruka
-curni
-karmanya
 padmin
-snam bu
+curni
+grong khyer
+karmanya
 vainya
 sanaparni
-lhun grub
-apakr
-suddhanta
 apahara
+apakr
 eranda
+ing
 khapura
-sras
+lhan skyes
+suddhanta
 bhrmi
 dezya
-ing
 pramiti
-bhumija
-lang
-svaka
 bheka
+bhumija
 madhyahna
 maulika
-prabodha
+svaka
+chos nyid
 griva
 karpatika
-daksinatya
-marala
-tshogs pa
+prabodha
+bsngo ba
 anupama
+daksinatya
 durasa
+marala
+zhing
 dhuramdhara
-spandana
-abhimanin
-avantika
-avisesa
-mahika
-piz
 taittira
-ba ra na si
+abhimanin
+avisesa
+piz
+spandana
 bhisa
+mahika
 sayaniya
-bhuyistha
-karkataka
+avantika
+ba ra na si
 kopin
-smon lam
-magna
-sa 'dzin
+karkataka
+bhuyistha
 samprayogin
-yon tan 'od
+magna
 adhira
 chandaka
 jnapti
-aksan
 khati
-pariklp
-spro ba
-avilambita
+sa 'dzin
+aksan
 ban
-datr
+pariklp
 ajya
+avilambita
+datr
 baidala
 gula
+mangh
 sambhuta
 upahr
-grsti
-mangh
-sikta
-kaliyaka
 khatva
-srid pa gsum
+sikta
+grsti
+kaliyaka
 tman
 susaman
 vasat
 trisanku
-samvarga
+dngos
+ubj
 vimada
+sadhi
+samvarga
 adharya
 alambusa
 aviksita
-sadhi
-ubj
 susaha
-'brel ba
-tarutr
 vasantah
-pulakin
-rol pa
 vistrta
 vrud
 genduka
-saryata
+tarutr
 khalvata
+sbrang rtsi
+pulakin
 tangana
-bskal pa
+saryata
+nasikya
+utsikta
 lohaja
 manthin
-nasikya
 prakasana
-lavanaka
-utsikta
 kotira
+lavanaka
 yaska
 malayaja
+sngon
 khali
-mahaghosa
-rip
 kham
+mahaghosa
+rung ba
+mi zad pa
+rip
+'du byed
+nus pa
 praneya
 sauptika
-carmika
 inkh
+carmika
+dngos gzhi
 kramah
 lavah
+ric
+slob dpon
 vaidyuta
-januka
+aghora
 kandira
 prahasta
-ric
-vighana
-aghora
+januka
 jayaka
 praghata
-durgati
-srnga
-vighatana
+vighana
 abhriya
+durgati
+man ngag
+rtsa ba
+srnga
 karhi
 pracala
+vighatana
 svarocis
 vipa
 chrd
 anumana
+hamho
+sveda
+dhuma
+paricarya
 suska
 svayamgraha
-sveda
-yangs pa
-dhuma
-hamho
-paricarya
 vyus
 ghatah
-sde snod gsum
-nag po chen po
 prazna
 svarajya
-shes bya
+nag po chen po
+de nas
 autpattika
-sahasraposa
-susumna
+sthaputa
+timi
 durvrtta
 kartari
 sayya
-sthaputa
-timi
+susumna
+dbyings
+sahasraposa
 satyam
 dhvajavat
-mya ngan med
 vyanjanam
 sahisnu
-shes bzhin
-tadguna
+sahrdaya
+takra
 uddipana
+upabhoga
 paribhasa
 pranasa
-sahrdaya
-stobs bcu
-takra
-upabhoga
+tadguna
 ksina
+mya ngan med
 agre
-bshad pa
+stobs bcu
 parvatah
-rgyu skar
-svadhyaya
 pratanu
-adhava
+svadhyaya
 alinjara
-pasya
-yid la byed pa
 paristi
-drang don
-ngal ba
-niskala
-phreng thogs
-caura
-damin
-tand
-tirohita
-pravasana
+rgyu skar
+adhava
+pasya
+rdzogs ldan
 sankula
+bye brag smra ba
+damin
+niskala
+tirohita
+caura
 sphita
+pravasana
+tand
+chos kyi dbyings
+phreng thogs
 samsthitih
 abhihata
-shing rta
 kovida
 nikhila
 godhuma
 kalakantha
 khadi
-rten cing 'brel bar 'byung ba
 arohana
 visrsta
-kikata
-pravrsenya
-rmugs pa
-dge 'dun
 ghasi
-rodhana
-subuddhi
+pravrsenya
+rdzu 'phrul
+kikata
+mig gi dbang po
+mdo sde pa
 utpat
-atitheya
 bah
 chedaka
+rodhana
+atitheya
 avacya
 dvisahasra
+subuddhi
 vic
-yi dam
+mar me mdzad
+mi'am ci
+ma mo
 cipita
 drsti
 maheza
-naisada
 khuda
+naisada
 udan
-'dus ma byas
 kadambah
-marda
-'od byed
+anuvrtta
 ganin
-gling
+marda
 mukuta
+nirartha
 pitryana
 varcas
-anuvrtta
+de kho na nyid
 kucika
-nirartha
 pascat
-kun tu snang ba
-viprakrta
-'du shes
 hal
-valayita
-asadgraha
-garja
-upamsu
+phul
+viprakrta
 uttamsa
 uttunga
+valayita
 yujya
+garja
+upamsu
 aruha
-dngos med
+asadgraha
 ksaudra
-smad pa
-caturthaka
-paniya
 samutsuka
 cakas
+paniya
+caturthaka
 indrasena
-'du 'dzi
+bud med
 avyavastha
-gavaya
-maharasa
-sunga
 damb
+gavaya
 kinkini
+maharasa
 pranidhi
+sunga
 upacitra
 visadin
 ajaka
-varija
-yud tsam
-daivika
-lhung bzed
-varha
 abhinaya
+daivika
+varija
+varha
+vitamsa
 pariskara
 vijata
-vitamsa
+mdzod spu
 bhangih
 dharanih
 dhrtimat
-subandhu
 tantuh
-anisa
 carmin
-gang ba
 kairava
-dhuli
 kart
-saktuka
+subandhu
 vijala
-shi
-zla 'od
+anisa
+dhuli
+saktuka
 atirikta
 halin
 pancasata
 astarana
-nor bu
-naityaka
+zla 'od
 samnihita
 dhauk
-baskala
 bhiksa
 camunda
-ma rungs pa
+naityaka
+gtsug tor
 pratapana
 salika
 svati
-upaja
 totaka
+baskala
+ral pa can
+upaja
 samkram
-log par lta ba
-dusaka
 parityaj
-prajagara
 tang
-'bum
+dusaka
+prajagara
 bhraja
 paramestha
 runda
@@ -7461,284 +7373,266 @@ sambhavana
 svatra
 dram
 raupya
-skyo ba
-visu
-amukha
-asraddha
 asvada
 balaksa
 caturaka
 kandota
-ri rab
-yon tan rgya mtsho
+visu
+amukha
+asraddha
 pausa
-tataka
 abrahman
 bhumika
-ming
 phali
 pramapana
 bahubala
 sapatni
+tataka
 vanayu
+bcu
 tax
 abhavya
 avanam
 patava
+srmara
 avarta
-dge tshul
 naraca
 parita
-srmara
-kun 'gro
 visalata
 pariplu
 samskr
-mamsa
-mgu ba
 anubandhin
 masrna
-nihsesa
 nirdara
-paribhavana
-rasaka
-samgraha
+mamsa
 napumsaka
-parata
+nihsesa
+paribhavana
+samgraha
 tund
+parata
+rasaka
+nor
 dhe
+anumati
 ekaksara
+methi
 karsin
 padmasana
 saranika
-anumati
-methi
-khro bo
-mngon par shes pa
 stag
 hastya
-rab tu byung ba
 usita
 vaksas
-prava
-satika
 vyavasthita
+satika
 'phags skyes po
+prava
+rin po che
 agnis
 tasmai
 devan
 prahata
+abhiyoga
+kuranga
 visuvat
 avalokita
-sprdh
-varaniya
-abhiyoga
+brgya
 carma
-kuranga
+sprdh
 urnu
-vihamga
-zhen pa
-asvastha
-kun gzhi
-prtana
-dharya
-gavedhuka
-prasajya
+varaniya
+mi gdung ba
 pratirodhaka
+vihamga
+asvastha
+prasajya
+dharya
 dusa
+gavedhuka
 juhu
-bsam gtan bzhi
+prtana
 nihsabda
-'chab pa
 ajasra
 anuma
 muhurta
-potaka
 niruha
+potaka
 prsti
-gnyen po
 durgama
-upaskrta
-chos kyi skye mched
-darin
 kramuka
-patheya
 puja
-vanaspati
+upaskrta
+yi ge
+darin
+patheya
+dgon pa
+ltung ba
 udvat
+vanaspati
 vimanyu
 balivarda
+rkang pa
+rnal 'byor spyod pa
 gunavat
-tshad
+rten 'brel
+kalakala
+chos skyong
+gantavya
+kancukin
 papaka
 paribhasana
 prakopana
-thams cad mkhyen pa
-vaisakha
-chos skyong
-kalakala
-kancukin
-paripaka
-skyes bu dam pa
+rang rgyal
 upadiz
+vaisakha
 visphulinga
+paripaka
 vyamsa
-gantavya
-dge slong
-paratra
+gsang ba
 slang
-apaksa
+paratra
 tsar
-bral ba
+apaksa
 ghosana
 kliba
 musti
 amanasya
 ashman
-theg pa gsum
+akarsa
 ammaya
 harenu
 ksemya
-akarsa
-rga shi
-vrttanta
-anayasa
-gardha
+bde bar gshegs pa
 mleccha
 nastita
 sisa
-bhagadheya
-gzugs brnyan
+vrttanta
+anayasa
+gardha
 tamonud
-astanga
 ativa
-ngo tsha med pa
+astanga
+bhagadheya
 vicarita
-gzugs kyi skye mched
-culika
+gong ma
 anupatha
+apata
+culika
 prasutika
 upasada
-apata
 samani
 samuhya
-lhag bsam
-svaksa
-ahati
-angaraka
-mngon sum
 pinv
+svaksa
+angaraka
+ahati
+blo ldan
 damani
-visranta
 gopura
 panita
-sarvanga
-ekadasa
 sajya
+visranta
 upagrahana
-brjod du med pa
-gya nom pa
+sarvanga
 utkasana
-zabara
-amrtaphala
+ekadasa
 kampita
-kulata
 ribh
 sramsin
+zabara
+amrtaphala
 lanchana
 pattra
+kulata
+nyon mongs
 sakalika
 tavaka
 abhikrama
-nalada
+tar
+bubhuksa
 sauhrda
 tankana
-tar
 arthita
-bubhuksa
-urvya
+nalada
 revati
-gzhi
-don dam pa
+urvya
 ghona
-kurma
 lul
-mtha' gnyis
-panduka
 payasvin
+kurma
 tavas
 triratra
-triloka
-avaroha
+panduka
+bye ba
+snam bu
+zrath
 dhvasta
+samutpinja
+sthiv
+triloka
+abhyagra
+avaroha
 gravan
 latva
 parsata
-samutpinja
-sthiv
-abhyagra
 gauri
 sarasija
 tundibha
-zrath
-gzhan dbang
-'char ba
-ratnagarbha
+lang
 saarasa
-aghreya
+rekha
 aupala
 caturazra
-mkhar
-rukmin
-samga
-visanin
-anapeksa
 dambhin
-kalla
-rekha
-sautya
-spong ba
+mkhar
+ratnagarbha
+rukmin
 syanda
-avarya
+aghreya
+anapeksa
+kalla
+samga
+sautya
 sitkara
-grangs
+visanin
+avarya
 nabhasvat
 prenkhana
 prsat
-sreg pa
 jigisa
 kunci
+gso ba
 aama
-ketuh
 paandu
 viruupa
-paraspara
-stong gsum
-subha
-vaideha
-vest
+ketuh
 apadhvasta
-gargya
+cinta
 ghas
 gupti
-kulin
+paraspara
 sambandhaka
 upacaya
-cinta
+vest
+gargya
 ota
+vaideha
+kulin
+subha
 gulmah
 pushkala
 kakudmin
-lambodara
 paurvika
 dhivara
-hotriya
+huna
 khadaka
+lambodara
 navika
+nisudana
 trpti
 udupa
-huna
-nisudana
+hotriya
 iishaana
 karkasha
 praajaapatya
@@ -7746,36 +7640,37 @@ shruta
 taamasa
 vyaala
 vyaliika
-vegita
-vibhusana
 adaiva
 apatu
 arajas
+vegita
+vibhusana
+vratati
 khola
 pingalaka
 poganda
+smaya
 vanija
 vikarana
 'char ka
 kasayin
-smaya
-vratati
+yon tan 'od
 kaashthaa
 nii
-ring bsrel
 shaalaa
 uttaana
-dbu ma pa
-nidralu
-sulaksana
 hval
-anavadya
 apaghana
+nidralu
+ring bsrel
+sulaksana
+anavadya
+bsdus pa
 karpasika
+kumbhika
 sarpi
 sirna
 titila
-kumbhika
 piba
 patiira
 prasavah
@@ -7783,36 +7678,33 @@ sadaa
 samaahita
 shyaamaa
 yaatraa
-bahika
-sku gsum
-vaktram
-kye
-paripluta
 prak
 pravartin
+vaktram
+bahika
+kye
+paripluta
 tsaru
 vapya
-uchchvasita
+dman pa
 khod
-ngan song
+uchchvasita
 uddharanam
-'gyod pa
+amsu
 caturvidya
 krtvan
-spyod pa
-amsu
+phye ba
 paraach
 dhrtih
-secana
-barhana
+gandhana
 geha
 pancajana
 samyoga
-adhiyajna
-gandhana
-gtan tshigs
 sayoni
+secana
+adhiyajna
 ahvaya
+barhana
 jyotisa
 aarah
 aasanam
@@ -7835,987 +7727,975 @@ vaadah
 xitih
 bhru
 durjana
-snying stobs
 vilokita
-yatrika
+bskal pa
 vehat
+yatrika
+sa bcu
 sarma
-gzugs khams
-avid
-chu srin
-dpal ldan
-vivrtta
-aryaka
 asthiti
+vivrtta
+avid
 gehya
-niruja
-samvega
-yongs su dag pa
 prabhrti
+samvega
+aryaka
+chu srin
+niruja
 tutuma
 shreshtha
+himsa
 vadanam
 vajapeya
-himsa
 ksit
-sahuri
 vijjala
+yan lag
+sahuri
 maksu
-tatkala
-asrapa
-bharuja
-camasa
-kutah
-legs pa
 manasija
 nirjhara
+tatkala
+camasa
+kutah
 vilola
 vivekin
-'ching ba
-dngul
+asrapa
+bharuja
 kaaru
 praadhva
-bar do
-bdag nyid chen po
 gunita
-mundaka
-sutaka
 isat
+mundaka
 samstuta
-krita
+sdud pa
+sutaka
 kusumam
-mchod gnas
+patiman
 pratibodhana
 adhisthana
 brmhana
+krita
 manvantara
+mchod gnas
 padapa
-patiman
-rig sngags
-tshangs pa'i dbyangs
-asada
 samahara
+asada
+tshangs pa'i dbyangs
 bhrngah
 pallavah
-ma ning
-yadava
+longs spyod
 apaviddha
 apluta
 asuh
-karkota
 klpta
 krsi
+yadava
+karkota
 paru
-abhinidhana
-abhisti
-badhana
-dadhikra
-dambara
+sde snod gsum
+sgyu
 grahila
-kurkura
 pratyuta
+spyan
+abhinidhana
+badhana
+dambara
+kurkura
 upas
 zvabhra
-upagrah
-abhista
+abhisti
+dadhikra
 hed
-ulmuka
+upagrah
+brda
 jhatiti
+nyes pa
+ulmuka
+zang zing
+abhista
 nagendra
-chana
-sakasa
 vedhin
-akanksa
-anrsamsa
 avabodhaka
-kalala
+chana
 pinaddha
+sakasa
+akanksa
+kalala
 prabheda
-upta
 simanta
-dbyig
-ruth
-'pho ba
+upta
+anrsamsa
 ashoka
-bstan bcos
+ruth
 gai
+ngal ba
 ripra
-zag med
-pracchana
 satva
+pracchana
 agner
-duhsparsa
 puraana
-hanana
-syam
-vadaba
-abhva
-caila
 dabh
-dravat
+duhsparsa
+hanana
 heth
 saumika
-sreni
+syam
+'od
+abhva
+caila
+dravat
 gurana
-ha la ha la
-lha mo
+sreni
+vadaba
+nges par 'byung ba
 saandra
-mu stegs
-pratimukta
 asukha
+pratimukta
 antarhita
 paya
 sandila
 samtap
-zabala
-mkha' 'gro ma
-mya ngan
 saksat
-samvadana
+kantu
 tadana
 vakya
-dustara
-kantu
-madhvika
+zabala
 zarva
+dustara
+madhvika
+samvadana
 daanta
 klishita
 suunrta
-galava
 ghrnin
 tvar
+galava
 utkampa
-shed bu
-vamin
 naha
+vamin
 shed
+jemana
 kalavinka
 anatha
 dhrtvan
-grangs can pa
-parinistha
-jemana
 parakrama
+parinistha
+asin
 prayasa
 sanmasika
-asin
-lay
-rin chen
-samgara
-g.yo ba
-niyamaka
-tha ma
-abhikama
-catana
+skyon med
 nihnava
 vyatikrama
+niyamaka
+samgara
+'dren pa
+abhikama
+catana
+lay
+rgyal rigs
 pranyaa
 anugrah
 niyam
-udvrt
-phalguni
 skhad
+udvrt
 sodara
 ayuddha
 janani
 paramarsa
 patali
-phyag rgya
-bhavuka
-mngon shes
-ngo bo nyid
-vidharana
-hemanta
+phalguni
 kvath
-praskanva
+vidharana
+bhavuka
+hemanta
 samtanu
-yang dag pa
+praskanva
+sras
 abhas
-tanmatra
 alaghu
-apeya
 arhat
 nepathya
 pid
+apeya
 purv
-gsung
-suksetra
+tanmatra
+spand
 anita
 cyuti
 darvika
 dhunana
-lus kyi dbang po
-spand
-srog gi dbang po
+misi
+suksetra
+varnya
 visvasa
 dunasa
-misi
-varnya
-sudina
+'jig pa
+aptu
 bahuvirya
 kravya
-mi bskyod pa
-pliha
 prahrta
-aptu
+sudina
 cula
-'phen pa
-samcarana
+nor bu
+pliha
+tshogs pa
 gopala
-jaja
-pasin
-punarbhava
-vikirana
-vindhya
 yauktika
 abhisapa
+pasin
+punarbhava
 purastat
+samcarana
+vindhya
 andhatamasa
-adhvaga
+jaja
+vikirana
 asthira
-bhrgu
+adhvaga
 kezin
 muraja
 vaimatra
-anuha
+'bum
+bhrgu
 grisma
+smon lam
 vadala
+anuha
 gomat
 karpara
 mudrita
 zakra
-'khor gsum
-pandaka
+mtshan
 paurana
 tusnim
 ulupa
+dbyig
+pandaka
 vatah
+ag
+grtsa
 irammada
 prapata
-samaga
-wa
-ag
-aranyani
-grtsa
 rj
+wa
+'dres pa
+aranyani
+samaga
 urjita
 pravani
-dkon mchog brtsegs pa
-mithu
+shing rta
 trd
 vegin
-bsnyen pa
+dge tshul
+mithu
 puspita
 upakhya
-durnaman
+srid pa gsum
 sagh
+daiteya
+patera
 vetasa
-yum
 abhidruh
 asviya
-daiteya
-gru
+durnaman
 khadyota
-patera
 pinasa
 dadi
 muktaphala
-rnam grangs
-che ba
+rol pa
 dhrsta
 rdo rje 'chang
+'brel ba
 daksiniya
 gavesa
 yasa
-mngon gyur
 chitraka
 gun
-dur khrod
-kuliza
 modin
-palava
+kuliza
+mya ngan las 'das pa
 samula
-sgron ma
-skar ma
-thun
-udas
-jatukarna
-vaivahika
+palava
 hesa
+udas
 idhma
+vaivahika
 ahe
+jatukarna
+thun
 pratar
 pramaa
-trut
 aravinda
+trut
 avarodhaka
+dvipin
 pataga
 viyoga
-dvipin
-ngu 'bod
 sravanika
-adhivasana
 apratima
 ardhacandra
-odana
-sasta
-vinda
-arhanta
+dngos med
 ekala
+odana
+vinda
+adhivasana
+arhanta
 nirakrti
-pracalaka
-za ma
 puritat
-carama
-mi mjed
+sasta
+shes rab kyi pha rol tu phyin pa
+pracalaka
+kotara
+jhara
+matkuna
 samapana
-theg pa chen po
 viyogin
 adambha
-jhara
-kotara
-matkuna
+carama
+cura
+gnyen po
+svasriya
 upajna
 upasaka
-cura
-svasriya
+shi
+samajika
 ekaksa
 kolaka
 phela
-samajika
+yangs pa
+kharj
 yayi
 atistha
-kharj
 rang byung
 sakra
 hayah
-nirveda
-vistarah
 anuvartana
-chen po
+vistarah
+nirveda
 nyi ma'i snying po
 sararu
 simhasana
 vagura
 naktam
+log par lta ba
 vak
 somanatha
-ksiroda
+punja
 ajada
+dhyana
+ksiroda
+uksan
+zak
 anisvara
 chadmika
-dhyana
-punja
-uksan
+duna
 yes
 bhrsti
 pramara
-zak
-duna
+shes bzhin
 avaraja
-mahakaya
 pratikrta
 arambha
+mahakaya
 nirharana
-rin po che sna bdun
 svaru
 vallaki
-bzlog pa
-samjivana
 bhrsa
+samjivana
 jhata
+rga shi
 samsrj
+rten cing 'brel bar 'byung ba
+ri rab
 asau
-bskyed rim
-lugs
 dazazata
-sirsa
 utsaha
-bem po
-'jam dbyangs
+sirsa
 bhrt
 sphurana
-tshangs chen
-jnata
 vancana
-vikira
 diksa
+jnata
+vikira
+kun 'gro
 kag
-ma he
-meth
-mulika
-prarocana
-'bras
 amh
-ayatha
-ibha
 karkata
 majjan
+meth
+brjod pa
+ibha
+mulika
+prarocana
 sphati
 udu
 vyudha
+ayatha
+ma he
+kalasa
+alapa
+tantrin
+yi dam
+yodha
 apakarsana
 bhagavata
-nilayana
-tantrin
-yodha
-alapa
+karmika
+upahara
 arcana
 chikkara
+nilayana
 chu bur can
-kalasa
-upahara
-karmika
-'jig rten dbang phyug
+dev
 krtih
 nivrttih
 phalakam
-bde mchog
-bhojaniya
-dev
-sambuddha
-aparvan
 ghra
 paumsna
-pavitraka
 pratibala
+sambuddha
+aparvan
+bhojaniya
+gling
+mi dge ba
+pavitraka
+'jig rten dbang phyug
 jusa
 prajam
-ldan min 'du byed
-vikeza
 vivrt
-aihika
 chadmin
-gurda
+adarsa
+aihika
+kaksi
 laksman
 nisphala
 niyantr
 prajavin
-yang dag pa'i lta ba
-adarsa
-chu lha
-kaksi
+vikeza
+gurda
 upamantrin
-zhi byed
-gavesana
+chu lha
 kalabha
-nirdhana
-sgom pa
-taskara
-yatama
+gavesana
 kantakin
+nirdhana
 niyoga
-rjra
-sisti
+taskara
 upayoga
 vasumati
-brtse ba
-chos kyi rgyal po
-gling bzhi
+yatama
+sisti
+smad pa
+rjra
+kund
 samprayuj
 abhyasta
 adhivas
-anyatha
-kund
-mat
-sarvausadhi
-traipura
-dran pa'i dbang po
 kinjalka
 kotaka
+mat
+traipura
 vinaha
+anyatha
+sarvausadhi
 zoka
+'du 'dzi
+bsam gtan bzhi
 ami
+gzhan dbang
 abhiyoktr
-kisalaya
-mrgya
-vidharman
-zaru
-bhasika
 iks
+kisalaya
+lhun grub
+mrgya
+thams cad mkhyen pa
 uda
+zaru
+lhung bzed
 vicchaya
+vidharman
+bhasika
 mayuka
+yud tsam
+chos kyi skye mched
 brhaspatir
-gdon
+khac
 apavrata
-ayacita
 cilla
 ghurna
-khac
-navaja
 nidigdha
-prasuti
 vyakti
+ayacita
 diksita
+navaja
+prasuti
 utkarika
-abhugna
-ji ltar
-lataka
-mocana
-mthun pa
-utsarjana
-vella
-aniha
 manca
-pravaraka
+mocana
+utsarjana
+abhugna
 samarthana
 samarthya
-saptadaza
+vella
+aniha
+lataka
+pravaraka
 anch
-khadana
-maheya
-dhyama
 gadayitnu
-lag na rdo rje
+khadana
+saptadaza
+dhyama
+maheya
+pes
 rathamtara
 hiranyaya
-pes
-gtong ba
-mrtyumjaya
-dge ba'i bshes gnyen
 long
-atikatha
+mrtyumjaya
 hras
-kukura
 lapita
+anatman
+kukura
 oni
 tantraka
+atikatha
+g.yo
 veza
-anatman
-gnas khang
-bye brag pa
+spro ba
 darsaniya
+drang don
+jar
 pandava
 satrava
 apama
-jar
+gnas khang
+skyo ba
+yid la byed pa
+yon tan rgya mtsho
 pranam
-cakranga
 add
-astri
 chan
-ci yang med pa'i skye mched
 khyati
 mathin
+ming
+cakranga
+guhyaka
 nath
 nitambin
 upadeza
+astri
 citika
-guhyaka
+sku gsum
+paksman
 samkarsana
-chos mngon pa
-palana
+sikata
 vimocana
 bhaiksa
 dauhitra
 kolahala
 nand
-sikata
+palana
+visarga
 avaraniya
 miv
-paksman
-visarga
-parapusta
-upe
-saugandha
-slesman
+ngo tsha med pa
+lhag bsam
 sthiti
-taitila
+upe
 kitta
+parapusta
+saugandha
+taitila
 palli
 prayaniya
-snyan pa
+slesman
+mgu ba
+rmugs pa
+asuhrd
 bhiruka
 pamsana
 pramathana
-prani
-skye mched bcu gnyis
-asuhrd
 rajni
 sarama
+prani
 tritaya
 usati
-'od srung
-dhishnya
+skye mched bcu gnyis
 anrju
-lehya
-mustika
-agnidh
+dhishnya
+upadhyaya
 cedi
-dhraji
-gzugs kyi khams
 jyotsna
+lehya
 kalantara
 maurva
-narikela
-upadhyaya
+mngon par shes pa
+mustika
 taksan
-khadgin
-apihita
-ksar
+agnidh
+dhraji
+dpal ldan
+kun tu snang ba
+narikela
+'od srung
 rasala
+apihita
+khadgin
+ksar
 skandhin
-tatya
 yamin
+khro bo
+tatya
+'od byed
 phur bu
-tshe
 samhr
-adheya
 anurakta
 kartavya
-nadin
 pramsu
-prasnika
-sha ri'i bu
 tittibha
+adheya
+nadin
+prasnika
 ullasita
+'du shes
 kena
 varn
+avadata
+apaciti
+avyathi
+bar do
+neya
+taksana
 vasuda
 vidvesana
-yangs pa can
-apaciti
-avadata
-avyathi
+lavanya
 rucita
 spharana
-taksana
-lavanya
-neya
 mam
-amarsana
 anavarata
-khalla
 kutsita
+amarsana
+khalla
 prakarana
 roga
+sreg pa
 japin
-'thab bral
-mgon po
-spobs pa
-abhiseka
-kramaka
-ripha
 bhusa
+ripha
+abhiseka
 durgata
+kramaka
 sakali
 att
-tshe dpag med
+tshad
 asamasta
-damayanti
-navanita
-patalika
-vikasana
-sadrsa
 upalabdhi
 uraga
 anutta
-'od byed pa
+damayanti
+navanita
+patalika
+sadrsa
+vikasana
+skyes bu dam pa
 shodhana
-anamya
 hikk
-khari
-paribarha
-rnga bo che
-uncha
-zrauta
+rangin
 akhanda
-azrama
 culli
 hai
-rangin
+paribarha
+zrauta
+azrama
+khari
 samrajya
+uncha
+anamya
 ta la
-lambakarna
 maanava
 paitamaha
 samni
+vli
 adatr
 anucara
+lambakarna
+nakhara
 prabhrta
-pratibhata
-svayoni
+sarvatra
 gotama
 karanka
-nakhara
+pratibhata
+svayoni
 pidaka
-sarvatra
-vli
+bral ba
 lalaama
+nikumbha
 vikuntha
 vrshni
-drti
-karsi
-paundarika
 pralepaka
 puga
 samvita
 vaitana
 bhuvanam
-nikumbha
+drti
+karsi
+paundarika
 slesa
-pauloma
-vilaya
-anaga
-apit
-cari
+zag med
 murcha
+pauloma
 samvalita
-sastrika
 savidha
 svargin
+apit
+cari
+lha mo
+sastrika
+vilaya
+anaga
+theg pa gsum
+ha la ha la
 prajaya
 aavaapa
-dhaarana
-phar phyin
-akratu
-avimukta
-chadi
-munja
-parina
-adaksina
-didi
-ij
 bhras
-prasthana
-raktaksa
-'dus byas
+dhaarana
+avimukta
+kun rdzob
+akratu
+chadi
+ij
+munja
+adaksina
+gzugs brnyan
+parina
+didi
+anukalpa
 grhin
+mya ngan
+prasthana
+yupa
 nirvisesa
 pela
-reg bya
-yupa
-anukalpa
+raktaksa
 apastamba
-grabha
+mkha' 'gro ma
 moda
+grabha
 saaman
 viraaj
+vyapad
 aktu
+samavrtta
 chos kyi phung po
 kusa
-rgyal sras
-samavrtta
-ston
-tandi
-vyapad
 pancavarsika
 prastavya
-dmigs rkyen
-grub
-gsal snang
-lus 'phags
-nyams dga' ba
-spyan ras gzigs
-kamin
+tandi
+dge 'dun
+vijihma
 samacara
 sarvagandha
 saubhadra
-suyama
-tarin
-vijihma
 vikartana
-ksamya
+gya nom pa
+kamin
 kusrti
 lanja
-pancadasa
+suyama
+tarin
 turna
 vastava
-khyad par can
+ksamya
+pancadasa
+rab tu byung ba
 dalita
+don spyi
 gatagata
-apasarana
-saktu
-tumba
-avalguja
-chandasa
 jayya
-kilata
 nisthura
 sukrti
+tumba
+apasarana
+avalguja
+catvara
+chandasa
+gzugs khams
+kilata
+saktu
 susna
 tridhatu
-catvara
 chu skyes
+upasadana
 vimardana
-'jig rten gsum
-sadya
-vaina
 zekhara
 bhaja
 chandoga
 kakanda
-upasadana
+sadya
 upendra
+vaina
+'jig rten gsum
 yuyam
-tarkah
-vaikrtya
-gzung ba
-pratyuttara
 cap
-grdhya
+tarkah
+gzhi
 jeh
-kasturika
-ngan 'gro
+pratyuttara
+vaikrtya
 yup
+grdhya
+kasturika
+mngon shes
+kun gzhi
+mtha' gnyis
+drh
 koshtha
-mu stegs pa
 paarthiva
 suraa
-drh
 grdh
 samhrta
-'phrul dga'
-dvar
-atmabhava
 bhasya
+dvar
 luk
+atmabhava
 uksa
+gdon
+vaijayantika
+'char ba
+anargala
+niraya
 nirupana
 pratyakhyana
 upalabh
-anargala
+sakunika
+vyavadha
 avasyu
 bhari
-niraya
-sakunika
-sngon po
-vaijayantika
-vyavadha
-'od gsal ba
+gang ba
+srog gi dbang po
 krsha
-akhyata
-anibaddha
-dbang bskur ba
-glang po che
-jighatsu
 prakhara
 se
+anibaddha
 aprazasta
+dge slong
+grangs
+jighatsu
 namana
-uddiyana
+akhyata
 vadisa
-mngon rtogs
-rags pa
+uddiyana
 sammoha
 ghna
 kamita
-samanika
-upaghata
-vyantara
 nirapeksa
 pracetasa
+upaghata
+vyantara
+samanika
 sthaman
-tshad med 'od
-bgegs
-mohin
-dge slob ma
+stong gsum
 manjusa
-rudriya
+mohin
 tamomaya
 vinoda
-yantrana
-hvala
+bstan bcos
+rudriya
 tumburu
 upadrava
+yantrana
 yogita
+hvala
+ma rungs pa
 samkalpah
-devavrata
-rabha
-sardula
 upanata
-varjya
 aikya
-candrayana
-haridrava
 krid
 ksobha
-mda'
+rabha
+sardula
+varjya
+candrayana
+devavrata
+haridrava
 vijya
 dhamara
-lin
-on
 ushaa
 vishada
-kautilya
+lin
+manipura
+on
 randhra
-saili
 vipratipanna
+kautilya
 kekaya
 kucela
-manipura
-pila
+saili
 urmi
 zvan
+pila
 karaala
 xveda
+acira
+bshad pa
+dayalu
+dkon mchog brtsegs pa
 upamana
 vainasika
-acira
-anuyaja
-dayalu
 halika
 mandita
-ngo mtshar
-pradiv
 steya
 vibhraj
+anuyaja
+pradiv
 sarasya
 bhaa
 jyaa
 kalusha
 raadhaa
 vaaha
-caksas
-cho 'phrul
-nye bar len pa
-saugata
+draunika
+ketaka
+utta
 adis
 amlavetasa
-bahutra
-draunika
+caksas
 gnas brtan
 kani
-ketaka
-krntatra
 mrnmaya
 rasin
 samparayika
-srin bu
+saugata
 sugandhi
-utta
+'gyod pa
+bahutra
+krntatra
 baalaka
-dbye ba
 diipana
 divaa
 ruudha
-silimukha
 svadhaa
 vishaala
-durdina
-nye gnas
-samvanana
-skye mched drug
-zad pa
 apeksa
+durdina
+samvanana
+silimukha
 mudgara
-susi
 tryaha
 stari
+susi
+brjod du med pa
+nye gnas
 drmh
-niyamita
-phyir mi ldog pa
-sisya
-sthapaka
-visha
-balada
-glana
 mina
 mukulita
+niyamita
+sisya
+visha
+glana
 naisadha
+sthapaka
 vetana
 vipazcit
+balada
 kaniyasa
 sitapuspa
 devanah
@@ -8833,52 +8713,55 @@ taavat
 tsha
 vibhaa
 vratah
-bdag nyid
-gantr
 anamaya
-garhana
-kandula
-log lta
-niskasa
-prasanta
-yantra
 anvartha
+gantr
+garhana
+grangs can pa
 samiddha
 sauri
-chos 'byung
+yantra
+kandula
+nyams dga' ba
+prasanta
+yongs su dag pa
+niskasa
+ananjana
+praphulla
+vrida
 agas
-dadhittha
+chos 'byung
 gulika
 kupatha
-mdo sde
-pho nya
-praphulla
-rgyal chen bzhi'i ris
-vrida
-ananjana
-arcis
-praghuna
 traigunya
+arcis
+dadhittha
+pho nya
+praghuna
+ngu 'bod
 aas
 maalin
-rab gnas
 shvan
+sutra
 xip
 aviruddha
-kakola
 mauktika
 samunnata
-suvarnaka
+shes bya
 alavala
 bhadanta
+kakola
+suvarnaka
+dngul
+legs pa
 cyautna
-sutra
+za ma
+'chab pa
 sanemi
 aadish
 aaghaatah
 aavartana
 aaxip
-dal ba
 diipah
 kaayah
 kumaarah
@@ -8900,1101 +8783,1218 @@ vichar
 vihaarah
 viiryam
 xepah
-rgyu ba
-rna ba
-talajangha
 adhyagni
-apatika
 catvarimsat
-dvaraka
 jalma
 klid
 panka
+talajangha
+theg pa chen po
+zhen pa
+dvaraka
 paripati
+apatika
+spong ba
 paurusha
-bcas pa
-daks
-utpadaka
 amama
 asakrt
+daks
 dhvani
 durnaya
 ghattana
 utkalita
+utpadaka
+don dam pa
+mi bskyod pa
 vyadhin
-yang
-avrtta
+rig sngags
 churita
 samanvita
-viksa
 zo
+viksa
+'phen pa
+avrtta
 dasya
 maryada
-patrata
 prccha
 tsam pa ka
+ma ning
+patrata
 yajnam
 khatah
-adhikaranika
+krakara
 anupaskrta
 anyonya
-krakara
+adhikaranika
 prabodhaka
 preksa
 shakya
 dantaghata
 chuudaa
-rang sangs rgyas
-po
 asamartha
+jayana
 ativartin
 hastidanta
-jayana
-rdul phra rab
-khong khro ba
-maudgalya
-rig
-rs
+po
+aupasargika
+udgara
 abhisampad
 alagarda
-aupasargika
-glang
-kha na ma tho ba
 madhyatas
+maudgalya
 pancaksara
+rs
 sadvrtta
 sanih
 ayajna
 sahayaka
-udgara
+rin po che sna bdun
 golah
 muudha
 cakora
 niti
-sgrol ma
 vyapya
 kahlara
 vanti
+'dus ma byas
+bhastra
+svatas
 ekatra
 kaunapa
+mahar
 peta
 savayas
 sukhita
-svatas
-utsarana
 vigama
-bhastra
-bska ba
-mahar
 namaka
-yid bzhin nor bu
+utsarana
 khol
-ngo tsha
-mocaka
-pratibhu
-shin tu rgyas pa'i sde
+yum
+rastra
 tadvat
+utkalika
+kantakita
+mocaka
+ngan song
+pratibhu
 vanc
-vitanda
 vivaza
 asani
-kantakita
+dbu ma pa
 mna
-rastra
-utkalika
+mu stegs
+vitanda
+'jam dbyangs
+tshangs chen
 yaman
-kun dga' ra ba
-gang yang
-akampana
-ming gi tshogs
 mithas
 pratipatti
+rang mtshan
 recana
 adhyudha
+akampana
 apurna
 humkara
 kanapa
 sedha
 sraya
-nyon yid
-'khor lo
-carisnu
-patistha
-asruta
 hrt
 jiv
 kulattha
 lohala
-rigs bzhi
-skya bo
+asruta
+carisnu
 pretya
-bdag rkyen
+skya bo
+patistha
+shed bu
+rigs bzhi
 khaata
 kharv
-tsher ma
-vimohana
-abhigamya
+mukura
 aksiva
 anata
 atanka
 avatamsa
+dvaimatura
+pratibuddha
+snying stobs
+vimohana
+abhigamya
+parivada
 brhaspati
 carcarika
 divija
-dvaimatura
-mukura
-parivada
-pratibuddha
-rdo rje can
 mahanta
+rdo rje can
 visvasya
 katakah
 maargana
 parusha
 amavat
-adhipati
 kaumuda
-kautika
-purahsara
-stotriya
-vipriya
-istaka
-khanj
 sibh
+vipriya
+adhipati
+kautika
+khanj
+purahsara
+rin chen
+tha ma
+istaka
+stotriya
 ahar
-dgongs pa
 praniita
 brmhita
-log pa
 gunth
 kaniyas
+kuvinda
 kekara
-manti
 parivrajaka
 rutha
 udarathi
-kuvinda
-mu stegs can
+manti
 maadhava
 maalaa
 apavah
+cihna
 manobhava
 arajaka
 gavyu
-suvasana
-cihna
 varivasya
-bhaksana
+suvasana
+dran pa'i dbang po
+mi mjed
 sampat
-thogs med
 anjas
-galvarka
-nges don
-zuna
-adhirajya
-canaka
+bhaksana
 dhavaliman
 grul bum
+adhirajya
+canaka
+galvarka
+yang dag pa
+zuna
 adhomukha
 mahamati
+pratta
 rgyab
 sirsaka
-'jigs med
+vaikalpika
 cakri
-gcan gzan
-gzhung
+durya
 juhurana
 karsna
-pattisa
-pratta
-vaikalpika
-zauva
-'brug sgra
-durya
-ngur smrig
 paritta
+pattisa
 prabhasa
 pratyabhijna
+zauva
+'brug sgra
 vacasa
 apavrj
 pratap
 udvah
 viplu
-baka
-nasana
-priyaka
-visvara
 anudatta
 apunar
-asravana
 garvita
-kauravya
+nasana
+priyaka
 tamam
 unna
+visvara
+asravana
+baka
+kauravya
 vibhvan
 manthah
-barhaspatya
-bskal pa bzang po
+moksa
+visramsana
 drstanta
 niyogin
-vicaksus
-dima
-moksa
-sadacara
 sakatara
+vicaksus
 visphara
-visramsana
-'phags pa'i nor bdun
-apanna
-gzungs
-phyag rgya chen po
-adayin
-asthita
+barhaspatya
+bskal pa bzang po
+dima
+sadacara
 avinita
-avrsti
 nidhuvana
 tejomaya
+'pho ba
+apanna
+asthita
+'phags pa'i nor bdun
+adayin
+avrsti
 samtapta
 yantrita
 abhihara
+bskyed rim
+gzugs kyi skye mched
 janardana
 tusita
+bye brag pa
 mahasena
 uto
-'tshig pa
 glas
-tanuka
-kapatha
-saukarya
-badarika
-mi che ba
 sandhya
+kapatha
+tanuka
+badarika
+saukarya
 mahan
-chardana
 dham
 nirmukta
-pramathita
-srpra
 svaruh
-abrahmana
-churi
+chardana
+pramathita
 pranita
+abrahmana
+chos mngon pa
+churi
+srpra
 sinivali
-gza'
-supratika
-'jig rten gyi khams
-praharsana
-sarpis
-anustubh
+bsnyen pa
+sprsa
 budhna
 citrakara
-sprsa
+praharsana
+sarpis
+supratika
+anustubh
 trinayana
-med pa
-durvarna
+gru
 jarat
-jiti
-ksullaka
-parivasa
 andu
 danti
+durvarna
+ksullaka
+che ba
 nisad
-rtsi
+parivasa
 samyu
-kla klo
-mnar med
-jaghanam
-rten 'brel yan lag bcu gnyis
-sim
-sparzana
-vayuvega
-vedhaka
+jiti
+dur khrod
 gadya
-kacchura
-mena
+jaghanam
 pitrvya
 pradyumna
 prasiddha
+sparzana
 utsarpin
-gzhan
-avedana
-bhettr
-gzi brjid chen po
-riktha
-samavastha
+vedhaka
+g.yo ba
+kacchura
+mena
+sgron ma
+sim
+skar ma
+vayuvega
+bde mchog
+gzugs kyi khams
 abhyupapatti
+riktha
 ajarya
+bhettr
 asrayana
+avedana
 ili
 kilasa
 purodha
+samavastha
+gtan tshigs
+lus kyi dbang po
 varunah
-mnyam par bzhag pa
-moksana
 samvarah
-chos kyi khams
+bamh
+moksana
 venuka
 zithila
 alabdha
-bamh
-dge bsnyen ma
 khajaka
 ku sha
 paramaka
-pranayya
 svask
-chos kyi dbang phyug
-thogs pa med pa
-anubhu
+'ching ba
+pranayya
 rih
 saskula
-spre'u
 vilaksana
-asas
+anubhu
+chos kyi rgyal po
 janghika
 kuruta
-kun brtags
-rdzu 'phrul gyi rkang pa bzhi
+spre'u
+asas
+chos kyi dbang phyug
+avyagra
 upaklp
 viklp
 asahya
-avyagra
-slob pa
+samakhya
 subala
-anubandhya
+ayazas
 kavosna
 kazipu
-nedistha
-samakhya
-snying po med pa
 anapakarman
-ayazas
+anubandhya
+bdag nyid chen po
 brhadratha
-devr
-may
-svasita
-amana
-apsas
+gling bzhi
+nedistha
+rdzu 'phrul gyi rkang pa bzhi
 ghurn
-lepana
 nisadin
-pralapa
-racita
+amana
 azvamedha
-drsika
+devr
+lepana
 mardava
+may
+mgon po
 paridhana
-mthong lam
+phyag rgya
+pralapa
+'thab bral
+apsas
+drsika
+racita
+svasita
 drbh
-apina
-asanaya
-katama
-parilaghu
-u dum ba ra
 upavana
+parilaghu
 vyatirikta
-yatara
 ambuja
-avrata
-bong bu
-citriya
-dbang ldan
+apina
+katama
 klib
 svapa
+yatara
+asanaya
+avrata
+citriya
+u dum ba ra
+bong bu
+tshe dpag med
 eha
-mayavin
+aksauhini
 pravr
-bang
-grahi
+avikala
+hastina
 kalevara
-mu khyud
+mayavin
+pinakin
+ucchista
 vazya
 zakuna
-zvastana
-aksauhini
-avikala
-gupa
-hastina
-pinakin
-prasana
-ucchista
-vidhuti
 zram
+zvastana
+chen po
+gupa
+mu khyud
+prasana
+vidhuti
+grahi
 abhitad
-sajana
-siktha
 sthag
 dasyu
-hadda
 jnanin
 lobha
+sajana
+siktha
+hadda
 prananta
+apavada
 sa ri
+vapi
 amaravati
 anudha
-apavada
 ghuta
 jambhana
+satadha
 kandin
 mahaprana
-satadha
-vapi
 devasya
-brjod bya
-shad
 utpattih
-mkhris pa
-satapuspa
-vilepana
-audaka
 hlad
 jhampa
 maksa
 manimantha
-tatparya
+satapuspa
 venu
+vilepana
+audaka
+tatparya
+lugs
 samyogah
 utsargah
-adhrta
-akhata
-anvi
-dge sbyong
 dhvamsin
-haimantika
 lipi
-nalikera
-nalina
-nisrava
-prasiti
 prth
 prthvi
 valga
 vyatyaya
+akhata
+anvi
+ci yang med pa'i skye mched
 dhvaj
-srog chags
-anargha
-klu sgrub
-nilalohita
+haimantika
+nalikera
+nalina
+nisrava
+adhrta
+prasiti
+'khor gsum
+dimbh
+apratigha
+dantya
 nimesa
 akarsana
+anargha
 anati
-apratigha
 azani
 azvattha
 bharu
-dantya
-khanya
 kheya
 namuci
+nilalohita
+spyod pa
 sudi
 uccara
 udbandha
-dimbh
+khanya
 sajatya
 vamya
-ye shes
-ahitundika
 duhkhin
+kunta
+priyangu
+ahitundika
 hyas
 kundin
-kunta
 pratibhasa
-priyangu
 mrg
-rtag tu ngu
+aprameya
 dadh
 nadah
-sangs rgyas kyi spyan
+rnam grangs
 upakram
 ahimsra
-aprameya
+kaliman
 naisargika
 sammati
+spyan ras gzigs
 dyo
-kaliman
 lagha
 sarari
 upabhrt
-'dzam bu gling
 dat
 gandhamadana
-kun nas nyon mongs pa
-agrahayana
-avikara
-desana
 kaivalya
 nadh
-paritosa
 sitasiva
-gdug pa
-kurara
+avikara
+desana
+paritosa
+agrahayana
+yang dag pa'i lta ba
+ksupa
 manak
 suhrd
-udghataka
-virahin
 gila
 kankara
-ksupa
+kurara
 parazu
+virahin
 samici
 samraj
+udghataka
 rastri
-tilakah
-anukampaka
+krad
 dampati
+tilakah
+adhijya
+anukampaka
+ksaura
+kutuka
 nirvrta
 sambhoga
+snusa
 abhasana
-adhijya
 atizaya
 dohada
 kesarin
-krad
-ksaura
-kutuka
-mngon pa'i nga rgyal
 sikhandaka
-snusa
 udakam
 uttarapatha
+zhi byed
+ngan 'gro
+sha ri'i bu
 uttaram
-nirnetr
 aranih
-balbaja
+asamsthita
+askanna
 nadija
 nairasya
+nirnetr
+pretvan
 purisa
 samsargin
 aksetra
-asamsthita
-askanna
 chida
+ngo bo nyid
 padantara
-pretvan
 vihina
+balbaja
+yangs pa can
+'phrul dga'
 abdhih
-mthong ba
+akhu
 rtih
 varta
-akhu
+karita
 krmighna
-'od zer
+yajnavalkya
 ayatana
 kalki
-karita
 khadgika
-rahugana
 straina
-yajnavalkya
 japana
 madhvaka
-'byed pa
+rahugana
 patangah
-rnam shes mtha' yas skye mched
-skandah
-alingin
-arara
-gdung
-mchu
 samrudh
-pauskara
+skandah
+arara
+parsni
 pratibandhaka
+alingin
+glang po che
+pauskara
 satpada
 sirin
-parsni
 nash
-bslab pa gsum
+bu mo
+niketa
 proth
-sadazva
 surezvara
 apodha
-bu mo
-kumudika
-niketa
-rol mo
 sresthin
-yo byad
-zhugs pa
-zas bzhi
-nivedana
+kumudika
+mthun pa
+sadazva
+tshad med 'od
+bgegs
+keka
+prabhid
 abhiyogin
-agrega
 anuzaya
 avaskanda
 avisaya
 hintala
-jira
 jutika
-keka
 mandakini
-prabhid
-pradiz
-bu
+nivedana
 pankila
-mkha' spyod
+pradiz
+agrega
+dge slob ma
+jira
+lag na rdo rje
 chat
-aindriya
-ekarupa
-jarna
 ksma
-lus can
 manisa
-mudgala
+puya
+sphit
+aindriya
+cukra
+jarna
+jitvara
+mkha' spyod
 naciketa
 prajvalita
-sphit
 anidra
-cukra
+bzlog pa
+ekarupa
 elaka
-jitvara
-puya
-shri
+mudgala
+okh
+angin
+kroza
 pancasara
 sughosa
-dbang chen
-kroza
-okh
-rigs lnga
-angin
 lampaka
 sabadha
+dbang chen
+rigs lnga
 upastut
-mnyam pa
-gandhaka
-upasevaka
+shad
 ajina
-parindra
 sapatnya
-damp
-abadhya
-caksu
+upasevaka
+gandhaka
+parindra
+mkhris pa
 mandalaka
-milana
 nivartin
 sastra
 saumanasya
-yajaka
+vrkta
 aksota
-gal te
+caksu
+damp
 hoda
+milana
 nita
 parasarin
+srin bu
+yajaka
+abadhya
 skyo ma
 stobs lnga
-vrkta
-samtati
-javanika
-kadarya
-rabhas
-rdul phran
-snying
-udasina
+losta
+pipasa
 ajanya
-akuta
-challi
+grub
+gsal snang
+kadarya
 kevalin
 krath
-losta
 naikrtika
 nyayya
-pipasa
-raktavarna
+rabhas
 sadhistha
-sakrasana
-snar ma
+akuta
+challi
+javanika
 palay
+raktavarna
+sakrasana
+samtati
+snar ma
+udasina
+snyan pa
 varunani
+avatara
 granthih
+hath
 nibandhanam
 pish
-hath
-sayalu
-skal ldan shing rta
-avatara
-chos dbyings
 gandusa
+sayalu
 upasarya
 devaputra
 indrani
+skal ldan shing rta
+'bras
 mitrah
 rayim
-avalepa
 vell
-bcom pa
-bdag med pa
-icchaka
+avalepa
 iksu
 ksnu
 murti
-nyi ma'i 'od
-parus
-sidhmala
-vitasoka
-bhramin
 samardhaka
-aroha
+sidhmala
+bhramin
+parus
+vitasoka
+icchaka
+nyi ma'i 'od
 bis
-gavaksa
-kha lo sgyur ba
-kulinga
 march
-pravayana
+anudruta
+aroha
+gavaksa
+kulinga
 sauvastika
-sthivi
 tirthaka
+viyama
+mdo sde
+pravayana
+sgom pa
+svanc
 tvasti
 vipas
-viyama
-anudruta
-svanc
 abhijita
-phung po lnga
+kha lo sgyur ba
+sthivi
 rich
 samgam
-bde gshegs
-'jog pa
+tshe
 anuru
-cha shas
+bhavani
 jhala
 nyaksa
+okya
 upavita
 vidvas
 yavistha
-bhavani
+brtse ba
 kandola
-okya
-amalaka
-durdharsa
-rtog ge
-agru
-apsava
-bar chad
-vyap
 adhuna
+durdharsa
+sajj
+amalaka
 arjaka
 nalva
+agru
+apsava
 nirada
 pesa
-sajj
-vayya
+rna ba
+vyap
 satara
+vayya
 bust
-gdol pa
-gru 'dzin
-samaveta
-shar ba
-avarina
 cest
-parsa
+samaveta
+tyagin
+gru 'dzin
 prasthanika
 sariman
+avarina
+parsa
 svista
-tyagin
-calacala
+gsung
 kleza
 pramardana
 prausthapada
-tamrika
+calacala
 marg
+spobs pa
+tamrika
 yosa
-'tsho ba
-samvad
-vaj
-vitan
-'du shes med 'du shes med min skye mched
-adhyatma
-jivanta
-nirutsuka
-padmodbhava
-patr
-vyasti
-apathi
-asvayuja
-dalmi
 gulpha
 nrtya
-sili
+samvad
 taila
-ba la
-dge slong ma
+vaj
+vitan
+jivanta
+nirutsuka
+patr
+adhyatma
+asvayuja
+dalmi
+padmodbhava
+sili
+vyasti
+apathi
 hrta
-pravad
-tinduka
-abhisah
-ardita
-atindriya
-grhamedha
-katphala
-lalaka
-saksin
 sams
+ardita
+katphala
+pravad
+rnga bo che
+saksin
 sanu
-sutradhara
+tinduka
 treta
-dbyig gnyen
+atindriya
+gtong ba
+lalaka
+sutradhara
+abhisah
+ba la
+grhamedha
 bahugandha
-dka' thub
 gutha
-vyadhikarana
-heda
-khro gnyer
-luntaka
 nihsattva
+vyadhikarana
+dge ba'i bshes gnyen
 talisa
 vyatihara
-'gram
-gcod pa
-gopana
+dka' thub
+heda
+luntaka
 ksetrajna
-rdzogs rim
-rje btsun
+rallaka
 vibhavari
 vilayana
-bag med pa
 gesna
+gopana
+kakkhata
 mantu
 niscesta
-rallaka
-sdom
-snying rje chen po
 vyati
 yapya
-kakkhata
 rohitaka
 zho
-bhasura
 parihr
-snyigs ma lnga
 srinivasa
 upatap
+bhasura
 hindola
 krauda
 madhurasa
-pradrava
 timita
 traividya
 aupasana
 ku mu da
+pradrava
 isam
 bhujangah
 hrag
-'gag pa
-vast
-cirajivin
 dantin
 samyamita
+srank
+cirajivin
+praseka
 sphar
+tarnaka
+vast
 vipasa
 dugha
 padmavati
-praseka
-tarnaka
-srank
-puramdara
-spyod lam
-amrtyu
+shin tu rgyas pa'i sde
+kun dga' ra ba
+zil
 bhramaka
-dita
 gunamaya
 nairgunya
-nasaka
 sarvatman
 tuladhara
-vayavya
 vilaksa
+amrtyu
+dita
 dusi
-zil
+nasaka
+puramdara
+vayavya
+ming gi tshogs
 rtam
-'od ldan
-don dam
-gsal
+dmigs rkyen
+murta
 saavitra
 samvardhana
+'khor lo
 keyura
-khora
-laga
 nabhazcara
+parsada
+rgyal sras
 ucchosana
-cinaka
 cosa
 kaviya
+khora
+laga
+log lta
+nyon yid
+'od ldan
+cinaka
 mu khyud 'dzin
-murta
-parsada
-gnod pa
-sektr
-kaupina
-ma la ya
-amula
-bharanya
-satkara
 trailokya
 uttala
 uttamarna
+amula
+bharanya
+kaupina
+satkara
+sektr
+ma la ya
 dhaatr
 iraa
 jaami
 karshana
 maanasa
 shuch
+srp
 asamskrta
 atmaja
-gzhan yang
-sautira
-srp
-sup
+nigu
 abhyanujna
 garbhin
 jangula
 ksiva
-nigu
-nyes byas
+sautira
+sup
 rtaya
-de'i tshe
-tsam
 jrmbh
 mitravinda
+vartani
 bhandaka
 dhauti
 gramika
 indrayudha
+tarjana
+gdug pa
 paramahamsa
 pauganda
-tarjana
-vartani
-brgyad pa
+rab gnas
 praci
+upapati
 vibhuta
 agnisikha
-kirtana
 atiga
 bhujaga
-darpaka
 jhat
-upapati
-yajatra
+kirtana
+darpaka
 kayika
 nivrta
 utkuta
+yajatra
 zravasya
 catuspad
-bzhag pa
-astr
-'od chung
 atyahita
+samipa
+asvapna
+mekhalin
+astr
+jimuta
 kukula
 loma
 mahayana
-mekhalin
-samipa
-saukara
-varnata
-visrtvara
-asvapna
-jimuta
 puj
-mush
+saukara
+visrtvara
+varnata
 anuviddha
+mush
 galla
+gzhung
 khandin
-khrel yod pa
 saptapada
-skyu ru ra
 udhas
+'jigs med
+'od gsal ba
 ayasya
 palada
-ched du brjod pa
-kimsuka
+suc
 sucaru
-bhaji
 bre
 caitraratha
-krsaka
-murala
-suc
+kimsuka
 svetasva
 zaizava
+bhaji
+krsaka
+manisin
+murala
+sanja
 arseya
 bcing ba
-ldan pa
-manisin
-sanja
+dbang bskur ba
 avagam
-abhri
-bahumula
-hingu
-purusaka
 sandra
-zakvan
-zayana
 adhyayana
+bahumula
 divatana
+hingu
 naiskarmya
-nam mkha' lding
-pavya
 ramaniya
-duspradharsa
-khengs pa
+zayana
+abhri
+nam mkha' lding
+zakvan
+pavya
+purusaka
 alih
-bahutitha
 apasada
+bahutitha
+duspradharsa
+prapti
+sgrol ma
+vyakhya
 dpung rgyan
+gzungs
+ji ltar
 kalakanja
 kambugriva
-prapti
+phyag rgya chen po
+rang sangs rgyas
 sambari
+'od byed pa
 vamra
-vyakhya
-dri mchog
-vaizasa
-adhrsta
-dge chung
-gzi brjid
+rig
 inv
 samkrti
 tard
-visvamitra
+vaizasa
+adhrsta
+dri mchog
+mda'
+dge chung
+kha na ma tho ba
 oman
 vanamala
+visvamitra
+caturvarnya
+kutuhala
 sharkaraa
 anusarana
-pi wang
-sudharman
-amiva
-casala
-caturvarnya
 kathana
 kotika
-kutuhala
-prabhata
 prakrama
-vivarta
+sudharman
+casala
+prabhata
 vyapeksa
-zab pa
+amiva
+vivarta
+mi che ba
 aa
-gopuccha
-nimittam
-'du shes med pa
 abhila
 bhaurika
+gopuccha
+nimittam
+bid
 hela
 ksita
+ngo mtshar
 vartamana
-bid
-'joms pa
 dhuu
-kotih
-sku gdung
+srnkhala
 aprasanna
-byang chub kyi sems
-gtum po
+kotih
 phakk
 saguna
-sga
 sphul
-srnkhala
-upakara
 yusa
+sga
+upakara
 zyeta
-bshes gnyen
-grogs
+'jig rten gyi khams
+gtum po
+mngon sum
+nye bar len pa
+mii
+nirmoka
+puu
+shamba
+dbye ba
+medini
+rasajna
+vitah
+abhijata
+adabhra
+aditsu
+antarala
+chuta
+gandhin
+ldan min 'du byed
+paradarika
+putraka
+saptaparna
+saptati
+vaisravana
+vicaya
+zad pa
+anasrava
+krdhu
+parsnigraha
+babhruka
+praticya
+sveta
+xara
+ekatara
+mkha' lding
+upahata
+viruta
+avadhvasta
+kla klo
+sadasiva
+sgyu 'phrul
+anutara
+grh
+shubhra
+sthaavara
+bdag nyid
+haranam
+jit
+sampratipattih
+alocana
+bhusnu
+ksitija
+svastha
+srastara
+astamika
+lus 'phags
+pancika
+gzi brjid chen po
+anuupa
+hathah
+vidambita
+kosna
+maunin
+pherava
+surunga
+tusnika
+vaizya
+varsneya
+vihaga
+vimarda
+vyabhicarin
+gtsug lag khang
+gzung ba
+praisa
+valla
+candrabhaga
+dge bsnyen ma
+rgyal chen bzhi'i ris
+aadya
+bhraanta
+bhuuri
+paarana
+puuti
+ruchira
+saartha
+shambara
+sphaara
+vitarka
+apaskara
+drohin
+kunkuma
+nirbandha
+kelikila
+he ru ka
+varisa
+abharana
+dal ba
+manada
+pankeruha
+upadhaana
+aupamya
+bhrngin
+katambhara
+khandita
+kodanda
+marja
+srai
+prakriya
+samudriya
+zaravya
+tapusi
+vacasya
+visam
+ashtaka
+dhuumra
+duushana
+kaara
+kolah
+nidarshana
+niras
+paavaka
+parighah
+pragaadha
+pratiika
+pratiita
+raamaa
+samyach
+shramana
+stambah
+vamshya
+vikalpah
+apratihata
+katthana
+pard
+sadharman
+shala
+uddeza
+upapatti
+atasi
+daihika
+dhvamsa
+jatiya

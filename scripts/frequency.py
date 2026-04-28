@@ -6,7 +6,9 @@ proxies "how prominent is this word in the v2 corpus", which is a reasonable
 stand-in for actual query popularity until real logs exist.
 
 Excludes `exclude_from_search` (Heritage Declension) dicts from the count
-since their headwords aren't searchable.
+since their headwords aren't searchable. Per D10c (option c, 2026-04-28),
+also excludes role=equivalents/thesaurus dicts — Zone B is a separate
+channel and must not bias top-10K headword selection for Zone C/D.
 
 Output:
   - data/reports/top10k.txt — one headword_norm per line, rank order.
@@ -37,6 +39,8 @@ def compute_scores(sources: Path, jsonl_dir: Path) -> dict[str, float]:
         iter_slugs_by_priority(sources), desc="dicts", unit="dict"
     ):
         if meta.get("exclude_from_search"):
+            continue
+        if meta.get("role") in ("equivalents", "thesaurus"):
             continue
         jsonl_path = jsonl_dir / f"{meta['slug']}.jsonl"
         if not jsonl_path.exists():

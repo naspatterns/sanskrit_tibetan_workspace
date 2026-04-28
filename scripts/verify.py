@@ -202,19 +202,28 @@ def verify_meta_registry(sources_dir: Path) -> list[str]:
         else:
             priorities[p] += 1
 
-        # FB-5: exclude_from_search requires used_by + family
+        # FB-5: exclude_from_search must be traceable. Two valid shapes:
+        #   (a) family-based exclude (heritage-decl) — needs `used_by` + `family`,
+        #       and `family` must be in the known-excluded set.
+        #   (b) dedup-via-supersession (`superseded_by` points at the canonical
+        #       dict) — replaces the used_by/family pair, since the data lives
+        #       elsewhere under a different family.
         if meta.get("exclude_from_search"):
-            if "used_by" not in meta:
-                errors.append(f"{meta['slug']}: exclude_from_search=true without used_by")
-            family = meta.get("family")
-            if not family:
-                errors.append(f"{meta['slug']}: exclude_from_search=true without family")
-            else:
-                excluded_families.add(family)
+            is_dedup = bool(meta.get("superseded_by"))
+            if not is_dedup:
+                if "used_by" not in meta:
+                    errors.append(
+                        f"{meta['slug']}: exclude_from_search=true without used_by or superseded_by"
+                    )
+                family = meta.get("family")
+                if not family:
+                    errors.append(f"{meta['slug']}: exclude_from_search=true without family")
+                else:
+                    excluded_families.add(family)
 
-    # FB-5 sanity: all excluded families must be in the known set. Phase 2+ may
-    # add more (e.g. sandhi, conjugation tables), so allow superset extensions
-    # by updating KNOWN_EXCLUDED_FAMILIES when new excludes are introduced.
+    # FB-5 sanity: family-based excludes (case (a) above) must use a known
+    # family. Dedup excludes (case (b)) can have any family — they're routing
+    # markers, not Phase 3.5 declension hints — so they don't feed this check.
     known_excluded = {"heritage-decl"}
     unknown = excluded_families - known_excluded
     if unknown:
