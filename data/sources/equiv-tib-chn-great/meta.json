@@ -1,6 +1,7 @@
 {
   "slug": "equiv-tib-chn-great",
   "name": "Great Tibetan-Chinese Dictionary 藏漢大辭典 (dKon-mchog tshul-khrims 2004)",
+  "short_name": "TibCn",
   "lang": "bo",
   "tier": 2,
   "priority": 32,

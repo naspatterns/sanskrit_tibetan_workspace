@@ -1,6 +1,7 @@
 {
   "slug": "equiv-turfan-skt-de",
   "name": "Sanskrit-Wörterbuch der buddhistischen Texte aus den Turfan-Funden (Bechert et al. 1973-)",
+  "short_name": "Trf",
   "lang": "skt",
   "tier": 2,
   "priority": 33,

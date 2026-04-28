@@ -1,6 +1,7 @@
 {
   "slug": "equiv-bodkye-hamsa",
   "name": "haMsa의 Tibetan 사전 (사용자 정리, Bodkye)",
+  "short_name": "BkH",
   "lang": "bo",
   "tier": 1,
   "priority": 35,

@@ -1,6 +1,7 @@
 {
   "slug": "equiv-amarakoza-synonyms",
   "name": "Amarakośa synonym groups (verse-level NLP from equiv-amarakoza OCR)",
+  "short_name": "Ama-Syn",
   "lang": "skt",
   "tier": 3,
   "priority": 50,

@@ -1,6 +1,7 @@
 {
   "slug": "equiv-nti-reader",
   "name": "NTI Reader Buddhist Dictionary (Sanskrit-Chinese, Fo Guang Shan)",
+  "short_name": "NTI",
   "lang": "skt",
   "tier": 1,
   "priority": 30,

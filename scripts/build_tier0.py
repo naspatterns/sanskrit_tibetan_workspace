@@ -95,14 +95,17 @@ def build_index(
             ko = existing_ko or translations.get(entry["id"], "")
             buckets[hw].append({
                 "dict": meta["slug"],
-                "short": meta["short_name"],
+                # equiv-* meta omits short_name/target_lang; fall back to
+                # slug / lang so they still sort + render in the UI without
+                # special-casing (B1 fix, 2026-04-29).
+                "short": meta.get("short_name", meta["slug"]),
                 "priority": meta["priority"],
                 "tier": meta["tier"],
                 "id": entry["id"],
                 "snippet_short": body.get("snippet_short", ""),
                 "snippet_medium": body.get("snippet_medium", ""),
                 "ko": ko,
-                "target_lang": meta["target_lang"],
+                "target_lang": meta.get("target_lang", meta.get("lang", "en")),
             })
 
     index: dict[str, dict] = {}

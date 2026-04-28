@@ -54,11 +54,15 @@ def collect_tokens(
         if not jsonl_path.exists():
             continue
 
+        meta_priority = meta["priority"]
         for entry in iter_jsonl(jsonl_path):
-            # Every Phase 1 entry inherits `priority` from meta; a missing
-            # field signals an upstream bug, so refuse to silently bucket it
-            # at a made-up rank.
-            priority = entry["priority"]
+            # Phase 1 design: entries inherit `priority` inline from meta.
+            # Phase 2.5 equiv-* extract scripts skipped this backfill, so
+            # fall back to meta priority when the inline field is absent
+            # (B1 fix, 2026-04-29). The B2 backfill script populates the
+            # inline field in-place; both code paths converge to the same
+            # priority value.
+            priority = entry.get("priority", meta_priority)
             entry_id = entry["id"]
             reverse = entry.get("reverse") or {}
             item = (-priority, entry_id)
