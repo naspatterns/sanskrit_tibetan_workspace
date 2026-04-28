@@ -203,6 +203,28 @@ def _has_devanagari(s: str) -> bool:
     return any("\u0900" <= c <= "\u097F" for c in s)
 
 
+def _has_tibetan(s: str) -> bool:
+    return any("ༀ" <= c <= "࿿" for c in s)
+
+
+_EWTS = None
+
+
+def tibetan_to_wylie(s: str) -> str:
+    """Convert Tibetan Unicode to standard EWTS Wylie via pyewts.
+
+    Trailing shad ('/' in EWTS) is stripped so the result is a clean search
+    key. pyewts is imported lazily so non-Tibetan paths don't pay the load.
+    """
+    global _EWTS
+    if _EWTS is None:
+        import pyewts
+        _EWTS = pyewts.pyewts()
+    if not s:
+        return ""
+    return _EWTS.toWylie(s).rstrip("/ \t").strip()
+
+
 def _looks_like_hk(s: str) -> bool:
     """Heuristic: HK uses uppercase retroflex/long-vowel chars.
 
@@ -224,11 +246,18 @@ def _looks_like_hk(s: str) -> bool:
 
 
 def detect_and_convert_to_iast(s: str) -> str:
-    """Auto-detect script and convert to IAST. Preserves IAST input as-is."""
+    """Auto-detect script and convert to IAST (or EWTS Wylie for Tibetan).
+
+    Tibetan dicts (lang=bo) store Wylie in headword_iast; we route Tibetan
+    Unicode through pyewts so normalize_headword(headword) lines up with the
+    stored norm.
+    """
     if not s:
         return s
     if _has_devanagari(s):
         return devanagari_to_iast(s)
+    if _has_tibetan(s):
+        return tibetan_to_wylie(s)
     if _looks_like_hk(s):
         return hk_to_iast(s)
     # Already IAST or Latin — return as-is

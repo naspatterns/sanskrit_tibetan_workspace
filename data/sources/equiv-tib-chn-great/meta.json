@@ -23,8 +23,8 @@
   },
   "row_count": 30889,
   "postprocess": {
-    "wylie_converter": "scripts.lib.tibetan_wylie.to_wylie",
-    "wylie_kind": "approximate-ewts (root-letter not detected, end-of-syllable 'a')",
+    "wylie_converter": "pyewts",
+    "wylie_kind": "standard-ewts (root-letter aware, stack-aware)",
     "rows_with_wylie": 30851
   }
 }

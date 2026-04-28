@@ -524,6 +524,12 @@ wheels = [
 ]
 
 [[package]]
+name = "pyewts"
+version = "0.2.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/f9/bb/51707e7f19b78b55b59eed66c5fa83b89786c30b346dea71dfecffb122a5/pyewts-0.2.0.tar.gz", hash = "sha256:6fb7b4e1abcb7b98d57d48d2fbc0ad0acc45d3d86341c059d1884ca26c924ee0", size = 18236, upload-time = "2022-11-22T08:05:34.08Z" }
+
+[[package]]
 name = "pygments"
 version = "2.20.0"
 source = { registry = "https://pypi.org/simple" }
@@ -703,6 +709,7 @@ dependencies = [
     { name = "pdf2image" },
     { name = "pdfplumber" },
     { name = "pillow" },
+    { name = "pyewts" },
     { name = "pypdf" },
     { name = "pytesseract" },
     { name = "python-docx" },
@@ -731,6 +738,7 @@ requires-dist = [
     { name = "pdf2image", specifier = ">=1.17.0" },
     { name = "pdfplumber", specifier = ">=0.11.9" },
     { name = "pillow", specifier = ">=12.2.0" },
+    { name = "pyewts", specifier = ">=0.2.0" },
     { name = "pypdf", specifier = ">=6.10.2" },
     { name = "pytesseract", specifier = ">=0.3.13" },
     { name = "python-docx", specifier = ">=1.2.0" },

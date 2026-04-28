@@ -30,6 +30,7 @@ dependencies = [
     "pdf2image>=1.17.0",
     "pillow>=12.2.0",
     "setuptools>=82.0.1",
+    "pyewts>=0.2.0",
 ]
 
 [dependency-groups]
@@ -42,6 +43,10 @@ dev = [
 [tool.uv]
 # Let uv manage the Python toolchain automatically per .python-version
 managed = true
+# pyewts (Tibetan Unicode ↔ EWTS Wylie) imports pkg_resources at build time
+# without declaring it. setuptools >=81 removed pkg_resources, so pin an older
+# setuptools just for pyewts's build environment.
+extra-build-dependencies = { pyewts = ["setuptools<81"] }
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

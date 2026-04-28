@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Tib_Chn JSONL post-process: Tibetan Unicode headword → Wylie approximation.
+"""Tib_Chn JSONL post-process: Tibetan Unicode headword → standard EWTS Wylie.
 
 Reads existing equiv-tib-chn-great.jsonl, populates body.equivalents.tib_wylie
 (currently "") with Wylie transliteration. Also updates headword_iast (was set
 to Tibetan unicode) to Wylie for proper search index integration.
 
-Approximate EWTS — see scripts/lib/tibetan_wylie.py for limitations.
+Standard EWTS via pyewts — root-letter aware, full stack handling.
 The Tibetan unicode original is always preserved in `headword`.
 """
 from __future__ import annotations
@@ -17,8 +17,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from scripts.lib.tibetan_wylie import to_wylie  # noqa: E402
-from scripts.lib.transliterate import normalize  # noqa: E402
+from scripts.lib.transliterate import normalize, tibetan_to_wylie as to_wylie  # noqa: E402
 
 JSONL_PATH = ROOT / "data" / "jsonl" / "equiv-tib-chn-great.jsonl"
 META_PATH = ROOT / "data" / "sources" / "equiv-tib-chn-great" / "meta.json"
@@ -50,10 +49,15 @@ def main() -> int:
             row.setdefault("body", {}).setdefault("equivalents", {})
             row["body"]["equivalents"]["tib_wylie"] = wylie
             note = row["body"]["equivalents"].get("note", "")
-            if "Tib unicode unconverted" in note:
-                row["body"]["equivalents"]["note"] = (
-                    "Wylie ≈ EWTS (root-letter not detected; see lib/tibetan_wylie.py)"
-                )
+            if "Tib unicode unconverted" in note or "root-letter not detected" in note:
+                row["body"]["equivalents"]["note"] = "Wylie = EWTS (pyewts)"
+        else:
+            # Lone shad / garbage OCR: schema requires headword_iast >= 1 char,
+            # so we can't blank. Fall back to headword passthrough (matches the
+            # pre-fix behavior for these rows).
+            if not row.get("headword_iast"):
+                row["headword_iast"] = head
+                row["headword_norm"] = normalize(head)
 
         out_lines.append(json.dumps(row, ensure_ascii=False))
 
@@ -63,8 +67,8 @@ def main() -> int:
     # Update meta
     meta = json.loads(META_PATH.read_text())
     meta["postprocess"] = {
-        "wylie_converter": "scripts.lib.tibetan_wylie.to_wylie",
-        "wylie_kind": "approximate-ewts (root-letter not detected, end-of-syllable 'a')",
+        "wylie_converter": "pyewts",
+        "wylie_kind": "standard-ewts (root-letter aware, stack-aware)",
         "rows_with_wylie": n_with_wylie,
     }
     META_PATH.write_text(json.dumps(meta, ensure_ascii=False, indent=2), encoding="utf-8")
