@@ -45,6 +45,11 @@ class DictCoverage:
 
 def audit_dict(slug_dir: Path, jsonl_dir: Path) -> DictCoverage | None:
     meta = load_meta(slug_dir)
+    # Translation audit only applies to definition dicts. role=equivalents/
+    # thesaurus rows carry term-level mappings (Zone B), not translatable
+    # definition prose, so they're excluded from coverage scoring.
+    if meta.get("role") in ("equivalents", "thesaurus"):
+        return None
     jsonl_path = jsonl_dir / f"{meta['slug']}.jsonl"
     if not jsonl_path.exists():
         return None
@@ -71,10 +76,10 @@ def audit_dict(slug_dir: Path, jsonl_dir: Path) -> DictCoverage | None:
 
     return DictCoverage(
         slug=meta["slug"],
-        short_name=meta["short_name"],
+        short_name=meta.get("short_name", meta["slug"]),
         lang=meta["lang"],
-        target_lang=meta["target_lang"],
-        direction=meta["direction"],
+        target_lang=meta.get("target_lang", "en"),
+        direction=meta.get("direction", "?"),
         priority=meta["priority"],
         total=total,
         translated=translated,
