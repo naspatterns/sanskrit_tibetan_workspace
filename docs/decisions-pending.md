@@ -90,6 +90,24 @@
 
 ## 데이터 결정
 
+### D10b. Zone B (equivalents) 통합 — **메인 세션 작업**
+
+본 spawn (`compassionate-rosalind-d663ca`)이 OCR 5 sources · 160,874 rows 완료
+(Hirakawa·Bonwa·Turfan·Tib_Chn·Amarakośa). schema 확장 (`body.equivalents.{ja, de}`)
++ Tib_Chn Wylie 자동변환 포함.
+
+**메인 세션 즉시 작업** (체크리스트 → [`data/reports/equiv-pending-tasks.md`](../data/reports/equiv-pending-tasks.md)):
+1. `scripts/build_equivalents_index.py` 신규 — 17 dict (v1 baseline 7 + spawn1 5 + spawn2 5) → `equivalents.msgpack.zst`
+2. `scripts/build_meta.py` — 5 새 슬러그 등록 또는 직접 작성 meta 보존
+3. `scripts/frequency.py` — equiv role rows priority weighting 검토
+4. verify.py 재실행 (현재 0 errors / 160,874 entries)
+
+**선택적 후속** (우선순위 낮음):
+- Tib_Chn Wylie 정확도 향상 (현 root-letter 미식별 → pyewts/botok)
+- Hirakawa OCR 노이즈 페이지 필터 (~109 rows)
+- Amarakośa verse-level NLP (산스 thesaurus 동의어 group 구조 추출)
+- 불광사전워.pdf 2GB OCR — Vision API 별도 spawn 권장
+
 ### D11. 빈도 데이터 출처
 top-10K 단어 결정 기준:
 - v1 사용 로그 (있다면)

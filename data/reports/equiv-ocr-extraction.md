@@ -347,7 +347,12 @@ OCR cache (`data/ocr_cache/`)도 `.gitignore` 추가 (gigabytes per source, rege
 
 ## 11. 후속 액션 가이드 (모든 OCR 완료)
 
-본 spawn은 모든 4 source의 OCR을 완료. 후속 작업 (메인 세션 또는 follow-up spawn):
+**👉 메인 세션 잔여 작업 체크리스트는 별도 파일 참조: [equiv-pending-tasks.md](equiv-pending-tasks.md)**
+
+본 spawn은 5 source의 OCR을 완료 (Hirakawa·Bonwa·Turfan·Tib_Chn·Amarakośa).
+schema 확장 (`body.equivalents.{ja, de}`) + Tib_Chn Wylie 자동변환 후속액션도 완료.
+
+후속 작업 요약:
 
 1. **메인 세션 통합** (가장 즉시):
    ```bash
