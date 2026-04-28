@@ -1,0 +1,24 @@
+{
+  "slug": "equiv-amarakoza",
+  "name": "Amarakośa Nāmaliṅgānuśāsana w/ Kṣīrasvāmin + Sarvānanda commentaries (TSS 1914-17, 4 vols)",
+  "lang": "skt",
+  "tier": 3,
+  "priority": 49,
+  "role": "thesaurus",
+  "direction": "skt-thesaurus",
+  "license": "public-domain",
+  "source_paths": [
+    "Sanskrit_Tibetan_Reading_Tools/Amarakoza/Ama9141__Amarasimha_Namalinganusasana_2COMMs-Ksir-Sarv_1_1914_TSS_38.pdf",
+    "Sanskrit_Tibetan_Reading_Tools/Amarakoza/Ama9142__Amarasimha_Namalinganusasana_2COMMs-Ksir-Sarv_2_1915_TSS_43.pdf",
+    "Sanskrit_Tibetan_Reading_Tools/Amarakoza/Ama9143__Amarasimha_Namalinganusasana_2COMMs-Ksir-Sarv_3_1917_TSS_51.pdf",
+    "Sanskrit_Tibetan_Reading_Tools/Amarakoza/Ama9144__Amarasimha_Namalinganusasana_2COMMs-Ksir-Sarv_4_1917_TSS_52.pdf"
+  ],
+  "extraction": {
+    "method": "tesseract-ocr (raw text dump)",
+    "langs": "san+eng",
+    "psm": 4,
+    "dpi": 300,
+    "note": "Per-page raw OCR. Verse-level synonym groups NOT extracted (requires Sanskrit NLP)."
+  },
+  "row_count": 1119
+}

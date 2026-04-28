@@ -32,14 +32,15 @@ from scripts.ocr.lib import (  # noqa: E402
     page_count,
 )
 
+_AMA_BASE = (
+    "/Users/jibak/Library/CloudStorage/GoogleDrive-naspatterns@gmail.com/"
+    "내 드라이브/haMsa CODE/Sanskrit_Tibetan_Reading_Tools/Amarakoza/"
+)
 PDF_PATHS = [
-    Path(
-        "/Users/jibak/Library/CloudStorage/GoogleDrive-naspatterns@gmail.com/"
-        "내 드라이브/haMsa CODE/Sanskrit_Tibetan_Reading_Tools/Amarakoza/"
-        f"Ama914{n}__Amarasimha_Namalinganusasana_2COMMs-Ksir-Sarv_{n}_191"
-        f"{4 if n in (1,2) else 7}_TSS_{['38','43','51','52'][n-1]}.pdf"
-    )
-    for n in (1, 2, 3, 4)
+    Path(_AMA_BASE + "Ama9141__Amarasimha_Namalinganusasana_2COMMs-Ksir-Sarv_1_1914_TSS_38.pdf"),
+    Path(_AMA_BASE + "Ama9142__Amarasimha_Namalinganusasana_2COMMs-Ksir-Sarv_2_1915_TSS_43.pdf"),
+    Path(_AMA_BASE + "Ama9143__Amarasimha_Namalinganusasana_2COMMs-Ksir-Sarv_3_1917_TSS_51.pdf"),
+    Path(_AMA_BASE + "Ama9144__Amarasimha_Namalinganusasana_2COMMs-Ksir-Sarv_4_1917_TSS_52.pdf"),
 ]
 SLUG_BASE = "equiv-amarakoza"
 SLUG_PER_VOL = lambda v: f"{SLUG_BASE}-v{v}"  # noqa: E731

@@ -11,17 +11,17 @@
 - **OCR 도구**: Tesseract 5.5.2 + Poppler (모두 brew, 무료/OSS)
 - **Python 의존성 추가**: `pytesseract`, `pdf2image`, `pillow` (uv add)
 - **신규 모듈**: `scripts/ocr/lib.py` — pdftoppm + tesseract 직접 호출, 페이지별 디스크 캐시, 6 worker 병렬, 2-칼럼 자동 분리
-- **처리 결과** (4 source · **159,755 rows committed** · 모든 OCR 완료):
+- **처리 결과** (5 source · **160,874 rows committed** · 모든 OCR 완료):
 
 | Slug | Source | Pages | Rows | Mean Conf | 비고 |
 |---|---|---:|---:|---:|---|
 | `equiv-hirakawa` | Hirakawa Buddhist Chinese-Sanskrit Dict | 1506 ✅ | **16,851** | 70.5 | 한자→Skt, 새 자료 |
-| `equiv-bonwa-daijiten` | 梵和大辭典 (Ogiwara) | 1666 ✅ | **100,253** | 72.9 | Skt→일본어, **v2에 첫 일본어 자료** |
-| `equiv-turfan-skt-de` | Turfan SWB (Bechert) v1 + v2 | 696+612 = 1308 ✅ | **11,762** | 85.4 | Skt→독일어, 4개 source 중 가장 깨끗 |
-| `equiv-tib-chn-great` | 藏漢大辭典 (dKon-mchog) | 3338 ✅ | **30,889** | 68.0 | Tib→중국어 (Wylie 변환 후속 권장) |
-| ~~`equiv-amarakoza`~~ | Amarakośa TSS 1914-17 4vols | 1121 | **skip** | n/a | Sanskrit verse+commentary, 구조 파싱 불가; v1에 이미 있음 |
+| `equiv-bonwa-daijiten` | 梵和大辭典 (Ogiwara) | 1666 ✅ | **100,253** | 72.9 | Skt→일본어, **v2에 첫 일본어** (body.equivalents.ja) |
+| `equiv-turfan-skt-de` | Turfan SWB (Bechert) v1 + v2 | 696+612 = 1308 ✅ | **11,762** | 85.4 | Skt→독일어 (body.equivalents.de), 가장 깨끗 |
+| `equiv-tib-chn-great` | 藏漢大辭典 (dKon-mchog) | 3338 ✅ | **30,889** | 68.0 | Tib→중국어 + Wylie 자동변환 (`scripts/lib/tibetan_wylie.py`) |
+| `equiv-amarakoza` | Amarakośa TSS 1914-17 4vols | 220+400+304+197 = 1121 ✅ | **1,119** | 65.0 | role=thesaurus, page-raw (verse-level NLP 후속) |
 
-**총 OCR 처리**: **7,818 페이지** (Hirakawa 1506 + Bonwa 1666 + Turfan 1308 + Tib_Chn 3338).
+**총 OCR 처리**: **8,939 페이지** (Hirakawa 1506 + Bonwa 1666 + Turfan 1308 + Tib_Chn 3338 + Amarakoza 1121).
 
 **OCR 캐시 보존**: 모든 OCR'd 페이지가 `data/ocr_cache/{slug}/p{NNNNN}.{txt,json}`에 남아 있음 (.gitignore). 파서 개선 시 `--from-cache`로 즉시 재추출 가능 (OCR 안 함).
 
@@ -323,9 +323,11 @@ def ocr_pdf_parallel(slug, pdf_path, pages, langs, psm=4, dpi=300, workers=6, co
 equiv-hirakawa.jsonl          :  16,851 rows ·  11 MB  (DONE — full 1506p ✅)
 equiv-bonwa-daijiten.jsonl    : 100,253 rows ·  62 MB  (DONE — full 1666p ✅)
 equiv-turfan-skt-de.jsonl     :  11,762 rows · 7.5 MB  (DONE — full 1308p ✅)
-equiv-tib-chn-great.jsonl     :  30,889 rows · 20 MB   (DONE — full 3338p ✅)
+equiv-tib-chn-great.jsonl     :  30,889 rows · 20 MB   (DONE — full 3338p + Wylie ✅)
+equiv-amarakoza.jsonl         :   1,119 rows · 5.5 MB  (DONE — full 1121p, page-raw ✅)
 ─────────────────────────────────────────────────────────────────
-TOTAL (committed)             : 159,755 rows · 102 MB · 7,818 pages
+TOTAL (committed)             : 160,874 rows · 106 MB · 8,939 pages
+verify.py: 0 errors / 160,874 entries (146 dicts incl. 5 new equiv)
 ```
 
 JSONL은 `.gitignore`로 제외 (CLAUDE.md §9 정책 준수). meta.json + extract scripts만 commit.
