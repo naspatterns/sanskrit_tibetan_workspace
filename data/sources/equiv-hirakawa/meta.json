@@ -18,5 +18,13 @@
       1506
     ]
   },
-  "row_count": 16851
+  "row_count": 16484,
+  "filter": {
+    "applied_at": "2026-04-28T13:34:26Z",
+    "min_ocr_conf": 60.0,
+    "max_headword_len": 8,
+    "input_rows": 16851,
+    "kept_rows": 16484,
+    "dropped_rows": 367
+  }
 }
