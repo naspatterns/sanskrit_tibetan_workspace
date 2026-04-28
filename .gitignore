@@ -6,7 +6,7 @@ build/
 *.log
 .npm
 .pnpm-debug.log
-package-lock.json
+.vscode/
 
 # ─── Python ───────────────────────────────────────────
 __pycache__/
@@ -66,3 +66,7 @@ data/translations/
 
 # ─── Project-local (never push) ────────────────────────
 CLAUDE.md
+
+# ─── Phase 4 deploy build outputs (Cloudflare Pages / Workers) ─
+.output
+.wrangler
