@@ -1,0 +1,60 @@
+{
+  "slug": "equiv-amarakoza-synonyms",
+  "name": "Amarakośa synonym groups (verse-level NLP from equiv-amarakoza OCR)",
+  "lang": "skt",
+  "tier": 3,
+  "priority": 50,
+  "role": "thesaurus",
+  "direction": "skt-thesaurus",
+  "license": "public-domain",
+  "derived_from": "equiv-amarakoza",
+  "extraction": {
+    "method": "heuristic verse-split + Devanagari→IAST tokenization",
+    "tooling": "Python regex; no external Sanskrit NLP library",
+    "vol_kanda_map": {
+      "1": 1,
+      "2": 2,
+      "3": 2,
+      "4": 3
+    },
+    "verse_marker": "॥ <Devanagari digit(s)> ॥",
+    "stop_tokens": 145,
+    "note": "Synonym groups are coarse: 1 verse = 1 group. Real Amarakośa often packs 2-3 groups per verse; finer split requires lemma analysis (vidyut-prakriya / dharmamitra), out of scope. Mūla/commentary boundary detected via Kṣīrasvāmin/Sarvānanda markers (क्षीर / टीका); commentary text preserved in note field."
+  },
+  "row_count": 1082,
+  "stats": {
+    "by_vol": {
+      "1": {
+        "kanda": 1,
+        "pages": 220,
+        "verses": 205,
+        "verses_with_num": 205,
+        "varga_count": 10
+      },
+      "2": {
+        "kanda": 2,
+        "pages": 398,
+        "verses": 345,
+        "verses_with_num": 345,
+        "varga_count": 5
+      },
+      "3": {
+        "kanda": 2,
+        "pages": 304,
+        "verses": 245,
+        "verses_with_num": 245,
+        "varga_count": 4
+      },
+      "4": {
+        "kanda": 3,
+        "pages": 197,
+        "verses": 352,
+        "verses_with_num": 352,
+        "varga_count": 5
+      }
+    },
+    "verses_with_shloka_num": 1147,
+    "verses_without_shloka_num": 0,
+    "median_synonyms_per_group": 9
+  }
+}

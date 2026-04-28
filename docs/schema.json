@@ -97,9 +97,9 @@
         },
         "equivalents": {
           "type": "object",
-          "description": "Cross-language equivalents row (for role=equivalents). Used by Zone B. Each field optional; at least one of skt_iast/tib_wylie/zh should be non-empty.",
+          "description": "Cross-language equivalents row (for role=equivalents) or synonym group (for role=thesaurus). Used by Zone B. Each field optional; at least one of skt_iast/tib_wylie/zh/synonyms should be non-empty.",
           "properties": {
-            "skt_iast": { "type": "string", "description": "Sanskrit IAST." },
+            "skt_iast": { "type": "string", "description": "Sanskrit IAST. For thesaurus rows: the representative term of the synonym group." },
             "skt_slp1": { "type": "string", "description": "Sanskrit SLP1 (optional, for legacy compatibility)." },
             "tib_wylie": { "type": "string", "description": "Tibetan Wylie." },
             "zh": { "type": "string", "description": "Chinese (Hanzi). Traditional or simplified as in source." },
@@ -107,8 +107,14 @@
             "en": { "type": "string", "description": "English gloss for the equivalent term." },
             "ja": { "type": "string", "description": "Japanese equivalent (e.g. Bonwa Daijiten 梵和大辭典 → equiv-bonwa-daijiten)." },
             "de": { "type": "string", "description": "German equivalent (e.g. Turfan SWB Sanskrit-Wörterbuch → equiv-turfan-skt-de)." },
-            "category": { "type": "string", "description": "Source-specific category/chapter (e.g., Mvy '【如來名號】')." },
-            "note": { "type": "string", "description": "Source-specific note." }
+            "synonyms": {
+              "type": "array",
+              "items": { "type": "string", "minLength": 1 },
+              "maxItems": 50,
+              "description": "Synonym group (for role=thesaurus, e.g. equiv-amarakoza-synonyms). All terms in IAST. The representative term is also stored in skt_iast. Each synonym serves as a lookup key in build_equivalents_index.py — searching any synonym should surface the entire group."
+            },
+            "category": { "type": "string", "description": "Source-specific category/chapter (e.g., Mvy '【如來名號】', Amarakośa 'kāṇḍa.varga.śloka')." },
+            "note": { "type": "string", "description": "Source-specific note (e.g. commentary text for thesaurus rows)." }
           },
           "additionalProperties": false
         }
