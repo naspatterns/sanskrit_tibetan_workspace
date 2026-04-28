@@ -108,6 +108,28 @@
 - Amarakośa verse-level NLP (산스 thesaurus 동의어 group 구조 추출)
 - 불광사전워.pdf 2GB OCR — Vision API 별도 spawn 권장
 
+### D10c. equiv rows 빈도 가중치 (frequency.py 동작)
+
+Phase 2.5b의 `scripts/frequency.py` 갱신 시점 결정. `role=equivalents`/`role=thesaurus` rows를 top-10K headword 빈도 계산에 어떻게 반영할지.
+
+**옵션**:
+- **(a)** equiv 빈도 무관 (어휘 자체이므로 모든 row 동일 weight)
+- **(b)** source priority 따라 가중치 (Apte/MW의 cross-ref와 같이 합산)
+- **(c)** equiv는 frequency.py에 *전혀 반영 안 함* — 별 채널이라 top-10K 결정에 영향 zero, 단순
+
+**추천**: **(c)**. equiv는 Zone B 별 채널이고 top-10K (Tier 0 정의) 빈도와 분리하는 게 깔끔.
+
+### D10d. 불광사전워.pdf 2GB OCR — Vision API 별도 spawn
+
+`Sanskrit_Tibetan_Reading_Tools/불광사전워.pdf` (2 GB, 한자 불교 대사전). Tesseract는 시간 + 정확도 우려 (12+ hours, 한자 정확도 critical). Google Cloud Vision API 권장.
+
+**옵션**:
+- **(a)** 별도 spawn 띄우고 진행 (~$3, GCP 인증 + 비용 사용자 컨펌)
+- **(b)** 보류 — Phase 3 완성 후 재검토
+- **(c)** Skip 영원히 — v2 Zone B에 한자 불교는 이미 Hirakawa 16K rows + NTI Reader 8K rows로 일부 cover
+
+**추천**: **(b)** 보류. 현재 한자 cover 충분 (Hirakawa + NTI + Tib-Chn 大辭典). 불광은 Phase 3 사용자 피드백 후 재검토.
+
 ### D11. 빈도 데이터 출처
 top-10K 단어 결정 기준:
 - v1 사용 로그 (있다면)

@@ -150,6 +150,50 @@ Top-10K Ko 번역 POC 100/9,995 (나머지는 subagent spawn_task 또는 batch A
 
 ---
 
+## Phase 2.5: Zone B 대응어 데이터 + 빌드 (✅ 데이터 / ⏭️ 빌드 next)
+
+**목표**: cross-language equivalents (산-티-한-일-독-한-영) 통합 + Zone B 단일 인덱스 빌드.
+
+### 2.5a 데이터 통합 ✅ (2026-04-26~28 완료)
+
+**17 source dicts · 약 445K rows** (`role=equivalents` 16 + `role=thesaurus` 1):
+
+| 단계 | source | rows | commit |
+|---|---|---:|---|
+| v1 baseline (메인) | bilex/equiv 7 sources (Mvy·Negi·LCh·84000·Hopkins·NTI·YBh) | 207K | `87b774e` / `790215a` |
+| spawn 1 텍스트 발굴 | 5 sources → dedup 후 활성 3 (Karashima·Bodkye·Hopkins-tsed) | 78K → 활성 ~21K | `2e54c8a` / `eaf9727` |
+| spawn 2 OCR | 5 sources (Hirakawa·Bonwa·Turfan·Tib-Chn·Amarakośa) | 161K | `cc5afa5` |
+
+**부수 산출물**:
+- `docs/schema.json` 확장: 최상위 `role` + `body.equivalents.{skt_iast, tib_wylie, zh, ko, en, ja, de, category, note}`
+- `scripts/ocr/lib.py` — Tesseract 5 + pdftoppm + 6 worker 병렬 + 2-column split + 디스크 캐시
+- `scripts/lib/tibetan_wylie.py` — Tib unicode → Wylie (char-by-char + syllable-end 'a')
+- `scripts/postprocess_{ja_de_fields, tib_chn_wylie}.py`
+- 16 사전 `exclude_from_search: true` (dedup, ADR-005 패턴)
+- 새 의존성: `pdfplumber`, `pypdf`, `openpyxl`, `python-docx`, `xlrd<2`, `pytesseract`, `pdf2image`, `pillow`
+
+세부 보고:
+- `data/reports/equiv-extraction.md` (spawn 1 텍스트)
+- `data/reports/equiv-ocr-extraction.md` (spawn 2 OCR)
+- `data/reports/equiv-pending-tasks.md` (메인 세션 작업 체크리스트) ⭐
+
+### 2.5b Zone B 빌드 파이프라인 ⏭️ (즉시 다음)
+
+| # | 작업 | 시간 | 비고 |
+|---|---|---|---|
+| 1 ⭐ | `scripts/build_equivalents_index.py` 신규 | 4-6h | 17 dict → `public/indices/equivalents.msgpack.zst`. v1 `mergeBilexResults` 패턴 참조 (`docs/app.js:254-336, 815-`) |
+| 2 | `scripts/build_meta.py` 동기화 | 1h | 직접 작성된 5 새 slug meta.json *덮어쓰지 않기* |
+| 3 | `scripts/frequency.py` 검토 | 2-3h | equiv rows 빈도 가중치 — **D10c 결정 필요** |
+| 4 | `scripts/verify.py` 재실행 | 10m | 0 errors 확인 (현재 통과) |
+| 5 | `bench/index.html` 갱신 + 측정 | 1h | **ADR-009 재검토 트리거**: heap ≤60MB이면 단일 OK, 초과면 source shard |
+
+**완료 기준**:
+- `equivalents.msgpack.zst` 생성 (~30-40 MB compressed 추정 → decompressed ~250 MB → JS heap ~50-100 MB 추정)
+- `verify.py` 0 errors
+- bench 결과로 단일 인덱스 vs source shard 결정
+
+---
+
 ## Phase 3: Svelte UI 최소 버전 (2주)
 
 **목표**: v1의 검색 모드 기능을 Svelte로 구현. 본격 사용 가능.
