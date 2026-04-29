@@ -3,39 +3,72 @@
 	import { page } from '$app/state';
 	import { goto } from '$app/navigation';
 	import { performSearch } from '$lib/stores/search';
-	import { langBalancedTop, langBalancedRest } from '$lib/search/lang';
-	import type { Tier0Result } from '$lib/indices/types';
+	import { entryLang, langBalancedTop, langBalancedRest, type EntryLang } from '$lib/search/lang';
+	import { isIndexLoaded, getIndexBundle } from '$lib/indices/store';
+	import type { HeadwordEntry, Tier0Result } from '$lib/indices/types';
 	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
 	import EntryFull from '$lib/components/EntryFull.svelte';
+	import Autocomplete from '$lib/components/Autocomplete.svelte';
+	import FilterBar from '$lib/components/FilterBar.svelte';
 
 	let query = $state('');
+	// 3.2.4 — Filter state (lang pills + priority slider).
+	let langFilter = $state<EntryLang | 'all'>('all');
+	let priorityMax = $state(100);
+	let inputFocused = $state(false);
+	let inputEl = $state<HTMLInputElement | null>(null);
+	let acRef = $state<{ moveSelection: (d: number) => boolean; pickSelected: () => boolean } | null>(
+		null
+	);
+
 	const result = $derived(performSearch(query));
 	let modalEntry = $state<Tier0Result | null>(null);
 
-	// Hydrate from ?q= on first paint.
-	onMount(() => {
-		const q = page.url.searchParams.get('q') ?? '';
-		query = q;
+	// 3.2.1 — URL → store reactive sync. SvelteKit's $app/state page.url
+	// updates on popstate / external goto. We mirror its q param into the
+	// local state when it diverges (avoiding store→URL→store loops).
+	$effect(() => {
+		const urlQ = page.url.searchParams.get('q') ?? '';
+		if (urlQ !== query) query = urlQ;
 	});
 
-	// Two-way URL sync (replaceState — back-button doesn't fill with keystrokes).
+	// 3.2.5 — store → URL (debounced 120ms; replaceState keeps history clean).
+	// Svelte 5 $effect cleanup cancels in-flight timer when query changes again.
 	$effect(() => {
 		if (typeof window === 'undefined') return;
-		const url = new URL(window.location.href);
-		if (query.trim()) url.searchParams.set('q', query);
-		else url.searchParams.delete('q');
-		if (url.search !== window.location.search) {
+		const target = query;
+		const id = window.setTimeout(() => {
+			const url = new URL(window.location.href);
+			const cur = url.searchParams.get('q') ?? '';
+			if (cur === target) return;
+			if (target.trim()) url.searchParams.set('q', target);
+			else url.searchParams.delete('q');
 			goto(url.pathname + url.search, {
 				keepFocus: true,
 				noScroll: true,
 				replaceState: true
 			});
+		}, 120);
+		return () => clearTimeout(id);
+	});
+
+	// 3.2.6 — ?from=entry-id deep link (open EntryFull modal directly).
+	onMount(() => {
+		if (!isIndexLoaded()) return;
+		const fromId = page.url.searchParams.get('from');
+		if (!fromId) return;
+		const bundle = getIndexBundle();
+		for (const info of bundle.tier0.values()) {
+			const hit = info.entries.find((e) => e.id === fromId);
+			if (hit) {
+				modalEntry = hit;
+				return;
+			}
 		}
 	});
 
 	function setQuery(next: string) {
 		query = next;
-		// Scroll back to top so the user sees the new exact match.
 		if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: 'smooth' });
 	}
 
@@ -43,28 +76,105 @@
 		return id.replace(/-\d+$/, '');
 	}
 
-	const zoneCEntries = $derived(result?.exact ? langBalancedTop(result.exact.entries, 3) : []);
-	const zoneDEntries = $derived(result?.exact ? langBalancedRest(result.exact.entries, 3) : []);
+	// 3.2.4 — Apply filter, then balance.
+	const filteredEntries = $derived.by(() => {
+		if (!result?.exact) return [];
+		let xs = result.exact.entries;
+		if (langFilter !== 'all') xs = xs.filter((e) => entryLang(e) === langFilter);
+		if (priorityMax < 100) xs = xs.filter((e) => e.priority <= priorityMax);
+		return xs;
+	});
+	const zoneCEntries = $derived(langBalancedTop(filteredEntries, 3));
+	const zoneDEntries = $derived(langBalancedRest(filteredEntries, 3));
+
+	// 3.2.2 — autocomplete suggestions (debounced via timer below).
+	const autocompleteItems = $derived<HeadwordEntry[]>(
+		query.trim() && result ? result.partial.slice(0, 12) : []
+	);
+	const showAutocomplete = $derived(
+		inputFocused && autocompleteItems.length > 0 && query.trim().length > 0
+	);
+
+	// 3.2.3 — Keyboard shortcuts at the page level.
+	function onKeyDown(e: KeyboardEvent) {
+		// '/' focuses input (unless typing in another field).
+		if (e.key === '/' && document.activeElement !== inputEl && !modalEntry) {
+			e.preventDefault();
+			inputEl?.focus();
+			return;
+		}
+		// 'Escape' closes modal first, else blurs/clears input.
+		if (e.key === 'Escape') {
+			if (modalEntry) {
+				modalEntry = null;
+				return;
+			}
+			if (showAutocomplete) {
+				inputEl?.blur();
+				return;
+			}
+			if (document.activeElement === inputEl && query) {
+				query = '';
+				return;
+			}
+		}
+		// Shift+D cycles theme (handled by ThemeToggle via window listener
+		// in the toggle component itself? — we wire it here for now).
+		if (e.key === 'D' && e.shiftKey && !modalEntry && document.activeElement !== inputEl) {
+			e.preventDefault();
+			document.querySelector<HTMLButtonElement>('.theme-toggle')?.click();
+		}
+	}
+
+	function onInputKey(e: KeyboardEvent) {
+		if (!showAutocomplete) return;
+		if (e.key === 'ArrowDown') {
+			if (acRef?.moveSelection(1)) e.preventDefault();
+		} else if (e.key === 'ArrowUp') {
+			if (acRef?.moveSelection(-1)) e.preventDefault();
+		} else if (e.key === 'Enter') {
+			if (acRef?.pickSelected()) e.preventDefault();
+		}
+	}
 </script>
+
+<svelte:window onkeydown={onKeyDown} />
 
 <main>
 	<header class="topbar">
-		<input
-			type="search"
-			bind:value={query}
-			placeholder="dharma · धर्म · chos · 般若 · 법"
-			autocomplete="off"
-			autocorrect="off"
-			autocapitalize="off"
-			spellcheck="false"
-			class="search-input"
-		/>
+		<div class="search-wrap">
+			<input
+				bind:this={inputEl}
+				type="search"
+				bind:value={query}
+				placeholder="dharma · धर्म · chos · 般若 · 법    (/ 누르면 포커스)"
+				autocomplete="off"
+				autocorrect="off"
+				autocapitalize="off"
+				spellcheck="false"
+				class="search-input"
+				onfocus={() => (inputFocused = true)}
+				onblur={() => (inputFocused = false)}
+				onkeydown={onInputKey}
+			/>
+			<Autocomplete
+				bind:this={acRef}
+				items={autocompleteItems}
+				visible={showAutocomplete}
+				onpick={(iast) => {
+					setQuery(iast);
+					inputEl?.blur();
+				}}
+				onclose={() => inputEl?.blur()}
+			/>
+		</div>
 		<ThemeToggle />
 	</header>
 
 	{#if !query.trim()}
 		<p class="hint">
 			검색어를 입력하세요. IAST · HK · Devanagari · Wylie · 한자 · 한국어 모두 지원.
+			<br /><kbd>/</kbd> 검색 포커스 · <kbd>Esc</kbd> clear · <kbd>Shift+D</kbd> 다크모드
 		</p>
 	{:else if !result}
 		<p class="hint">로딩 중…</p>
@@ -78,12 +188,11 @@
 			<span class="dim">· {result.detectedScript} · {result.durationMs.toFixed(2)}ms</span>
 		</div>
 
-		<!-- Tibetan / long-tail miss notice — only when equiv has hits but tier0 is empty. -->
 		{#if !result.exact && result.equivalents.length > 0}
 			<div class="notice">
 				ⓘ 이 단어는 <strong>top-10K 정의 인덱스</strong> 밖입니다 — 대응어(Zone B)는 표시되지만,
 				전문 prose 정의(Zone C)는 Phase 5 Edge API 도입 후 제공 예정. (티벳어 단어는 현재 약 0.5%만
-				cover.)
+				cover. Phase 3.3에서 별도 `tier0-bo` 인덱스로 50%+ 확장 예정.)
 			</div>
 		{/if}
 
@@ -134,6 +243,15 @@
 					</p>
 				{/if}
 			</section>
+		{/if}
+
+		{#if result.exact && result.exact.entries.length > 0}
+			<FilterBar
+				bind:langFilter
+				bind:priorityMax
+				totalEntries={result.exact.entries.length}
+				visibleEntries={filteredEntries.length}
+			/>
 		{/if}
 
 		{#if zoneCEntries.length > 0}
@@ -214,21 +332,6 @@
 				{/each}
 			</section>
 		{/if}
-
-		{#if result.partial.length > 0 && !result.exact}
-			<section class="zone zone-auto">
-				<h2>자동완성 · Autocomplete</h2>
-				<ul class="autocomplete">
-					{#each result.partial as hw (hw.norm)}
-						<li>
-							<button type="button" onclick={() => setQuery(hw.iast)} class="ac-item">
-								{hw.iast}
-							</button>
-						</li>
-					{/each}
-				</ul>
-			</section>
-		{/if}
 	{/if}
 
 	{#if modalEntry}
@@ -247,17 +350,22 @@
 	.topbar {
 		display: flex;
 		gap: 0.5rem;
-		align-items: center;
+		align-items: stretch;
 		margin-bottom: 1rem;
 	}
-	.search-input {
+	.search-wrap {
 		flex: 1;
+		position: relative;
+	}
+	.search-input {
+		width: 100%;
 		padding: 0.5rem 0.75rem;
 		font-size: 1.05rem;
 		border: 1px solid var(--border);
 		border-radius: 6px;
 		background: var(--bg);
 		color: var(--fg);
+		font-family: inherit;
 	}
 	.search-input:focus {
 		outline: 2px solid var(--accent);
@@ -266,6 +374,14 @@
 	.hint {
 		color: var(--fg-muted);
 		font-size: 0.92rem;
+	}
+	kbd {
+		background: var(--bg-alt);
+		border: 1px solid var(--border);
+		border-radius: 3px;
+		padding: 0 0.3rem;
+		font-family: inherit;
+		font-size: 0.85rem;
 	}
 	.header-strip {
 		font-size: 0.88rem;
@@ -434,14 +550,6 @@
 		display: flex;
 		gap: 0.4rem;
 		align-items: center;
-	}
-	.autocomplete {
-		list-style: none;
-		padding: 0;
-		margin: 0;
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.4rem;
 	}
 	.ac-item {
 		background: var(--bg-alt);
