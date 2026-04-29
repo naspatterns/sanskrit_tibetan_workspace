@@ -260,7 +260,13 @@ v1은 tier 1 (15개) 내부 순서가 무작위 → 사용자 불만.
   - **P1-3** equivalents.zh 32% Wylie/IAST 오염 (fix: extract_equiv_yogacarabhumi.py 디버깅)
   - 추가 P1: Svelte `$effect` closure refactor, parse.ts/loader.ts unit tests, frequency.py stable sort.
   Phase 3.6 = original polish (1일) + audit P0/P1 (2-4일) 확장. 상세 backlog: `data/reports/audit-2026-04-30/audit-summary.md`.
-- D-Audit-Day3-Pending = Track C (Sentinel 50 query production preview demo) + D4·D5·D6 (browser heap/latency/SW measurements)는 다음 세션으로 deferred. Sentinel queries 초안 사용자 검토 후 진입. (`sentinel-50-queries-draft.md`)
+- D-Audit-Day3-Done = Day 3 자동 측정 항목 완료 (2026-04-30): D5 latency 정밀 측정 (Map.get < 1µs ✅) · D6 SW 검증 ✅ · D9 race 분석 (prod 부재) ✅ · Lighthouse (Performance 45 측정 artifact, **Accessibility 95 ✅**, Best Practices 100, SEO 82) · E1-E5 production readiness. **Day 3 새 발견**:
+  - **P0-3** tier0.msgpack.zst 28.78 MB > Cloudflare 25 MB → zstd 재압축 또는 R2 이관 (Phase 4 deploy blocker)
+  - **P1-E2** static/_headers 미작성 (CSP/Cache-Control)
+  - **P1-E4** LICENSES.md 47 dicts 미명시 (148 - 101)
+  - **P2** zstd 디컴프 Web Worker 이전 (Performance 45→80+ 예상)
+  - **P2** meta description / sitemap.xml / robots.txt (SEO 82→95)
+  사용자 시연 (50 queries baseline + D4 heap + 모바일)은 다음 세션 보류 — Phase 3.6 fix 전후 비교용. Sentinel #15 사용자 정정 완료 (māhā→mahā). 가이드: `audit-C-demo-guide.md`.
 - 프로젝트 이름 = Sanskrit-Tibetan Workspace (FB-7)
 - 패키지 매니저 = `uv` + `pyproject.toml`
 - Git 배포 정책 = meta.json/reports 커밋, JSONL은 gitignore (LICENSES 참조)

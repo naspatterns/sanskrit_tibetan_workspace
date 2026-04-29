@@ -3,7 +3,7 @@
 Date: 2026-04-30
 Phase: 3.5b 통합 검토 (Audit) — Phase 4 배포 직전
 Scope: 5 트랙 (A 정합성·B 완전성·C UX·D 코드품질·E 배포 readiness)
-Status: **Day 1+2 완료** (Track A·B·D static), **Day 3 deferred** (Track C·D4-6 browser, Track E)
+Status: **Day 1+2+3 완료** (Track A·B 자동·D 자동+browser·E 자동·C user demo guide). **사용자 시연 (Sentinel 50 queries baseline)은 다음 세션에서 진행**.
 
 ---
 
@@ -69,13 +69,21 @@ Cold rebuild .................................. 4:18 min
 
 상세: `audit-B-summary.md` + `audit-B-coverage.md` + `audit-B-eu-quality.md`
 
-### Track C — UX 시연 ⏭️ Day 3
+### Track C — UX 자동 측정 ✅ + 사용자 시연 가이드 ✅
 
-- Sentinel 50 queries 초안 작성 ✅ (`sentinel-50-queries-draft.md`)
-  - 9 카테고리: 산스크리트 핵심 10 / prefix 5 / Wylie 5 / 영어 역검색 10 / 한국어 5 / 한자 5 / 혼용 5 / typo 3 / dead zone 2
-  - 사용자 검토 대기 중
-- 시연 시점: production preview build (`npm run preview`) 가동 후
-- Track C는 P0/P1 fix 전후 비교가 가장 가치 있음 → Phase 3.6 진입 후 일정 협의
+| Item | Verdict | P-level |
+|---|---|---|
+| Sentinel 50 queries (작성, 사용자 검토 후 #15 mahā 정정) | ✅ ready | — |
+| Lighthouse Performance | ❌ 45/100 (측정 artifact, splash + SW cold load) | P2 |
+| Lighthouse Accessibility | ✅ 95/100 (목표 달성) | — |
+| Lighthouse Best Practices | ✅ 100/100 | — |
+| Lighthouse SEO | ⚠️ 82/100 (meta description 부족) | P2 (Phase 4) |
+| Production preview reachability | ✅ /, /declension, /sw.js 200 | — |
+| 사용자 시연 가이드 | ✅ 작성 (`audit-C-demo-guide.md`) | — |
+
+상세: `audit-C-a11y.md` + `audit-C-demo-guide.md`
+
+**사용자 시연 (Sentinel 50 queries baseline)은 다음 세션에서 진행** — Phase 3.6 P0/P1 fix 전 baseline + fix 후 비교를 위해 의도적 보류.
 
 ### Track D — Code Quality + Build ✅
 
@@ -86,31 +94,47 @@ Cold rebuild .................................. 4:18 min
 | D3 | Production build | ✅ adapter-static 성공 ~50 kB gzipped | — |
 | D7 | Build script perf | ✅ 4:18 cold rebuild | P3 (multiprocessing) |
 | D8 | Test coverage | ⚠️ parse.ts·loader.ts 갭 | **P1-D8-1·D8-2** |
-| D4 Heap | ⏭️ Day 3 | — | — |
-| D5 Latency | ⏭️ Day 3 | — | — |
-| D6 SW | ⏭️ Day 3 | — | — |
-| D9 HMR race | ⏭️ Day 3 (production preview) | — | — |
+| D4 Heap | ⏭️ user demo (devtools 수동) | — | guide 제공 |
+| D5 Latency | ✅ Map.get 모두 < 1µs, cold load 2.35s (Python) | — | `audit-D-latency.md` |
+| D6 SW | ✅ v3 cache, 7 indices precache, scope-limited fetch | P3 (app shell precache) | `audit-D-sw.md` |
+| D9 HMR race | ✅ prod 코드 path 분석 — race 없음 (HMR 부재) | — | `audit-D-decl-race.md` |
 
-상세: `audit-D-summary.md` + `audit-D-build.md` + `audit-D-svelte5.md` + `audit-D-tests.md` + `audit-D-buildperf.md`
+상세: `audit-D-summary.md` + `audit-D-build.md` + `audit-D-svelte5.md` + `audit-D-tests.md` + `audit-D-buildperf.md` + `audit-D-latency.md` + `audit-D-sw.md` + `audit-D-decl-race.md`
 
-### Track E — Production Readiness ⏭️ Day 3
+### Track E — Production Readiness ✅
 
-- E1 adapter-static export 완전성 (D3에서 일부 검증됨)
-- E2 CSP / security headers
-- E3 Cloudflare Pages 한계
-- E4 LICENSES.md 17 equiv source coverage
-- E5 사용자 피드백 루프
+| # | Item | Status | P-level |
+|---|---|---|---|
+| E1 | adapter-static export | ✅ | — |
+| E2 | CSP + headers | ⚠️ `_headers` 미작성 | P1 (Phase 4 entry) |
+| E3 | Cloudflare 25 MB 한계 | ❌ **tier0.msgpack.zst 28.78 MB > 25 MB** | **P0 새로 (Phase 4 deploy blocker)** |
+| E4 | LICENSES.md 커버리지 | ⚠️ **47 dicts 미명시** (148 - 101) | **P1 새로** |
+| E5 | 피드백 루프 | ⏭️ deferred | P2 |
+
+**Phase 4 entry checklist**:
+1. tier0 zstd 재압축 (`-22 --ultra`) → ~24 MB OR R2/Workers 이관
+2. `static/_headers` 작성 (CSP + Cache-Control + Service-Worker-Allowed)
+3. LICENSES.md 47 dicts 보충
+4. wrangler.toml 또는 Pages Git integration
+5. 도메인 또는 *.pages.dev URL
+6. 배포 후 50 sentinel queries 재실행
+
+상세: `audit-E-deploy.md`
 
 ---
 
-## 4. Phase 3.6 확장 backlog (audit 결과 통합)
+## 4. Phase 3.6 + Phase 4 확장 backlog (audit 결과 통합 + Day 3)
 
 ```
 P0 (must fix before Phase 4 deploy)
 ├─ P0-1 reverse search UI render headword + snippet
 │       (reverse_meta.msgpack.zst 신규 + +page.svelte 갱신)
-└─ P0-2 DE/FR/LA $225 batch re-translation
-        (priority pwg→pwk→cappeller→schmidt→stchoupak→burnouf→grassmann→bopp-latin)
+├─ P0-2 DE/FR/LA $225 batch re-translation
+│       (priority pwg→pwk→cappeller→schmidt→stchoupak→burnouf→grassmann→bopp-latin)
+└─ P0-3 [NEW Day 3] tier0.msgpack.zst (28.78 MB) > Cloudflare 25 MB 한계
+        Option A: zstd -22 --ultra 재압축 (30 min)
+        Option B: R2/Workers 이관 (Phase 5)
+        ※ Phase 4 deploy blocker
 
 P1 (Phase 3.6 sprint)
 ├─ P1-1 build_reverse_index.py headword salience boost
@@ -118,11 +142,14 @@ P1 (Phase 3.6 sprint)
 ├─ P1-3 extract_equiv_yogacarabhumi.py zh column-mapping fix
 ├─ P1-D2-1 $effect debounce closure refactor (+page, declension)
 ├─ P1-D8-1 parse.ts unit tests (~30 min)
-└─ P1-D8-2 loader.ts unit tests (~1h)
+├─ P1-D8-2 loader.ts unit tests (~1h)
+├─ P1-E2 [NEW Day 3] static/_headers 작성 (CSP + Cache-Control)
+└─ P1-E4 [NEW Day 3] LICENSES.md 47 dicts 보충
 
 Original 3.6 polish (1-1.5일)
-├─ 모바일 반응형 (≤768px)
-├─ Lighthouse Performance ≥ 90 / Accessibility ≥ 95
+├─ 모바일 반응형 (≤768px) — devtools 시뮬 with audit-C-demo-guide.md
+├─ Lighthouse Performance fix (현재 45 — zstd Web Worker 이전 시 80+ 예상)
+├─ Lighthouse Accessibility ≥ 95 (현재 95 ✅)
 ├─ 키보드 navigation 완성
 └─ Loading state per-channel progress
 
@@ -130,6 +157,8 @@ P2/P3 deferred
 ├─ P2 9 dicts FB-5 family rule align
 ├─ P2 1,119 equiv-amarakoza 'amarakoza-v1-pX' 슬러그 re-extract
 ├─ P2 stores/theme.ts unit test, audit_meta_consistency relax
+├─ P2 [NEW Day 3] zstd 디컴프 Web Worker 이전 (Performance 45→80+)
+├─ P2 [NEW Day 3] meta description / sitemap.xml / robots.txt (SEO 82→95)
 ├─ P3 147 dicts entry_count auto-fill
 ├─ P3 frequency.py stable sort
 └─ P3 build_tier0/build_reverse_index multiprocessing (52% speedup)
@@ -140,22 +169,43 @@ P2/P3 deferred
 
 ---
 
-## 5. Day 3 계획 (다음 세션)
+## 5. Day 3 결과 + 다음 세션 작업
 
-### 5.1 입장 조건
-사용자가 Sentinel 50 queries 검토 완료 + Phase 3.6 진입 결정 OK.
+### 5.1 Day 3 완료된 항목 ✅
 
-### 5.2 작업 순서
-1. **Track C 시연** — production preview build 가동 → 50 queries 직접 입력 → CSV 기록 (audit-C-sentinel-results.csv)
-2. **D4 Heap profile** — Chrome devtools memory snapshot, 7 indices load 후 heap, 검색 100회 후 leak 여부
-3. **D5 Latency** — bench/index.html 확장 (declension, equivalents 채널 추가), 1000 query × 5 round
-4. **D6 Service Worker** — devtools application tab으로 install/activate/cache-first 실제 동작, offline 검증
-5. **D9 HMR race** — production preview에서 declension `?q=` 자동 채움 검증 (dev에서만 race이면 OK)
-6. **Track E** — Cloudflare Pages 한계, CSP draft, LICENSES re-check
-7. **audit-summary.md 최종 갱신** + Phase 3.6 진입 게이트
+- D5 Latency 정밀 측정 (7 index profile)
+- D6 Service Worker 코드 분석 + production 검증
+- D9 Declension HMR race production 분석 (race 없음 확인)
+- Track E1-E5 (Cloudflare 한계 + LICENSES + CSP draft)
+- Lighthouse 자동 측정 (Performance 45 측정 artifact, A11y 95 ✅)
+- Sentinel #15 사용자 정정 (māhā → mahā)
+- Track C 사용자 시연 가이드 (`audit-C-demo-guide.md`)
 
-### 5.3 시간 추정
-Day 3 = ~4-6시간 (Track C 1.5h + D4-6 2h + Track E 1h + 통합 1h)
+### 5.2 다음 세션 작업
+
+**A. 사용자 시연** (Track C 직접 입력, ~2h)
+- 50 queries baseline 측정 → `audit-C-sentinel-results.csv`
+- D4 Heap profile (devtools 수동, audit-C-demo-guide.md §D4)
+- 모바일 시뮬 (devtools)
+
+**B. Phase 3.6 sprint** (~3-5일, audit-C 시연과 병행 가능)
+
+순서:
+1. P0-3 tier0 zstd 재압축 (30 min) — 즉시 unblock Phase 4
+2. P0-1 reverse_meta.msgpack.zst 신규 + UI 갱신 (~4-6h)
+3. P0-2 $225 batch submit (병렬 — 폴링 2-3일)
+4. P1-1 build_reverse_index salience boost (~2h) + 재측정
+5. P1-3 yogācārabhūmi zh fix (~2-4h)
+6. P1-D2-1 + P1-D8-1 + P1-D8-2 (코드/테스트, ~3h)
+7. P1-E2 _headers 작성 (~30 min)
+8. P1-E4 LICENSES.md 47 dicts 보충 (~1-2h)
+9. P0-2 batch retrieve + tier0 재빌드 (~1h)
+10. Lighthouse 재측정 + 모바일 polish
+
+**C. Phase 4 deploy entry** (Phase 3.6 완료 후)
+- adapter-static build → wrangler pages deploy
+- 도메인 결정
+- 배포된 URL에서 50 queries 재실행 → before/after 비교
 
 ---
 

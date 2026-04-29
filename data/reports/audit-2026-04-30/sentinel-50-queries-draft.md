@@ -51,7 +51,7 @@
 | 12 | `bud` | buddha, buddhi, buddhānusmṛti … | 불교 |
 | 13 | `pra` | prajñā, pratyaya, pratīyasamutpāda … | 가장 큰 prefix bucket |
 | 14 | `ana` | anātman, anitya, ānanda … | a-prefix 부정 |
-| 15 | `māhā` (오타로 두번째 글자 ā) | (자동완성 비호환 테스트) | norm 처리 검증 |
+| 15 | `mahā` | mahābhārata, mahāyāna, mahātman 등 | macron diacritic + prefix 자동완성 |
 
 ## 카테고리 3 — 티벳어 Wylie (5)
 
