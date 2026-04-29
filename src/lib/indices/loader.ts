@@ -21,6 +21,7 @@ interface IndexSpec {
 
 const INDICES: IndexSpec[] = [
 	{ key: 'tier0', url: '/indices/tier0.msgpack.zst', decoder: 'msgpack' },
+	{ key: 'tier0Bo', url: '/indices/tier0-bo.msgpack.zst', decoder: 'msgpack' },
 	{ key: 'equivalents', url: '/indices/equivalents.msgpack.zst', decoder: 'msgpack' },
 	{ key: 'reverseEn', url: '/indices/reverse_en.msgpack.zst', decoder: 'msgpack' },
 	{ key: 'reverseKo', url: '/indices/reverse_ko.msgpack.zst', decoder: 'msgpack' },
@@ -116,9 +117,10 @@ export async function loadAllIndices(
 		INDICES.map((spec, i) => fetchAndDecode(spec, status[i], emit))
 	);
 
-	const [tier0Raw, equivRaw, revEnRaw, revKoRaw, headwordsRaw] = results;
+	const [tier0Raw, tier0BoRaw, equivRaw, revEnRaw, revKoRaw, headwordsRaw] = results;
 	const bundle: IndexBundle = {
 		tier0: objectToMap<Tier0Entry>(tier0Raw),
+		tier0Bo: objectToMap<Tier0Entry>(tier0BoRaw),
 		equivalents: objectToMap<EquivRow[]>(equivRaw),
 		reverseEn: objectToMap<string[]>(revEnRaw),
 		reverseKo: objectToMap<string[]>(revKoRaw),

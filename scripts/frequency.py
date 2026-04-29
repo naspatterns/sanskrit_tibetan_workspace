@@ -32,7 +32,11 @@ def priority_weight(priority: int) -> float:
     return max(0.01, (100 - priority) / 100)
 
 
-def compute_scores(sources: Path, jsonl_dir: Path) -> dict[str, float]:
+def compute_scores(
+    sources: Path,
+    jsonl_dir: Path,
+    lang_filter: str | None = None,
+) -> dict[str, float]:
     scores: dict[str, float] = defaultdict(float)
 
     for _slug_dir, meta in tqdm(
@@ -41,6 +45,10 @@ def compute_scores(sources: Path, jsonl_dir: Path) -> dict[str, float]:
         if meta.get("exclude_from_search"):
             continue
         if meta.get("role") in ("equivalents", "thesaurus"):
+            continue
+        # Phase 3.3 (D-Tib10K) — restrict scoring to a single source language
+        # so we can build per-language Tier 0 (e.g. tier0-bo).
+        if lang_filter and meta.get("lang") != lang_filter:
             continue
         jsonl_path = jsonl_dir / f"{meta['slug']}.jsonl"
         if not jsonl_path.exists():
@@ -67,11 +75,19 @@ def main() -> int:
         help="Optional: write full ranking (all scored headwords) as JSON",
     )
     parser.add_argument("--top-n", type=int, default=10_000)
+    parser.add_argument(
+        "--lang-filter",
+        choices=["skt", "bo", "pi", "zh"],
+        default=None,
+        help="Restrict scoring to dicts with meta.lang == this value "
+        "(used for Phase 3.3 per-language Tier 0 — e.g. --lang-filter bo "
+        "→ data/reports/top10k_bo.txt).",
+    )
     args = parser.parse_args()
 
     args.out_top.parent.mkdir(parents=True, exist_ok=True)
 
-    scores = compute_scores(args.sources, args.jsonl)
+    scores = compute_scores(args.sources, args.jsonl, lang_filter=args.lang_filter)
     print(f"Scored {len(scores):,} unique headwords", file=sys.stderr)
 
     ranked = sorted(scores.items(), key=lambda kv: (-kv[1], kv[0]))

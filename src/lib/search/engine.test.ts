@@ -28,6 +28,7 @@ function makeBundle(): IndexBundle {
 				}
 			]
 		]),
+		tier0Bo: new Map(),
 		equivalents: new Map([
 			[
 				'dharma',

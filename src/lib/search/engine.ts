@@ -65,8 +65,19 @@ export function search(
 	const wylieKey = normalize(trimmed); // tib/Latin-side, no script conv
 	const zhKey = trimmed; // CJK as-is
 
-	// 1. Exact tier0 (definition top-3 + rest).
-	const exact = bundle.tier0.get(iastKey) ?? null;
+	// 1. Exact tier0 (definition top-3 + rest). Phase 3.3 (D-Tib10K) — union
+	// over Sanskrit and Tibetan top-10K. When a headword exists in both
+	// (e.g. 'chos' is in skt cross-ref and bo native), merge entries.
+	const sktInfo = bundle.tier0.get(iastKey);
+	const boInfo = bundle.tier0Bo.get(iastKey);
+	const exact: Tier0Entry | null =
+		sktInfo && boInfo
+			? {
+					iast: sktInfo.iast,
+					// Concatenate; client-side langBalancedTop will balance Zone C.
+					entries: [...sktInfo.entries, ...boInfo.entries]
+				}
+			: (sktInfo ?? boInfo ?? null);
 
 	// 2. Equivalents — try all 3 channels, merge unique row references.
 	// Build-side rows are interned per dedup key, so reference equality is

@@ -7,10 +7,12 @@
 // caches via the activate handler. To force-refresh after rebuilding the
 // indices, bump the suffix below and reload twice (install + activate).
 
-const CACHE_NAME = 'stw-indices-v1';
+// v2: Phase 3.3 added tier0-bo (Tibetan top-10K).
+const CACHE_NAME = 'stw-indices-v2';
 
 const PRECACHE_URLS = [
 	'/indices/tier0.msgpack.zst',
+	'/indices/tier0-bo.msgpack.zst',
 	'/indices/equivalents.msgpack.zst',
 	'/indices/reverse_en.msgpack.zst',
 	'/indices/reverse_ko.msgpack.zst',

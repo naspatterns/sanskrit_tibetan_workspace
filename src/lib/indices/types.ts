@@ -43,6 +43,10 @@ export interface HeadwordEntry {
 
 export interface IndexBundle {
 	tier0: Map<string, Tier0Entry>;
+	/** Phase 3.3 (D-Tib10K) — Tibetan top-10K. Same shape as tier0; the
+	 * search engine merges entries when a key exists in both (cross-language
+	 * headword like 'chos'). */
+	tier0Bo: Map<string, Tier0Entry>;
 	equivalents: Map<string, EquivRow[]>;
 	reverseEn: Map<string, string[]>;
 	reverseKo: Map<string, string[]>;
