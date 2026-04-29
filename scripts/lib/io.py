@@ -88,15 +88,31 @@ def load_top10k(path: Path) -> list[str]:
     return [line.strip() for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
 
 
-def write_msgpack_zst(data: object, path: Path, level: int = 19) -> tuple[int, int]:
+def write_msgpack_zst(
+    data: object,
+    path: Path,
+    level: int = 19,
+    long_range: bool = False,
+) -> tuple[int, int]:
     """Serialize `data` as msgpack, zstd-compress, write atomically to `path`.
 
     Returns `(raw_size, compressed_size)` so callers can report compression
     ratio without re-packing.
+
+    `long_range=True` enables long-range matching with window_log=27 (128 MB
+    window) — squeezes out an extra ~3-5% on highly redundant data like
+    tier0.msgpack.zst (P0-3 fix, Phase 3.6, to fit Cloudflare Pages 25 MiB
+    single-file limit). fzstd 0.1.x supports any standard window size.
     """
     path.parent.mkdir(parents=True, exist_ok=True)
     packed = msgpack.packb(data, use_bin_type=True)
-    compressed = zstd.ZstdCompressor(level=level).compress(packed)
+    if long_range:
+        params = zstd.ZstdCompressionParameters.from_level(
+            level, window_log=27, enable_ldm=True
+        )
+        compressed = zstd.ZstdCompressor(compression_params=params).compress(packed)
+    else:
+        compressed = zstd.ZstdCompressor(level=level).compress(packed)
     tmp = path.with_suffix(path.suffix + ".tmp")
     tmp.write_bytes(compressed)
     tmp.replace(path)

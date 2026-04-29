@@ -109,8 +109,17 @@ def build_index(
                 "tier": meta["tier"],
                 "id": entry["id"],
                 "snippet_short": body.get("snippet_short", ""),
-                "snippet_medium": body.get("snippet_medium", ""),
-                "ko": ko,
+                # P0-3 (Phase 3.6): cap snippet_medium at 350 chars in tier0
+                # (JSONL keeps full ≤500, accessible via Phase 5 D1 Edge API).
+                # snippet_medium has median 88, p95 438, so 95% of entries
+                # are unaffected. Brings tier0 from 25.7 MiB (over Cloudflare
+                # 25 MiB cap) → ~24.5 MiB.
+                "snippet_medium": body.get("snippet_medium", "")[:350],
+                # ko outlier cap — a handful of long-form dictionary entries
+                # (e.g. Apte's 'a' definition) leaked 10-45K chars from v1
+                # body.ko. Cap at 2000 chars to preserve typical translations
+                # while bounding the worst case.
+                "ko": ko[:2000],
                 "target_lang": meta.get("target_lang", meta.get("lang", "en")),
             })
 
@@ -155,7 +164,12 @@ def main() -> int:
           f"({total_entries:,} entries, avg {total_entries/max(1,len(index)):.1f}/hw)",
           file=sys.stderr)
 
-    raw, compressed = write_msgpack_zst(index, args.out)
+    # P0-3 (Phase 3.6): zstd level 22 + long-range mode (window 27) to fit
+    # Cloudflare Pages 25 MiB single-file limit. Tier0 at level 19 was
+    # 28.78 MB → level 22 alone 25.7 MB → +long-range targets ~24 MB.
+    # Decompression speed is unchanged (zstd asymmetry); fzstd 0.1.x supports
+    # standard window sizes.
+    raw, compressed = write_msgpack_zst(index, args.out, level=22, long_range=True)
     print(f"\n✓ Wrote {args.out}")
     print(f"  raw msgpack:  {raw/1024/1024:.1f} MB")
     print(f"  compressed:   {compressed/1024/1024:.1f} MB ({compressed/raw:.1%})")
