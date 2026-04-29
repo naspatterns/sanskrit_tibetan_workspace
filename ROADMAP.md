@@ -247,18 +247,63 @@ scaffold + 5 indices loader + Service Worker + 5 채널 검색 (tier0 / equivale
 
 **알려진 issue**: dev mode HMR + URL hydration race로 `?q=` 파라미터가 일부 hot-reload 사이클에서 input에 자동 채워지지 않음. 사용자 직접 typing 시 정상. **Production build (Phase 4) 검증 deferred**.
 
-### 3.6 Polish + a11y ⏭️ (즉시 다음, ≈1일)
+### 3.5b 통합 검토 (Audit) ✅ (2026-04-30, commits `10b9d93`+`257404f`)
 
-- 모바일 반응형 (≤768px) — sidebar collapse, 폰트 크기 조정
+Phase 4 배포 직전 데이터 정합성·완전성·UX·코드 품질 통합 audit.
+산출물: `data/reports/audit-2026-04-30/` (16+ md 보고서) · `scripts/audit_*.py` (5 신규).
+
+**Track A (Data Integrity)** — ✅ data layer clean
+- Schema errors 0 / id duplicates 0 / missing iast·norm 0 / 3.81M entries
+- 189K warnings 모두 카테고리 분류 (대부분 학술 표기·의도된 데이터)
+- Cross-source dedup 작동, exclude_from_search filter 0 leaks
+- 산출 보고서: A-summary, A-warnings, A-meta-consistency, A-translations, A-indices, A-reverse-precision, A-zh-contamination
+
+**Track B (Data Completeness)** — ⚠️ 번역 품질이 핵심 결함
+- Tibetan top-10K coverage 94% sentinel hit
+- Long-tail 98.4% (Phase 5 D1 Edge API 가치 확인)
+- **DE/FR/LA `body.ko` 1.87/4.0** (498 sample) — v1은 per-token substitution, 실제 한국어 5-7% only
+- 산출 보고서: B-summary, B-coverage, B-eu-quality
+
+**Track D (Code Quality + Build)** — ✅ 코드 견고
+- TypeScript strict 0/0 / 255 files
+- Production build 성공 ~50 kB gzipped client critical-path
+- Svelte 5 runes 0 P0 / 1 P1 (closure pattern) / 2 P2
+- vitest 75 + pytest 79 pass / <1s
+- 산출 보고서: D-summary, D-build, D-svelte5, D-tests, D-buildperf
+
+**Track C (UX 시연) + D4·D5·D6 (browser perf)** — Day 3 deferred
+- Sentinel 50 queries 초안 작성 완료 (`sentinel-50-queries-draft.md`)
+- production preview build에서 직접 시연 + Lighthouse + heap profile 예약
+
+**P0/P1 backlog 도출 → Phase 3.6 확장**
+
+### 3.6 Polish + a11y + Audit P0/P1 fixes ⏭️ (즉시 다음, ~3-5일 확장)
+
+**Audit P0** (must fix before deploy):
+- **P0-1** Reverse search UI raw entry_id → `reverse_meta.msgpack.zst` 신규 인덱스 + EntryFull-style 렌더링
+- **P0-2** DE/FR/LA `body.ko` re-translation — $225 batch (priority pwg→pwk→cappeller-german→schmidt-nachtrage→stchoupak→burnouf→grassmann-vedic→bopp-latin)
+
+**Audit P1**:
+- **P1-1** `build_reverse_index.py` headword salience boost (target ≥12/15 EN strict)
+- **P1-2** Korean coverage push for English-source dicts ($30 batch, top 50K)
+- **P1-3** `extract_equiv_yogacarabhumi.py` zh column-mapping fix → equivalents 재빌드
+- **P1-D2-1** `$effect` debounce closure refactor (+page.svelte, declension/+page.svelte)
+- **P1-D8-1** `parse.ts` unit tests (~30 min)
+- **P1-D8-2** `loader.ts` unit tests (~1h)
+
+**Original 3.6 polish**:
+- 모바일 반응형 (≤768px) — sidebar collapse, 폰트 크기
 - WCAG AAA 본문 검증 (Lighthouse + manual)
-- 키보드 navigation 완성 (tab order, focus rings, screen reader)
+- 키보드 navigation 완성 (tab order, focus rings)
 - Loading state 고도화 (per-channel progress)
+- Production preview에서 declension HMR race 해소 검증
 
-**Phase 3 완료 기준**:
-- v1 대비 모든 검색 채널 + 곡용 탭 동작
+**Phase 3.6 완료 기준**:
+- v1 대비 모든 검색 채널 + 곡용 탭 + 역검색이 의미 있게 동작 (P0-1, P0-2, P1-1, P1-2 fix 후)
 - query latency <1ms 유지 (ADR-011 D)
 - Lighthouse Performance ≥ 90 / Accessibility ≥ 95
-- 모바일 반응형 정상 동작
+- 모바일 반응형 정상
+- vitest ≥ 80 cases (parse.ts + loader.ts 테스트 추가)
 
 ---
 

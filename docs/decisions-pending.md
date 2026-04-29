@@ -252,6 +252,15 @@ v1은 tier 1 (15개) 내부 순서가 무작위 → 사용자 불만.
 - D-Pre-deploy = Phase 4 (배포) 전에 Phase 3.2-3.6 (Search UX polish + Tibetan tier0 + Equiv UX + Declension + a11y) 충실 구현 (2026-04-29). 자율 일괄 진행 후 사용자 review.
 - D-Reader-Vocab-Last = Phase 6 (Reader) + Phase 7 (Vocab)는 *마지막* phase로 deferred (2026-04-29). 배포 + Edge API 도입 후 진입.
 - D-URL-Sync-Pattern = URL ↔ query 양방향 sync는 reactive `$effect` 대신 onMount + popstate listener로 (2026-04-29 fix `07bbbd5`). 양 effect 간 race로 typing 중 query를 stale URL value로 덮어쓰는 버그 발견. popstate는 외부 navigate 시만 fire하므로 self-overwrite 회피.
+- D-Audit-2026-04-30 = Phase 3.6 진입 전 통합 검토 (Day 1+2 완료, Day 3 deferred). 5 트랙 (A 정합성·B 완전성·C UX·D 코드품질·E 배포) 산출물 16+ 보고서 (`data/reports/audit-2026-04-30/`). **데이터 layer 깨끗** (errors 0, id dup 0, 189K warnings 모두 분류) — 단 5개 P0/P1 발견:
+  - **P0-1** 역검색 UI raw entry_id 노출 (fix: `reverse_meta.msgpack.zst` 신규 인덱스 + UI 갱신)
+  - **P0-2** DE/FR/LA `body.ko` 1.87/4.0 — v1은 per-token substitution이라 한국어 5-7%만 (fix: $225 batch re-translate)
+  - **P1-1** reverse_en priority sort 부정확 (fix: build_reverse_index.py salience boost)
+  - **P1-2** Korean coverage push for English-source dicts ($30 batch)
+  - **P1-3** equivalents.zh 32% Wylie/IAST 오염 (fix: extract_equiv_yogacarabhumi.py 디버깅)
+  - 추가 P1: Svelte `$effect` closure refactor, parse.ts/loader.ts unit tests, frequency.py stable sort.
+  Phase 3.6 = original polish (1일) + audit P0/P1 (2-4일) 확장. 상세 backlog: `data/reports/audit-2026-04-30/audit-summary.md`.
+- D-Audit-Day3-Pending = Track C (Sentinel 50 query production preview demo) + D4·D5·D6 (browser heap/latency/SW measurements)는 다음 세션으로 deferred. Sentinel queries 초안 사용자 검토 후 진입. (`sentinel-50-queries-draft.md`)
 - 프로젝트 이름 = Sanskrit-Tibetan Workspace (FB-7)
 - 패키지 매니저 = `uv` + `pyproject.toml`
 - Git 배포 정책 = meta.json/reports 커밋, JSONL은 gitignore (LICENSES 참조)
