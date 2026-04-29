@@ -214,44 +214,40 @@ scaffold + 5 indices loader + Service Worker + 5 채널 검색 (tier0 / equivale
 - query latency 0.00-0.20 µs (ADR-011 D 목표 ×5000배)
 - 68 vitest + 79 pytest pass
 
-### 3.2 Search UX polish ⏭️ (즉시 다음, ≈1.5일)
+### 3.2 Search UX polish ✅ (`40802ca` + race fix `07bbbd5`)
 
-| # | 작업 | 추정 |
-|---|---|---|
-| 1 | URL `$page` reactive sync (popstate 시 store 동기화) | 30 min |
-| 2 | 자동완성 dropdown (입력 중 즉시 표시, debounced 80ms, ↑↓/Enter navigation) | 3h |
-| 3 | 키보드 단축키 (`/` focus, `Esc` clear/close, `Shift+D` 다크모드) | 1h |
-| 4 | 사전/lang 필터 (priority slider + lang pills + dict toggle) | 3h |
-| 5 | 결과 정밀화 (debounce 100ms keystroke, scroll preserve, virtual list 검토) | 1h |
-| 6 | URL `?from=entry-id` deep-link (특정 entry 모달로 직접 진입) | 1h |
-| 7 | Vitest + Playwright tests | 1h |
+- URL ↔ query sync (popstate listener — reactive `$effect`는 race로 typing reset 유발, fix `07bbbd5`)
+- Autocomplete dropdown (입력 중, ↑↓/Enter, mouse hover)
+- 키보드 단축키 (`/` focus, `Esc` clear/close, `Shift+D` 다크모드)
+- LANG pills (전체/산스/티벳/Pāli) + Priority slider (1-100) + visible/total count
+- store→URL debounce 120ms
+- `?from=entry-id` deep link → EntryFull modal 직접 진입
+- vitest 7 추가 (lang.test.ts) → 총 75 pass
 
-### 3.3 Tibetan tier0 확장 (≈4h, **option A 확정 2026-04-29**)
+### 3.3 Tibetan tier0 확장 ✅ (`d5e91f2`, option A)
 
-별도 `public/indices/tier0-bo.msgpack.zst` (5-8 MB compressed, top-10K Tibetan headwords).
+별도 `public/indices/tier0-bo.msgpack.zst` (7.1 MB compressed · 162,888 entries · 16.3 avg/hw).
+- `scripts/frequency.py --lang-filter bo` 옵션 추가 → `data/reports/top10k_bo.txt`
+- 클라이언트 6번째 index + `engine.ts`에서 tier0 + tier0-bo union (entries concat → langBalancedTop이 lang별 top-3 분배)
+- **Verify**: `klong chen` 정의 0 → 9 (RY [20] "great expanse...")
 
-- `scripts/frequency.py --lang-filter bo` 옵션 — Tibetan 사전들에서만 빈도 산정 → `data/reports/top10k_bo.txt`
-- `scripts/build_tier0.py --top-source <path>` 옵션 — 임의 top-list로 별도 인덱스
-- 클라이언트 `loader.ts` 6번째 index + `engine.ts`에서 tier0 / tier0-bo union lookup (skt 우선, bo 보충)
-- SplashScreen 6 bars · SW precache 6 indices
+### 3.4 Equivalents UX 마감 ✅ (`829286b`)
 
-**효과**: Tibetan 단어 정의 cover율 0.5% → ~50%+ 추정.
+- `src/lib/search/source-colors.ts`: 18 equiv 사전 → label + OKLCH hue 매핑 (Mvy purple / Negi blue / LCh green / 84K amber / ...)
+- `src/lib/components/EquivDetail.svelte`: 클릭 시 modal (10 fields + sources list)
+- 50씩 페이지네이션 ("더 보기" / "접기" toggle)
 
-### 3.4 Equivalents UX 마감 (≈1일)
-
-- Equiv row 클릭 → detail modal (note, category, source meta, sources list 풍부 표시)
-- 사전별 색상 또는 아이콘 (시각적 구분)
-- 페이지네이션 (50 row 이상 시)
-- 사전 그룹 토글 (특정 source 사전들만 표시)
-
-### 3.5 Declension tab (≈2일)
+### 3.5 Declension tab ✅ (`9c2b6f7`)
 
 - `/declension` 라우트
-- Heritage Declension 데이터 (`exclude_from_search: true` 사전들 — `decl-a01..a08`)
-- 곡용표 UI (격 8 × 수 3 × 성 3)
-- 검색 탭 ↔ 곡용 탭 cross-link (단어 클릭으로 이동)
+- `scripts/build_declension.py`: top-10K Heritage Declension → `public/indices/declension.msgpack.zst` (2.1 MB compressed · 7,438 unique headwords · 39,408 rows)
+- `src/lib/declension/parse.ts`: `body.plain` → 8 case × 3 number grid (HEADER_RE + CASE_SPLIT_RE)
+- 검색 탭 ↔ 곡용 탭 cross-link tabs
+- 7번째 index를 eager bundle에 통합 (lazy fetch는 dev HMR race로 hint stuck → eager가 안정적)
 
-### 3.6 Polish + a11y (≈1일)
+**알려진 issue**: dev mode HMR + URL hydration race로 `?q=` 파라미터가 일부 hot-reload 사이클에서 input에 자동 채워지지 않음. 사용자 직접 typing 시 정상. **Production build (Phase 4) 검증 deferred**.
+
+### 3.6 Polish + a11y ⏭️ (즉시 다음, ≈1일)
 
 - 모바일 반응형 (≤768px) — sidebar collapse, 폰트 크기 조정
 - WCAG AAA 본문 검증 (Lighthouse + manual)

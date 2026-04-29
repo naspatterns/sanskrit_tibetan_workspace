@@ -251,6 +251,7 @@ v1은 tier 1 (15개) 내부 순서가 무작위 → 사용자 불만.
 - D-Tib10K = Tibetan 별도 `tier0-bo.msgpack.zst` (option A) 채택 (2026-04-29). frequency.py에 lang-filter 옵션 추가 + top10k_bo.txt 생성 + 6번째 index. 클라이언트 union lookup. Tibetan 단어 정의 cover율 0.5% → ~50%+ 향상.
 - D-Pre-deploy = Phase 4 (배포) 전에 Phase 3.2-3.6 (Search UX polish + Tibetan tier0 + Equiv UX + Declension + a11y) 충실 구현 (2026-04-29). 자율 일괄 진행 후 사용자 review.
 - D-Reader-Vocab-Last = Phase 6 (Reader) + Phase 7 (Vocab)는 *마지막* phase로 deferred (2026-04-29). 배포 + Edge API 도입 후 진입.
+- D-URL-Sync-Pattern = URL ↔ query 양방향 sync는 reactive `$effect` 대신 onMount + popstate listener로 (2026-04-29 fix `07bbbd5`). 양 effect 간 race로 typing 중 query를 stale URL value로 덮어쓰는 버그 발견. popstate는 외부 navigate 시만 fire하므로 self-overwrite 회피.
 - 프로젝트 이름 = Sanskrit-Tibetan Workspace (FB-7)
 - 패키지 매니저 = `uv` + `pyproject.toml`
 - Git 배포 정책 = meta.json/reports 커밋, JSONL은 gitignore (LICENSES 참조)
