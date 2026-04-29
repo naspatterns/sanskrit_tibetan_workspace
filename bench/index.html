@@ -24,7 +24,9 @@
 <p>ADR-009 재검토 입력: <strong>equivalents 단독 heap ≤ 60 MB</strong>이면 Zone B 단일 인덱스 OK; 초과 시 source-shard 분할 검토.</p>
 <p>측정 환경: 브라우저 fetch + fzstd decompress + msgpack decode. <code>performance.memory</code>(Chromium)로 JS heap 측정.</p>
 <button id="run" disabled>Loading modules…</button>
+<button id="run-query">Run query latency bench</button>
 <div id="results"></div>
+<div id="query-results"></div>
 <h2>Console</h2>
 <div id="log"></div>
 
@@ -232,7 +234,69 @@ async function runAll() {
   log('\n결과는 window.__BENCH__ 로도 접근 가능');
 }
 
+// ─── Query latency benchmark (ADR-011 D verification) ───────────────────
+// 1,000 random Map.get calls per index. Target p95 < 5 ms (measured wall),
+// per-call mean ~5-50 µs is typical for JS Map<string, X> hit on a warm
+// runtime.
+async function runQueryLatencyBench() {
+  if (!window.__BENCH__?.results) {
+    log('Run main benchmark first to load indices.');
+    return;
+  }
+  const indices = window.__BENCH__.results.filter(r => !r.error && r.parsed && typeof r.parsed === 'object' && r.name !== 'headwords');
+  if (!indices.length) { log('No indices to bench.'); return; }
+
+  const SAMPLES = 1000;
+  const lines = [];
+  lines.push('<h2>Query latency (per-index, ' + SAMPLES + ' random Map.get calls)</h2>');
+  lines.push('<table><tr><th>index</th><th class="num">total</th><th class="num">mean</th><th class="num">p95</th></tr>');
+
+  for (const r of indices) {
+    const keys = Object.keys(r.parsed);
+    if (!keys.length) continue;
+    // Pre-sample random keys to avoid measuring Math.random.
+    const queries = [];
+    for (let i = 0; i < SAMPLES; i++) {
+      queries.push(keys[(Math.random() * keys.length) | 0]);
+    }
+
+    // Convert to Map for realistic lookup characteristics.
+    const m = new Map(Object.entries(r.parsed));
+
+    const samples = new Float64Array(SAMPLES);
+    for (let i = 0; i < SAMPLES; i++) {
+      const t0 = performance.now();
+      const v = m.get(queries[i]);
+      const t1 = performance.now();
+      samples[i] = t1 - t0;
+      // Touch result so optimizer doesn't elide.
+      if (v && typeof v === 'object') void v;
+    }
+
+    let total = 0;
+    for (let i = 0; i < SAMPLES; i++) total += samples[i];
+    const mean = total / SAMPLES;
+    // p95
+    const sorted = Array.from(samples).sort((a, b) => a - b);
+    const p95 = sorted[Math.floor(SAMPLES * 0.95)];
+
+    const meanCls = mean < 0.001 ? 'ok' : mean < 0.01 ? 'ok' : mean < 0.1 ? 'warn' : 'bad';
+    const p95Cls = p95 < 1 ? 'ok' : p95 < 5 ? 'warn' : 'bad';
+    lines.push(`<tr>
+      <td>${r.name}</td>
+      <td class="num">${fmtMs(total)}</td>
+      <td class="num ${meanCls}"><strong>${(mean * 1000).toFixed(2)} µs</strong></td>
+      <td class="num ${p95Cls}">${fmtMs(p95)}</td>
+    </tr>`);
+  }
+
+  lines.push('</table>');
+  lines.push('<p>ADR-011 (D) target: query latency &lt; 1 ms. Map.get on hash bucket is typically 5-50 µs on a warm V8.</p>');
+  document.getElementById('query-results').innerHTML = lines.join('');
+}
+
 document.getElementById('run').addEventListener('click', runAll);
+document.getElementById('run-query').addEventListener('click', runQueryLatencyBench);
 </script>
 </body>
 </html>
