@@ -55,6 +55,21 @@ export interface IndexBundle {
 	 * Eager-loaded (2.1 MB compressed) to avoid the lazy-promise race
 	 * hang in dev/HMR; the /declension route reads this directly. */
 	declension: Map<string, DeclensionRow[]>;
+	/** Phase 3.6 P0-1 — entry_id → [iast, dict_slug] meta for reverse search
+	 * results. Without this, the UI shows raw entry_ids and users can't tell
+	 * which Sanskrit/Tibetan word matched their English/Korean gloss.
+	 * Compact schema: dict slugs deduped to a separate array (~148 strings),
+	 * each id maps to [iast, dict_idx] to keep size under Cloudflare 25 MiB
+	 * cap. snippet_short omitted — full body via Phase 5 D1 Edge API.
+	 * Top-30 entries per token only (UI shows 30); deeper hits would need
+	 * the same lazy fetch path. */
+	reverseMeta: ReverseMetaBundle;
+}
+
+export interface ReverseMetaBundle {
+	dicts: string[];
+	/** entry_id → [headword_iast, dict_index_into_dicts] */
+	ids: Map<string, [string, number]>;
 }
 
 export interface DeclensionRow {

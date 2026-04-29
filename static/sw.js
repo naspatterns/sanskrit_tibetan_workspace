@@ -8,7 +8,8 @@
 // indices, bump the suffix below and reload twice (install + activate).
 
 // v3: Phase 3.5 added declension (top-10K Heritage paradigms).
-const CACHE_NAME = 'stw-indices-v3';
+// v4: Phase 3.6 P0-1 added reverse_meta (id → iast/dict for reverse hits UI).
+const CACHE_NAME = 'stw-indices-v4';
 
 const PRECACHE_URLS = [
 	'/indices/tier0.msgpack.zst',
@@ -16,6 +17,7 @@ const PRECACHE_URLS = [
 	'/indices/equivalents.msgpack.zst',
 	'/indices/reverse_en.msgpack.zst',
 	'/indices/reverse_ko.msgpack.zst',
+	'/indices/reverse_meta.msgpack.zst',
 	'/indices/declension.msgpack.zst',
 	'/indices/headwords.txt.zst'
 ];

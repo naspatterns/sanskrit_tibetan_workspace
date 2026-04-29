@@ -11,6 +11,7 @@ import type {
 	IndexBundle,
 	IndexLoadStatus,
 	LoadProgress,
+	ReverseMetaBundle,
 	Tier0Entry,
 } from './types';
 
@@ -26,6 +27,8 @@ const INDICES: IndexSpec[] = [
 	{ key: 'equivalents', url: '/indices/equivalents.msgpack.zst', decoder: 'msgpack' },
 	{ key: 'reverseEn', url: '/indices/reverse_en.msgpack.zst', decoder: 'msgpack' },
 	{ key: 'reverseKo', url: '/indices/reverse_ko.msgpack.zst', decoder: 'msgpack' },
+	// Phase 3.6 P0-1 — reverse search hit meta (id → [iast, dict_idx])
+	{ key: 'reverseMeta', url: '/indices/reverse_meta.msgpack.zst', decoder: 'msgpack' },
 	{ key: 'declension', url: '/indices/declension.msgpack.zst', decoder: 'msgpack' },
 	{ key: 'headwords', url: '/indices/headwords.txt.zst', decoder: 'text' }
 ];
@@ -121,17 +124,28 @@ export async function loadAllIndices(
 		INDICES.map((spec, i) => fetchAndDecode(spec, status[i], emit))
 	);
 
-	const [tier0Raw, tier0BoRaw, equivRaw, revEnRaw, revKoRaw, declRaw, headwordsRaw] = results;
+	const [tier0Raw, tier0BoRaw, equivRaw, revEnRaw, revKoRaw, revMetaRaw, declRaw, headwordsRaw] =
+		results;
 	const bundle: IndexBundle = {
 		tier0: objectToMap<Tier0Entry>(tier0Raw),
 		tier0Bo: objectToMap<Tier0Entry>(tier0BoRaw),
 		equivalents: objectToMap<EquivRow[]>(equivRaw),
 		reverseEn: objectToMap<string[]>(revEnRaw),
 		reverseKo: objectToMap<string[]>(revKoRaw),
+		reverseMeta: parseReverseMeta(revMetaRaw),
 		declension: objectToMap<DeclensionRow[]>(declRaw),
 		headwords: parseHeadwords(headwordsRaw as string)
 	};
 
 	emit();
 	return bundle;
+}
+
+/** Decode reverse_meta.msgpack.zst payload into a typed ReverseMetaBundle. */
+export function parseReverseMeta(raw: unknown): ReverseMetaBundle {
+	const obj = raw as { dicts?: string[]; ids?: Record<string, [string, number]> };
+	return {
+		dicts: obj.dicts ?? [],
+		ids: new Map(Object.entries(obj.ids ?? {}))
+	};
 }

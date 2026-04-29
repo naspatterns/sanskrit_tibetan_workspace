@@ -13,6 +13,10 @@
 	import Autocomplete from '$lib/components/Autocomplete.svelte';
 	import FilterBar from '$lib/components/FilterBar.svelte';
 
+	// Phase 3.6 P0-1 — bundle ref at module scope so the reverse-search
+	// renderer can resolve entry_ids to (iast, dict_slug) via reverseMeta.
+	const bundle = getIndexBundle();
+
 	let query = $state('');
 	// 3.2.4 — Filter state (lang pills + priority slider).
 	let langFilter = $state<EntryLang | 'all'>('all');
@@ -68,7 +72,6 @@
 		if (isIndexLoaded()) {
 			const fromId = page.url.searchParams.get('from');
 			if (fromId) {
-				const bundle = getIndexBundle();
 				for (const info of bundle.tier0.values()) {
 					const hit = info.entries.find((e) => e.id === fromId);
 					if (hit) {
@@ -350,28 +353,34 @@
 			<section class="zone zone-rev">
 				<h2>역검색 · Reverse</h2>
 				{#each result.reverse as hit, i (hit.language + i)}
-					<details class="rev-detail">
+					<details class="rev-detail" open>
 						<summary>
 							<code>{hit.language}</code> · <code>{hit.token}</code> →
-							<strong>{hit.entryIds.length}</strong> entries (펼치기)
+							<strong>{hit.entryIds.length}</strong> matches
 						</summary>
 						<ul class="rev-list">
 							{#each hit.entryIds.slice(0, 30) as eid}
-								{@const dict = dictFromEntryId(eid)}
-								<li>
-									<code>{eid}</code>
+								{@const meta = bundle.reverseMeta.ids.get(eid)}
+								{@const iast = meta ? meta[0] : '(미상)'}
+								{@const dictSlug = meta
+									? bundle.reverseMeta.dicts[meta[1]]
+									: dictFromEntryId(eid)}
+								<li class="rev-hit">
 									<button
 										type="button"
-										class="ac-item"
-										onclick={() => setQuery(dict)}
-										title="이 사전으로 새 검색"
+										class="rev-iast"
+										onclick={() => setQuery(iast)}
+										title="이 단어로 검색"
 									>
-										→ {dict}
+										{iast}
 									</button>
+									<span class="rev-dict" title={eid}>{dictSlug}</span>
 								</li>
 							{/each}
 							{#if hit.entryIds.length > 30}
-								<li class="more">... {hit.entryIds.length - 30}개 더</li>
+								<li class="more">
+									… {hit.entryIds.length - 30}개 더 (Phase 5 Edge API에서 lazy load 예정)
+								</li>
 							{/if}
 						</ul>
 					</details>
@@ -653,27 +662,40 @@
 		list-style: none;
 		padding: 0.4rem 0 0.4rem 1rem;
 		margin: 0;
-		font-size: 0.85rem;
+		font-size: 0.92rem;
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+		gap: 0.4rem;
 	}
 	.rev-list li {
 		padding: 0.15rem 0;
 		display: flex;
-		gap: 0.4rem;
-		align-items: center;
+		gap: 0.5rem;
+		align-items: baseline;
 	}
-	.ac-item {
+	.rev-hit .rev-iast {
 		background: var(--bg-alt);
 		border: 1px solid var(--border);
-		border-radius: 12px;
-		padding: 0.25rem 0.6rem;
+		border-radius: 6px;
+		padding: 0.2rem 0.55rem;
 		cursor: pointer;
 		color: var(--fg);
 		font-family: inherit;
-		font-size: 0.85rem;
+		font-size: 0.95rem;
+		font-weight: 500;
 	}
-	.ac-item:hover {
+	.rev-hit .rev-iast:hover {
 		background: var(--accent);
 		color: var(--bg);
+	}
+	.rev-hit .rev-dict {
+		color: var(--fg-muted);
+		font-size: 0.78rem;
+	}
+	.rev-list li.more {
+		grid-column: 1 / -1;
+		font-size: 0.8rem;
+		color: var(--fg-muted);
 	}
 	code {
 		background: var(--bg-alt);

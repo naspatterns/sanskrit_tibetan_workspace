@@ -46,6 +46,13 @@ function makeBundle(): IndexBundle {
 		]),
 		reverseEn: new Map([['duty', ['apte-sanskrit-english-001', 'monier-williams-001']]]),
 		reverseKo: new Map([['법', ['apte-sanskrit-english-001']]]),
+		reverseMeta: {
+			dicts: ['apte-sanskrit-english', 'monier-williams'],
+			ids: new Map<string, [string, number]>([
+				['apte-sanskrit-english-001', ['dharma', 0]],
+				['monier-williams-001', ['dharma', 1]]
+			])
+		},
 		headwords: [
 			{ norm: 'dharma', iast: 'dharma' },
 			{ norm: 'dharma-cakra', iast: 'dharma-cakra' },
