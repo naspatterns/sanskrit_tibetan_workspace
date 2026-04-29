@@ -327,6 +327,10 @@ def main() -> int:
     slug_filter = args.dicts.split(",") if args.dicts else None
     slug_dirs = iter_slug_dirs(args.sources, slug_filter)
 
+    # Skip equivalents-only sources (no v1 dict-table backing; populated by
+    # build_equivalents_index.py from external/OCR pipelines).
+    slug_dirs = [d for d in slug_dirs if "v1_name" in load_meta(d)]
+
     if args.skip_existing:
         slug_dirs = [d for d in slug_dirs if not (args.out / f"{d.name}.jsonl").exists()]
 

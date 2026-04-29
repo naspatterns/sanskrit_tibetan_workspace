@@ -1,6 +1,6 @@
 # Hirakawa OCR Noise Filter — Report
 
-**Generated**: 2026-04-28 13:34 UTC
+**Generated**: 2026-04-29 05:13 UTC
 
 ## Filter
 
@@ -80,28 +80,8 @@ Rows failing **either** condition are dropped.
 | `equiv-hirakawa-000016` | `原則當` | 3 | 46.5 | 36 | low_conf |
 | `equiv-hirakawa-000017` | `但` | 1 | 46.2 | 37 | low_conf |
 
-## Verify (`scripts.verify` — equiv-hirakawa only)
-
-| run | total | errors | warnings |
-|---|---:|---:|---:|
-| before filter | 16,851 | 0 | 16,851 |
-| after filter | 16,484 | 0 | 16,484 |
-| **delta** | **−367** | 0 | **−367** |
-
-Warning reduction matches the dropped-row count one-to-one. The remaining
-~16K warnings are a pre-existing `headword_norm` schema mismatch in the
-extractor (the extractor stores the IAST normalization in `headword_norm`,
-while `scripts.verify` recomputes it from the CJK `headword`). That issue
-is independent of this filter and out of scope.
-
-> Note: `scripts.verify` (full repo) currently exits at the meta-registry
-> stage on unrelated `exclude_from_search` errors for `equiv-hopkins` and
-> the `tib-hopkins-*` family. The numbers above were obtained by invoking
-> `verify.verify_dict()` directly with `--dicts equiv-hirakawa` semantics.
-
 ## Notes
 
 - Filter is applied in-place by `scripts/postprocess_hirakawa_filter.py`. Re-running the script on already-filtered data is a no-op.
 - Surviving rows include the page-level OCR confidence in `source_meta.ocr_conf`, so downstream consumers can apply stricter filters at query time without re-running this pass.
 - Audit trail: `data/sources/equiv-hirakawa/meta.json` records the filter thresholds and counts under the `filter` key.
-- Optional Zone B index rebuild (`scripts.build_equivalents_index`) was skipped — that builder doesn't yet exist (Phase 2.5b §1, see `data/reports/equiv-pending-tasks.md`). When it lands, re-running it will pick up the −367 row delta automatically.
