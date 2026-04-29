@@ -222,4 +222,55 @@
 		padding: 0.5rem;
 		border-radius: 4px;
 	}
+
+	/* Phase 3.6 — focus rings for keyboard nav. */
+	a:focus-visible,
+	input:focus-visible {
+		outline: 2px solid var(--accent);
+		outline-offset: 2px;
+		border-radius: 4px;
+	}
+
+	/* Phase 3.6 — mobile responsive (≤768px). */
+	@media (max-width: 768px) {
+		main {
+			margin: 0.75rem auto;
+			padding: 0 0.75rem;
+		}
+		.topbar {
+			flex-wrap: wrap;
+			gap: 0.4rem;
+		}
+		.tabs {
+			flex: 1 1 auto;
+		}
+		.search-input {
+			flex: 1 1 100%;
+			order: 3;
+			font-size: 1rem;
+		}
+		.decl-grid {
+			font-size: 0.85rem;
+		}
+		.decl-grid th,
+		.decl-grid td {
+			padding: 0.25rem 0.35rem;
+		}
+		.par-head {
+			flex-wrap: wrap;
+			gap: 0.4rem;
+		}
+	}
+	@media (max-width: 480px) {
+		main {
+			padding: 0 0.5rem;
+		}
+		.tab {
+			padding: 0.45rem 0.6rem;
+			font-size: 0.88rem;
+		}
+		.decl-grid {
+			font-size: 0.8rem;
+		}
+	}
 </style>

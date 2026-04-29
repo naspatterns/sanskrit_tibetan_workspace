@@ -707,4 +707,54 @@
 		border-radius: 3px;
 		font-size: 0.85rem;
 	}
+
+	/* Phase 3.6 — focus rings for keyboard navigation (a11y).
+	 * Add visible focus indicator on all interactive elements. */
+	button:focus-visible,
+	a:focus-visible,
+	input:focus-visible,
+	details > summary:focus-visible {
+		outline: 2px solid var(--accent);
+		outline-offset: 2px;
+		border-radius: 4px;
+	}
+
+	/* Phase 3.6 — mobile responsive (≤768px).
+	 * Layout already 760px max-width; mobile changes below address topbar
+	 * wrap, font scaling, and modal full-screen. */
+	@media (max-width: 768px) {
+		main {
+			margin: 0.75rem auto;
+			padding: 0 0.75rem;
+		}
+		.topbar {
+			flex-wrap: wrap;
+			gap: 0.4rem;
+		}
+		.tabs {
+			flex: 1 1 auto;
+		}
+		.search-wrap {
+			flex: 1 1 100%;
+			order: 3;
+		}
+		.search-input {
+			font-size: 1rem;
+		}
+		.zone h2 {
+			font-size: 0.92rem;
+		}
+		.rev-list {
+			grid-template-columns: 1fr;
+		}
+	}
+	@media (max-width: 480px) {
+		main {
+			padding: 0 0.5rem;
+		}
+		.tab {
+			padding: 0.45rem 0.6rem;
+			font-size: 0.88rem;
+		}
+	}
 </style>

@@ -169,4 +169,18 @@
 		font-size: 0.78rem;
 		color: var(--fg-muted);
 	}
+	/* Phase 3.6 — mobile: full-screen modal. */
+	@media (max-width: 768px) {
+		.modal-bg {
+			padding: 0;
+			align-items: stretch;
+		}
+		.modal {
+			max-height: 100vh;
+			min-height: 100vh;
+			border-radius: 0;
+			border: none;
+			padding: 1rem;
+		}
+	}
 </style>
