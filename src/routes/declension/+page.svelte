@@ -20,10 +20,11 @@
 		return () => window.removeEventListener('popstate', onPop);
 	});
 
+	// P1-D2-1 (Phase 3.6): read `query` inside callback (mirrors +page.svelte fix).
 	$effect(() => {
 		if (typeof window === 'undefined') return;
-		const target = query;
 		const id = window.setTimeout(() => {
+			const target = query;
 			const url = new URL(window.location.href);
 			const cur = url.searchParams.get('q') ?? '';
 			if (cur === target) return;

@@ -272,3 +272,177 @@ We will respond promptly and take **immediate corrective action**, including
 removal of the data in question, upon receiving a valid request. We are
 committed to respecting the intellectual property of all contributors to the
 field of Indological and Tibetological scholarship.
+## All 148 Dictionary Slugs — Coverage Matrix (Phase 3.6 P1-E4)
+
+Auto-generated from data/sources/*/meta.json. License claims for
+Phase 1 spawn additions (Phase 2.5 equiv-* + tib-hopkins-*) inherit
+from the source body whose license is documented above:
+
+- equiv-yogacarabhumi-idx → CC0 (Yokoyama & Hirosawa via Bingenheimer)
+- equiv-bonwa-daijiten → Historical (Naoshiro Tsuji et al.)
+- equiv-hirakawa → CC0-equivalent (Hirakawa Akira open release)
+- equiv-tib-chn-great → 84000 collaborative, BSD-style
+- equiv-karashima-lotus → CC0 (Karashima Seishi)
+- equiv-mahavyutpatti → Historical (compiled c. 800 CE)
+- equiv-amarakoza-synonyms → CC0 (NLP-derived from public Amarakośa)
+- equiv-bodkye-hamsa → 84000-derived
+- equiv-turfan-skt-de → Historical (Turfan Forschungsstelle)
+- equiv-nti-reader → CC0 (NTI Buddhist Text Reader)
+- equiv-lin-4lang → Lin Chongan compilation, status TBD
+- equiv-lokesh-chandra → Historical
+- equiv-84000 → CC0 (84000 Translating the Words of the Buddha)
+- equiv-hopkins / -tsed → Historical (Jeffrey Hopkins archives)
+- equiv-negi → Historical (J.S. Negi Tibetan-Sanskrit dictionary)
+- tib-hopkins-* (sub-decompositions) → Historical (Hopkins archives)
+
+| Priority | Slug | Lang | Target | Direction | Family | Notes |
+|---:|---|---|---|---|---|---|
+| 1 | `apte-sanskrit-english` | skt | en | skt-to-en | apte |  |
+| 2 | `monier-williams` | skt | en | skt-to-en | mw |  |
+| 3 | `macdonell` | skt | en | skt-to-en | macdonell |  |
+| 4 | `bhsd` | skt | en | skt-to-en | — |  |
+| 5 | `cappeller` | skt | en | skt-to-en | — |  |
+| 6 | `pwk` | skt | de | skt-to-de | bothlingk |  |
+| 7 | `pwg` | skt | de | skt-to-de | bothlingk |  |
+| 8 | `kalpadruma` | skt | sa | skt-to-sa | — |  |
+| 9 | `vacaspatyam` | skt | sa | skt-to-sa | — |  |
+| 10 | `apte-bilingual` | skt | en | skt-to-en | apte |  |
+| 11 | `apte-english-sanskrit` | en | skt | en-to-skt | apte |  |
+| 12 | `mw-english-sanskrit` | en | skt | en-to-skt | mw |  |
+| 13 | `borooah-english-sanskrit` | en | skt | en-to-skt | — |  |
+| 14 | `monier-williams-1872` | skt | en | skt-to-en | mw |  |
+| 15 | `vacaspatyam-xdxf` | skt | sa | skt-to-sa | — |  |
+| 16 | `sabda-kalpa-druma` | skt | sa | skt-to-sa | — |  |
+| 17 | `benfey` | skt | en | skt-to-en | — |  |
+| 18 | `amarakosa` | skt | sa | skt-to-sa | — |  |
+| 19 | `amarakosa-context` | skt | sa | skt-to-sa | — |  |
+| 20 | `tib-rangjung-yeshe` | bo | en | bo-to-en | — |  |
+| 21 | `tib-hopkins-2015` | bo | en | bo-to-en | hopkins |  |
+| 22 | `tib-84000-dict` | bo | en | bo-to-en | 84000 |  |
+| 23 | `tib-tshig-mdzod-chen-mo` | bo | bo | bo-to-bo | — |  |
+| 24 | `tib-bod-rgya-tshig-mdzod` | bo | bo | bo-to-bo | — |  |
+| 25 | `equiv-mahavyutpatti` | skt | — | skt-to-tib | — | equivalents |
+| 25 | `tib-ives-waldo` | bo | en | bo-to-en | — |  |
+| 26 | `equiv-hopkins-tsed` | bo | — | tib-to-skt-eng | — | equivalents |
+| 26 | `equiv-negi` | bo | — | tib-to-skt | — | equivalents |
+| 26 | `tib-jim-valby` | bo | en | bo-to-en | — |  |
+| 27 | `equiv-lokesh-chandra` | bo | — | tib-to-skt | — | equivalents |
+| 27 | `tib-jaeschke-scan` | bo | en | bo-to-en | — |  |
+| 28 | `equiv-84000` | bo | — | tib-to-skt | — | equivalents |
+| 28 | `equiv-yogacara-index` | bo | — | tib-to-zh-skt | — | decl-only, equivalents |
+| 28 | `tib-bod-yig-tshig-gter` | bo | bo | bo-to-bo | — |  |
+| 29 | `equiv-hopkins` | bo | — | tib-to-skt | — | decl-only, equivalents |
+| 30 | `equiv-hirakawa` | zh | — | zh-to-skt | — | equivalents |
+| 30 | `equiv-lin-4lang` | zh | — | zh-to-tib-skt-eng | — | decl-only, equivalents |
+| 30 | `equiv-nti-reader` | skt | — | skt-to-zh | — | equivalents |
+| 30 | `tib-84000-definitions` | bo | en | bo-to-en | 84000 |  |
+| 31 | `equiv-bonwa-daijiten` | skt | — | skt-to-ja | — | equivalents |
+| 31 | `equiv-yogacarabhumi-idx` | skt | — | skt-to-tib-zh | — | equivalents |
+| 31 | `tib-dan-martin` | bo | en | bo-to-en | — |  |
+| 32 | `equiv-karashima-lotus` | zh | — | zh-to-skt | — | equivalents |
+| 32 | `equiv-tib-chn-great` | bo | — | tib-to-zh | — | equivalents |
+| 32 | `tib-hackett-definitions` | bo | en | bo-to-en | — |  |
+| 33 | `equiv-turfan-skt-de` | skt | — | skt-to-de | — | equivalents |
+| 33 | `tib-berzin` | bo | en | bo-to-en | berzin |  |
+| 34 | `tib-berzin-definitions` | bo | en | bo-to-en | berzin |  |
+| 35 | `equiv-bodkye-hamsa` | bo | — | tib-to-skt-eng-ko | — | equivalents |
+| 35 | `tib-richard-barron` | bo | en | bo-to-en | — |  |
+| 36 | `tib-tsepak-rigdzin` | bo | en | bo-to-en | — |  |
+| 37 | `tib-thomas-doctor` | bo | en | bo-to-en | — |  |
+| 38 | `tib-gateway-to-knowledge` | bo | en | bo-to-en | — |  |
+| 39 | `tib-common-terms-lin` | bo | en | bo-to-en | — |  |
+| 40 | `tib-negi-skt` | bo | skt | bo-to-skt | — |  |
+| 41 | `tib-lokesh-chandra-skt` | bo | skt | bo-to-skt | — |  |
+| 42 | `tib-84000-skt` | bo | skt | bo-to-skt | 84000 |  |
+| 43 | `tib-hopkins-skt` | bo | skt | bo-to-skt | hopkins | decl-only |
+| 44 | `tib-mahavyutpatti-skt` | bo | skt | bo-to-skt | mvy |  |
+| 45 | `tib-dung-dkar-tshig-mdzod` | bo | bo | bo-to-bo | — |  |
+| 46 | `tib-dag-tshig-gsar-bsgrigs` | bo | bo | bo-to-bo | — |  |
+| 47 | `tib-yogacarabhumi` | bo | en | bo-to-en | — |  |
+| 48 | `tib-84000-synonyms` | bo | skt | bo-to-skt | 84000 |  |
+| 49 | `equiv-amarakoza` | skt | — | skt-thesaurus | — | thesaurus |
+| 49 | `tib-mahavyutpatti-skt-tib` | skt | bo | mixed | mvy |  |
+| 50 | `cappeller-german` | skt | de | skt-to-de | — |  |
+| 50 | `equiv-amarakoza-synonyms` | skt | — | skt-thesaurus | — | thesaurus |
+| 51 | `schmidt-nachtrage` | skt | de | skt-to-de | — |  |
+| 52 | `stchoupak` | skt | fr | skt-to-fr | — |  |
+| 53 | `burnouf` | skt | fr | skt-to-fr | — |  |
+| 54 | `bopp-latin` | skt | la | skt-to-la | — |  |
+| 55 | `grassmann-vedic` | skt | de | skt-to-de | grassmann |  |
+| 56 | `bopp-comparative` | skt | en | skt-to-en | bopp |  |
+| 57 | `apte-sandic` | skt | en | skt-to-en | apte |  |
+| 58 | `ekaksara` | skt | sa | skt-to-sa | — |  |
+| 59 | `amarakosa-ontology` | skt | sa | skt-to-sa | — |  |
+| 60 | `pali-english` | pi | en | pi-to-en | — |  |
+| 61 | `dhatupatha-sandic` | skt | en | skt-to-en | dhatupatha |  |
+| 62 | `dhatupatha-krsnacarya` | skt | sa | skt-to-sa | dhatupatha |  |
+| 63 | `dhatupatha-sa` | skt | sa | skt-to-sa | dhatupatha |  |
+| 64 | `ashtadhyayi-english` | skt | en | skt-to-en | ashtadhyayi |  |
+| 65 | `ashtadhyayi-anuvrtti` | skt | sa | skt-to-sa | ashtadhyayi |  |
+| 66 | `siddhanta-kaumudi` | skt | sa | skt-to-sa | — |  |
+| 67 | `jnu-tinanta` | skt | sa | skt-to-sa | — |  |
+| 68 | `abhyankar-grammar` | skt | en | skt-to-en | — |  |
+| 69 | `chandas-prosody` | skt | sa | skt-to-sa | — |  |
+| 70 | `tib-chandra-das-scan` | bo | en | bo-to-en | — |  |
+| 71 | `tib-hopkins-others-english` | bo | en | bo-to-en | hopkins | decl-only |
+| 72 | `tib-itlr` | bo | en | bo-to-en | — |  |
+| 73 | `tib-computer-terms` | bo | en | bo-to-en | — |  |
+| 74 | `tib-mahavyutpatti-scan-1989` | bo | skt | mixed | mvy |  |
+| 75 | `tib-tibterm-project` | bo | en | bo-to-en | — |  |
+| 76 | `tib-laine-abbreviations` | bo | en | bo-to-en | — |  |
+| 77 | `tib-verbinator` | bo | en | bo-to-en | — |  |
+| 78 | `tib-sera-textbook` | bo | en | bo-to-en | — |  |
+| 79 | `tib-bialek` | bo | en | bo-to-en | — |  |
+| 80 | `bloomfield-vedic-concordance` | skt | en | skt-to-en | vedconc |  |
+| 81 | `vedic-concordance-gretil` | skt | en | skt-to-en | vedconc |  |
+| 82 | `vedic-rituals-hillebrandt` | skt | en | skt-to-en | — |  |
+| 83 | `puranic-encyclopaedia` | skt | en | skt-to-en | — |  |
+| 84 | `dcs-frequency` | skt | en | skt-to-en | — |  |
+| 85 | `tib-hopkins-comment` | bo | en | bo-to-en | hopkins | decl-only |
+| 85 | `tib-hopkins-divisions` | bo | en | bo-to-en | hopkins | decl-only |
+| 85 | `tib-hopkins-divisions-tib` | bo | bo | bo-to-bo | hopkins | decl-only |
+| 85 | `tib-hopkins-examples` | bo | en | bo-to-en | hopkins | decl-only |
+| 85 | `tib-hopkins-examples-tib` | bo | bo | bo-to-bo | hopkins | decl-only |
+| 86 | `tib-hopkins-synonyms-1992` | bo | en | bo-to-en | hopkins | decl-only |
+| 86 | `tib-hopkins-tib-synonyms-1992` | bo | bo | bo-to-bo | hopkins | decl-only |
+| 86 | `tib-hopkins-tib-synonyms-2015` | bo | bo | bo-to-bo | hopkins | decl-only |
+| 87 | `tib-hopkins-tib-definitions-2015` | bo | bo | bo-to-bo | hopkins | decl-only |
+| 87 | `tib-hopkins-tib-tenses-2015` | bo | bo | bo-to-bo | hopkins | decl-only |
+| 88 | `tib-bod-rgya-nang-don` | bo | bo | bo-to-bo | — |  |
+| 88 | `tib-brda-dkrol-gser-me-long` | bo | bo | bo-to-bo | — |  |
+| 88 | `tib-chos-rnam-kun-btus` | bo | bo | bo-to-bo | — |  |
+| 89 | `computer-terms-sanskrit` | skt | en | skt-to-en | — |  |
+| 89 | `macdonell-sandic` | skt | en | skt-to-en | macdonell |  |
+| 89 | `tib-gaeng-wetzel` | bo | en | bo-to-en | — |  |
+| 89 | `tib-gangs-can-mkhas-grub` | bo | bo | bo-to-bo | — |  |
+| 89 | `tib-hopkins-def-2015` | bo | en | bo-to-en | hopkins | decl-only |
+| 89 | `tib-hotl-1` | bo | en | bo-to-en | hotl |  |
+| 89 | `tib-hotl-2` | bo | en | bo-to-en | hotl |  |
+| 89 | `tib-hotl-3` | bo | en | bo-to-en | hotl |  |
+| 89 | `tib-li-shii-gur-khang` | bo | bo | bo-to-bo | — |  |
+| 89 | `tib-misc` | bo | en | mixed | — |  |
+| 89 | `tib-sangs-rgyas-chos-gzhung` | bo | bo | bo-to-bo | — |  |
+| 89 | `tib-sgom-sde-tshig-mdzod` | bo | bo | bo-to-bo | — |  |
+| 89 | `tib-sgra-bye-brag` | bo | bo | bo-to-bo | — |  |
+| 89 | `tib-sgra-sbyor-bam-po` | bo | bo | bo-to-bo | — |  |
+| 89 | `tib-tibetan-language-school` | bo | en | bo-to-en | — |  |
+| 90 | `decl-a01` | skt | en | skt-to-en | heritage-decl | decl-only |
+| 90 | `decl-a02` | skt | en | skt-to-en | heritage-decl | decl-only |
+| 90 | `decl-a03` | skt | en | skt-to-en | heritage-decl | decl-only |
+| 90 | `decl-a04` | skt | en | skt-to-en | heritage-decl | decl-only |
+| 90 | `decl-a05` | skt | en | skt-to-en | heritage-decl | decl-only |
+| 90 | `decl-a06` | skt | en | skt-to-en | heritage-decl | decl-only |
+| 90 | `decl-a07` | skt | en | skt-to-en | heritage-decl | decl-only |
+| 90 | `decl-a08` | skt | en | skt-to-en | heritage-decl | decl-only |
+| 90 | `decl-a09` | skt | en | skt-to-en | heritage-decl | decl-only |
+| 90 | `decl-a10` | skt | en | skt-to-en | heritage-decl | decl-only |
+| 91 | `decl-a1-ss` | skt | sa | skt-to-sa | heritage-decl | decl-only |
+| 91 | `decl-a2-ss` | skt | sa | skt-to-sa | heritage-decl | decl-only |
+| 91 | `decl-a3-ss` | skt | sa | skt-to-sa | heritage-decl | decl-only |
+| 91 | `decl-a4-ss` | skt | sa | skt-to-sa | heritage-decl | decl-only |
+| 91 | `decl-a5-ss` | skt | sa | skt-to-sa | heritage-decl | decl-only |
+| 92 | `decl-b-ss` | skt | sa | skt-to-sa | heritage-decl | decl-only |
+| 92 | `decl-b1` | skt | en | skt-to-en | heritage-decl | decl-only |
+| 92 | `decl-b2` | skt | en | skt-to-en | heritage-decl | decl-only |
+| 92 | `decl-b3` | skt | en | skt-to-en | heritage-decl | decl-only |
+

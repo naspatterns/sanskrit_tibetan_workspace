@@ -41,10 +41,14 @@
 
 	// 3.2.5 — store → URL (debounced 120ms; replaceState keeps history clean).
 	// Svelte 5 $effect cleanup cancels in-flight timer when query changes again.
+	// P1-D2-1 (Phase 3.6): read `query` *inside* the timeout callback so the
+	// dispatched URL always reflects the latest value at fire time. The prior
+	// pattern captured `target = query` at effect entry, which combined with
+	// cleanup-on-rerun was correct but fragile against future refactors.
 	$effect(() => {
 		if (typeof window === 'undefined') return;
-		const target = query;
 		const id = window.setTimeout(() => {
+			const target = query;
 			const url = new URL(window.location.href);
 			const cur = url.searchParams.get('q') ?? '';
 			if (cur === target) return;
