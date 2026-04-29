@@ -12,6 +12,12 @@
 
 	onMount(() => {
 		query = page.url.searchParams.get('q') ?? '';
+		const onPop = () => {
+			const nextQ = new URL(window.location.href).searchParams.get('q') ?? '';
+			if (nextQ !== query) query = nextQ;
+		};
+		window.addEventListener('popstate', onPop);
+		return () => window.removeEventListener('popstate', onPop);
 	});
 
 	$effect(() => {

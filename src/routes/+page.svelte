@@ -29,13 +29,11 @@
 	const result = $derived(performSearch(query));
 	let modalEntry = $state<Tier0Result | null>(null);
 
-	// 3.2.1 — URL → store reactive sync. SvelteKit's $app/state page.url
-	// updates on popstate / external goto. We mirror its q param into the
-	// local state when it diverges (avoiding store→URL→store loops).
-	$effect(() => {
-		const urlQ = page.url.searchParams.get('q') ?? '';
-		if (urlQ !== query) query = urlQ;
-	});
+	// 3.2.1 fix — popstate listener instead of reactive $effect. The reactive
+	// effect raced with our own goto(): each goto touches $page.url, the
+	// effect fires, and overwrote the user's in-flight typing with the
+	// stale URL value (only the last *committed* char survived). popstate
+	// fires only on back/forward navigation — exactly when we want sync.
 
 	// 3.2.5 — store → URL (debounced 120ms; replaceState keeps history clean).
 	// Svelte 5 $effect cleanup cancels in-flight timer when query changes again.
@@ -58,18 +56,30 @@
 	});
 
 	// 3.2.6 — ?from=entry-id deep link (open EntryFull modal directly).
+	// Also hydrate ?q= once on mount and on popstate (back/forward).
 	onMount(() => {
-		if (!isIndexLoaded()) return;
-		const fromId = page.url.searchParams.get('from');
-		if (!fromId) return;
-		const bundle = getIndexBundle();
-		for (const info of bundle.tier0.values()) {
-			const hit = info.entries.find((e) => e.id === fromId);
-			if (hit) {
-				modalEntry = hit;
-				return;
+		query = page.url.searchParams.get('q') ?? '';
+		const onPop = () => {
+			const nextQ = new URL(window.location.href).searchParams.get('q') ?? '';
+			if (nextQ !== query) query = nextQ;
+		};
+		window.addEventListener('popstate', onPop);
+
+		if (isIndexLoaded()) {
+			const fromId = page.url.searchParams.get('from');
+			if (fromId) {
+				const bundle = getIndexBundle();
+				for (const info of bundle.tier0.values()) {
+					const hit = info.entries.find((e) => e.id === fromId);
+					if (hit) {
+						modalEntry = hit;
+						break;
+					}
+				}
 			}
 		}
+
+		return () => window.removeEventListener('popstate', onPop);
 	});
 
 	function setQuery(next: string) {
