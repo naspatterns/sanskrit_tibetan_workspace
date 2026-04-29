@@ -7,8 +7,8 @@
 // caches via the activate handler. To force-refresh after rebuilding the
 // indices, bump the suffix below and reload twice (install + activate).
 
-// v2: Phase 3.3 added tier0-bo (Tibetan top-10K).
-const CACHE_NAME = 'stw-indices-v2';
+// v3: Phase 3.5 added declension (top-10K Heritage paradigms).
+const CACHE_NAME = 'stw-indices-v3';
 
 const PRECACHE_URLS = [
 	'/indices/tier0.msgpack.zst',
@@ -16,6 +16,7 @@ const PRECACHE_URLS = [
 	'/indices/equivalents.msgpack.zst',
 	'/indices/reverse_en.msgpack.zst',
 	'/indices/reverse_ko.msgpack.zst',
+	'/indices/declension.msgpack.zst',
 	'/indices/headwords.txt.zst'
 ];
 

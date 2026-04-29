@@ -29,6 +29,7 @@ function makeBundle(): IndexBundle {
 			]
 		]),
 		tier0Bo: new Map(),
+		declension: new Map(),
 		equivalents: new Map([
 			[
 				'dharma',

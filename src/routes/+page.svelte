@@ -147,6 +147,10 @@
 
 <main>
 	<header class="topbar">
+		<nav class="tabs" aria-label="primary tabs">
+			<a href="/" class="tab active" aria-current="page">검색</a>
+			<a href="/declension?q={encodeURIComponent(query)}" class="tab">곡용</a>
+		</nav>
 		<div class="search-wrap">
 			<input
 				bind:this={inputEl}
@@ -387,6 +391,26 @@
 		gap: 0.5rem;
 		align-items: stretch;
 		margin-bottom: 1rem;
+	}
+	.tabs {
+		display: flex;
+		gap: 0.3rem;
+	}
+	.tab {
+		padding: 0.5rem 0.8rem;
+		border: 1px solid var(--border);
+		border-radius: 6px;
+		text-decoration: none;
+		color: var(--fg);
+		font-size: 0.92rem;
+	}
+	.tab:hover {
+		background: var(--bg-alt);
+	}
+	.tab.active {
+		background: var(--accent);
+		color: var(--bg);
+		border-color: var(--accent);
 	}
 	.search-wrap {
 		flex: 1;

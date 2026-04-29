@@ -5,6 +5,7 @@
 import { decompress } from 'fzstd';
 import { decode } from '@msgpack/msgpack';
 import type {
+	DeclensionRow,
 	EquivRow,
 	HeadwordEntry,
 	IndexBundle,
@@ -25,6 +26,7 @@ const INDICES: IndexSpec[] = [
 	{ key: 'equivalents', url: '/indices/equivalents.msgpack.zst', decoder: 'msgpack' },
 	{ key: 'reverseEn', url: '/indices/reverse_en.msgpack.zst', decoder: 'msgpack' },
 	{ key: 'reverseKo', url: '/indices/reverse_ko.msgpack.zst', decoder: 'msgpack' },
+	{ key: 'declension', url: '/indices/declension.msgpack.zst', decoder: 'msgpack' },
 	{ key: 'headwords', url: '/indices/headwords.txt.zst', decoder: 'text' }
 ];
 
@@ -117,13 +119,14 @@ export async function loadAllIndices(
 		INDICES.map((spec, i) => fetchAndDecode(spec, status[i], emit))
 	);
 
-	const [tier0Raw, tier0BoRaw, equivRaw, revEnRaw, revKoRaw, headwordsRaw] = results;
+	const [tier0Raw, tier0BoRaw, equivRaw, revEnRaw, revKoRaw, declRaw, headwordsRaw] = results;
 	const bundle: IndexBundle = {
 		tier0: objectToMap<Tier0Entry>(tier0Raw),
 		tier0Bo: objectToMap<Tier0Entry>(tier0BoRaw),
 		equivalents: objectToMap<EquivRow[]>(equivRaw),
 		reverseEn: objectToMap<string[]>(revEnRaw),
 		reverseKo: objectToMap<string[]>(revKoRaw),
+		declension: objectToMap<DeclensionRow[]>(declRaw),
 		headwords: parseHeadwords(headwordsRaw as string)
 	};
 

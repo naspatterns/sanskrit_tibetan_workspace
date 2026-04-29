@@ -51,6 +51,16 @@ export interface IndexBundle {
 	reverseEn: Map<string, string[]>;
 	reverseKo: Map<string, string[]>;
 	headwords: HeadwordEntry[];
+	/** Phase 3.5 — Heritage Declension paradigms keyed by headword_norm.
+	 * Eager-loaded (2.1 MB compressed) to avoid the lazy-promise race
+	 * hang in dev/HMR; the /declension route reads this directly. */
+	declension: Map<string, DeclensionRow[]>;
+}
+
+export interface DeclensionRow {
+	iast: string;
+	body: string;
+	dict: string;
 }
 
 // ─── Loader progress ────────────────────────────────────────────────────
