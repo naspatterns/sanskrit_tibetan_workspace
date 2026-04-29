@@ -248,6 +248,9 @@ v1은 tier 1 (15개) 내부 순서가 무작위 → 사용자 불만.
 - D10c equiv frequency = (c) frequency.py 무관, 별 채널 (2026-04-28)
 - D10d 불광사전 OCR = (b) 보류, Phase 3 후 재검토 (2026-04-28)
 - ADR-011 = all-eager 인덱스 + Service Worker precache, 사전 shard 분할 안 함 (2026-04-29; supersedes ADR-009 B+A 하이브리드). 데스크톱 우선 + 검색 query latency <1ms 목표. Phase 3 5 default: (1) Vanilla CSS modules, (2) build_tier0.py --translations 머지, (3) SW 5 indices precache, (4) msgpack+zstd 유지, (5) main thread decode.
+- D-Tib10K = Tibetan 별도 `tier0-bo.msgpack.zst` (option A) 채택 (2026-04-29). frequency.py에 lang-filter 옵션 추가 + top10k_bo.txt 생성 + 6번째 index. 클라이언트 union lookup. Tibetan 단어 정의 cover율 0.5% → ~50%+ 향상.
+- D-Pre-deploy = Phase 4 (배포) 전에 Phase 3.2-3.6 (Search UX polish + Tibetan tier0 + Equiv UX + Declension + a11y) 충실 구현 (2026-04-29). 자율 일괄 진행 후 사용자 review.
+- D-Reader-Vocab-Last = Phase 6 (Reader) + Phase 7 (Vocab)는 *마지막* phase로 deferred (2026-04-29). 배포 + Edge API 도입 후 진입.
 - 프로젝트 이름 = Sanskrit-Tibetan Workspace (FB-7)
 - 패키지 매니저 = `uv` + `pyproject.toml`
 - Git 배포 정책 = meta.json/reports 커밋, JSONL은 gitignore (LICENSES 참조)

@@ -199,67 +199,70 @@ Top-10K Ko 번역 POC 100/9,995 (나머지는 subagent spawn_task 또는 batch A
 
 ---
 
-## Phase 3: Svelte UI 최소 버전 (2주)
+## Phase 3: Svelte UI (Pre-deploy 충실 구현, 2026-04-29~)
 
-**목표**: v1의 검색 모드 기능을 Svelte로 구현. 본격 사용 가능.
+**목표**: 배포 전 검색 + 곡용 기능을 충실히 구현. v1 대비 모든 차원 개선.
 
-### 3.1 프로젝트 셋업
-- Vite + Svelte 5
-- TypeScript
-- Vitest 단위 테스트
-- Playwright E2E
+**구조**: 사용자 review (2026-04-29) 후 sub-phase로 세분화 + Reader/Vocab은 마지막으로 deferred.
 
-### 3.2 핵심 컴포넌트
-- `<SearchBar>`: 자동완성 (FST), HK/IAST/Devanagari/한글/Latin 입력 호환
-  - **입력 문자 감지 (FB-8)**: Latin alphabet-only → 역검색 모드, 한글 → Ko
-    역인덱스, IAST/Devanagari/Wylie → 표제어 검색
-- `<ResultList>`: 4-zone 레이아웃 (A/B/D/C), **priority 순 정렬**
-  - 역검색 결과는 별도 섹션 ("영어/한국어 gloss로 찾음") (FB-8)
-- `<DictBlock>`: 사전별 엔트리
-  - 표제어는 **항상 `headword_iast`** 표시 (FB-4)
-  - 원본과 IAST가 다를 때만 "원본: ..." 작게 표시
-  - `body.ko` 없으면 "원문만" 배지 (FB-2)
-- `<ZoneA>`: `snippet_short` 기본 → "더 보기" 클릭 시 `snippet_medium` (FB-1)
-- `<EntryFull>`: 본문 전체 보기 + "원본 보기" 토글
+### 3.1 Search UI minimal viable ✅ (commit `cf18e57`까지)
 
-### 3.3 상태 관리
-- nanostores: `searchTerm`, `results`, `loadingState`
-- URL ↔ store 양방향 동기화
-- 페이지 새로고침 시 완전 복원
+scaffold + 5 indices loader + Service Worker + 5 채널 검색 (tier0 / equivalents 3채널 / reverse_en+ko / headwords prefix) + Zone B/C/D + 다크모드 + Sprint 1 quick wins (clickable terms / lang-balanced top-3 / EntryFull modal / Tibetan miss notice / role-filtered tier0).
 
-### 3.4 Service Worker
-- Cache-first for indices
-- Stale-while-revalidate for API
-- OPFS 캐시 (1GB까지)
+검증 (Chromium):
+- IAST 'dharma' / CJK '般若' / Korean '법' / Devanagari 'धर्म' / HK 'Dharma' / Wylie 'chos' 모든 채널 동작
+- query latency 0.00-0.20 µs (ADR-011 D 목표 ×5000배)
+- 68 vitest + 79 pytest pass
 
-### 3.5 **다크모드 (FB-6)**
-- `src/styles/theme.css`: OKLCH 기반 CSS 변수
-  - 라이트: `--bg: oklch(0.99 0 0)`, `--fg: oklch(0.18 0 0)` 등
-  - 다크: `--bg: oklch(0.18 0 0)`, `--fg: oklch(0.92 0 0)` 등
-  - 대비비 WCAG AAA (본문) / AA (보조)
-- `src/lib/stores/theme.ts`: Svelte store + localStorage 동기화
-  - `$state<'light' | 'dark' | 'auto'>`
-  - `prefers-color-scheme` media query 감지
-- `<ThemeToggle>`: 헤더 우상단 3-state 토글 (☀️/🌙/🔄)
-- 키보드 단축키 `Shift+D`
-- View Transitions API로 부드러운 전환
-- 산스크리트/티벳 diacritic 가독성 테스트 (모바일 + 다크)
+### 3.2 Search UX polish ⏭️ (즉시 다음, ≈1.5일)
 
-### 3.6 디자인 마무리
-- 모바일 우선 반응형
-- 폰트 로딩: Noto Sans Devanagari/Tibetan system fallback, IAST는 Latin 기본 폰트
-- 한자 system fonts
+| # | 작업 | 추정 |
+|---|---|---|
+| 1 | URL `$page` reactive sync (popstate 시 store 동기화) | 30 min |
+| 2 | 자동완성 dropdown (입력 중 즉시 표시, debounced 80ms, ↑↓/Enter navigation) | 3h |
+| 3 | 키보드 단축키 (`/` focus, `Esc` clear/close, `Shift+D` 다크모드) | 1h |
+| 4 | 사전/lang 필터 (priority slider + lang pills + dict toggle) | 3h |
+| 5 | 결과 정밀화 (debounce 100ms keystroke, scroll preserve, virtual list 검토) | 1h |
+| 6 | URL `?from=entry-id` deep-link (특정 entry 모달로 직접 진입) | 1h |
+| 7 | Vitest + Playwright tests | 1h |
 
-### 3.7 탭 네비게이션
-- 헤더에 3-탭 (검색 · 곡용 · 독해)
-- 독해 탭은 Phase 3에선 "Coming soon" placeholder
-- 검색/곡용 탭 간 쉬운 이동 (단어 공유)
+### 3.3 Tibetan tier0 확장 (≈4h, **option A 확정 2026-04-29**)
 
-**완료 기준**:
-- v1과 동일한 검색 결과 (검색 탭)
-- 첫 로드 후 모든 검색 <100ms (Tier 0 hit)
-- 다크모드 토글 작동, localStorage 유지
-- Lighthouse Performance ≥ 90
+별도 `public/indices/tier0-bo.msgpack.zst` (5-8 MB compressed, top-10K Tibetan headwords).
+
+- `scripts/frequency.py --lang-filter bo` 옵션 — Tibetan 사전들에서만 빈도 산정 → `data/reports/top10k_bo.txt`
+- `scripts/build_tier0.py --top-source <path>` 옵션 — 임의 top-list로 별도 인덱스
+- 클라이언트 `loader.ts` 6번째 index + `engine.ts`에서 tier0 / tier0-bo union lookup (skt 우선, bo 보충)
+- SplashScreen 6 bars · SW precache 6 indices
+
+**효과**: Tibetan 단어 정의 cover율 0.5% → ~50%+ 추정.
+
+### 3.4 Equivalents UX 마감 (≈1일)
+
+- Equiv row 클릭 → detail modal (note, category, source meta, sources list 풍부 표시)
+- 사전별 색상 또는 아이콘 (시각적 구분)
+- 페이지네이션 (50 row 이상 시)
+- 사전 그룹 토글 (특정 source 사전들만 표시)
+
+### 3.5 Declension tab (≈2일)
+
+- `/declension` 라우트
+- Heritage Declension 데이터 (`exclude_from_search: true` 사전들 — `decl-a01..a08`)
+- 곡용표 UI (격 8 × 수 3 × 성 3)
+- 검색 탭 ↔ 곡용 탭 cross-link (단어 클릭으로 이동)
+
+### 3.6 Polish + a11y (≈1일)
+
+- 모바일 반응형 (≤768px) — sidebar collapse, 폰트 크기 조정
+- WCAG AAA 본문 검증 (Lighthouse + manual)
+- 키보드 navigation 완성 (tab order, focus rings, screen reader)
+- Loading state 고도화 (per-channel progress)
+
+**Phase 3 완료 기준**:
+- v1 대비 모든 검색 채널 + 곡용 탭 동작
+- query latency <1ms 유지 (ADR-011 D)
+- Lighthouse Performance ≥ 90 / Accessibility ≥ 95
+- 모바일 반응형 정상 동작
 
 ---
 
