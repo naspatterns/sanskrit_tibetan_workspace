@@ -288,7 +288,34 @@ Phase 4 배포 직전 데이터 정합성·완전성·UX·코드 품질·배포 
 
 **P0/P1 backlog 도출 → Phase 3.6 + Phase 4 확장**
 
-### 3.6 Polish + a11y + Audit P0/P1 fixes ⏭️ (즉시 다음, ~3-5일 확장)
+### 3.6 Polish + a11y + Audit P0/P1 fixes ✅ (2026-04-30 종결, 6 commits)
+
+main = `bf1a877`. 옵션 B 결정 (UI/UX + 코드 품질) + Phase 3.7 데이터 재번역 동시 발사.
+
+**완료된 작업** (commit 순서):
+- ✅ P0-3 (`38efc6f`) tier0 28.78 → 23.43 MiB (zstd level 22 + LDM + snippet_medium ≤350 + ko outlier ≤2000)
+- ✅ P1-D8-1 + P1-D8-2 (`b9670fc`) parse.ts 12 + loader.ts 15 unit tests (75→102 vitest)
+- ✅ P0-2 batch infra (`f9c9d5b`) scripts/translate_eu.py — chunking + state resume + rate-limit graceful handling. 4 chunks prepared (381K candidates, ~$451)
+- ✅ P0-1 (`1408fc2`) reverse_meta.msgpack.zst 7.81 MiB + UI 갱신 (raw entry_id → headword + dict)
+- ✅ P1-D2-1 + P1-E2 + P1-E4 (`d5a5445`) $effect closure refactor + static/_headers + LICENSES 148 coverage table
+- ✅ Day 3 polish (`bf1a877`) 모바일 ≤768px + ≤480px + a11y focus rings (button/a/input/details summary)
+
+**Phase 3.7로 deferred** (옵션 B 결정 — batch retrieve 후 진행):
+- P0-2 EU batch submit + retrieve (사용자 ANTHROPIC_API_KEY 후 즉시)
+- P1-1 build_reverse_index.py headword salience boost
+- P1-2 en-source 한국어 $30 batch
+- P1-3 yogācārabhūmi zh column-mapping fix
+
+**Phase 3.6 완료 기준 vs 결과**:
+- ✅ TypeScript strict 0 errors / 257 files
+- ✅ vitest 102/102, pytest 79/79
+- ✅ Cloudflare 25 MiB 한계 통과 (tier0 23.43, reverse_meta 7.81, equivalents 13.24, …)
+- ✅ static/_headers (CSP + Cache-Control)
+- ✅ Lighthouse Accessibility 95 (이전), 모바일/키보드 polish로 더 향상 예상
+- ✅ adapter-static build success
+- ⏭️ Sentinel 50 queries baseline (Phase 3.7 batch retrieve 후 비교)
+
+### 3.6 (이전 plan 참고용) — 이미 모두 ✅ 처리
 
 **Audit P0** (must fix before deploy):
 - **P0-1** Reverse search UI raw entry_id → `reverse_meta.msgpack.zst` 신규 인덱스 + 렌더링 갱신

@@ -265,6 +265,8 @@ v1은 tier 1 (15개) 내부 순서가 무작위 → 사용자 불만.
   - **P1-E2** static/_headers 미작성 (CSP/Cache-Control)
   - **P1-E4** LICENSES.md 47 dicts 미명시 (148 - 101)
   - **P2** zstd 디컴프 Web Worker 이전 (Performance 45→80+ 예상)
+- D-Phase-3.6-Done = Phase 3.6 종결 (2026-04-30, 6 commits, main = `bf1a877`). 옵션 B 결정 (UI/UX + 코드 품질) — Phase 3.7 데이터 재번역과 동시 발사. Phase 3.6 완료 작업: P0-3 tier0 23.43 MiB · P0-1 reverse_meta + UI · P1-D8 27 unit tests (75→102) · P1-D2-1 closure · P1-E2 _headers · P1-E4 LICENSES 148 coverage · 모바일 ≤768px + a11y focus rings. **Phase 3.7 deferred**: P0-2 batch (사용자 ANTHROPIC_API_KEY 대기, ~$451 cost — B2 audit 추정 $225 정정) + P1-1 + P1-2 + P1-3.
+- D-EU-Batch-Cost-Revised = P0-2 EU re-translate 비용은 audit-B-eu-quality.md $225 추정의 실측 정정으로 ~$451 (Sonnet 4.5 batch, input 138 chars/entry × output 150 tokens). 4 chunks (100K + 100K + 100K + 81K) prepared (`data/translations/eu/state.json`). 사용자 plan 안에서 graceful submit/poll/retrieve resume — `scripts/translate_eu.py`.
   - **P2** meta description / sitemap.xml / robots.txt (SEO 82→95)
   사용자 시연 (50 queries baseline + D4 heap + 모바일)은 다음 세션 보류 — Phase 3.6 fix 전후 비교용. Sentinel #15 사용자 정정 완료 (māhā→mahā). 가이드: `audit-C-demo-guide.md`.
 - 프로젝트 이름 = Sanskrit-Tibetan Workspace (FB-7)
