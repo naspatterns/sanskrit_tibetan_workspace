@@ -5,9 +5,11 @@
 	import { performSearch } from '$lib/stores/search';
 	import { entryLang, langBalancedTop, langBalancedRest, type EntryLang } from '$lib/search/lang';
 	import { isIndexLoaded, getIndexBundle } from '$lib/indices/store';
-	import type { HeadwordEntry, Tier0Result } from '$lib/indices/types';
+	import { chipStyle, styleFor } from '$lib/search/source-colors';
+	import type { EquivRow, HeadwordEntry, Tier0Result } from '$lib/indices/types';
 	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
 	import EntryFull from '$lib/components/EntryFull.svelte';
+	import EquivDetail from '$lib/components/EquivDetail.svelte';
 	import Autocomplete from '$lib/components/Autocomplete.svelte';
 	import FilterBar from '$lib/components/FilterBar.svelte';
 
@@ -15,6 +17,9 @@
 	// 3.2.4 — Filter state (lang pills + priority slider).
 	let langFilter = $state<EntryLang | 'all'>('all');
 	let priorityMax = $state(100);
+	// 3.4 — Equivalents pagination + detail modal.
+	let equivPageSize = $state(50);
+	let equivDetail = $state<EquivRow | null>(null);
 	let inputFocused = $state(false);
 	let inputEl = $state<HTMLInputElement | null>(null);
 	let acRef = $state<{ moveSelection: (d: number) => boolean; pickSelected: () => boolean } | null>(
@@ -200,7 +205,7 @@
 			<section class="zone zone-b">
 				<h2>대응어 · Equivalents <span class="count">{result.equivalents.length}</span></h2>
 				<ul class="equiv-list">
-					{#each result.equivalents.slice(0, 50) as row}
+					{#each result.equivalents.slice(0, equivPageSize) as row}
 						<li class="equiv-row">
 							{#if row.skt_iast}
 								<button
@@ -233,14 +238,41 @@
 							{#if row.ko}<span class="sep">·</span><span class="lang ko">{row.ko}</span>{/if}
 							{#if row.en}<span class="sep">·</span><span class="lang en">{row.en}</span>{/if}
 							{#if row.category}<span class="cat">{row.category}</span>{/if}
-							<span class="sources">{row.sources.join(' · ')}</span>
+							<span class="source-chips">
+								{#each row.sources as slug}
+									<span class="chip" style={chipStyle(slug)} title={slug}>
+										{styleFor(slug).label}
+									</span>
+								{/each}
+							</span>
+							<button
+								type="button"
+								class="detail-btn"
+								onclick={() => (equivDetail = row)}
+								title="대응어 상세 보기"
+								aria-label="대응어 상세"
+							>
+								ⓘ
+							</button>
 						</li>
 					{/each}
 				</ul>
-				{#if result.equivalents.length > 50}
-					<p class="more">
-						... {result.equivalents.length - 50}건 더 (페이지네이션은 follow-up)
-					</p>
+				{#if result.equivalents.length > equivPageSize}
+					<button
+						type="button"
+						class="show-more"
+						onclick={() => (equivPageSize += 50)}
+					>
+						... {result.equivalents.length - equivPageSize}건 더 보기 (다음 50개)
+					</button>
+				{:else if equivPageSize > 50 && result.equivalents.length > 0}
+					<button
+						type="button"
+						class="show-more"
+						onclick={() => (equivPageSize = 50)}
+					>
+						접기 (50개로)
+					</button>
 				{/if}
 			</section>
 		{/if}
@@ -336,6 +368,9 @@
 
 	{#if modalEntry}
 		<EntryFull entry={modalEntry} onclose={() => (modalEntry = null)} />
+	{/if}
+	{#if equivDetail}
+		<EquivDetail row={equivDetail} onclose={() => (equivDetail = null)} />
 	{/if}
 </main>
 
@@ -474,10 +509,51 @@
 		color: var(--fg-muted);
 		font-size: 0.82rem;
 	}
-	.sources {
+	.source-chips {
 		margin-left: 0.6rem;
+		display: inline-flex;
+		gap: 0.25rem;
+		flex-wrap: wrap;
+	}
+	.chip {
+		display: inline-block;
+		padding: 0 0.4rem;
+		border-radius: 8px;
+		font-size: 0.7rem;
+		font-weight: 600;
+		line-height: 1.4;
+	}
+	.detail-btn {
+		margin-left: 0.4rem;
+		padding: 0 0.35rem;
+		background: transparent;
+		border: 1px solid var(--border);
+		border-radius: 50%;
 		color: var(--fg-muted);
+		cursor: pointer;
 		font-size: 0.78rem;
+		line-height: 1.3;
+	}
+	.detail-btn:hover {
+		background: var(--bg-alt);
+		color: var(--accent);
+		border-color: var(--accent);
+	}
+	.show-more {
+		display: block;
+		width: 100%;
+		margin-top: 0.5rem;
+		padding: 0.4rem;
+		background: var(--bg-alt);
+		border: 1px solid var(--border);
+		border-radius: 4px;
+		color: var(--accent);
+		cursor: pointer;
+		font-family: inherit;
+		font-size: 0.85rem;
+	}
+	.show-more:hover {
+		border-color: var(--accent);
 	}
 	.more {
 		color: var(--fg-muted);
