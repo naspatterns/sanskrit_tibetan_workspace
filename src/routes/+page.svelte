@@ -3,10 +3,14 @@
 	import { page } from '$app/state';
 	import { goto } from '$app/navigation';
 	import { performSearch } from '$lib/stores/search';
+	import { langBalancedTop, langBalancedRest } from '$lib/search/lang';
+	import type { Tier0Result } from '$lib/indices/types';
 	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
+	import EntryFull from '$lib/components/EntryFull.svelte';
 
 	let query = $state('');
 	const result = $derived(performSearch(query));
+	let modalEntry = $state<Tier0Result | null>(null);
 
 	// Hydrate from ?q= on first paint.
 	onMount(() => {
@@ -29,9 +33,18 @@
 		}
 	});
 
-	function chooseSuggestion(iast: string) {
-		query = iast;
+	function setQuery(next: string) {
+		query = next;
+		// Scroll back to top so the user sees the new exact match.
+		if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: 'smooth' });
 	}
+
+	function dictFromEntryId(id: string): string {
+		return id.replace(/-\d+$/, '');
+	}
+
+	const zoneCEntries = $derived(result?.exact ? langBalancedTop(result.exact.entries, 3) : []);
+	const zoneDEntries = $derived(result?.exact ? langBalancedRest(result.exact.entries, 3) : []);
 </script>
 
 <main>
@@ -65,17 +78,47 @@
 			<span class="dim">· {result.detectedScript} · {result.durationMs.toFixed(2)}ms</span>
 		</div>
 
+		<!-- Tibetan / long-tail miss notice — only when equiv has hits but tier0 is empty. -->
+		{#if !result.exact && result.equivalents.length > 0}
+			<div class="notice">
+				ⓘ 이 단어는 <strong>top-10K 정의 인덱스</strong> 밖입니다 — 대응어(Zone B)는 표시되지만,
+				전문 prose 정의(Zone C)는 Phase 5 Edge API 도입 후 제공 예정. (티벳어 단어는 현재 약 0.5%만
+				cover.)
+			</div>
+		{/if}
+
 		{#if result.equivalents.length > 0}
 			<section class="zone zone-b">
 				<h2>대응어 · Equivalents <span class="count">{result.equivalents.length}</span></h2>
 				<ul class="equiv-list">
 					{#each result.equivalents.slice(0, 50) as row}
 						<li class="equiv-row">
-							{#if row.skt_iast}<span class="lang skt">{row.skt_iast}</span>{/if}
-							{#if row.tib_wylie}<span class="sep">↔</span><span class="lang tib"
-									>{row.tib_wylie}</span
-								>{/if}
-							{#if row.zh}<span class="sep">·</span><span class="lang zh">{row.zh}</span>{/if}
+							{#if row.skt_iast}
+								<button
+									type="button"
+									class="lang skt term-link"
+									onclick={() => setQuery(row.skt_iast!)}
+									title="이 산스크리트 단어로 새 검색">{row.skt_iast}</button
+								>
+							{/if}
+							{#if row.tib_wylie}
+								<span class="sep">↔</span>
+								<button
+									type="button"
+									class="lang tib term-link"
+									onclick={() => setQuery(row.tib_wylie!)}
+									title="이 티벳어 단어로 새 검색">{row.tib_wylie}</button
+								>
+							{/if}
+							{#if row.zh}
+								<span class="sep">·</span>
+								<button
+									type="button"
+									class="lang zh term-link"
+									onclick={() => setQuery(row.zh!)}
+									title="이 한자로 새 검색">{row.zh}</button
+								>
+							{/if}
 							{#if row.ja}<span class="sep">·</span><span class="lang ja">{row.ja}</span>{/if}
 							{#if row.de}<span class="sep">·</span><span class="lang de">{row.de}</span>{/if}
 							{#if row.ko}<span class="sep">·</span><span class="lang ko">{row.ko}</span>{/if}
@@ -87,37 +130,52 @@
 				</ul>
 				{#if result.equivalents.length > 50}
 					<p class="more">
-						... {result.equivalents.length - 50}건 더 (전체 보기는 Step 6 후속에서)
+						... {result.equivalents.length - 50}건 더 (페이지네이션은 follow-up)
 					</p>
 				{/if}
 			</section>
 		{/if}
 
-		{#if result.exact}
+		{#if zoneCEntries.length > 0}
 			<section class="zone zone-c">
-				<h2>정의 · Definitions <span class="count">{result.exact.entries.length}</span></h2>
-				{#each result.exact.entries.slice(0, 3) as entry (entry.id)}
-					<article class="entry">
+				<h2>
+					정의 · Definitions
+					<span class="count">{result.exact?.entries.length ?? 0}</span>
+					<span class="dim">(언어별 top-3)</span>
+				</h2>
+				{#each zoneCEntries as entry (entry.id)}
+					<button
+						type="button"
+						class="entry entry-clickable"
+						onclick={() => (modalEntry = entry)}
+						title="전문 보기"
+					>
 						<header class="entry-head">
 							<span class="dict">{entry.short}</span>
 							<span class="prio">[{entry.priority}]</span>
+							<span class="dim">{entry.target_lang}</span>
 						</header>
 						<p class="snippet">{entry.snippet_short}</p>
 						{#if entry.ko}<p class="ko">{entry.ko}</p>{/if}
-					</article>
+					</button>
 				{/each}
 
-				{#if result.exact.entries.length > 3}
+				{#if zoneDEntries.length > 0}
 					<details class="zone-d">
-						<summary>추가 사전 {result.exact.entries.length - 3}개 보기</summary>
-						{#each result.exact.entries.slice(3) as entry (entry.id)}
-							<article class="entry">
+						<summary>추가 사전 {zoneDEntries.length}개 보기</summary>
+						{#each zoneDEntries as entry (entry.id)}
+							<button
+								type="button"
+								class="entry entry-clickable"
+								onclick={() => (modalEntry = entry)}
+							>
 								<header class="entry-head">
 									<span class="dict">{entry.short}</span>
 									<span class="prio">[{entry.priority}]</span>
+									<span class="dim">{entry.target_lang}</span>
 								</header>
 								<p class="snippet">{entry.snippet_short}</p>
-							</article>
+							</button>
 						{/each}
 					</details>
 				{/if}
@@ -127,11 +185,32 @@
 		{#if result.reverse.length > 0}
 			<section class="zone zone-rev">
 				<h2>역검색 · Reverse</h2>
-				{#each result.reverse as hit}
-					<p>
-						<code>{hit.language}</code> · <code>{hit.token}</code> →
-						<strong>{hit.entryIds.length}</strong> entries
-					</p>
+				{#each result.reverse as hit, i (hit.language + i)}
+					<details class="rev-detail">
+						<summary>
+							<code>{hit.language}</code> · <code>{hit.token}</code> →
+							<strong>{hit.entryIds.length}</strong> entries (펼치기)
+						</summary>
+						<ul class="rev-list">
+							{#each hit.entryIds.slice(0, 30) as eid}
+								{@const dict = dictFromEntryId(eid)}
+								<li>
+									<code>{eid}</code>
+									<button
+										type="button"
+										class="ac-item"
+										onclick={() => setQuery(dict)}
+										title="이 사전으로 새 검색"
+									>
+										→ {dict}
+									</button>
+								</li>
+							{/each}
+							{#if hit.entryIds.length > 30}
+								<li class="more">... {hit.entryIds.length - 30}개 더</li>
+							{/if}
+						</ul>
+					</details>
 				{/each}
 			</section>
 		{/if}
@@ -142,7 +221,7 @@
 				<ul class="autocomplete">
 					{#each result.partial as hw (hw.norm)}
 						<li>
-							<button type="button" onclick={() => chooseSuggestion(hw.iast)} class="ac-item">
+							<button type="button" onclick={() => setQuery(hw.iast)} class="ac-item">
 								{hw.iast}
 							</button>
 						</li>
@@ -150,6 +229,10 @@
 				</ul>
 			</section>
 		{/if}
+	{/if}
+
+	{#if modalEntry}
+		<EntryFull entry={modalEntry} onclose={() => (modalEntry = null)} />
 	{/if}
 </main>
 
@@ -194,10 +277,22 @@
 		margin-left: 0.6rem;
 		color: var(--fg-muted);
 	}
-	.header-strip .dim {
-		margin-left: 0.6rem;
+	.header-strip .dim,
+	.dim {
 		color: var(--fg-muted);
 		font-size: 0.78rem;
+	}
+	.header-strip .dim {
+		margin-left: 0.6rem;
+	}
+	.notice {
+		background: var(--bg-alt);
+		border-left: 3px solid var(--accent);
+		padding: 0.6rem 0.8rem;
+		margin: 0 0 1rem;
+		font-size: 0.88rem;
+		color: var(--fg);
+		border-radius: 0 4px 4px 0;
 	}
 	.zone {
 		margin-bottom: 1.5rem;
@@ -236,6 +331,24 @@
 	.lang.ja {
 		font-family: 'Noto Sans CJK KR', sans-serif;
 	}
+	.term-link {
+		background: transparent;
+		border: none;
+		padding: 0.05rem 0.2rem;
+		margin: 0 -0.2rem;
+		font-family: inherit;
+		font-size: inherit;
+		color: inherit;
+		cursor: pointer;
+		border-radius: 3px;
+	}
+	.term-link:hover {
+		background: var(--bg-alt);
+		color: var(--accent);
+	}
+	.lang.tib.term-link {
+		color: var(--accent);
+	}
 	.sep {
 		color: var(--fg-muted);
 		margin: 0 0.3rem;
@@ -256,10 +369,24 @@
 		font-style: italic;
 	}
 	.entry {
+		display: block;
+		width: 100%;
+		text-align: left;
 		margin-bottom: 0.8rem;
 		padding: 0.5rem 0.6rem;
 		background: var(--bg-alt);
+		border: 1px solid transparent;
 		border-radius: 4px;
+		color: inherit;
+		font-family: inherit;
+		font-size: inherit;
+	}
+	.entry-clickable {
+		cursor: pointer;
+		transition: border-color 0.1s;
+	}
+	.entry-clickable:hover {
+		border-color: var(--accent);
 	}
 	.entry-head {
 		display: flex;
@@ -275,6 +402,7 @@
 	.snippet {
 		margin: 0;
 		font-size: 0.94rem;
+		line-height: 1.5;
 	}
 	.ko {
 		margin: 0.4rem 0 0;
@@ -286,6 +414,26 @@
 		color: var(--accent);
 		font-size: 0.88rem;
 		padding: 0.3rem 0;
+	}
+	.rev-detail {
+		margin: 0.3rem 0;
+	}
+	.rev-detail summary {
+		cursor: pointer;
+		padding: 0.3rem 0;
+		font-size: 0.92rem;
+	}
+	.rev-list {
+		list-style: none;
+		padding: 0.4rem 0 0.4rem 1rem;
+		margin: 0;
+		font-size: 0.85rem;
+	}
+	.rev-list li {
+		padding: 0.15rem 0;
+		display: flex;
+		gap: 0.4rem;
+		align-items: center;
 	}
 	.autocomplete {
 		list-style: none;
@@ -303,7 +451,7 @@
 		cursor: pointer;
 		color: var(--fg);
 		font-family: inherit;
-		font-size: 0.88rem;
+		font-size: 0.85rem;
 	}
 	.ac-item:hover {
 		background: var(--accent);

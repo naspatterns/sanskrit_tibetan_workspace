@@ -79,6 +79,12 @@ def build_index(
 
         if meta.get("exclude_from_search"):
             continue
+        # Tier 0 = definition zone (Zone C/D). Skip equivalents/thesaurus —
+        # those route to Zone B via equivalents.msgpack.zst. Without this
+        # filter, Negi/Mvy/Hopkins-tsed/etc. show up in Zone C with empty
+        # snippets (their bodies are cross-language mappings, not prose).
+        if meta.get("role") in ("equivalents", "thesaurus"):
+            continue
         jsonl_path = jsonl_dir / f"{meta['slug']}.jsonl"
         if not jsonl_path.exists():
             continue
