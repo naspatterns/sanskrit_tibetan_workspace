@@ -267,6 +267,13 @@ v1은 tier 1 (15개) 내부 순서가 무작위 → 사용자 불만.
   - **P2** zstd 디컴프 Web Worker 이전 (Performance 45→80+ 예상)
 - D-Phase-3.6-Done = Phase 3.6 종결 (2026-04-30, 6 commits, main = `bf1a877`). 옵션 B 결정 (UI/UX + 코드 품질) — Phase 3.7 데이터 재번역과 동시 발사. Phase 3.6 완료 작업: P0-3 tier0 23.43 MiB · P0-1 reverse_meta + UI · P1-D8 27 unit tests (75→102) · P1-D2-1 closure · P1-E2 _headers · P1-E4 LICENSES 148 coverage · 모바일 ≤768px + a11y focus rings. **Phase 3.7 deferred**: P0-2 batch (사용자 ANTHROPIC_API_KEY 대기, ~$451 cost — B2 audit 추정 $225 정정) + P1-1 + P1-2 + P1-3.
 - D-EU-Batch-Cost-Revised = P0-2 EU re-translate 비용은 audit-B-eu-quality.md $225 추정의 실측 정정으로 ~$451 (Sonnet 4.5 batch, input 138 chars/entry × output 150 tokens). 4 chunks (100K + 100K + 100K + 81K) prepared (`data/translations/eu/state.json`). 사용자 plan 안에서 graceful submit/poll/retrieve resume — `scripts/translate_eu.py`.
+- D-Phase-3.7-Started = Phase 3.7 진입 (2026-04-30, 옵션 B 동시 발사). main = `a8c7a28`. 진척:
+  - ✅ P1-1 reverse salience boost — `c0972e1`. EN strict 2/15 → **9/15** (4.5x). build_reverse_index 4-tuple heap key (salience, -priority, -hw_len, entry_id). reverse_meta 8.9 MiB.
+  - ✅ P1-3 yogācārabhūmi zh sanitize — `c0972e1`. 119,464 contamination → **0**. equivalents.msgpack.zst 13.24→12.32 MiB. build_equivalents_index._row_from_entry CJK gate.
+  - ⏭️ P0-2 EU $451 batch (4 chunks ready) — translate_eu.py
+  - ⏭️ P1-2 en-extended $46.64 batch (1 chunk · 39,874 candidates, top-50K-not-top-10K) — `a8c7a28`. translate_en_extended.py. data/reports/top50k.txt (50K headwords) committed.
+  - 둘 다 사용자 ANTHROPIC_API_KEY 후 graceful submit + 한도 시 resume.
+  - Phase 3.7 잔여 (batch retrieve 후): tier0 재빌드 (translations-eu + translations-en-extended 통합) · Sentinel 50 queries before/after · Phase 4 deploy entry.
   - **P2** meta description / sitemap.xml / robots.txt (SEO 82→95)
   사용자 시연 (50 queries baseline + D4 heap + 모바일)은 다음 세션 보류 — Phase 3.6 fix 전후 비교용. Sentinel #15 사용자 정정 완료 (māhā→mahā). 가이드: `audit-C-demo-guide.md`.
 - 프로젝트 이름 = Sanskrit-Tibetan Workspace (FB-7)
