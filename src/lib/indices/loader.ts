@@ -67,11 +67,13 @@ async function fetchAndDecode(
 	return parsed;
 }
 
-function objectToMap<V>(obj: unknown): Map<string, V> {
+// Helpers exposed for unit testing (Phase 3.6 P1-D8-2). Internal to module
+// otherwise — callers should use loadAllIndices().
+export function objectToMap<V>(obj: unknown): Map<string, V> {
 	return new Map(Object.entries(obj as Record<string, V>));
 }
 
-function parseHeadwords(text: string): HeadwordEntry[] {
+export function parseHeadwords(text: string): HeadwordEntry[] {
 	const lines = text.split('\n');
 	const out: HeadwordEntry[] = [];
 	for (const line of lines) {
@@ -84,7 +86,7 @@ function parseHeadwords(text: string): HeadwordEntry[] {
 	return out;
 }
 
-function recomputeOverall(status: IndexLoadStatus[]): LoadProgress['overallStage'] {
+export function recomputeOverall(status: IndexLoadStatus[]): LoadProgress['overallStage'] {
 	if (status.some((s) => s.stage === 'error')) return 'error';
 	if (status.every((s) => s.stage === 'done')) return 'done';
 	if (status.some((s) => s.stage === 'decoding' || s.stage === 'decompressing')) return 'decoding';
