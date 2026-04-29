@@ -31,6 +31,19 @@ MAX_PER_TOKEN = 100
 # Tokens with global frequency below this are dropped (long-tail noise).
 DEFAULT_MIN_FREQ = 3
 
+# Phase 3.6 P1-1 — headword salience boost. reverse_tokens.py emits the
+# reverse.en[] / reverse.ko[] list ordered by position weight (tokens in the
+# first 30 chars of body.plain rank highest). We use that index as a salience
+# signal: entries where the searched token appears as one of the *first 5*
+# reverse tokens get prioritised over entries where it's a buried gloss.
+#
+# Combined with a short-headword secondary signal, this fixes the audit-A
+# finding that `fire` returned `homiḥ, homaḥ, hotṛ, huta, hu` (alphabetic late
+# entries) instead of `agni`. After boost: `agni`'s body starts "m. fire; the
+# god of fire" → token `fire` is reverse.en[0], salience=5; `huta`'s body
+# starts "burnt offering" → `fire` appears later, salience<5. agni rises.
+SALIENCE_TOP = 5  # tokens at indices [0..SALIENCE_TOP-1] get descending boost
+
 
 def collect_tokens(
     sources: Path,
@@ -38,10 +51,14 @@ def collect_tokens(
 ) -> tuple[dict[str, list], dict[str, list]]:
     """Single pass over all JSONL files.
 
-    Returns (en_buckets, ko_buckets) where each bucket is a min-heap keyed on
-    (priority, entry_id). Using a max-heap on -priority would keep the
-    *worst*; we want to keep the best, so we use a min-heap and `heappushpop`
-    to evict when full.
+    Each heap item is now `(salience, -priority, -hw_len, entry_id)` so the
+    sort cascade is:
+      1. salience DESC — token in body.plain first-30-chars wins (P1-1)
+      2. -priority ASC actually meaning priority ASC — Apte (1) before MW (2)
+      3. -hw_len DESC actually meaning hw_len ASC — short canonical headwords
+         (`agni`) before long compounds
+      4. entry_id — deterministic tiebreak
+    See finalize() for the actual ordering reverse.
     """
     en_buckets: dict[str, list] = defaultdict(list)
     ko_buckets: dict[str, list] = defaultdict(list)
@@ -64,23 +81,37 @@ def collect_tokens(
             # priority value.
             priority = entry.get("priority", meta_priority)
             entry_id = entry["id"]
+            hw = entry.get("headword_iast") or entry.get("headword") or ""
+            hw_len = len(hw)
             reverse = entry.get("reverse") or {}
-            item = (-priority, entry_id)
-            for tok in reverse.get("en", ()):
+
+            # P1-1: enumerate reverse.en/ko to recover position. The list is
+            # already sorted by position weight (reverse_tokens.py:103), so
+            # index 0 = highest salience.
+            for i, tok in enumerate(reverse.get("en", ())):
+                salience = max(0, SALIENCE_TOP - i)
+                item = (salience, -priority, -hw_len, entry_id)
                 _bounded_push(en_buckets[tok], item)
-            for tok in reverse.get("ko", ()):
+            for i, tok in enumerate(reverse.get("ko", ())):
+                salience = max(0, SALIENCE_TOP - i)
+                item = (salience, -priority, -hw_len, entry_id)
                 _bounded_push(ko_buckets[tok], item)
 
     return en_buckets, ko_buckets
 
 
 def _bounded_push(heap: list, item: tuple) -> None:
-    """Keep the N items with LOWEST `priority` number (= BEST dict).
+    """Keep the N items with HIGHEST salience-priority composite key.
 
-    Items are `(-priority, entry_id)`, so min-heap's `heap[0]` is the worst
-    priority held. When a better candidate arrives (`-priority` less negative
-    than heap[0]), evict the worst. Trace: heap=[(-89,x)], push (-1,y) →
-    (-1,y) > (-89,x) → heapreplace → heap=[(-1,y)], priority 1 kept.
+    Items are tuples whose lexicographic ordering reflects:
+      (salience DESC, priority ASC, hw_len ASC, entry_id ASC)
+    encoded as (salience, -priority, -hw_len, entry_id) so that `item > heap[0]`
+    means "better candidate, evict the worst-held".
+
+    P1-1 (Phase 3.6): The 4-tuple replaces the prior 2-tuple
+    `(-priority, entry_id)`. `agni`/`fire` example: agni has salience=5
+    (fire is reverse.en[0]); huta has salience<5 (fire is later) — heap keeps
+    agni even though both have priority=1.
     """
     if len(heap) < MAX_PER_TOKEN:
         heapq.heappush(heap, item)
@@ -89,14 +120,18 @@ def _bounded_push(heap: list, item: tuple) -> None:
 
 
 def finalize(buckets: dict[str, list], min_freq: int) -> dict[str, list[str]]:
-    """Convert heaps to priority-sorted entry-id lists, dropping rare tokens."""
+    """Convert heaps to salience+priority-sorted entry-id lists.
+
+    Drops tokens below min_freq. The heap items are
+    `(salience, -priority, -hw_len, entry_id)`, so `sorted(heap, reverse=True)`
+    yields highest salience first → priority 1 first → shortest headword first.
+    """
     out: dict[str, list[str]] = {}
     for tok, heap in buckets.items():
         if len(heap) < min_freq:
             continue
-        # heap contains (-priority, entry_id). Sort so BEST priority comes first.
-        ordered = sorted(heap, reverse=True)  # reverse: largest -priority (=lowest prio) first
-        out[tok] = [entry_id for _, entry_id in ordered]
+        ordered = sorted(heap, reverse=True)
+        out[tok] = [entry_id for _, _, _, entry_id in ordered]
     return out
 
 

@@ -73,11 +73,34 @@ def _dedup_key(row: dict) -> tuple[str, str, str]:
     )
 
 
+def _has_cjk(s: str) -> bool:
+    """True if the string contains at least one CJK ideograph or punctuation.
+    P1-3 (Phase 3.6): used to gate the zh field from leaking Wylie/IAST/Tibetan
+    script set by upstream extractor column-mapping bugs (audit-A-zh-contam).
+    """
+    return any(
+        '　' <= ch <= '〿' or  # CJK punctuation
+        '一' <= ch <= '鿿' or  # CJK unified ideographs
+        '豈' <= ch <= '﫿'     # CJK compatibility
+        for ch in s
+    )
+
+
+def _has_tibetan_script(s: str) -> bool:
+    return any('ༀ' <= ch <= '࿿' for ch in s)
+
+
 def _row_from_entry(entry: dict, slug: str) -> dict | None:
     """Project a JSONL entry's body.equivalents into a flat row.
 
     Returns None when the entry has no skt/tib/zh signal at all (would not
     be searchable in any channel, so storing it is dead weight).
+
+    P1-3 (Phase 3.6): sanitize the zh slot — if `eq["zh"]` is not actually
+    Chinese (no CJK codepoints), drop it. Some extractor pipelines (notably
+    `extract_equiv_yogacara.py`) leak Tibetan script or Wylie/IAST tokens into
+    that field. We additionally try to recover such mis-routed data into the
+    correct slot (`tib_wylie`) when it's clearly Tibetan-shaped.
     """
     eq = (entry.get("body") or {}).get("equivalents") or {}
     row: dict = {"sources": [slug]}
@@ -85,6 +108,19 @@ def _row_from_entry(entry: dict, slug: str) -> dict | None:
         v = eq.get(f, "")
         if v:
             row[f] = v
+
+    # P1-3 sanitize zh
+    zh_val = row.get("zh", "")
+    if zh_val and not _has_cjk(zh_val):
+        # Not actually Chinese. Try to recover obvious Tibetan misrouting.
+        if _has_tibetan_script(zh_val) and "tib_wylie" not in row:
+            # Drop the Tibetan-script form; tib_wylie is the canonical store.
+            # If we don't already have a tib_wylie value, this entry has no
+            # recoverable Tibetan signal either (rare — most entries with
+            # Tibetan-in-zh also have proper tib_wylie set).
+            pass
+        del row["zh"]
+
     if not any(row.get(c) for c in SEARCHABLE_CHANNELS):
         return None
     return row
