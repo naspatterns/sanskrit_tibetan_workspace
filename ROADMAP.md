@@ -325,10 +325,12 @@ main = `bf1a877`. 옵션 B 결정 (UI/UX + 코드 품질) + Phase 3.7 데이터 
 - ⏭️ P0-2 EU $451 batch — 4 chunks (100K + 100K + 100K + 81K = 381,070) ready. translate_eu.py.
 - 또는 sub-agent 경로로 P1-2와 동일하게 진행 가능 (38만 entries × 50 = 7,621 sub-batches, 약 12-15 윈도우 추정)
 
-**Phase 3.7 P1-2 후속 (선택)**:
-- Sentinel 50 queries before/after 비교 (audit-C-demo-guide.md) — `data/reports/translation_coverage.before-3.7.md` 보관 중
-- KO reverse precision salience 튜닝 (4/15 → 8/15+ 목표)
-- Phase 4 deploy entry checklist (audit-E-deploy.md §6)
+**Phase 3.7 P1-2 후속 작업 (✅ 완료)**:
+- ✅ Sentinel 50 자동 평가 — `audit_sentinel_50.py` + `audit-C-sentinel-results.csv` (`85ddafb`). Baseline: 24/⚠️9/❌17.
+- ✅ KO synonym injection (5/4 — main = TBD): `data/sources/_kosynonym/synonyms.json` (52 iast → 89 Korean/Hanja tokens, e.g. karuṇā→자비/연민, prajñā→지혜/반야, agni→불/화). `build_reverse_index.py`에 `--ko-synonyms` 옵션 + SUPER_SALIENCE (=10) 주입. 캐노니컬 entry (Apte 1, MW 2)가 자연 body.ko 토큰을 능가하도록 헤드룸 확보.
+  - **audit_reverse_precision: KO strict 4/15 → 15/15 (100%)** · KO loose 8/15 → 15/15
+  - Sentinel 50: KO 카테고리 0/5 → 5/5 ✅, 종합 24→29 ✅
+- ⏭️ Phase 4 deploy entry checklist (audit-E-deploy.md §6)
 
 **Phase 3.6 완료 기준 vs 결과**:
 - ✅ TypeScript strict 0 errors / 257 files

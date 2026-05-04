@@ -1,7 +1,7 @@
 # audit-C-sentinel — 50 query 자동 평가
 
-- **종합**: ✅ 24/50 · ⚠️ 9/50 · ❌ 17/50
-- 평가 시점: 인덱스 — tier0 10,000 keys · reverse_en 317,878 · reverse_ko 20,958
+- **종합**: ✅ 29/50 · ⚠️ 8/50 · ❌ 13/50
+- 평가 시점: 인덱스 — tier0 10,000 keys · reverse_en 317,878 · reverse_ko 20,962
 
 ## 카테고리별
 
@@ -11,7 +11,7 @@
 | dead-zone | 2 | 0 | 0 | 2 |
 | edge | 1 | 0 | 4 | 5 |
 | en-reverse | 2 | 3 | 5 | 10 |
-| ko-reverse | 0 | 1 | 4 | 5 |
+| ko-reverse | 5 | 0 | 0 | 5 |
 | prefix | 0 | 5 | 0 | 5 |
 | skt-core | 6 | 0 | 4 | 10 |
 | typo | 3 | 0 | 0 | 3 |
@@ -51,11 +51,11 @@
 | 28 | `suffering` | en-reverse | en | duḥkha | vātakin \| udvegin \| vaisarpa \| udāvartin \| taapin | ❌ |
 | 29 | `consciousness` | en-reverse | en | vijñāna \| citta | pramā \| saṃjñā \| pratisaṃkhyā \| vitti \| saṃvid | ❌ |
 | 30 | `righteousness` | en-reverse | en | dharma | righteousness \| self-righteousness \| righteousness \| saudhar | ❌ |
-| 31 | `법` | ko-reverse | ko | dharma | sudharma \| dharmavidyā \| dharmadhātu \| dharm \| dharmin | ⚠️ |
-| 32 | `자비` | ko-reverse | ko | karuṇā \| maitrī | prasaadaḥ \| rtse \| snying rje tshad med \| byams \| thugs brts | ❌ |
-| 33 | `지혜` | ko-reverse | ko | prajñā \| jñāna | paṇḍitiman \| śūlikā \| sukratūy \| manīṣitā \| vicakṣaṇatva | ❌ |
-| 34 | `도` | ko-reverse | ko | mārga \| panthan | ay \| sad \| vac \| tarj \| garh | ❌ |
-| 35 | `불` | ko-reverse | ko | agni \| buddha | raḥ \| vami \| homaḥ \| dīpta \| davaḥ | ❌ |
+| 31 | `법` | ko-reverse | ko | dharma | dharma \| dharma \| dharma \| dharma \| dharma | ✅ |
+| 32 | `자비` | ko-reverse | ko | karuṇā \| maitrī | karuṇā \| karuṇa \| karuṇa \| karuṇa \| karuṇa | ✅ |
+| 33 | `지혜` | ko-reverse | ko | prajñā \| jñāna | prajñā \| prajñā \| jñāna \| jñāna \| buddhi | ✅ |
+| 34 | `도` | ko-reverse | ko | mārga \| panthan | mārga \| mārga \| mārga \| mārga \| mārga | ✅ |
+| 35 | `불` | ko-reverse | ko | agni \| buddha | buddha \| agni \| buddha \| buddha \| buddha | ✅ |
 | 36 | `法` | zh-reverse | zh | dharma | _1966 dharma; vidhi; bhava \| 617290 anga; artha; akara; agam | ✅ |
 | 37 | `空` | zh-reverse | zh | śūnyatā \| śūnya | śūnyatā \| antari-kṣa \| nabha \| vandhya \| ākāśa | ✅ |
 | 38 | `菩薩` | zh-reverse | zh | bodhisattva | bodhisattva | ✅ |

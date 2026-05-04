@@ -11,11 +11,20 @@ Output:
 
 Each file decodes to: `{token: [entry_id, ...]}` — entry_id list is
 priority-sorted so the client just iterates in order.
+
+Phase 3.7 P1-2 follow-up: optional Korean synonym injection. Reads
+`data/sources/_kosynonym/synonyms.json` (committed) which maps headword_iast
+→ [Korean tokens]. For each canonical entry whose iast matches and whose
+priority is best-in-dict (Apte 1 / MW 2), the Korean tokens are injected
+into ko_buckets with SUPER_SALIENCE so they rank above all natural body.ko
+hits. Fixes Sentinel KO 0/5 baseline where 자비/지혜/도/불 don't surface
+karuṇā/prajñā/agni/mārga because their Apte body.ko uses 동정/지식/화/길.
 """
 from __future__ import annotations
 
 import argparse
 import heapq
+import json
 import sys
 from collections import defaultdict
 from pathlib import Path
@@ -44,10 +53,44 @@ DEFAULT_MIN_FREQ = 3
 # starts "burnt offering" → `fire` appears later, salience<5. agni rises.
 SALIENCE_TOP = 5  # tokens at indices [0..SALIENCE_TOP-1] get descending boost
 
+# Phase 3.7 P1-2 follow-up: Korean synonym injection. Tokens added via
+# synonyms.json get a salience > SALIENCE_TOP so they always rank above
+# natural body.ko-derived tokens for the same Sanskrit canonical entry.
+SUPER_SALIENCE = SALIENCE_TOP + 5  # = 10. Plenty of headroom for natural [0..4].
+
+# Path of optional Korean synonym table (Phase 3.7 P1-2 follow-up).
+KO_SYNONYM_PATH_DEFAULT = Path("data/sources/_kosynonym/synonyms.json")
+
+
+def load_ko_synonyms(path: Path) -> dict[str, list[str]]:
+    """Load `iast → [Korean tokens]` mapping for canonical synonym injection.
+
+    Returns empty dict if path doesn't exist (preserves backward compat with
+    callers that don't ship the curated table). The schema is documented in
+    `data/sources/_kosynonym/synonyms.json:_meta`.
+    """
+    if not path.exists():
+        return {}
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        print(f"WARN: failed to parse {path}: {exc}", file=sys.stderr)
+        return {}
+    syns = data.get("synonyms", {})
+    # Validate shape — keys are str, values are list[str]
+    out: dict[str, list[str]] = {}
+    for iast, ko_list in syns.items():
+        if isinstance(iast, str) and isinstance(ko_list, list):
+            cleaned = [s for s in ko_list if isinstance(s, str) and s.strip()]
+            if cleaned:
+                out[iast] = cleaned
+    return out
+
 
 def collect_tokens(
     sources: Path,
     jsonl_dir: Path,
+    ko_synonyms: dict[str, list[str]] | None = None,
 ) -> tuple[dict[str, list], dict[str, list]]:
     """Single pass over all JSONL files.
 
@@ -97,6 +140,22 @@ def collect_tokens(
                 item = (salience, -priority, -hw_len, entry_id)
                 _bounded_push(ko_buckets[tok], item)
 
+            # Phase 3.7 P1-2 follow-up: Korean synonym injection.
+            # If ko_synonyms maps this entry's iast to canonical Korean tokens,
+            # push them with SUPER_SALIENCE so they outrank natural body.ko
+            # hits. The heap's priority/hw_len tiebreakers still apply, so
+            # Apte priority=1 short-headword wins over MW priority=2 long
+            # for the same synonym. Only the canonical entries get this
+            # boost — entries with the same iast but different priority
+            # naturally fall behind in priority sort.
+            if ko_synonyms:
+                iast = entry.get("headword_iast") or ""
+                synonym_list = ko_synonyms.get(iast)
+                if synonym_list:
+                    item = (SUPER_SALIENCE, -priority, -hw_len, entry_id)
+                    for tok in synonym_list:
+                        _bounded_push(ko_buckets[tok], item)
+
     return en_buckets, ko_buckets
 
 
@@ -142,10 +201,23 @@ def main() -> int:
     parser.add_argument("--out-dir", type=Path, default=Path("public/indices"))
     parser.add_argument("--min-freq", type=int, default=DEFAULT_MIN_FREQ,
                         help="Drop tokens appearing in fewer than N entries (default: 3)")
+    parser.add_argument("--ko-synonyms", type=Path,
+                        default=KO_SYNONYM_PATH_DEFAULT,
+                        help="Optional Korean synonym table for canonical injection "
+                             "(Phase 3.7 P1-2 follow-up). Pass /dev/null to disable.")
     args = parser.parse_args()
 
+    ko_synonyms = load_ko_synonyms(args.ko_synonyms)
+    if ko_synonyms:
+        n_tokens = sum(len(v) for v in ko_synonyms.values())
+        print(f"Loaded {len(ko_synonyms):,} iast → KO synonym mappings "
+              f"({n_tokens:,} tokens) from {args.ko_synonyms}", file=sys.stderr)
+    else:
+        print(f"(No KO synonym table at {args.ko_synonyms}; natural body.ko only)",
+              file=sys.stderr)
+
     print("Collecting reverse tokens across 130 dicts…", file=sys.stderr)
-    en_buckets, ko_buckets = collect_tokens(args.sources, args.jsonl)
+    en_buckets, ko_buckets = collect_tokens(args.sources, args.jsonl, ko_synonyms)
 
     print(f"  raw tokens: en={len(en_buckets):,}  ko={len(ko_buckets):,}", file=sys.stderr)
 
