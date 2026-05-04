@@ -39,6 +39,10 @@ export interface EquivRow {
 export interface HeadwordEntry {
 	norm: string;
 	iast: string;
+	/** Phase 3.7 follow-up: 1-based top-10K rank (lower = more important).
+	 * Long-tail headwords use 999_999. Used by prefix engine to re-rank
+	 * match candidates so common terms surface above HTML extraction noise. */
+	rank: number;
 }
 
 export interface IndexBundle {
@@ -47,6 +51,11 @@ export interface IndexBundle {
 	 * search engine merges entries when a key exists in both (cross-language
 	 * headword like 'chos'). */
 	tier0Bo: Map<string, Tier0Entry>;
+	/** Phase 3.7 follow-up (Option A) — Sanskrit ranks 10001..20000. Same
+	 * shape as tier0; the search engine union-lookups all three so canonical
+	 * Buddhist/philosophical terms outside the top-10K (e.g. mid-frequency
+	 * Vedic deities, secondary commentary terms) still ship with snippets. */
+	tier0Extended: Map<string, Tier0Entry>;
 	equivalents: Map<string, EquivRow[]>;
 	reverseEn: Map<string, string[]>;
 	reverseKo: Map<string, string[]>;

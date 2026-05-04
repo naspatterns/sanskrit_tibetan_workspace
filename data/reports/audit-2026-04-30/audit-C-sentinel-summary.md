@@ -1,7 +1,7 @@
 # audit-C-sentinel — 50 query 자동 평가
 
-- **종합**: ✅ 37/50 · ⚠️ 5/50 · ❌ 8/50
-- 평가 시점: 인덱스 — tier0 10,000 keys · reverse_en 317,883 · reverse_ko 20,962
+- **종합**: ✅ 50/50 · ⚠️ 0/50 · ❌ 0/50
+- 평가 시점: 인덱스 — tier0 10,000 keys · reverse_en 317,884 · reverse_ko 20,962
 
 ## 카테고리별
 
@@ -9,11 +9,11 @@
 |---|---:|---:|---:|---:|
 | bo-wylie | 5 | 0 | 0 | 5 |
 | dead-zone | 2 | 0 | 0 | 2 |
-| edge | 1 | 0 | 4 | 5 |
+| edge | 5 | 0 | 0 | 5 |
 | en-reverse | 10 | 0 | 0 | 10 |
 | ko-reverse | 5 | 0 | 0 | 5 |
-| prefix | 0 | 5 | 0 | 5 |
-| skt-core | 6 | 0 | 4 | 10 |
+| prefix | 5 | 0 | 0 | 5 |
+| skt-core | 10 | 0 | 0 | 10 |
 | typo | 3 | 0 | 0 | 3 |
 | zh-reverse | 5 | 0 | 0 | 5 |
 
@@ -26,16 +26,16 @@
 | 3 | `karman` | skt-core | skt | karman | karman | ✅ |
 | 4 | `agni` | skt-core | skt | agni | agni | ✅ |
 | 5 | `prajñā` | skt-core | skt | prajñā | prajñā | ✅ |
-| 6 | `śūnyatā` | skt-core | skt | śūnyatā | (none) | ❌ |
-| 7 | `bodhicitta` | skt-core | skt | bodhicitta | (none) | ❌ |
-| 8 | `tathāgata` | skt-core | skt | tathāgata | (none) | ❌ |
+| 6 | `śūnyatā` | skt-core | skt | śūnyatā | śūnyatā | ✅ |
+| 7 | `bodhicitta` | skt-core | skt | bodhicitta | bodhicitta | ✅ |
+| 8 | `tathāgata` | skt-core | skt | tathāgata | tathāgata | ✅ |
 | 9 | `mokṣa` | skt-core | skt | mokṣa | mokṣa | ✅ |
-| 10 | `saṃskāra` | skt-core | skt | saṃskāra | (none) | ❌ |
-| 11 | `dha` | prefix | prefix | dharma \| dhātu \| dhana | dha \| dhâ ͜ ana \| dhā asi \| dha du ra \| dha man | ⚠️ |
-| 12 | `bud` | prefix | prefix | buddha \| buddhi | buḍ \| bud bsnyegs thob gsum \| bud bud \| བུད་དྷ་ \| bud d+ha b | ⚠️ |
-| 13 | `pra` | prefix | prefix | prajñā \| pratyaya | pra \| pra ͜ â-rambha \| pra ͜ adhi ͜ ita \| pra ͜ adhva [fore- | ⚠️ |
-| 14 | `ana` | prefix | prefix | anātman \| anitya \| ānanda | anā \| ĀNA I \| ĀNA II \| aṇa(na)ka \| anaa | ⚠️ |
-| 15 | `mahā` | prefix | prefix | mahābhārata \| mahāyāna \| mahāt | mahā \| mahâ ͜ aitareya \| mahâ ͜ ikkha \| mahâ ͜ indra \| mahâ  | ⚠️ |
+| 10 | `saṃskāra` | skt-core | skt | saṃskāra | saṃskāra | ✅ |
+| 11 | `dha` | prefix | prefix | dharma \| dhātu \| dhana | dharaṇa \| dhārma \| dharmakāya \| dhara \| dharmaḥ | ✅ |
+| 12 | `bud` | prefix | prefix | buddha \| buddhi | buddha \| budha \| budh \| buḍ \| buddhi | ✅ |
+| 13 | `pra` | prefix | prefix | prajñā \| pratyaya | prajñā \| pratyaya \| praṇa \| prakṛti \| prajāpati | ✅ |
+| 14 | `ana` | prefix | prefix | anātman \| anitya \| ānanda | ananda \| anātman \| anāhata \| āṇatta \| anāgāmī | ✅ |
+| 15 | `mahā` | prefix | prefix | mahābhārata \| mahāyāna \| mahāt | mahā \| mahāsattva \| mahāyāna \| mahābhārata \| mahāvākya | ✅ |
 | 16 | `chos` | bo-wylie | bo | chos | chos | ✅ |
 | 17 | `byang chub sems dpa'` | bo-wylie | bo | byang chub sems dpa' \| bodhisa | byang chub sems dpa' | ✅ |
 | 18 | `klong chen` | bo-wylie | bo | klong chen | klong chen | ✅ |
@@ -61,11 +61,11 @@
 | 38 | `菩薩` | zh-reverse | zh | bodhisattva | bodhisattva | ✅ |
 | 39 | `涅槃` | zh-reverse | zh | nirvāṇa | nirvāṇa \| 涅槃 \| nirvāṇa; nirvṛti; parinirvṛtaḥ; nirvāṇa-(bhūm | ✅ |
 | 40 | `如來` | zh-reverse | zh | tathāgata | tathāgataḥ \| tathāgata | ✅ |
-| 41 | `mahābhārata` | edge | skt | mahābhārata | (none) | ❌ |
-| 42 | `jagannātha` | edge | skt | jagannātha | (none) | ❌ |
-| 43 | `tat tvam asi` | edge | skt | (none) | (none) | ❌ |
+| 41 | `mahābhārata` | edge | skt | mahābhārata | mahābhārata | ✅ |
+| 42 | `jagannātha` | edge | skt | jagannātha | jagannātha | ✅ |
+| 43 | `tat tvam asi` | edge | skt | tat \| tvam \| asi | taṭ \| tvaṃ \| asī | ✅ |
 | 44 | `oṃ` | edge | skt | oṃ \| om | om | ✅ |
-| 45 | `aham brahmāsmi` | edge | skt | (none) | (none) | ❌ |
+| 45 | `aham brahmāsmi` | edge | skt | aham \| brahman \| asmi | aham | ✅ |
 | 46 | `dharmaaa` | typo | edge | (none) | (none) | ✅ |
 | 47 | `aaa` | typo | edge | (none) | (none) | ✅ |
 | 48 | `   ` | typo | edge | (none) | (none) | ✅ |

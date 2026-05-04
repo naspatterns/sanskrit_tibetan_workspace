@@ -1,0 +1,201 @@
+n,query,category,channel,expected,top_5,verdict
+1,dharma,skt-core,skt,dharma,dhārma,✅
+2,ātman,skt-core,skt,ātman,ātman,✅
+3,karman,skt-core,skt,karman,karman,✅
+4,agni,skt-core,skt,agni,agni,✅
+5,prajñā,skt-core,skt,prajñā,prajñā,✅
+6,śūnyatā,skt-core,skt,śūnyatā,śūnyatā,✅
+7,bodhicitta,skt-core,skt,bodhicitta,bodhicitta,✅
+8,tathāgata,skt-core,skt,tathāgata,tathāgata,✅
+9,mokṣa,skt-core,skt,mokṣa,mokṣa,✅
+10,saṃskāra,skt-core,skt,saṃskāra,saṃskāra,✅
+11,dha,prefix,prefix,dharma | dhātu | dhana,dharaṇa | dhārma | dharmakāya | dhara | dharmaḥ,✅
+12,bud,prefix,prefix,buddha | buddhi,buddha | budha | budh | buḍ | buddhi,✅
+13,pra,prefix,prefix,prajñā | pratyaya,prajñā | pratyaya | praṇa | prakṛti | prajāpati,✅
+14,ana,prefix,prefix,anātman | anitya | ānanda,ananda | anātman | anāhata | āṇatta | anāgāmī,✅
+15,mahā,prefix,prefix,mahābhārata | mahāyāna | mahātman,mahā | mahāsattva | mahāyāna | mahābhārata | mahāvākya,✅
+16,chos,bo-wylie,bo,chos,chos,✅
+17,byang chub sems dpa',bo-wylie,bo,byang chub sems dpa' | bodhisattva,byang chub sems dpa',✅
+18,klong chen,bo-wylie,bo,klong chen,klong chen,✅
+19,rdo rje,bo-wylie,bo,rdo rje | vajra,rdo rje,✅
+20,'jam dpal,bo-wylie,bo,'jam dpal | mañjuśrī,'jam dpal,✅
+21,fire,en-reverse,en,agni,pāvaka | agni | vahni | vahni | anala,✅
+22,wisdom,en-reverse,en,prajñā | jñāna | buddhi,vidyā | prajñā | prajñā | vidyā | jñāna,✅
+23,compassion,en-reverse,en,karuṇā | anukampā | dayā,karuṇā | karuṇā | karuṇā | karuṇā | karuṇā,✅
+24,emptiness,en-reverse,en,śūnyatā | śūnya,śūnyatā | śūnyatā | śūnyatā | śūnyatā | śūnyatā,✅
+25,liberation,en-reverse,en,mokṣa | mukti,mokṣa | mokṣa | mukti | mokṣa | mukti,✅
+26,meditation,en-reverse,en,dhyāna | samādhi,dhyāna | dhyāna | dhyāna | samādhi | samādhi,✅
+27,enlightenment,en-reverse,en,bodhi | sambodhi,bodhi | bodhi | bodhi | bodhi | bodhi,✅
+28,suffering,en-reverse,en,duḥkha,duḥkha | duḥkha | duḥkha | duḥkha | duḥkha,✅
+29,consciousness,en-reverse,en,vijñāna | citta,cetas | citta | saṃjñā | saṃjñā | cetas,✅
+30,righteousness,en-reverse,en,dharma,dharma | dharma | dharma | dharma | dharma,✅
+31,법,ko-reverse,ko,dharma,dharma | dharma | dharma | dharma | dharma,✅
+32,자비,ko-reverse,ko,karuṇā | maitrī,karuṇā | karuṇa | karuṇa | karuṇa | karuṇa,✅
+33,지혜,ko-reverse,ko,prajñā | jñāna,prajñā | prajñā | jñāna | jñāna | buddhi,✅
+34,도,ko-reverse,ko,mārga | panthan,mārga | mārga | mārga | mārga | mārga,✅
+35,불,ko-reverse,ko,agni | buddha,buddha | agni | buddha | buddha | buddha,✅
+36,法,zh-reverse,zh,dharma,_1966 dharma; vidhi; bhava | 617290 anga; artha; akara; agama; alambana; karana; krama; guna; dravya; dharama; dharma-jiadna; dharmaté; dharmatva; dharmadeSana; dharman; dharma-naya; dharma-paryaya; dharma-prakrti; dharmamaya; dharma-Sabda; dharma-Sasana; dharma-samjfiaka; dharma-stha; dharma-svabhava; dharmakhya; dharmin; dharmaisgvarya; dharmépavicara; dharmya; dharma; dharmika; dharmya; naya; naya-dharma; paksa; pariskara; -puiija; prakara; prakrti; pratipad; pratisamyukta; prayoga; pravacana; prasangatva; dhana; Sabda; Siksd; samgati; sat; sad-dharma; sthana; 1yk—4> dharma-dhatv-eka-deSa; dharmardha | dharma | dharmaka | vidhāna,✅
+37,空,zh-reverse,zh,śūnyatā | śūnya,śūnyatā | antari-kṣa | nabha | vandhya | ākāśa,✅
+38,菩薩,zh-reverse,zh,bodhisattva,bodhisattva,✅
+39,涅槃,zh-reverse,zh,nirvāṇa,nirvāṇa | 涅槃 | nirvāṇa; nirvṛti; parinirvṛtaḥ; nirvāṇa-(bhūmi~),✅
+40,如來,zh-reverse,zh,tathāgata,tathāgataḥ | tathāgata,✅
+41,mahābhārata,edge,skt,mahābhārata,mahābhārata,✅
+42,jagannātha,edge,skt,jagannātha,jagannātha,✅
+43,tat tvam asi,edge,skt,tat | tvam | asi,taṭ | tvaṃ | asī,✅
+44,oṃ,edge,skt,oṃ | om,om,✅
+45,aham brahmāsmi,edge,skt,aham | brahman | asmi,aham,✅
+46,dharmaaa,typo,edge,,(none),✅
+47,aaa,typo,edge,,(none),✅
+48,   ,typo,edge,,(none),✅
+49,decl-a01,dead-zone,edge,,(none),✅
+50,aṃśanīya@aṃś,dead-zone,edge,,(none),✅
+51,veda,skt-mid,skt,veda,veḍā,✅
+52,upaniṣad,skt-mid,skt,upaniṣad,upaniṣad,✅
+53,brahman,skt-mid,skt,brahman,brahman,✅
+54,yoga,skt-mid,skt,yoga,yoga,✅
+55,indra,skt-mid,skt,indra,indra,✅
+56,viṣṇu,skt-mid,skt,viṣṇu,viṣṇu,✅
+57,śiva,skt-mid,skt,śiva,śivā,✅
+58,sūrya,skt-mid,skt,sūrya,sūryā,✅
+59,candra,skt-mid,skt,candra,candra,✅
+60,soma,skt-mid,skt,soma,soma,✅
+61,nirvāṇa,skt-mid,skt,nirvāṇa,nirvāṇa,✅
+62,bodhi,skt-mid,skt,bodhi,bodhi,✅
+63,saṃsāra,skt-mid,skt,saṃsāra,saṃśara,✅
+64,māyā,skt-mid,skt,māyā,maya,✅
+65,kāma,skt-mid,skt,kāma,kamā,✅
+66,kalpa,skt-mid,skt,kalpa,kalpa,✅
+67,tantra,skt-mid,skt,tantra,tantra,✅
+68,mantra,skt-mid,skt,mantra,mantra,✅
+69,vajra,skt-mid,skt,vajra,vajra,✅
+70,mudrā,skt-mid,skt,mudrā,mudrā,✅
+71,guru,skt-mid,skt,guru,guru,✅
+72,śiṣya,skt-mid,skt,śiṣya,śiṣya,✅
+73,ahiṃsā,skt-mid,skt,ahiṃsā,ahiṃsā,✅
+74,satya,skt-mid,skt,satya,satya,✅
+75,puruṣa,skt-mid,skt,puruṣa,puruṣa,✅
+76,prakṛti,skt-mid,skt,prakṛti,prakṛti,✅
+77,kuṇḍalinī,skt-mid,skt,kuṇḍalinī,kuṇḍalinī,✅
+78,cakra,skt-mid,skt,cakra,cākra,✅
+79,rāma,skt-mid,skt,rāma,rama,✅
+80,kṛṣṇa,skt-mid,skt,kṛṣṇa,kṛṣṇa,✅
+81,vipaśyanā,skt-long,skt,vipaśyanā | vipassanā,vipaśyanā,✅
+82,abhidharma,skt-long,skt,abhidharma,abhidharma,✅
+83,śīla,skt-long,skt,śīla,śilā,✅
+84,dāna,skt-long,skt,dāna,dāna,✅
+85,kṣānti,skt-long,skt,kṣānti,kṣānti,✅
+86,vīrya,skt-long,skt,vīrya,vīrya,✅
+87,smṛti,skt-long,skt,smṛti,smṛti,✅
+88,śraddhā,skt-long,skt,śraddhā,śraddhā,✅
+89,vairāgya,skt-long,skt,vairāgya,vairāgya,✅
+90,viveka,skt-long,skt,viveka,viveka,✅
+91,trsnā,skt-long,skt,tṛṣṇā,tṛṣṇā,✅
+92,upādāna,skt-long,skt,upādāna,upadāna,✅
+93,avidyā,skt-long,skt,avidyā,avidya,✅
+94,anitya,skt-long,skt,anitya,anitya,✅
+95,anātman,skt-long,skt,anātman,anātman,✅
+96,skandha,skt-long,skt,skandha,skandha,✅
+97,rūpa,skt-long,skt,rūpa,rupa,✅
+98,vedanā,skt-long,skt,vedanā,vedana,✅
+99,saṃjñā,skt-long,skt,saṃjñā,saṃjñā,✅
+100,vijñāna,skt-long,skt,vijñāna,vijñāna,✅
+101,moon,en-reverse,en,candra | soma | indu,soma | soma | soma | soma | soma,✅
+102,sun,en-reverse,en,sūrya | āditya,savitṛ | āditya | ravi | ravi | sūrya,✅
+103,earth,en-reverse,en,pṛthivī | bhūmi,pṛthivī | bhūmi | bhūmi | bhūmi | bhūmi,✅
+104,water,en-reverse,en,jala | ap | ambu,ap | vāri | jala | ap | ap,✅
+105,wind,en-reverse,en,vāyu | anila,marut | pavana | vāyu | vāyu | vāyu,✅
+106,death,en-reverse,en,mṛtyu | yama | māraṇa,yama | yama | yama | yama | yama,✅
+107,love,en-reverse,en,kāma | preman | rāga,preman | kāma | kāma | kāma | kāma,✅
+108,king,en-reverse,en,rāja | nṛpa | narendra,rājan | rāja | rāja | nṛpa | nṛpa,✅
+109,mind,en-reverse,en,manas | citta | cetas,hṛd | manas | cetas | citta | hṛd,✅
+110,heart,en-reverse,en,hṛd | hṛdaya,hṛd | hṛd | hṛdaya | hṛdaya | hṛdaya,✅
+111,self,en-reverse,en,ātman | svayam,ātman | ātman | ātman | ātman | ātman,✅
+112,soul,en-reverse,en,ātman | jīva,jīva | ātman | jīva | jīva | jīva,✅
+113,god,en-reverse,en,deva | īśvara,deva | deva | deva | deva | deva,✅
+114,duty,en-reverse,en,dharma | kartavya,kartavya | kartavya | dharma | dharma | dharma,✅
+115,knowledge,en-reverse,en,jñāna | vidyā,vidyā | vidyā | jñāna | jñāna | vidyā,✅
+116,공,ko-reverse,ko,śūnyatā | śūnya | kha,śūnya | kha | kha | kha | kha,✅
+117,마음,ko-reverse,ko,manas | citta,hṛd | manas | cetas | citta | hṛd,✅
+118,신,ko-reverse,ko,deva | īśvara,deva | īśvara | deva | deva | deva,✅
+119,왕,ko-reverse,ko,rāja | nṛpa,rāja | rāja | nṛpa | nṛpa | nṛpa,✅
+120,물,ko-reverse,ko,jala | ap,ap | vāri | jala | ap | ap,✅
+121,지옥,ko-reverse,ko,naraka | niraya,niraya | naraka | niraya | naraka | niraya,✅
+122,인연,ko-reverse,ko,nidāna | pratyaya,nidāna | nidāna | nidāna | nidāna | pratyaya,✅
+123,해탈,ko-reverse,ko,mokṣa | mukti,mokṣa | mokṣa | mukti | mokṣa | mukti,✅
+124,열반,ko-reverse,ko,nirvāṇa,nirvāṇa | nirvāṇa | nirvāṇa | nirvāṇa | nirvāṇa,✅
+125,보살,ko-reverse,ko,bodhisattva,bodhisattva | bodhisattva | bodhisattva | bodhisattva | bodhisattva,✅
+126,天,zh-reverse,zh,deva | svarga,devaḥ | 737 deva; divya; svarga; amara; améanusa; ISvaradi; tri-pistapa; div; diva; divaukas; devata; deva-nikaya; deva-bhuvana; deva-bhita; deva-loka; devya; daiva; daivata; naka-prstha; bhavana; maru; marut; maruta; loka-pala; Sri-mahiman; sattva; sura; sura-ga; svarga-loka; devata; deva-samgha | 59838 ya; yuvan; hrasva; 8R..- 7% akala-marana | 740 HE 853 | bY | 305 | deva,✅
+127,地,zh-reverse,zh,pṛthivī | bhūmi,prthivi; dharani; avani; urvi; nidhana; pams&u; patala; prthivi-tala; prthivi-dhatu; prthivi-pradega; pradeSa; bhi; bhita-dhatri; bhimika; bhimi-ja; bhimi-tala; bhimya; bhimy-atikranta; mandala; maha-prthivi; mahi; marga; medini-tala; medini; vasu-dha; vasum-dhara; vasa; sthandila; sthala; sthana; rani-tala; prthivi-pradese; bhautika; bhauma | pṛthivī | bhūmi | mahī,✅
+128,心,zh-reverse,zh,citta | manas | hṛd,"jyeṣṭhā | hṛdayam | (5) Blatt 61; VERFRERX nigraha-Sila; PER prakrti; prakrtya; MEA PE bhava-svabhava | (7一8) HRS BE 61; 138882 avabodha; anubodha; adhimukti; ava-/'tt; ajfia; parijia; budhyana; vijdnat; samyagavabodha; -1207 Adinava; duhkha; Vbadh; iti; upa- | (11 HERMES 61; unnati; darpa; mada; Vman; manyana; manavat; stambha; Sha ATH ""mana-grahin; 12h8 #5 ""mana-samyojana",⚠️
+129,苦,zh-reverse,zh,duḥkha,tiktaḥ | duḥkham | duḥkha | bādhā | duḥkhatā,✅
+130,智慧,zh-reverse,zh,prajñā | jñāna | buddhi,matiḥ | jñāna | prajñāna | 智慧,✅
+131,道,zh-reverse,zh,mārga | panthan,3785 Wa marga; path; gati; pratipad; bodhi; bhiksu; nyaya; adhvan; avacara; asrama; gatika; gati-samdhi; carana; cari; cari; carya; jati; dharma; naya; patha; pada; parayana; pratipatti; prahana; bodhimarga; bhimi; marga-carana; margana; margatas; margatva; marga-satya; yana; rathya; vartman; vidhi | mārga | pathi | vartman | bodhi; buddhabodhi; caryā; carī; -caryā; -adhikāra; yāna; pūrva-caryā; mārga; sarvajña-dharma; pada; cariṃ cariṃ,✅
+132,佛,zh-reverse,zh,buddha,buddha | agrabodhi | anuttara~ samyaksaṃbodhi; samyaksaṃbuddhatva; samyaksaṃbodhim abhisaṃbudhyeyaṃ,✅
+133,禪,zh-reverse,zh,dhyāna,"2619 See [9 2621; oan anavamrdya; samadhi; samapatti; ifs HF °; HET f° °; dhyanantara; dhyananga; dhyandépaya; dhyana-gocara; dhyana-samvara; dhyana; samadhi; dhydna-parami; dhyana-vari; dhydyin; pratisamlayana; Samatha; samapatti; samahita; HELE °°; samahita-citta; samadhi-dhanus; Samapatti-citta; dhyana-tejas; HR FE FBR' °; dhydna-mamsa; dhydna-Sila; mitta; jiiana-bala; Ngo jantu; Samapatti-jfiana-bala | 3396 19刁""3401 SHE 1046 | dhyāna | pādaiḥ samaiḥ sthitvā; dhyāna; catu-dhyāna; vihāri āsannam",✅
+134,般若,zh-reverse,zh,prajñā,prajñā | 般若,✅
+135,業,zh-reverse,zh,karman | karma,karma | kriyā,✅
+136,sangs rgyas,bo-wylie,bo,sangs rgyas | buddha,sangs rgyas,✅
+137,ye shes,bo-wylie,bo,ye shes | jñāna,ye shes,✅
+138,shes rab,bo-wylie,bo,shes rab | prajñā,shes rab,✅
+139,snying rje,bo-wylie,bo,snying rje | karuṇā,snying rje,✅
+140,byams pa,bo-wylie,bo,byams pa | maitri,byams pa,✅
+141,stong pa,bo-wylie,bo,stong pa | śūnyatā,stong pa,✅
+142,lam,bo-wylie,bo,lam | mārga,lam,✅
+143,rgyud,bo-wylie,bo,rgyud | tantra,rgyud,✅
+144,sgom,bo-wylie,bo,sgom | bhāvanā,sgom,✅
+145,blo,bo-wylie,bo,blo,blo,✅
+146,śā,prefix,prefix,śānti | śāstra | śākyamuni,śaṭ | satya | samāna | sādhana | saṃkhyā,❌
+147,yo,prefix,prefix,yoga | yogī,yoga | yogacara | yogasūtra | yo | yogaḥ,✅
+148,nir,prefix,prefix,nirvāṇa | nirodha,nirvāṇa | nirodha | nirmāṇakāya | nir | nirasa,✅
+149,sam,prefix,prefix,saṃskāra | samādhi,samāna | saṃkhyā | saṃjñā | samudaya | saṃyāma,❌
+150,vij,prefix,prefix,vijñāna,vijñāna | vij | vijana | vijayā | vijita,✅
+151,tri,prefix,prefix,triratna | trikāya,triratna | trikāya | tri | tripura | tridaza,✅
+152,ka,prefix,prefix,karma | kāma | kalpa,kalpa | karman | karuṇa | kali | kalyāṇa,✅
+153,su,prefix,prefix,sukha | sūtra | sūrya,śuṇḍāra | sūryā | śūnya | suṣumṇa | śūnyatā,✅
+154,br,prefix,prefix,brahman | brahma,brahman | brāhma | brahmacarya | brahmaloka | brahmasūtra,✅
+155,ut,prefix,prefix,utpāda,uttara | uta | uttama | utkatā | utpala,❌
+156,om mani padme hum,edge,skt,om | om | om | om,om | maṇi | hum,✅
+157,buddha dharma sangha,edge,skt,buddha | dharma | sangha,buddha | dhārma | saṅgha,✅
+158,namo buddhāya,edge,skt,namo | buddha,namo,✅
+159,bodhisattva mahāsattva,edge,skt,bodhisattva | mahāsattva,bodhisattva | mahāsattva,✅
+160,śīla samādhi prajñā,edge,skt,śīla | samādhi | prajñā,śilā | samadhī | prajñā,✅
+161,guru yoga,edge,skt,guru | yoga,guru | yoga,✅
+162,yoga sūtra,edge,skt,yoga | sūtra,yoga | sūtra,✅
+163,satyam śivam sundaram,edge,skt,satyam | śiva | sundara,satyam | sundaraṃ,✅
+164,neti neti,edge,skt,neti,netī,✅
+165,sat cit ānanda,edge,skt,sat | cit | ānanda,śaṭ | ciṭ | ananda,✅
+166,path,en-reverse,en,mārga | panthan,mārga | mārga | mārga | mārga | mārga,✅
+167,patience,en-reverse,en,kṣānti,kṣānti | kṣānti | kṣānti | kṣānti | kṣānti,✅
+168,wealth,en-reverse,en,dhana | artha | vasu | sampatti,vasu | vasu | vasu | vasu | vasu,✅
+169,speech,en-reverse,en,vāc,vāc | vāc | vāc | śabda | vāc,✅
+170,body,en-reverse,en,śarīra | kāya | deha,vapus | deha | deha | deha | kāya,✅
+171,merit,en-reverse,en,puṇya | kuśala,puṇya | puṇya | puṇya | puṇya | puṇya,✅
+172,evil,en-reverse,en,pāpa | akuśala | doṣa,pāpa | pāpa | doṣa | doṣa | doṣa,✅
+173,prayer,en-reverse,en,prārthanā | stuti,stuti | stuti | prārthanā | prārthanā | prārthanā,✅
+174,vow,en-reverse,en,vrata,vrata | vrata | vrata | vrata | vrata,✅
+175,monk,en-reverse,en,bhikṣu | śramaṇa,śramaṇa | bhikṣu | bhikṣu | śramaṇa | śramaṇa,✅
+176,sin,en-reverse,en,pāpa,pāpa | pāpa | pāpa | pāpa | pāpa,✅
+177,victory,en-reverse,en,vijaya | jaya,jaya | jaya | jaya | jaya | jaya,✅
+178,sacrifice,en-reverse,en,yajña | homa,homa | yajña | yajña | yajña | homa,✅
+179,gift,en-reverse,en,dāna | tyāga,tyāga | tyāga | tyāga | tyāga | tyāga,✅
+180,teacher,en-reverse,en,guru | ācārya | śāstṛ | upādhyāya,śāstṛ | śāstṛ | ācārya | ācārya | upādhyāya,✅
+181,om,edge,skt,oṃ | om,om,✅
+182,AUM,edge,skt,aum | oṃ,aum,✅
+183,Buddha,edge,skt,buddha,buddha,✅
+184,DHARMA,edge,skt,dharma,dhārma,✅
+185, agni ,edge,skt,agni,agni,✅
+186,Śiva,edge,skt,śiva,śivā,✅
+187,नमस्ते,edge,skt,,(none),❌
+188,汉字,edge,skt,,(none),❌
+189,??,typo,edge,,????????,⚠️
+190,***,typo,edge,,(none),✅
+191,prajñāpāramitā,skt-long,skt,prajñāpāramitā,prajñāpāramitā,✅
+192,saddharmapuṇḍarīka,skt-long,skt,saddharmapuṇḍarīka,saddharmapuṇḍarīka,✅
+193,laṅkāvatāra,skt-long,skt,laṅkāvatāra,laṅkāvatāra,✅
+194,vajracchedikā,skt-long,skt,vajracchedikā,(none),❌
+195,hṛdaya,skt-mid,skt,hṛdaya,hṛdaya,✅
+196,saṃdhinirmocana,skt-long,skt,saṃdhinirmocana,saṃdhinirmocana,✅
+197,daśabhūmika,skt-long,skt,daśabhūmika,daśabhūmika,✅
+198,gaṇḍavyūha,skt-long,skt,gaṇḍavyūha,gaṇḍavyūha,✅
+199,mahāparinirvāṇa,skt-long,skt,mahāparinirvāṇa,mahāparinirvāṇa,✅
+200,śūraṅgama,skt-long,skt,śūraṅgama,(none),❌

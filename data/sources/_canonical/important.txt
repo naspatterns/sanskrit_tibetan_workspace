@@ -1,0 +1,402 @@
+# Canonical importance list (Phase 3.7 P1-1+ follow-up, 2026-05-04)
+#
+# One headword_norm per line (NFD-stripped, lowercase). Lines starting with
+# `#` or blank are ignored.
+#
+# Purpose: lexical frequency alone misranks essential Buddhist / Vedic /
+# Hindu / Tibetan philosophical terms because dictionaries don't cite them
+# proportionally to their philosophical weight. E.g. śūnyatā / bodhicitta /
+# tathāgata / saṃskāra are below top-10K in raw cumulative counts, leaving
+# tier0 unable to surface them on direct query.
+#
+# This file is consumed by `scripts/frequency.py` via `--canonical` flag. Each
+# matching headword gets a constant boost large enough to ensure inclusion
+# in top-N regardless of raw frequency rank.
+#
+# To extend: add new entries (any case OK — normalized at load). Comments OK.
+#
+# License: editorial / curated. Free to redistribute as part of the workspace.
+
+# ─── Core Buddhist concepts ─────────────────────────────────────────
+sunyata
+sunyataa
+bodhicitta
+tathagata
+samskara
+samkhara
+nirvana
+nirvāna
+parinirvana
+dharmakaya
+sambhogakaya
+nirmanakaya
+trikaya
+buddha
+dharma
+sangha
+triratna
+ratnatraya
+
+# ─── Four Noble Truths / Eightfold Path ─────────────────────────────
+duhkha
+dukkha
+samudaya
+nirodha
+marga
+arya
+aryasatya
+
+# ─── Three marks of existence ───────────────────────────────────────
+anitya
+anicca
+anatman
+anatta
+duhkhata
+
+# ─── Dependent origination ──────────────────────────────────────────
+pratityasamutpada
+paticcasamuppada
+nidana
+hetu
+pratyaya
+paccaya
+
+# ─── Five aggregates / paramitas ────────────────────────────────────
+skandha
+khandha
+rupa
+vedana
+samjna
+sanna
+samskara
+vinnana
+vijnana
+paramita
+dana
+sila
+ksanti
+khanti
+virya
+viriya
+dhyana
+jhana
+samadhi
+prajna
+panna
+
+# ─── Yogācāra / Madhyamaka ──────────────────────────────────────────
+yogacara
+madhyamaka
+alayavijnana
+manasvijnana
+parikalpita
+paratantra
+parinispanna
+trisvabhava
+svabhava
+nihsvabhava
+sunya
+
+# ─── Major Mahāyāna sūtras ──────────────────────────────────────────
+prajnaparamita
+saddharmapundarika
+lankavatara
+samdhinirmocana
+vajracchedika
+hridaya
+suvarnaprabhasa
+mahaparinirvana
+gandavyuha
+dasabhumika
+
+# ─── Tantric Buddhism ───────────────────────────────────────────────
+mantra
+mandala
+mudra
+vajra
+tantra
+sadhana
+guru
+yidam
+abhiseka
+yoga
+mahamudra
+dzogchen
+rdzogs chen
+sems nyid
+rang byung
+ye shes
+chos sku
+longs sku
+sprul sku
+
+# ─── Vedic / Upanishadic ────────────────────────────────────────────
+brahman
+atman
+veda
+upanisad
+upanishad
+mahavakya
+tattvamasi
+ahambrahmasmi
+prajnanambrahma
+ayamatmabrahma
+moksa
+mukti
+maya
+purusa
+prakrti
+gunas
+sattva
+rajas
+tamas
+karma
+karman
+samsara
+yoga
+bhakti
+jnana
+karma
+dvaita
+advaita
+visistadvaita
+
+# ─── Hindu deities ──────────────────────────────────────────────────
+brahma
+visnu
+siva
+sakti
+durga
+kali
+laksmi
+sarasvati
+ganesa
+ganesha
+hanuman
+parvati
+kartikeya
+indra
+agni
+varuna
+yama
+soma
+surya
+mitra
+savitri
+candra
+prajapati
+rudra
+visvakarma
+
+# ─── Avatāras ───────────────────────────────────────────────────────
+rama
+sita
+hanuman
+krsna
+balarama
+buddha
+kalkin
+matsya
+kurma
+varaha
+narasimha
+vamana
+parasurama
+
+# ─── Major texts ────────────────────────────────────────────────────
+mahabharata
+ramayana
+bhagavad
+bhagavadgita
+gita
+purana
+jagannatha
+manusmrti
+arthasastra
+yogasutra
+brahmasutra
+nyaya
+vaisesika
+samkhya
+mimamsa
+
+# ─── Key mantras / sounds ───────────────────────────────────────────
+om
+aum
+hum
+huṃ
+phat
+svaha
+namo
+namaste
+namaskara
+shanti
+om mani padme hum
+
+# ─── Buddhist Tibetan canonical forms (Wylie) ───────────────────────
+sangs rgyas
+chos
+dge 'dun
+byang chub sems dpa'
+byang chub sems
+shes rab
+ye shes
+thabs
+snying rje
+byams
+'jam dpal
+spyan ras gzigs
+phyag rdor
+phyag na rdo rje
+rdo rje sems dpa'
+gsal stong
+rang rig
+gnas lugs
+sgom
+dmigs pa
+bsgom pa
+zhi gnas
+lhag mthong
+gzhi
+lam
+'bras bu
+
+# ─── Common philosophical states ────────────────────────────────────
+viparyasa
+avidya
+moha
+dvesa
+raga
+trsna
+upadana
+bhava
+jati
+jara
+maranam
+priya
+ratna
+karuna
+maitri
+mudita
+upeksa
+apramana
+brahmavihara
+kalyana
+kusala
+akusala
+papa
+punya
+mahasattva
+bodhisattva
+sravaka
+pratyekabuddha
+arhat
+arahant
+
+# ─── Cosmology / time ───────────────────────────────────────────────
+kalpa
+yuga
+satyayuga
+tretayuga
+dvaparayuga
+kaliyuga
+manvantara
+mahayuga
+loka
+brahmaloka
+trailokya
+sukhavati
+abhirati
+tusita
+trayastrimsa
+
+# ─── Yoga / energy ──────────────────────────────────────────────────
+prana
+apana
+udana
+vyana
+samana
+kundalini
+cakra
+muladhara
+svadhisthana
+manipura
+anahata
+visuddha
+ajna
+sahasrara
+nadi
+ida
+pingala
+susumna
+bandha
+asana
+pranayama
+pratyahara
+dharana
+samyama
+samapatti
+
+# ─── Pāli / Theravāda ───────────────────────────────────────────────
+theravada
+mahasanghika
+mahayana
+hinayana
+arahant
+arhat
+sotapanna
+sakadagami
+anagami
+puthujjana
+sotapatti
+abhidharma
+abhidhamma
+visuddhimagga
+patimokkha
+vinaya
+vipasyana
+vipassana
+surangama
+shurangama
+neti
+saccidananda
+sat
+cit
+ananda
+sundaram
+shivam
+sundara
+namo
+nava
+ban
+
+# ─── Modern / important compounds ───────────────────────────────────
+ahimsa
+satya
+brahmacarya
+asteya
+aparigraha
+yama
+niyama
+saucha
+santosa
+tapas
+svadhyaya
+isvara
+isvarapranidhana
+vairagya
+viveka
+shraddha
+sraddha
+
+# ─── Korean Buddhist terms (Hanja-derived in Sanskrit) ──────────────
+ji ja
+jeong
+hwa
+ban ya
+beob
+jong
+seon
+maha
+prajnaparamita
+upeksa

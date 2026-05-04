@@ -95,12 +95,12 @@ QUERIES: list[Query] = [
     Query(38, "菩薩", "zh-reverse", "zh", ["bodhisattva"]),
     Query(39, "涅槃", "zh-reverse", "zh", ["nirvāṇa"]),
     Query(40, "如來", "zh-reverse", "zh", ["tathāgata"]),
-    # 7. Edge cases (5)
+    # 7. Edge cases (5) — Phase 3.7 (Option E) added space-split multi-word
     Query(41, "mahābhārata", "edge", "skt", ["mahābhārata"]),
     Query(42, "jagannātha", "edge", "skt", ["jagannātha"]),
-    Query(43, "tat tvam asi", "edge", "skt", []),  # multi-word; document behavior
+    Query(43, "tat tvam asi", "edge", "skt", ["tat", "tvam", "asi"]),
     Query(44, "oṃ", "edge", "skt", ["oṃ", "om"]),
-    Query(45, "aham brahmāsmi", "edge", "skt", []),  # multi-word
+    Query(45, "aham brahmāsmi", "edge", "skt", ["aham", "brahman", "asmi"]),
     # 8. Typo (3)
     Query(46, "dharmaaa", "typo", "edge", []),  # graceful empty
     Query(47, "aaa", "typo", "edge", []),
@@ -120,14 +120,22 @@ def load_msgpack_zst(path: Path):
                            raw=False, strict_map_key=False)
 
 
-def load_headwords(path: Path) -> list[tuple[str, str]]:
+def load_headwords(path: Path) -> list[tuple[str, str, int]]:
+    """Load 3-column TSV (norm, iast, rank). Tolerates the 2-column legacy."""
     raw = path.read_bytes()
     text = zstd.ZstdDecompressor().decompress(raw).decode("utf-8")
     out = []
     for line in text.splitlines():
-        if "\t" in line:
-            norm, iast = line.split("\t", 1)
-            out.append((norm, iast))
+        parts = line.split("\t")
+        if len(parts) >= 3:
+            norm, iast, rank_s = parts[0], parts[1], parts[2]
+            try:
+                rank = int(rank_s)
+            except ValueError:
+                rank = 999_999
+            out.append((norm, iast, rank))
+        elif len(parts) == 2:
+            out.append((parts[0], parts[1], 999_999))
     return out
 
 
@@ -146,42 +154,66 @@ def normalize_skt(q: str) -> str:
 # ─────────────────────────────────────────────────────────────────────
 #  Channel evaluators
 # ─────────────────────────────────────────────────────────────────────
-def eval_skt(q: str, tier0: dict, tier0_bo: dict) -> list[str]:
+def eval_skt(q: str, tier0: dict, tier0_bo: dict, tier0_ext: dict) -> list[str]:
     norm = normalize_skt(q)
     hits = []
-    if norm in tier0:
-        # tier0 hit — return iast + dict short of top-5 entries
-        slot = tier0[norm]
-        hits.append(slot.get("iast", norm))
-    if norm in tier0_bo:
-        slot = tier0_bo[norm]
-        if slot.get("iast", norm) not in hits:
-            hits.append(slot.get("iast", norm))
+    for src in (tier0, tier0_ext, tier0_bo):
+        if norm in src:
+            iast = src[norm].get("iast", norm)
+            if iast not in hits:
+                hits.append(iast)
+    if hits:
+        return hits[:5]
+    # Phase 3.7 (Option E): multi-word fallback. Split on whitespace and
+    # try each token; surface as many distinct iast hits as the limit allows.
+    if " " in norm:
+        for token in norm.split():
+            if not token:
+                continue
+            for src in (tier0, tier0_ext, tier0_bo):
+                if token in src:
+                    iast = src[token].get("iast", token)
+                    if iast not in hits:
+                        hits.append(iast)
+                    break  # first source that has this token
+            if len(hits) >= 5:
+                break
     return hits[:5]
 
 
-def eval_bo(q: str, tier0_bo: dict, tier0: dict) -> list[str]:
-    """Wylie input — primarily tier0-bo."""
+def eval_bo(q: str, tier0_bo: dict, tier0: dict, tier0_ext: dict) -> list[str]:
+    """Wylie input — primarily tier0-bo, then Sanskrit fallback."""
     norm = normalize_skt(q)  # Wylie is ASCII; lowercase OK
     hits = []
-    if norm in tier0_bo:
-        hits.append(tier0_bo[norm].get("iast", norm))
-    if norm in tier0:
-        iast = tier0[norm].get("iast", norm)
-        if iast not in hits:
-            hits.append(iast)
+    for src in (tier0_bo, tier0, tier0_ext):
+        if norm in src:
+            iast = src[norm].get("iast", norm)
+            if iast not in hits:
+                hits.append(iast)
     return hits[:5]
 
 
-def eval_prefix(q: str, headwords: list[tuple[str, str]]) -> list[str]:
+def eval_prefix(q: str, headwords: list[tuple[str, str, int]]) -> list[str]:
+    """Match the client `prefixSearch` (Phase 3.7 follow-up):
+    collect ALL prefix candidates, then rank by (rank ASC, len ASC,
+    alphabetic) to surface common terms above HTML extraction noise.
+    Common prefixes match 1-10K candidates; sorting is O(N log N).
+    """
     norm = normalize_skt(q)
-    out = []
-    for n, iast in headwords:
+    cands: list[tuple[str, str, int]] = []
+    # Find lower bound via linear scan (test bench; client uses binary search)
+    started = False
+    for n, iast, rank in headwords:
         if n.startswith(norm):
-            out.append(iast)
-            if len(out) >= 5:
-                break
-    return out
+            cands.append((n, iast, rank))
+            started = True
+        elif started:
+            # Headwords sorted by norm; first non-match after a match means done.
+            break
+    if not cands:
+        return []
+    cands.sort(key=lambda t: (t[2], len(t[0]), t[0]))
+    return [iast for _, iast, _ in cands[:5]]
 
 
 def eval_reverse(q: str, reverse_idx: dict, reverse_meta: dict) -> list[str]:
@@ -218,14 +250,15 @@ def eval_zh(q: str, equivalents: dict) -> list[str]:
     return []
 
 
-def eval_edge(q: str, tier0: dict, tier0_bo: dict, headwords: list, eq: dict) -> list[str]:
+def eval_edge(q: str, tier0: dict, tier0_bo: dict, tier0_ext: dict,
+              headwords: list, eq: dict) -> list[str]:
     """Try multiple channels for edge cases; return first non-empty."""
     if not q.strip():
         return []
-    res = eval_skt(q, tier0, tier0_bo)
+    res = eval_skt(q, tier0, tier0_bo, tier0_ext)
     if res:
         return res
-    res = eval_bo(q, tier0_bo, tier0)
+    res = eval_bo(q, tier0_bo, tier0, tier0_ext)
     if res:
         return res
     res = eval_prefix(q, headwords)
@@ -264,13 +297,15 @@ def main() -> int:
     print("Loading indices…", file=sys.stderr)
     tier0 = load_msgpack_zst(INDICES / "tier0.msgpack.zst")
     tier0_bo = load_msgpack_zst(INDICES / "tier0-bo.msgpack.zst")
+    tier0_ext_path = INDICES / "tier0-extended.msgpack.zst"
+    tier0_ext = load_msgpack_zst(tier0_ext_path) if tier0_ext_path.exists() else {}
     headwords = load_headwords(INDICES / "headwords.txt.zst")
     reverse_en = load_msgpack_zst(INDICES / "reverse_en.msgpack.zst")
     reverse_ko = load_msgpack_zst(INDICES / "reverse_ko.msgpack.zst")
     reverse_meta = load_msgpack_zst(INDICES / "reverse_meta.msgpack.zst")
     equivalents = load_msgpack_zst(INDICES / "equivalents.msgpack.zst")
-    print(f"  tier0 keys: {len(tier0):,} · tier0-bo keys: {len(tier0_bo):,}",
-          file=sys.stderr)
+    print(f"  tier0 keys: {len(tier0):,} · tier0-bo: {len(tier0_bo):,} · "
+          f"tier0-ext: {len(tier0_ext):,}", file=sys.stderr)
     print(f"  headwords: {len(headwords):,} · reverse_en: {len(reverse_en):,} · "
           f"reverse_ko: {len(reverse_ko):,}", file=sys.stderr)
 
@@ -281,9 +316,9 @@ def main() -> int:
     for q in QUERIES:
         ch = q.channel
         if ch == "skt":
-            hits = eval_skt(q.text, tier0, tier0_bo)
+            hits = eval_skt(q.text, tier0, tier0_bo, tier0_ext)
         elif ch == "bo":
-            hits = eval_bo(q.text, tier0_bo, tier0)
+            hits = eval_bo(q.text, tier0_bo, tier0, tier0_ext)
         elif ch == "prefix":
             hits = eval_prefix(q.text, headwords)
         elif ch == "en":
@@ -293,7 +328,8 @@ def main() -> int:
         elif ch == "zh":
             hits = eval_zh(q.text, equivalents)
         else:  # edge
-            hits = eval_edge(q.text, tier0, tier0_bo, headwords, equivalents)
+            hits = eval_edge(q.text, tier0, tier0_bo, tier0_ext,
+                             headwords, equivalents)
         v = verdict(q, hits)
         summary[v] += 1
         by_cat.setdefault(q.category, {"✅": 0, "⚠️": 0, "❌": 0})[v] += 1

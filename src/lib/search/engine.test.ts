@@ -29,6 +29,7 @@ function makeBundle(): IndexBundle {
 			]
 		]),
 		tier0Bo: new Map(),
+		tier0Extended: new Map(),
 		declension: new Map(),
 		equivalents: new Map([
 			[
@@ -54,9 +55,9 @@ function makeBundle(): IndexBundle {
 			])
 		},
 		headwords: [
-			{ norm: 'dharma', iast: 'dharma' },
-			{ norm: 'dharma-cakra', iast: 'dharma-cakra' },
-			{ norm: 'dharmin', iast: 'dharmin' }
+			{ norm: 'dharma', iast: 'dharma', rank: 1 },
+			{ norm: 'dharma-cakra', iast: 'dharma-cakra', rank: 999_999 },
+			{ norm: 'dharmin', iast: 'dharmin', rank: 999_999 }
 		]
 	};
 }
@@ -116,10 +117,15 @@ describe('search engine', () => {
 		expect(r.reverse[0].language).toBe('ko');
 	});
 
-	it('prefix autocomplete from headwords.txt', () => {
+	it('prefix autocomplete from headwords.txt — Phase 3.7 rank-aware', () => {
+		// Phase 3.7 follow-up: prefixSearch sorts by (rank ASC, len ASC, alpha).
+		// Fixture ranks: dharma=1, dharma-cakra=999999, dharmin=999999.
+		// → dharma (rank 1) wins; among long-tail, dharmin (len 7) before
+		//   dharma-cakra (len 12). Alphabetic-only order is no longer the
+		//   tiebreaker.
 		const r = search(makeBundle(), 'dh');
 		expect(r.partial).toHaveLength(3);
-		expect(r.partial.map((h) => h.norm)).toEqual(['dharma', 'dharma-cakra', 'dharmin']);
+		expect(r.partial.map((h) => h.norm)).toEqual(['dharma', 'dharmin', 'dharma-cakra']);
 	});
 
 	it('partial limit is honored', () => {

@@ -4,16 +4,16 @@ n,query,category,channel,expected,top_5,verdict
 3,karman,skt-core,skt,karman,karman,✅
 4,agni,skt-core,skt,agni,agni,✅
 5,prajñā,skt-core,skt,prajñā,prajñā,✅
-6,śūnyatā,skt-core,skt,śūnyatā,(none),❌
-7,bodhicitta,skt-core,skt,bodhicitta,(none),❌
-8,tathāgata,skt-core,skt,tathāgata,(none),❌
+6,śūnyatā,skt-core,skt,śūnyatā,śūnyatā,✅
+7,bodhicitta,skt-core,skt,bodhicitta,bodhicitta,✅
+8,tathāgata,skt-core,skt,tathāgata,tathāgata,✅
 9,mokṣa,skt-core,skt,mokṣa,mokṣa,✅
-10,saṃskāra,skt-core,skt,saṃskāra,(none),❌
-11,dha,prefix,prefix,dharma | dhātu | dhana,dha | dhâ ͜ ana | dhā asi | dha du ra | dha man,⚠️
-12,bud,prefix,prefix,buddha | buddhi,buḍ | bud bsnyegs thob gsum | bud bud | བུད་དྷ་ | bud d+ha ba na,⚠️
-13,pra,prefix,prefix,prajñā | pratyaya,pra | pra ͜ â-rambha | pra ͜ adhi ͜ ita | pra ͜ adhva [fore-journey | pra ͜ ag-ika,⚠️
-14,ana,prefix,prefix,anātman | anitya | ānanda,anā | ĀNA I | ĀNA II | aṇa(na)ka | anaa,⚠️
-15,mahā,prefix,prefix,mahābhārata | mahāyāna | mahātman,mahā | mahâ ͜ aitareya | mahâ ͜ ikkha | mahâ ͜ indra | mahâ ͜ îsa,⚠️
+10,saṃskāra,skt-core,skt,saṃskāra,saṃskāra,✅
+11,dha,prefix,prefix,dharma | dhātu | dhana,dharaṇa | dhārma | dharmakāya | dhara | dharmaḥ,✅
+12,bud,prefix,prefix,buddha | buddhi,buddha | budha | budh | buḍ | buddhi,✅
+13,pra,prefix,prefix,prajñā | pratyaya,prajñā | pratyaya | praṇa | prakṛti | prajāpati,✅
+14,ana,prefix,prefix,anātman | anitya | ānanda,ananda | anātman | anāhata | āṇatta | anāgāmī,✅
+15,mahā,prefix,prefix,mahābhārata | mahāyāna | mahātman,mahā | mahāsattva | mahāyāna | mahābhārata | mahāvākya,✅
 16,chos,bo-wylie,bo,chos,chos,✅
 17,byang chub sems dpa',bo-wylie,bo,byang chub sems dpa' | bodhisattva,byang chub sems dpa',✅
 18,klong chen,bo-wylie,bo,klong chen,klong chen,✅
@@ -39,11 +39,11 @@ n,query,category,channel,expected,top_5,verdict
 38,菩薩,zh-reverse,zh,bodhisattva,bodhisattva,✅
 39,涅槃,zh-reverse,zh,nirvāṇa,nirvāṇa | 涅槃 | nirvāṇa; nirvṛti; parinirvṛtaḥ; nirvāṇa-(bhūmi~),✅
 40,如來,zh-reverse,zh,tathāgata,tathāgataḥ | tathāgata,✅
-41,mahābhārata,edge,skt,mahābhārata,(none),❌
-42,jagannātha,edge,skt,jagannātha,(none),❌
-43,tat tvam asi,edge,skt,,(none),❌
+41,mahābhārata,edge,skt,mahābhārata,mahābhārata,✅
+42,jagannātha,edge,skt,jagannātha,jagannātha,✅
+43,tat tvam asi,edge,skt,tat | tvam | asi,taṭ | tvaṃ | asī,✅
 44,oṃ,edge,skt,oṃ | om,om,✅
-45,aham brahmāsmi,edge,skt,,(none),❌
+45,aham brahmāsmi,edge,skt,aham | brahman | asmi,aham,✅
 46,dharmaaa,typo,edge,,(none),✅
 47,aaa,typo,edge,,(none),✅
 48,   ,typo,edge,,(none),✅

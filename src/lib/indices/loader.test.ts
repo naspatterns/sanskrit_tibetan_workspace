@@ -16,12 +16,28 @@ import {
 import type { IndexLoadStatus } from './types';
 
 describe('parseHeadwords', () => {
-	it('parses tab-separated norm \\t iast pairs', () => {
+	it('parses 2-column legacy (norm \\t iast)', () => {
 		const input = 'dharma\tdharma\nagni\tagni\nshanti\tśānti\n';
 		const out = parseHeadwords(input);
 		expect(out).toHaveLength(3);
-		expect(out[0]).toEqual({ norm: 'dharma', iast: 'dharma' });
-		expect(out[2]).toEqual({ norm: 'shanti', iast: 'śānti' });
+		// 2-column input → rank defaults to long-tail (999_999)
+		expect(out[0]).toEqual({ norm: 'dharma', iast: 'dharma', rank: 999_999 });
+		expect(out[2]).toEqual({ norm: 'shanti', iast: 'śānti', rank: 999_999 });
+	});
+
+	it('parses 3-column TSV (norm \\t iast \\t rank) — Phase 3.7', () => {
+		const input = 'dharma\tdharma\t34\nagni\tagni\t12\nrare\tdurlabha\t999999\n';
+		const out = parseHeadwords(input);
+		expect(out).toHaveLength(3);
+		expect(out[0]).toEqual({ norm: 'dharma', iast: 'dharma', rank: 34 });
+		expect(out[1]).toEqual({ norm: 'agni', iast: 'agni', rank: 12 });
+		expect(out[2]).toEqual({ norm: 'rare', iast: 'durlabha', rank: 999_999 });
+	});
+
+	it('falls back to long-tail rank on non-numeric rank field', () => {
+		const input = 'dharma\tdharma\toops\n';
+		const out = parseHeadwords(input);
+		expect(out[0].rank).toBe(999_999);
 	});
 
 	it('skips blank lines', () => {
@@ -46,13 +62,6 @@ describe('parseHeadwords', () => {
 	it('returns empty array on empty input', () => {
 		expect(parseHeadwords('')).toEqual([]);
 		expect(parseHeadwords('\n\n')).toEqual([]);
-	});
-
-	it('handles iast containing extra tabs (only first split)', () => {
-		// If somehow a tab leaks into iast, only first delimiter splits
-		const input = 'dharma\tdharma\textra\n';
-		const out = parseHeadwords(input);
-		expect(out[0]).toEqual({ norm: 'dharma', iast: 'dharma\textra' });
 	});
 });
 

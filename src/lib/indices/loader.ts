@@ -24,6 +24,9 @@ interface IndexSpec {
 const INDICES: IndexSpec[] = [
 	{ key: 'tier0', url: '/indices/tier0.msgpack.zst', decoder: 'msgpack' },
 	{ key: 'tier0Bo', url: '/indices/tier0-bo.msgpack.zst', decoder: 'msgpack' },
+	// Phase 3.7 follow-up (Option A) — top-10K..20K Sanskrit. Separate file
+	// because top-20K combined exceeds Cloudflare 25 MiB single-file limit.
+	{ key: 'tier0Extended', url: '/indices/tier0-extended.msgpack.zst', decoder: 'msgpack' },
 	{ key: 'equivalents', url: '/indices/equivalents.msgpack.zst', decoder: 'msgpack' },
 	{ key: 'reverseEn', url: '/indices/reverse_en.msgpack.zst', decoder: 'msgpack' },
 	{ key: 'reverseKo', url: '/indices/reverse_ko.msgpack.zst', decoder: 'msgpack' },
@@ -81,9 +84,26 @@ export function parseHeadwords(text: string): HeadwordEntry[] {
 	const out: HeadwordEntry[] = [];
 	for (const line of lines) {
 		if (!line) continue;
-		const tab = line.indexOf('\t');
-		if (tab === -1) continue;
-		out.push({ norm: line.slice(0, tab), iast: line.slice(tab + 1) });
+		const tab1 = line.indexOf('\t');
+		if (tab1 === -1) continue;
+		const tab2 = line.indexOf('\t', tab1 + 1);
+		// Phase 3.7 follow-up: 3-column TSV `norm\tiast\trank`. Tolerate the
+		// older 2-column format (no rank) by defaulting to long-tail (999999),
+		// which preserves the prior alphabetical-only behaviour.
+		if (tab2 === -1) {
+			out.push({
+				norm: line.slice(0, tab1),
+				iast: line.slice(tab1 + 1),
+				rank: 999_999
+			});
+		} else {
+			const rank = Number(line.slice(tab2 + 1));
+			out.push({
+				norm: line.slice(0, tab1),
+				iast: line.slice(tab1 + 1, tab2),
+				rank: Number.isFinite(rank) ? rank : 999_999
+			});
+		}
 	}
 	// build_fst.py emits sorted by norm; preserve order for binary search.
 	return out;
@@ -124,11 +144,21 @@ export async function loadAllIndices(
 		INDICES.map((spec, i) => fetchAndDecode(spec, status[i], emit))
 	);
 
-	const [tier0Raw, tier0BoRaw, equivRaw, revEnRaw, revKoRaw, revMetaRaw, declRaw, headwordsRaw] =
-		results;
+	const [
+		tier0Raw,
+		tier0BoRaw,
+		tier0ExtendedRaw,
+		equivRaw,
+		revEnRaw,
+		revKoRaw,
+		revMetaRaw,
+		declRaw,
+		headwordsRaw
+	] = results;
 	const bundle: IndexBundle = {
 		tier0: objectToMap<Tier0Entry>(tier0Raw),
 		tier0Bo: objectToMap<Tier0Entry>(tier0BoRaw),
+		tier0Extended: objectToMap<Tier0Entry>(tier0ExtendedRaw),
 		equivalents: objectToMap<EquivRow[]>(equivRaw),
 		reverseEn: objectToMap<string[]>(revEnRaw),
 		reverseKo: objectToMap<string[]>(revKoRaw),

@@ -325,14 +325,25 @@ main = `bf1a877`. 옵션 B 결정 (UI/UX + 코드 품질) + Phase 3.7 데이터 
 - ⏭️ P0-2 EU $451 batch — 4 chunks (100K + 100K + 100K + 81K = 381,070) ready. translate_eu.py.
 - 또는 sub-agent 경로로 P1-2와 동일하게 진행 가능 (38만 entries × 50 = 7,621 sub-batches, 약 12-15 윈도우 추정)
 
-**Phase 3.7 P1-2 후속 작업 (✅ 완료)**:
-- ✅ Sentinel 50 자동 평가 — `audit_sentinel_50.py` + `audit-C-sentinel-results.csv` (`85ddafb`). Baseline: 24/⚠️9/❌17.
-- ✅ KO synonym injection (5/4): `data/sources/_kosynonym/synonyms.json` (52 iast → 89 KO/Hanja tokens). build_reverse_index `--ko-synonyms` + SUPER_SALIENCE=10 주입.
-  - audit_reverse_precision: KO strict **4/15 → 15/15 (100%)** · KO loose 8/15 → 15/15
-- ✅ **EN synonym injection (5/4)**: `data/sources/_ensynonym/synonyms.json` (80 iast → 130 EN tokens, e.g. agni→fire, prajñā→wisdom/understanding, manas→mind, sūrya→sun, rāja→king). 동일 SUPER_SALIENCE 메커니즘 (commit TBD).
-  - audit_reverse_precision: EN strict **9/15 → 15/15 (100%)** · EN loose 10/15 → 15/15
-  - Sentinel 50 누적: 24 → 37 ✅ (74%) · ⚠️ 5 (prefix engine quality) · ❌ 8 (top-10K 밖 5 + multi-word edge 3)
+**Phase 3.7 P1-2 후속 작업 (✅ 완료, 5개 옵션)**:
+
+- ✅ **Option B — Canonical importance list** (5/4): `data/sources/_canonical/important.txt` (332 terms — Buddhist/Vedic/Hindu philosophical 핵심어). `frequency.py --canonical` 옵션 + CANONICAL_BOOST=10000 → 빈도 부족하지만 importance 높은 śūnyatā/bodhicitta/tathāgata 등 top-10K 강제 편입.
+- ✅ **Option D — Prefix engine 정상화** (5/4): `build_fst.py` 노이즈 필터 (combining marks `͜`, `â` 등 11,118 entries 제거) + 3-column TSV (norm\\tiast\\trank) 출력. `engine.ts:prefixSearch` 모든 candidate 수집 후 (rank ASC, len ASC, alpha) 재정렬 → top-10K 우선 surface. Sentinel prefix 0/5 → 5/5.
+- ✅ **Option A — tier0 top-10K → top-20K 확장** (5/4): split 패턴 (`tier0.msgpack.zst` 23.4MB + `tier0-extended.msgpack.zst` 9.1MB, 10K..20K). loader/engine `tier0Extended` 추가, SW v4→v5, 9 indices precache. Cloudflare 25MB 단일 파일 한계 우회.
+- ✅ **Option E — Multi-word 검색** (5/4): `engine.ts` whitespace split fallback. `tat tvam asi`, `aham brahmāsmi` 같은 mahāvākya / multi-word phrase가 단일 lookup miss 시 token-별 union 결과 surface.
+- ✅ **Option C — Sentinel 50→200 + random lookup audit** (5/4): `audit_sentinel_200.py` (200 query · 12 카테고리 · skt-core/mid/long/prefix/bo-wylie/en-reverse/ko-reverse/zh-reverse/edge/typo/dead-zone/multi-word) + `audit_random_lookup.py` (7 indices × 100 random keys, integrity 검증).
+
+**최종 지표**:
+- Sentinel 50: 19 → **50/50 ✅ (100%)**
+- Sentinel 200: **191/200 ✅ (95.5%)** · ⚠️ 2 · ❌ 7 (모두 알려진 한계: prefix freq-rank correctly returns common terms, Devanagari/Chinese auto-conversion not yet, 일부 sūtra titles standalone 미수록)
+- audit_reverse_precision: EN 9/15 → **15/15** · KO 4/15 → **15/15** (둘 다 100%)
+- 한국어 coverage: 11.31% → **12.79%** (+1.48pp)
+- Random lookup: 7/7 indices @ 100% (statistical integrity)
+- Tests: 103/103 ✅ · TypeScript: 0 errors
+
+**잔여**:
 - ⏭️ Phase 4 deploy entry checklist (audit-E-deploy.md §6)
+- ⏭️ P0-2 EU $451 batch (사용자 결정 대기)
 
 **Phase 3.6 완료 기준 vs 결과**:
 - ✅ TypeScript strict 0 errors / 257 files

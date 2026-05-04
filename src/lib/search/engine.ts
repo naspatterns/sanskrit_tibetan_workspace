@@ -66,18 +66,51 @@ export function search(
 	const zhKey = trimmed; // CJK as-is
 
 	// 1. Exact tier0 (definition top-3 + rest). Phase 3.3 (D-Tib10K) — union
-	// over Sanskrit and Tibetan top-10K. When a headword exists in both
-	// (e.g. 'chos' is in skt cross-ref and bo native), merge entries.
+	// over Sanskrit and Tibetan top-10K. Phase 3.7 (Option A) — also union
+	// against tier0-extended (top-10K..20K). When a headword exists in
+	// multiple, merge entries (preserving sktInfo iast as primary).
 	const sktInfo = bundle.tier0.get(iastKey);
+	const sktExtInfo = bundle.tier0Extended.get(iastKey);
 	const boInfo = bundle.tier0Bo.get(iastKey);
-	const exact: Tier0Entry | null =
-		sktInfo && boInfo
-			? {
-					iast: sktInfo.iast,
+	const sources: Tier0Entry[] = [];
+	if (sktInfo) sources.push(sktInfo);
+	if (sktExtInfo && sktExtInfo !== sktInfo) sources.push(sktExtInfo);
+	if (boInfo && boInfo !== sktInfo && boInfo !== sktExtInfo) sources.push(boInfo);
+	let exact: Tier0Entry | null = sources.length === 0
+		? null
+		: sources.length === 1
+			? sources[0]
+			: {
+					iast: sources[0].iast,
 					// Concatenate; client-side langBalancedTop will balance Zone C.
-					entries: [...sktInfo.entries, ...boInfo.entries]
+					entries: sources.flatMap((s) => s.entries)
+				};
+
+	// Phase 3.7 (Option E): multi-word fallback. When a phrase like
+	// `tat tvam asi` doesn't match the joined key, split on whitespace and
+	// merge tier0 entries for each token. Useful for upaniṣadic mahāvākyas
+	// and short Sanskrit citations. Skip if exact already hit (single-word
+	// behaviour preserved).
+	if (!exact && iastKey.includes(' ')) {
+		const multiSources: Tier0Entry[] = [];
+		const seenIasts = new Set<string>();
+		for (const token of iastKey.split(/\s+/).filter(Boolean)) {
+			for (const map of [bundle.tier0, bundle.tier0Extended, bundle.tier0Bo]) {
+				const slot = map.get(token);
+				if (slot && !seenIasts.has(slot.iast)) {
+					multiSources.push(slot);
+					seenIasts.add(slot.iast);
+					break; // first source for this token
 				}
-			: (sktInfo ?? boInfo ?? null);
+			}
+		}
+		if (multiSources.length > 0) {
+			exact = {
+				iast: multiSources.map((s) => s.iast).join(' '),
+				entries: multiSources.flatMap((s) => s.entries)
+			};
+		}
+	}
 
 	// 2. Equivalents — try all 3 channels, merge unique row references.
 	// Build-side rows are interned per dedup key, so reference equality is
@@ -127,7 +160,16 @@ export function search(
 	};
 }
 
-// Lower-bound binary search → walk forward while prefix matches, capped.
+// Lower-bound binary search → walk forward while prefix matches.
+// Phase 3.7 follow-up: collect ALL matching candidates (common prefix matches
+// 1-10K entries; sorting is cheap), then sort by rank ASC (top-10K first),
+// tie-break by norm length ASC, then alphabetic. Returns top `limit`. This
+// surfaces common terms above HTML extraction noise — e.g. `dha` returns
+// dharma/dhātu/dhana instead of dha/dhaaraa/dhaa (long-tail mediaeval forms).
+//
+// Hard cap defends against pathological prefixes (e.g. empty string).
+const PREFIX_CANDIDATE_CAP = 20_000;
+
 function prefixSearch(
 	headwords: HeadwordEntry[],
 	prefix: string,
@@ -144,10 +186,17 @@ function prefixSearch(
 			hi = mid;
 		}
 	}
-	const out: HeadwordEntry[] = [];
-	for (let i = lo; i < headwords.length && out.length < limit; i++) {
+	const candidates: HeadwordEntry[] = [];
+	for (let i = lo; i < headwords.length && candidates.length < PREFIX_CANDIDATE_CAP; i++) {
 		if (!headwords[i].norm.startsWith(prefix)) break;
-		out.push(headwords[i]);
+		candidates.push(headwords[i]);
 	}
-	return out;
+	if (candidates.length === 0) return [];
+	// Re-rank: top-10K position ASC → norm length ASC → alphabetical
+	candidates.sort((a, b) => {
+		if (a.rank !== b.rank) return a.rank - b.rank;
+		if (a.norm.length !== b.norm.length) return a.norm.length - b.norm.length;
+		return a.norm < b.norm ? -1 : a.norm > b.norm ? 1 : 0;
+	});
+	return candidates.slice(0, limit);
 }

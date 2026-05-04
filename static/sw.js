@@ -9,11 +9,14 @@
 
 // v3: Phase 3.5 added declension (top-10K Heritage paradigms).
 // v4: Phase 3.6 P0-1 added reverse_meta (id → iast/dict for reverse hits UI).
-const CACHE_NAME = 'stw-indices-v4';
+// v5: Phase 3.7 (Option A) added tier0-extended (top-10K..20K Sanskrit),
+//     plus headwords format change to 3-column TSV (norm\tiast\trank).
+const CACHE_NAME = 'stw-indices-v5';
 
 const PRECACHE_URLS = [
 	'/indices/tier0.msgpack.zst',
 	'/indices/tier0-bo.msgpack.zst',
+	'/indices/tier0-extended.msgpack.zst',
 	'/indices/equivalents.msgpack.zst',
 	'/indices/reverse_en.msgpack.zst',
 	'/indices/reverse_ko.msgpack.zst',
