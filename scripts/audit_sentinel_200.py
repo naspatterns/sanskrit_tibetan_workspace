@@ -272,6 +272,31 @@ QUERIES: list[Query] = [
     Query(198, "gaṇḍavyūha", "skt-long", "skt", ["gaṇḍavyūha"]),
     Query(199, "mahāparinirvāṇa", "skt-long", "skt", ["mahāparinirvāṇa"]),
     Query(200, "śūraṅgama", "skt-long", "skt", ["śūraṅgama"]),
+
+    # ─── Section 13: Upasarga prefix (Phase 3.7 Depth 2) ────────────
+    # Sanskrit: typing the upasarga should surface words USING that prefix
+    Query(201, "pra", "upasarga-prefix", "prefix", ["prajñā", "pratyaya", "prakṛti"]),
+    Query(202, "prati", "upasarga-prefix", "prefix", ["pratītyasamutpāda", "pratipad"]),
+    Query(203, "sam", "upasarga-prefix", "prefix", ["samāna", "saṃskāra", "saṃjñā"]),
+    Query(204, "vi", "upasarga-prefix", "prefix", ["vijñāna", "vinaya", "viveka"]),
+    Query(205, "abhi", "upasarga-prefix", "prefix", ["abhidharma", "abhiṣeka"]),
+    Query(206, "anu", "upasarga-prefix", "prefix", ["anukampā", "anumāna"]),
+    Query(207, "upa", "upasarga-prefix", "prefix", ["upādhyāya", "upādāna"]),
+    Query(208, "ud", "upasarga-prefix", "prefix", ["udaya", "udāna"]),
+    Query(209, "ni", "upasarga-prefix", "prefix", ["nirodha", "nidāna"]),
+    Query(210, "su", "upasarga-prefix", "prefix", ["sukha", "subhūti"]),
+
+    # Tibetan upasarga equivalents (15)
+    Query(211, "rab tu", "upasarga-prefix", "prefix",
+          ["rab tu byung", "rab tu dga'", "rab tu mi gnas"]),
+    Query(212, "rnam par", "upasarga-prefix", "prefix",
+          ["rnam par shes pa", "rnam par snang mdzad", "rnam par dag"]),
+    Query(213, "kun", "upasarga-prefix", "prefix",
+          ["kun rdzob", "kun gzhi", "kun mkhyen", "kun dga'"]),
+    Query(214, "mngon par", "upasarga-prefix", "prefix",
+          ["mngon par shes pa", "mngon par dga' ba"]),
+    Query(215, "nye bar", "upasarga-prefix", "prefix",
+          ["nye bar"]),
 ]
 
 
@@ -284,20 +309,27 @@ def load_msgpack_zst(path: Path):
                            raw=False, strict_map_key=False)
 
 
-def load_headwords(path: Path) -> list[tuple[str, str, int]]:
+def load_headwords(path: Path) -> list[tuple[str, str, int, str]]:
+    """Load 4-column TSV (norm, iast, rank, upasarga). 2/3-col legacy OK."""
     raw = path.read_bytes()
     text = zstd.ZstdDecompressor().decompress(raw).decode("utf-8")
     out = []
     for line in text.splitlines():
         parts = line.split("\t")
-        if len(parts) >= 3:
+        if len(parts) >= 4:
             try:
                 rank = int(parts[2])
             except ValueError:
                 rank = 999_999
-            out.append((parts[0], parts[1], rank))
+            out.append((parts[0], parts[1], rank, parts[3]))
+        elif len(parts) == 3:
+            try:
+                rank = int(parts[2])
+            except ValueError:
+                rank = 999_999
+            out.append((parts[0], parts[1], rank, ""))
         elif len(parts) == 2:
-            out.append((parts[0], parts[1], 999_999))
+            out.append((parts[0], parts[1], 999_999, ""))
     return out
 
 
@@ -342,20 +374,24 @@ def eval_bo(q: str, tier0_bo: dict, tier0: dict, tier0_ext: dict) -> list[str]:
     return hits[:5]
 
 
-def eval_prefix(q: str, headwords: list[tuple[str, str, int]]) -> list[str]:
+def eval_prefix(q: str, headwords: list[tuple[str, str, int, str]]) -> list[str]:
     norm = normalize_skt(q)
-    cands: list[tuple[str, str, int]] = []
+    cands: list[tuple[str, str, int, str]] = []
     started = False
-    for n, iast, rank in headwords:
-        if n.startswith(norm):
-            cands.append((n, iast, rank))
+    for tup in headwords:
+        if tup[0].startswith(norm):
+            cands.append(tup)
             started = True
         elif started:
             break
     if not cands:
         return []
-    cands.sort(key=lambda t: (t[2], len(t[0]), t[0]))
-    return [iast for _, iast, _ in cands[:5]]
+    upa_query = norm if any(c[3] == norm for c in cands) else ""
+    def sort_key(c):
+        upa_hit = 0 if (upa_query and c[3] == upa_query) else 1
+        return (upa_hit, c[2], len(c[0]), c[0])
+    cands.sort(key=sort_key)
+    return [c[1] for c in cands[:5]]
 
 
 def eval_reverse(q: str, reverse_idx: dict, reverse_meta: dict) -> list[str]:

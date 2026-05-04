@@ -20,18 +20,31 @@ describe('parseHeadwords', () => {
 		const input = 'dharma\tdharma\nagni\tagni\nshanti\tśānti\n';
 		const out = parseHeadwords(input);
 		expect(out).toHaveLength(3);
-		// 2-column input → rank defaults to long-tail (999_999)
-		expect(out[0]).toEqual({ norm: 'dharma', iast: 'dharma', rank: 999_999 });
-		expect(out[2]).toEqual({ norm: 'shanti', iast: 'śānti', rank: 999_999 });
+		// 2-column input → rank defaults to long-tail (999_999), upasarga ""
+		expect(out[0]).toEqual({ norm: 'dharma', iast: 'dharma', rank: 999_999, upasarga: '' });
+		expect(out[2]).toEqual({ norm: 'shanti', iast: 'śānti', rank: 999_999, upasarga: '' });
 	});
 
 	it('parses 3-column TSV (norm \\t iast \\t rank) — Phase 3.7', () => {
 		const input = 'dharma\tdharma\t34\nagni\tagni\t12\nrare\tdurlabha\t999999\n';
 		const out = parseHeadwords(input);
 		expect(out).toHaveLength(3);
-		expect(out[0]).toEqual({ norm: 'dharma', iast: 'dharma', rank: 34 });
-		expect(out[1]).toEqual({ norm: 'agni', iast: 'agni', rank: 12 });
-		expect(out[2]).toEqual({ norm: 'rare', iast: 'durlabha', rank: 999_999 });
+		// 3-col → upasarga defaults to ""
+		expect(out[0]).toEqual({ norm: 'dharma', iast: 'dharma', rank: 34, upasarga: '' });
+		expect(out[1]).toEqual({ norm: 'agni', iast: 'agni', rank: 12, upasarga: '' });
+		expect(out[2]).toEqual({ norm: 'rare', iast: 'durlabha', rank: 999_999, upasarga: '' });
+	});
+
+	it('parses 4-column TSV with upasarga — Phase 3.7 follow-up', () => {
+		const input =
+			'prajna\tprajñā\t35\tpra\n' +
+			'pratisthana\tpratiṣṭhāna\t800\tprati\n' +
+			'agni\tagni\t12\t\n';
+		const out = parseHeadwords(input);
+		expect(out).toHaveLength(3);
+		expect(out[0]).toEqual({ norm: 'prajna', iast: 'prajñā', rank: 35, upasarga: 'pra' });
+		expect(out[1]).toEqual({ norm: 'pratisthana', iast: 'pratiṣṭhāna', rank: 800, upasarga: 'prati' });
+		expect(out[2]).toEqual({ norm: 'agni', iast: 'agni', rank: 12, upasarga: '' });
 	});
 
 	it('falls back to long-tail rank on non-numeric rank field', () => {

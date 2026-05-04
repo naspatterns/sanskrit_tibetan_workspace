@@ -162,10 +162,13 @@ export function search(
 
 // Lower-bound binary search → walk forward while prefix matches.
 // Phase 3.7 follow-up: collect ALL matching candidates (common prefix matches
-// 1-10K entries; sorting is cheap), then sort by rank ASC (top-10K first),
-// tie-break by norm length ASC, then alphabetic. Returns top `limit`. This
-// surfaces common terms above HTML extraction noise — e.g. `dha` returns
-// dharma/dhātu/dhana instead of dha/dhaaraa/dhaa (long-tail mediaeval forms).
+// 1-10K entries; sorting is cheap), then sort by:
+//   1. upasarga-match bonus (when prefix exactly is a known upasarga, entries
+//      tagged with that upasarga rank above untagged ones)
+//   2. rank ASC (top-10K first)
+//   3. norm length ASC, alphabetic
+// Returns top `limit`. Surfaces common terms above HTML extraction noise —
+// e.g. `dha` returns dharma/dhātu/dhana instead of dha/dhaaraa/dhaa.
 //
 // Hard cap defends against pathological prefixes (e.g. empty string).
 const PREFIX_CANDIDATE_CAP = 20_000;
@@ -192,8 +195,19 @@ function prefixSearch(
 		candidates.push(headwords[i]);
 	}
 	if (candidates.length === 0) return [];
-	// Re-rank: top-10K position ASC → norm length ASC → alphabetical
+	// Phase 3.7 follow-up — upasarga awareness. If the user's typed prefix
+	// exactly matches one of the canonical upasarga forms recorded in
+	// `entry.upasarga` for ANY of our candidates, treat that as a strong
+	// signal: surface upasarga-tagged words first. Computed lazily from the
+	// candidate set itself (no extra index — the upasarga string IS the
+	// prefix when this applies).
+	const upasargaQuery = candidates.some((c) => c.upasarga === prefix) ? prefix : '';
 	candidates.sort((a, b) => {
+		if (upasargaQuery) {
+			const aHit = a.upasarga === upasargaQuery ? 0 : 1;
+			const bHit = b.upasarga === upasargaQuery ? 0 : 1;
+			if (aHit !== bHit) return aHit - bHit;
+		}
 		if (a.rank !== b.rank) return a.rank - b.rank;
 		if (a.norm.length !== b.norm.length) return a.norm.length - b.norm.length;
 		return a.norm < b.norm ? -1 : a.norm > b.norm ? 1 : 0;

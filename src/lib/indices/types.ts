@@ -43,6 +43,13 @@ export interface HeadwordEntry {
 	 * Long-tail headwords use 999_999. Used by prefix engine to re-rank
 	 * match candidates so common terms surface above HTML extraction noise. */
 	rank: number;
+	/** Phase 3.7 follow-up: single canonical upasarga matching the start of
+	 * `norm`, or empty string. For Sanskrit (`pra`, `prati`, `vi`, `sam`,
+	 * `abhi`, etc.) and Tibetan equivalents (`rab tu`, `rnam par`, `kun`,
+	 * `mngon par`). Single (not chained). Used by prefix engine to surface
+	 * upasarga-tagged matches in a separate tier when the user types a
+	 * known upasarga. */
+	upasarga: string;
 }
 
 export interface IndexBundle {

@@ -1,0 +1,72 @@
+{
+  "_meta": {
+    "purpose": "Canonical upasarga (Sanskrit verbal/nominal prefix) reference for Phase 3.7 follow-up.",
+    "explanation": "Each Sanskrit upasarga is a single morpheme. Tibetan equivalents are listed for canonical phrase prefixes (rab tu, rnam par, kun, etc.). build_fst.py tags each headword with at most ONE upasarga — the leftmost single-prefix match (NOT chained). prefixSearch surfaces tagged matches above generic prefix matches when the user types an upasarga.",
+    "sources": [
+      "Pāṇini's Aṣṭādhyāyī upasarga list (canonical 22)",
+      "Apte's Practical Sanskrit-English Dictionary §upasarga entries",
+      "Hopkins-tsed/Rangjung-Yeshe Tibetan-Sanskrit equivalence dictionaries"
+    ],
+    "schema": {
+      "sanskrit": "{ form_norm → { iast, meaning_en, meaning_ko, tibetan: [...] } }",
+      "tibetan": "{ form_norm → { iast, sanskrit_upasarga (norm), meaning_en, meaning_ko } }"
+    }
+  },
+  "sanskrit": {
+    "ati":   { "iast": "ati",  "meaning_en": "across, beyond, very",      "meaning_ko": "넘어서, 매우",      "tibetan": ["shin tu"] },
+    "adhi":  { "iast": "adhi", "meaning_en": "above, over, on",           "meaning_ko": "위에, 더 높은",      "tibetan": ["lhag par"] },
+    "anu":   { "iast": "anu",  "meaning_en": "after, along, with",        "meaning_ko": "따라, 후에",        "tibetan": ["rjes su"] },
+    "antar": { "iast": "antar","meaning_en": "between, within",           "meaning_ko": "사이에, 안에",      "tibetan": ["bar"] },
+    "apa":   { "iast": "apa",  "meaning_en": "away, off, down",           "meaning_ko": "떨어져, 아래로",     "tibetan": ["bral bar", "phyir"] },
+    "api":   { "iast": "api",  "meaning_en": "also, even, near",          "meaning_ko": "또한, 가까이",       "tibetan": ["yang"] },
+    "abhi":  { "iast": "abhi", "meaning_en": "towards, against, intensive","meaning_ko": "향하여, 강조",     "tibetan": ["mngon par"] },
+    "ava":   { "iast": "ava",  "meaning_en": "down, away",                "meaning_ko": "아래로, 멀리",      "tibetan": ["nges par", "rab tu"] },
+    "a":     { "iast": "ā",    "meaning_en": "to, towards, hither",       "meaning_ko": "~로, 방향",         "tibetan": ["yang dag par"] },
+    "ud":    { "iast": "ud",   "meaning_en": "up, upwards, out",          "meaning_ko": "위로, 밖으로",      "tibetan": ["yongs su", "rab"] },
+    "upa":   { "iast": "upa",  "meaning_en": "near, towards, sub-",       "meaning_ko": "가까이, 부",        "tibetan": ["nye bar"] },
+    "ni":    { "iast": "ni",   "meaning_en": "down, into, under",         "meaning_ko": "아래로, 안으로",     "tibetan": ["nges par"] },
+    "nis":   { "iast": "nis",  "meaning_en": "out, away, without",        "meaning_ko": "밖으로, 없이",      "tibetan": ["nges par", "med par"] },
+    "nir":   { "iast": "nir",  "meaning_en": "out, away, without",        "meaning_ko": "밖으로, 없이",      "tibetan": ["nges par", "med par"] },
+    "para":  { "iast": "parā", "meaning_en": "away, beyond, opposite",    "meaning_ko": "넘어서, 반대",      "tibetan": ["pha rol", "rab tu"] },
+    "pari":  { "iast": "pari", "meaning_en": "around, completely",        "meaning_ko": "주위, 완전히",      "tibetan": ["yongs su"] },
+    "pra":   { "iast": "pra",  "meaning_en": "forth, forward, intensive", "meaning_ko": "앞으로, 강조",      "tibetan": ["rab tu"] },
+    "prati": { "iast": "prati","meaning_en": "back, against, towards",    "meaning_ko": "다시, 향하여",      "tibetan": ["so sor", "ldog par"] },
+    "vi":    { "iast": "vi",   "meaning_en": "apart, away, separate",     "meaning_ko": "분리, 떨어져",      "tibetan": ["rnam par"] },
+    "sam":   { "iast": "sam",  "meaning_en": "together, completely, with","meaning_ko": "함께, 완전히",      "tibetan": ["yang dag par", "kun"] },
+    "su":    { "iast": "su",   "meaning_en": "well, good, easy",          "meaning_ko": "잘, 좋게",         "tibetan": ["legs par", "shin tu"] },
+    "dus":   { "iast": "dus",  "meaning_en": "ill, bad, hard",            "meaning_ko": "잘못, 나쁘게",      "tibetan": ["nyes par", "ngan par"] },
+    "dur":   { "iast": "dur",  "meaning_en": "ill, bad, hard",            "meaning_ko": "잘못, 나쁘게",      "tibetan": ["nyes par", "ngan par"] }
+  },
+  "tibetan": {
+    "rab tu":             { "iast": "rab tu",             "sanskrit_upasarga": "pra",   "meaning_en": "forth (= pra-)",            "meaning_ko": "앞으로 (pra-)" },
+    "rnam par":           { "iast": "rnam par",           "sanskrit_upasarga": "vi",    "meaning_en": "apart, separately (= vi-)", "meaning_ko": "분리 (vi-)" },
+    "kun":                { "iast": "kun",                "sanskrit_upasarga": "sam",   "meaning_en": "all, together (= sam-)",    "meaning_ko": "함께 (sam-)" },
+    "kun tu":             { "iast": "kun tu",             "sanskrit_upasarga": "sam",   "meaning_en": "all, together (= sam-)",    "meaning_ko": "함께 (sam-)" },
+    "yang dag par":       { "iast": "yang dag par",       "sanskrit_upasarga": "samyak","meaning_en": "completely correct (= samyak-)","meaning_ko": "완전히 (samyak-)" },
+    "mngon par":          { "iast": "mngon par",          "sanskrit_upasarga": "abhi",  "meaning_en": "towards, manifest (= abhi-)","meaning_ko": "향하여 (abhi-)" },
+    "nye bar":            { "iast": "nye bar",            "sanskrit_upasarga": "upa",   "meaning_en": "near, sub- (= upa-)",       "meaning_ko": "가까이 (upa-)" },
+    "shin tu":            { "iast": "shin tu",            "sanskrit_upasarga": "ati",   "meaning_en": "very, extremely (= ati-/su-)","meaning_ko": "매우 (ati-)" },
+    "lhag par":           { "iast": "lhag par",           "sanskrit_upasarga": "adhi",  "meaning_en": "above, over (= adhi-)",     "meaning_ko": "더 (adhi-)" },
+    "rjes su":            { "iast": "rjes su",            "sanskrit_upasarga": "anu",   "meaning_en": "after, along (= anu-)",     "meaning_ko": "따라서 (anu-)" },
+    "yongs su":           { "iast": "yongs su",           "sanskrit_upasarga": "pari",  "meaning_en": "around, completely (= pari-)","meaning_ko": "주위 (pari-)" },
+    "so sor":             { "iast": "so sor",             "sanskrit_upasarga": "prati", "meaning_en": "individually (= prati-)",   "meaning_ko": "개별 (prati-)" },
+    "ldog par":           { "iast": "ldog par",           "sanskrit_upasarga": "prati", "meaning_en": "back, reverse (= prati-)",  "meaning_ko": "되돌아 (prati-)" },
+    "phyir":              { "iast": "phyir",              "sanskrit_upasarga": "para",  "meaning_en": "after, away (= parā-/apa-)","meaning_ko": "다시 (parā-)" },
+    "pha rol":            { "iast": "pha rol",            "sanskrit_upasarga": "para",  "meaning_en": "beyond (= parā-)",          "meaning_ko": "넘어 (parā-)" },
+    "nges par":           { "iast": "nges par",           "sanskrit_upasarga": "ni",    "meaning_en": "definitely (= ni-/nis-)",   "meaning_ko": "확정 (ni-)" },
+    "med par":            { "iast": "med par",            "sanskrit_upasarga": "nir",   "meaning_en": "without (= nir-)",          "meaning_ko": "없이 (nir-)" },
+    "legs par":           { "iast": "legs par",           "sanskrit_upasarga": "su",    "meaning_en": "well (= su-)",              "meaning_ko": "잘 (su-)" },
+    "nyes par":           { "iast": "nyes par",           "sanskrit_upasarga": "dus",   "meaning_en": "badly (= dus-/dur-)",       "meaning_ko": "잘못 (dus-)" },
+    "ngan par":           { "iast": "ngan par",           "sanskrit_upasarga": "dur",   "meaning_en": "ill, bad (= dur-)",         "meaning_ko": "나쁘게 (dur-)" },
+    "yang":               { "iast": "yang",               "sanskrit_upasarga": "api",   "meaning_en": "also, even (= api-)",       "meaning_ko": "또한 (api-)" },
+    "bar":                { "iast": "bar",                "sanskrit_upasarga": "antar", "meaning_en": "between (= antar-)",        "meaning_ko": "사이 (antar-)" },
+    "rab":                { "iast": "rab",                "sanskrit_upasarga": "ud",    "meaning_en": "up, top (= ud-)",           "meaning_ko": "위 (ud-)" },
+    "rab tu phye":        { "iast": "rab tu phye",        "sanskrit_upasarga": "vyākṛ", "meaning_en": "elaborately distinguished", "meaning_ko": "상세히 분별" },
+    "shin tu rnam par":   { "iast": "shin tu rnam par",   "sanskrit_upasarga": "ativi", "meaning_en": "extremely apart",           "meaning_ko": "극도로 분리" },
+    "rnam par dag":       { "iast": "rnam par dag",       "sanskrit_upasarga": "viśuddha","meaning_en": "thoroughly pure",         "meaning_ko": "완전 청정" },
+    "rnam par grol":      { "iast": "rnam par grol",      "sanskrit_upasarga": "vimukta","meaning_en": "thoroughly liberated",     "meaning_ko": "완전 해탈" },
+    "rab tu byung":       { "iast": "rab tu byung",       "sanskrit_upasarga": "pravraj","meaning_en": "to go forth (ordain)",     "meaning_ko": "출가" },
+    "rab tu mi gnas":     { "iast": "rab tu mi gnas",     "sanskrit_upasarga": "apratiṣṭhita","meaning_en": "non-abiding",         "meaning_ko": "무주" },
+    "kun nas":            { "iast": "kun nas",            "sanskrit_upasarga": "sam",   "meaning_en": "from all sides (= sam-)",   "meaning_ko": "두루 (sam-)" }
+  }
+}

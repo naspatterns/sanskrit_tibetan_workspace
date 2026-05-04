@@ -120,22 +120,31 @@ def load_msgpack_zst(path: Path):
                            raw=False, strict_map_key=False)
 
 
-def load_headwords(path: Path) -> list[tuple[str, str, int]]:
-    """Load 3-column TSV (norm, iast, rank). Tolerates the 2-column legacy."""
+def load_headwords(path: Path) -> list[tuple[str, str, int, str]]:
+    """Load 4-column TSV (norm, iast, rank, upasarga).
+
+    Tolerates the 2-column and 3-column legacy formats by defaulting missing
+    fields to long-tail rank / empty upasarga.
+    """
     raw = path.read_bytes()
     text = zstd.ZstdDecompressor().decompress(raw).decode("utf-8")
     out = []
     for line in text.splitlines():
         parts = line.split("\t")
-        if len(parts) >= 3:
-            norm, iast, rank_s = parts[0], parts[1], parts[2]
+        if len(parts) >= 4:
             try:
-                rank = int(rank_s)
+                rank = int(parts[2])
             except ValueError:
                 rank = 999_999
-            out.append((norm, iast, rank))
+            out.append((parts[0], parts[1], rank, parts[3]))
+        elif len(parts) == 3:
+            try:
+                rank = int(parts[2])
+            except ValueError:
+                rank = 999_999
+            out.append((parts[0], parts[1], rank, ""))
         elif len(parts) == 2:
-            out.append((parts[0], parts[1], 999_999))
+            out.append((parts[0], parts[1], 999_999, ""))
     return out
 
 
@@ -193,27 +202,28 @@ def eval_bo(q: str, tier0_bo: dict, tier0: dict, tier0_ext: dict) -> list[str]:
     return hits[:5]
 
 
-def eval_prefix(q: str, headwords: list[tuple[str, str, int]]) -> list[str]:
-    """Match the client `prefixSearch` (Phase 3.7 follow-up):
-    collect ALL prefix candidates, then rank by (rank ASC, len ASC,
-    alphabetic) to surface common terms above HTML extraction noise.
-    Common prefixes match 1-10K candidates; sorting is O(N log N).
+def eval_prefix(q: str, headwords: list[tuple[str, str, int, str]]) -> list[str]:
+    """Match the client `prefixSearch` — Phase 3.7 follow-up with upasarga
+    awareness. Sort key: (upasarga-match-bonus, rank ASC, len ASC, alpha).
     """
     norm = normalize_skt(q)
-    cands: list[tuple[str, str, int]] = []
-    # Find lower bound via linear scan (test bench; client uses binary search)
+    cands: list[tuple[str, str, int, str]] = []
     started = False
-    for n, iast, rank in headwords:
+    for tup in headwords:
+        n = tup[0]
         if n.startswith(norm):
-            cands.append((n, iast, rank))
+            cands.append(tup)
             started = True
         elif started:
-            # Headwords sorted by norm; first non-match after a match means done.
             break
     if not cands:
         return []
-    cands.sort(key=lambda t: (t[2], len(t[0]), t[0]))
-    return [iast for _, iast, _ in cands[:5]]
+    upa_query = norm if any(c[3] == norm for c in cands) else ""
+    def sort_key(c):
+        upa_hit = 0 if (upa_query and c[3] == upa_query) else 1
+        return (upa_hit, c[2], len(c[0]), c[0])
+    cands.sort(key=sort_key)
+    return [c[1] for c in cands[:5]]
 
 
 def eval_reverse(q: str, reverse_idx: dict, reverse_meta: dict) -> list[str]:

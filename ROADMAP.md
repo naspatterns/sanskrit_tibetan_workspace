@@ -341,6 +341,27 @@ main = `bf1a877`. 옵션 B 결정 (UI/UX + 코드 품질) + Phase 3.7 데이터 
 - Random lookup: 7/7 indices @ 100% (statistical integrity)
 - Tests: 103/103 ✅ · TypeScript: 0 errors
 
+**Phase 3.7 Upasarga (Depth 2 — 5/4)**:
+
+산스크리트 22 upasargas + 티벳어 ~30 canonical translations 인식. 사용자 지적: 빈도 기반 prefix는 morphological prefix 표현 못함. `pra`/`rnam par` 같은 진짜 문법적 접두사 surface 필요.
+
+- `data/sources/_upasarga/upasarga.json` — 23 SA upasargas (ati/adhi/anu/antar/apa/api/abhi/ava/ā/ud/upa/ni/nis/nir/parā/pari/pra/prati/vi/sam/su/dus/dur) + 30 Tibetan equivalents (rab tu→pra, rnam par→vi, kun→sam, mngon par→abhi, nye bar→upa, shin tu→ati/su, lhag par→adhi, rjes su→anu, yongs su→pari, so sor/ldog par→prati 등). 한국어 + 영어 의미 포함.
+- `build_fst.py:tag_upasarga` — IAST-based leftmost-match (단일 short prefix, NOT chained). diacritic-aware (su가 sūrya 잘못 태그하지 않도록 IAST `s+u` ≠ IAST `s+ū` 구분). 106,266 Sanskrit + 16,240 Tibetan headwords 태깅.
+- `headwords.txt.zst` 4-column TSV: `norm\\tiast\\trank\\tupasarga`. 압축 7.6 → 7.7 MB (+0.1MB only).
+- `loader.ts:parseHeadwords` — 2/3/4-column 모두 호환 + `HeadwordEntry.upasarga` 필드 추가.
+- `engine.ts:prefixSearch` — upasarga-aware 정렬: 사용자 query가 매칭된 upasarga와 일치하면 tagged 단어들이 first tier, 일반 prefix 매치는 second tier.
+- 결과:
+  - `pra` → prajñā, pratyaya, prakṛti, prajāpati, pratyāhāra (모두 진짜 pra-prefix)
+  - `prati` → pratītyasamutpāda, pratipad, pratika
+  - `sam` → samāna, saṃskāra, saṃjñā, samudaya
+  - `vi` → vinaya, vijñāna, viveka, vīrya
+  - `abhi` → abhiṣeka, abhirati, abhidharma
+  - `rab tu` → rab tu byung, rab tu dga' ba (출가, 환희)
+  - `rnam par` → rnam par shes pa (vijñāna), rnam par snang mdzad (Vairocana), rnam par dag (śuddha)
+  - `kun` → kun rdzob, kun gzhi (ālaya), kun mkhyen (sarvajña)
+  - `mngon par` → mngon par shes pa (abhijñā), mngon par dga' ba (abhirati)
+- **Sentinel 215: 202 ✅ (94%) · upasarga-prefix 카테고리 11/15** · 잔여 minor (anu/su rank-related, rab tu partial-match verdict)
+
 **잔여**:
 - ⏭️ Phase 4 deploy entry checklist (audit-E-deploy.md §6)
 - ⏭️ P0-2 EU $451 batch (사용자 결정 대기)

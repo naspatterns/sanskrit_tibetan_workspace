@@ -55,9 +55,9 @@ function makeBundle(): IndexBundle {
 			])
 		},
 		headwords: [
-			{ norm: 'dharma', iast: 'dharma', rank: 1 },
-			{ norm: 'dharma-cakra', iast: 'dharma-cakra', rank: 999_999 },
-			{ norm: 'dharmin', iast: 'dharmin', rank: 999_999 }
+			{ norm: 'dharma', iast: 'dharma', rank: 1, upasarga: '' },
+			{ norm: 'dharma-cakra', iast: 'dharma-cakra', rank: 999_999, upasarga: '' },
+			{ norm: 'dharmin', iast: 'dharmin', rank: 999_999, upasarga: '' }
 		]
 	};
 }

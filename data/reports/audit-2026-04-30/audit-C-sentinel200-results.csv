@@ -146,12 +146,12 @@ n,query,category,channel,expected,top_5,verdict
 145,blo,bo-wylie,bo,blo,blo,✅
 146,śā,prefix,prefix,śānti | śāstra | śākyamuni,śaṭ | satya | samāna | sādhana | saṃkhyā,❌
 147,yo,prefix,prefix,yoga | yogī,yoga | yogacara | yogasūtra | yo | yogaḥ,✅
-148,nir,prefix,prefix,nirvāṇa | nirodha,nirvāṇa | nirodha | nirmāṇakāya | nir | nirasa,✅
-149,sam,prefix,prefix,saṃskāra | samādhi,samāna | saṃkhyā | saṃjñā | samudaya | saṃyāma,❌
+148,nir,prefix,prefix,nirvāṇa | nirodha,nirvāṇa | nirodha | nirmāṇakāya | nirasa | nirvapaṇa,✅
+149,sam,prefix,prefix,saṃskāra | samādhi,samāna | samudaya | samadhī | samāpatti | sambhogakāya,✅
 150,vij,prefix,prefix,vijñāna,vijñāna | vij | vijana | vijayā | vijita,✅
 151,tri,prefix,prefix,triratna | trikāya,triratna | trikāya | tri | tripura | tridaza,✅
 152,ka,prefix,prefix,karma | kāma | kalpa,kalpa | karman | karuṇa | kali | kalyāṇa,✅
-153,su,prefix,prefix,sukha | sūtra | sūrya,śuṇḍāra | sūryā | śūnya | suṣumṇa | śūnyatā,✅
+153,su,prefix,prefix,sukha | sūtra | sūrya,suṣumṇa | suvarṇaprabhāsa | sukhavatī | sundaraṃ | suta,⚠️
 154,br,prefix,prefix,brahman | brahma,brahman | brāhma | brahmacarya | brahmaloka | brahmasūtra,✅
 155,ut,prefix,prefix,utpāda,uttara | uta | uttama | utkatā | utpala,❌
 156,om mani padme hum,edge,skt,om | om | om | om,om | maṇi | hum,✅
@@ -199,3 +199,18 @@ n,query,category,channel,expected,top_5,verdict
 198,gaṇḍavyūha,skt-long,skt,gaṇḍavyūha,gaṇḍavyūha,✅
 199,mahāparinirvāṇa,skt-long,skt,mahāparinirvāṇa,mahāparinirvāṇa,✅
 200,śūraṅgama,skt-long,skt,śūraṅgama,(none),❌
+201,pra,upasarga-prefix,prefix,prajñā | pratyaya | prakṛti,prajñā | pratyaya | praṇa | prakṛti | prajāpati,✅
+202,prati,upasarga-prefix,prefix,pratītyasamutpāda | pratipad,pratipad | pratika | pratisara | pratikūla | pratibhā,✅
+203,sam,upasarga-prefix,prefix,samāna | saṃskāra | saṃjñā,samāna | samudaya | samadhī | samāpatti | sambhogakāya,✅
+204,vi,upasarga-prefix,prefix,vijñāna | vinaya | viveka,vinaya | vijñāna | viṣṇu | viveka | viparyāsa,✅
+205,abhi,upasarga-prefix,prefix,abhidharma | abhiṣeka,abhiṣeka | abhirati | abhidharma | abhidhamma | abhisara,✅
+206,anu,upasarga-prefix,prefix,anukampā | anumāna,anupa | anuja | anupūrva | anudara | anukta,❌
+207,upa,upasarga-prefix,prefix,upādhyāya | upādāna,upadāna | upaniṣad | upaniṣhad | upasthā | upama,✅
+208,ud,upasarga-prefix,prefix,udaya | udāna,udāna | udāra | udvaha | udaya | udvega,✅
+209,ni,upasarga-prefix,prefix,nirodha | nidāna,niyama | nidāna | niḥsvabhāva | nikaṣā | nivṛtta,✅
+210,su,upasarga-prefix,prefix,sukha | subhūti,suṣumṇa | suvarṇaprabhāsa | sukhavatī | sundaraṃ | suta,⚠️
+211,rab tu,upasarga-prefix,prefix,rab tu byung | rab tu dga' | rab tu mi gnas,rab tu dga' ba | rab tu za | rab tu bya | rab tu bye | rab tu bzo,⚠️
+212,rnam par,upasarga-prefix,prefix,rnam par shes pa | rnam par snang mdzad | rnam par dag,rnam par shes pa | rnam par snang mdzad | rnam par snang byed | rnam par za | rnam par bye,✅
+213,kun,upasarga-prefix,prefix,kun rdzob | kun gzhi | kun mkhyen | kun dga',kun rdzob bden pa | kun dga' bo | kun mkhyen | kun 'gro | kun rdzob,✅
+214,mngon par,upasarga-prefix,prefix,mngon par shes pa | mngon par dga' ba,mngon par dga' ba | mngon par shes pa | mngon par 'du | mngon par bab | mngon par bya,✅
+215,nye bar,upasarga-prefix,prefix,nye bar,nye bar zhi ba | nye bar len pa | nye bar ded | nye bar gos | nye bar gus,⚠️

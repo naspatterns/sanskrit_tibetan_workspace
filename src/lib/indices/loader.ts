@@ -87,21 +87,35 @@ export function parseHeadwords(text: string): HeadwordEntry[] {
 		const tab1 = line.indexOf('\t');
 		if (tab1 === -1) continue;
 		const tab2 = line.indexOf('\t', tab1 + 1);
-		// Phase 3.7 follow-up: 3-column TSV `norm\tiast\trank`. Tolerate the
-		// older 2-column format (no rank) by defaulting to long-tail (999999),
-		// which preserves the prior alphabetical-only behaviour.
+		// Phase 3.7 follow-ups: tolerate three TSV layouts simultaneously.
+		//   2-col legacy:    norm \t iast               (rank=999_999, upa="")
+		//   3-col rank:      norm \t iast \t rank       (upa="")
+		//   4-col upasarga:  norm \t iast \t rank \t upasarga
 		if (tab2 === -1) {
 			out.push({
 				norm: line.slice(0, tab1),
 				iast: line.slice(tab1 + 1),
-				rank: 999_999
+				rank: 999_999,
+				upasarga: ''
 			});
-		} else {
+			continue;
+		}
+		const tab3 = line.indexOf('\t', tab2 + 1);
+		if (tab3 === -1) {
 			const rank = Number(line.slice(tab2 + 1));
 			out.push({
 				norm: line.slice(0, tab1),
 				iast: line.slice(tab1 + 1, tab2),
-				rank: Number.isFinite(rank) ? rank : 999_999
+				rank: Number.isFinite(rank) ? rank : 999_999,
+				upasarga: ''
+			});
+		} else {
+			const rank = Number(line.slice(tab2 + 1, tab3));
+			out.push({
+				norm: line.slice(0, tab1),
+				iast: line.slice(tab1 + 1, tab2),
+				rank: Number.isFinite(rank) ? rank : 999_999,
+				upasarga: line.slice(tab3 + 1)
 			});
 		}
 	}
