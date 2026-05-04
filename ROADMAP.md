@@ -306,22 +306,28 @@ main = `bf1a877`. 옵션 B 결정 (UI/UX + 코드 품질) + Phase 3.7 데이터 
 - P1-2 en-source 한국어 $30 batch
 - P1-3 yogācārabhūmi zh column-mapping fix
 
-### 3.7 Data quality 🔄 진행 중 (2026-04-30 시작, main = `a8c7a28`)
+### 3.7 Data quality 🔄 진행 중 (2026-04-30 시작 · P1-2 완료 2026-05-04)
 
-옵션 B 동시 발사. P1-1·P1-3 자율 처리됐고, P0-2·P1-2는 사용자 ANTHROPIC_API_KEY 대기.
+옵션 B 동시 발사. P1-1·P1-3 자율 처리됐고, **P1-2는 Claude Code sub-agent 798 sub-batches로 직접 처리**. P0-2 EU만 사용자 ANTHROPIC_API_KEY 대기.
 
 **완료된 작업**:
 - ✅ P1-1 (`c0972e1`) build_reverse_index.py 4-tuple heap key (salience, -priority, -hw_len, entry_id). reverse_tokens.py의 position-weighted output을 활용해 reverse.en[0..4]에 descending salience 부여. **EN strict 2/15 → 9/15 (4.5x), KO 6/15 → 7/15**. reverse_meta 8.9 MiB.
 - ✅ P1-3 (`c0972e1`) build_equivalents_index._row_from_entry CJK gate. 119,464 zh-field contamination (Wylie + Tibetan-script + IAST) → 0. equivalents 13.24 → 12.32 MiB. JSONL은 보존 (Phase 5 D1 재추출용).
+- ✅ **P1-2 en-extended sub-agent 처리 (5/3~5/4)**: translate_via_subagent.py + 798 sub-batches × 50 entries = 39,874 candidates. 5차례 한도 reset 처리 (graceful resume), rolling pipeline (5 in-flight) 패턴. 결과: **39,873/39,874 (99.997%)** 한국어 번역 생성. 이어서 **apply_translations_to_jsonl.py**로 JSONL `body.ko` + `reverse.ko[]` in-place 적용 (49,868 entries — translations.jsonl 9,995 + en-extended 39,873). 인덱스 재빌드:
+  - tier0: 24.56 → **23.4 MiB**
+  - reverse_ko: 0.17 → **0.9 MiB (5.5x growth)** — Korean tokens 20,958
+  - reverse_meta: 9.3 → **8.9 MiB**
+- ✅ Audit 결과:
+  - 한국어 coverage: 11.31% → **12.79%** (+1.48pp · +49,868 entries)
+  - reverse_precision: EN strict 9/15 유지 · KO strict 4/15 (loose 8/15) — KO salience 추가 튜닝 여지
 
-**ANTHROPIC_API_KEY 대기 작업**:
+**ANTHROPIC_API_KEY 대기 작업** (Phase 3.7 잔여):
 - ⏭️ P0-2 EU $451 batch — 4 chunks (100K + 100K + 100K + 81K = 381,070) ready. translate_eu.py.
-- ⏭️ P1-2 en-extended $46.64 batch — 1 chunk (39,874, top-50K - top-10K) ready. translate_en_extended.py. data/reports/top50k.txt committed (`a8c7a28`).
+- 또는 sub-agent 경로로 P1-2와 동일하게 진행 가능 (38만 entries × 50 = 7,621 sub-batches, 약 12-15 윈도우 추정)
 
-**Batch retrieve 후 잔여 작업**:
-- tier0 재빌드 (`build_tier0 --translations` 통합 — translations.jsonl + translations-eu.jsonl + translations-en-extended.jsonl)
-- audit_reverse_precision 재측정 (P1-2 KO 보강 후 ≥12/15 목표)
-- Sentinel 50 queries before/after 비교 (audit-C-demo-guide.md)
+**Phase 3.7 P1-2 후속 (선택)**:
+- Sentinel 50 queries before/after 비교 (audit-C-demo-guide.md) — `data/reports/translation_coverage.before-3.7.md` 보관 중
+- KO reverse precision salience 튜닝 (4/15 → 8/15+ 목표)
 - Phase 4 deploy entry checklist (audit-E-deploy.md §6)
 
 **Phase 3.6 완료 기준 vs 결과**:

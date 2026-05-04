@@ -1,16 +1,16 @@
 # Korean Translation Coverage Audit (FB-2)
 
-Scan of 130 dictionaries · 3,369,435 entries.
-Overall coverage: **12.8%** (430,939 translated).
+Scan of 130 dictionaries · 3,364,487 entries.
+Overall coverage: **11.3%** (381,071 translated).
 
 ## Coverage by Target Language
 
 | Target | Dicts | Entries | Translated | Coverage |
 |--------|------:|--------:|-----------:|---------:|
-| en | 71 | 1,876,977 | 49,868 | 2.7% |
+| en | 71 | 1,876,977 | 0 | 0.0% |
 | sa | 20 | 593,067 | 0 | 0.0% |
 | de | 5 | 327,716 | 327,716 | 100.0% |
-| bo | 21 | 299,137 | 0 | 0.0% |
+| bo | 21 | 294,189 | 0 | 0.0% |
 | skt | 10 | 219,183 | 0 | 0.0% |
 | fr | 2 | 44,349 | 44,349 | 100.0% |
 | la | 1 | 9,006 | 9,006 | 100.0% |
@@ -26,44 +26,44 @@ Dicts where `target_lang` is DE/FR/LA/RU (non-English European) and Korean cover
 
 | Priority | Slug | Direction | Total | Translated | Coverage |
 |---------:|------|-----------|------:|-----------:|---------:|
-| 1 | `apte-sanskrit-english` | skt-to-en | 31,750 | 13,064 | 41.1% |
-| 2 | `monier-williams` | skt-to-en | 223,501 | 20,210 | 9.0% |
-| 3 | `macdonell` | skt-to-en | 20,787 | 82 | 0.4% |
-| 4 | `bhsd` | skt-to-en | 17,807 | 38 | 0.2% |
-| 5 | `cappeller` | skt-to-en | 39,872 | 147 | 0.4% |
+| 1 | `apte-sanskrit-english` | skt-to-en | 31,750 | 0 | 0.0% |
+| 2 | `monier-williams` | skt-to-en | 223,501 | 0 | 0.0% |
+| 3 | `macdonell` | skt-to-en | 20,787 | 0 | 0.0% |
+| 4 | `bhsd` | skt-to-en | 17,807 | 0 | 0.0% |
+| 5 | `cappeller` | skt-to-en | 39,872 | 0 | 0.0% |
 | 6 | `pwk` | skt-to-de | 135,776 | 135,776 | 100.0% |
 | 7 | `pwg` | skt-to-de | 122,730 | 122,730 | 100.0% |
 | 8 | `kalpadruma` | skt-to-sa | 42,200 | 0 | 0.0% |
 | 9 | `vacaspatyam` | skt-to-sa | 48,351 | 0 | 0.0% |
-| 10 | `apte-bilingual` | skt-to-en | 122,555 | 3,193 | 2.6% |
+| 10 | `apte-bilingual` | skt-to-en | 122,555 | 0 | 0.0% |
 | 11 | `apte-english-sanskrit` | en-to-skt | 11,314 | 0 | 0.0% |
 | 12 | `mw-english-sanskrit` | en-to-skt | 32,503 | 0 | 0.0% |
 | 13 | `borooah-english-sanskrit` | en-to-skt | 24,608 | 0 | 0.0% |
-| 14 | `monier-williams-1872` | skt-to-en | 55,367 | 61 | 0.1% |
+| 14 | `monier-williams-1872` | skt-to-en | 55,367 | 0 | 0.0% |
 | 15 | `vacaspatyam-xdxf` | skt-to-sa | 48,370 | 0 | 0.0% |
 | 16 | `sabda-kalpa-druma` | skt-to-sa | 42,203 | 0 | 0.0% |
-| 17 | `benfey` | skt-to-en | 17,322 | 10 | 0.1% |
+| 17 | `benfey` | skt-to-en | 17,322 | 0 | 0.0% |
 | 18 | `amarakosa` | skt-to-sa | 3,137 | 0 | 0.0% |
 | 19 | `amarakosa-context` | skt-to-sa | 3,790 | 0 | 0.0% |
-| 20 | `tib-rangjung-yeshe` | bo-to-en | 73,730 | 10,236 | 13.9% |
-| 21 | `tib-hopkins-2015` | bo-to-en | 17,720 | 364 | 2.1% |
-| 22 | `tib-84000-dict` | bo-to-en | 25,356 | 677 | 2.7% |
+| 20 | `tib-rangjung-yeshe` | bo-to-en | 73,730 | 0 | 0.0% |
+| 21 | `tib-hopkins-2015` | bo-to-en | 17,720 | 0 | 0.0% |
+| 22 | `tib-84000-dict` | bo-to-en | 25,356 | 0 | 0.0% |
 | 23 | `tib-tshig-mdzod-chen-mo` | bo-to-bo | 51,030 | 0 | 0.0% |
-| 24 | `tib-bod-rgya-tshig-mdzod` | bo-to-bo | 53,436 | 0 | 0.0% |
-| 25 | `tib-ives-waldo` | bo-to-en | 120,946 | 1,311 | 1.1% |
-| 26 | `tib-jim-valby` | bo-to-en | 64,221 | 156 | 0.2% |
+| 24 | `tib-bod-rgya-tshig-mdzod` | bo-to-bo | 48,488 | 0 | 0.0% |
+| 25 | `tib-ives-waldo` | bo-to-en | 120,946 | 0 | 0.0% |
+| 26 | `tib-jim-valby` | bo-to-en | 64,221 | 0 | 0.0% |
 | 27 | `tib-jaeschke-scan` | bo-to-en | 154,112 | 0 | 0.0% |
 | 28 | `tib-bod-yig-tshig-gter` | bo-to-bo | 81,935 | 0 | 0.0% |
-| 30 | `tib-84000-definitions` | bo-to-en | 26,239 | 40 | 0.2% |
-| 31 | `tib-dan-martin` | bo-to-en | 20,196 | 25 | 0.1% |
+| 30 | `tib-84000-definitions` | bo-to-en | 26,239 | 0 | 0.0% |
+| 31 | `tib-dan-martin` | bo-to-en | 20,196 | 0 | 0.0% |
 | 32 | `tib-hackett-definitions` | bo-to-en | 3,184 | 0 | 0.0% |
 | 33 | `tib-berzin` | bo-to-en | 1,197 | 0 | 0.0% |
-| 34 | `tib-berzin-definitions` | bo-to-en | 888 | 1 | 0.1% |
+| 34 | `tib-berzin-definitions` | bo-to-en | 888 | 0 | 0.0% |
 | 35 | `tib-richard-barron` | bo-to-en | 4,742 | 0 | 0.0% |
 | 36 | `tib-tsepak-rigdzin` | bo-to-en | 2,695 | 0 | 0.0% |
 | 37 | `tib-thomas-doctor` | bo-to-en | 502 | 0 | 0.0% |
 | 38 | `tib-gateway-to-knowledge` | bo-to-en | 522 | 0 | 0.0% |
-| 39 | `tib-common-terms-lin` | bo-to-en | 2,325 | 2 | 0.1% |
+| 39 | `tib-common-terms-lin` | bo-to-en | 2,325 | 0 | 0.0% |
 | 40 | `tib-negi-skt` | bo-to-skt | 79,293 | 0 | 0.0% |
 | 41 | `tib-lokesh-chandra-skt` | bo-to-skt | 15,961 | 0 | 0.0% |
 | 42 | `tib-84000-skt` | bo-to-skt | 15,705 | 0 | 0.0% |
@@ -71,7 +71,7 @@ Dicts where `target_lang` is DE/FR/LA/RU (non-English European) and Korean cover
 | 44 | `tib-mahavyutpatti-skt` | bo-to-skt | 9,586 | 0 | 0.0% |
 | 45 | `tib-dung-dkar-tshig-mdzod` | bo-to-bo | 13,310 | 0 | 0.0% |
 | 46 | `tib-dag-tshig-gsar-bsgrigs` | bo-to-bo | 6,938 | 0 | 0.0% |
-| 47 | `tib-yogacarabhumi` | bo-to-en | 16,028 | 2 | 0.0% |
+| 47 | `tib-yogacarabhumi` | bo-to-en | 16,028 | 0 | 0.0% |
 | 48 | `tib-84000-synonyms` | bo-to-skt | 6,029 | 0 | 0.0% |
 | 49 | `tib-mahavyutpatti-skt-tib` | mixed | 19,069 | 0 | 0.0% |
 | 50 | `cappeller-german` | skt-to-de | 30,038 | 30,038 | 100.0% |
@@ -80,11 +80,11 @@ Dicts where `target_lang` is DE/FR/LA/RU (non-English European) and Korean cover
 | 53 | `burnouf` | skt-to-fr | 19,775 | 19,775 | 100.0% |
 | 54 | `bopp-latin` | skt-to-la | 9,006 | 9,006 | 100.0% |
 | 55 | `grassmann-vedic` | skt-to-de | 10,421 | 10,421 | 100.0% |
-| 56 | `bopp-comparative` | skt-to-en | 8,960 | 8 | 0.1% |
-| 57 | `apte-sandic` | skt-to-en | 44,943 | 7 | 0.0% |
+| 56 | `bopp-comparative` | skt-to-en | 8,960 | 0 | 0.0% |
+| 57 | `apte-sandic` | skt-to-en | 44,943 | 0 | 0.0% |
 | 58 | `ekaksara` | skt-to-sa | 391 | 0 | 0.0% |
 | 59 | `amarakosa-ontology` | skt-to-sa | 11,582 | 0 | 0.0% |
-| 60 | `pali-english` | pi-to-en | 49,000 | 64 | 0.1% |
+| 60 | `pali-english` | pi-to-en | 49,000 | 0 | 0.0% |
 | 61 | `dhatupatha-sandic` | skt-to-en | 1,159 | 0 | 0.0% |
 | 62 | `dhatupatha-krsnacarya` | skt-to-sa | 2,101 | 0 | 0.0% |
 | 63 | `dhatupatha-sa` | skt-to-sa | 2,282 | 0 | 0.0% |
@@ -96,19 +96,19 @@ Dicts where `target_lang` is DE/FR/LA/RU (non-English European) and Korean cover
 | 69 | `chandas-prosody` | skt-to-sa | 1,199 | 0 | 0.0% |
 | 70 | `tib-chandra-das-scan` | bo-to-en | 20,773 | 0 | 0.0% |
 | 71 | `tib-hopkins-others-english` | bo-to-en | 6,511 | 0 | 0.0% |
-| 72 | `tib-itlr` | bo-to-en | 5,654 | 21 | 0.4% |
+| 72 | `tib-itlr` | bo-to-en | 5,654 | 0 | 0.0% |
 | 73 | `tib-computer-terms` | bo-to-en | 5,683 | 0 | 0.0% |
 | 74 | `tib-mahavyutpatti-scan-1989` | mixed | 9,583 | 0 | 0.0% |
 | 75 | `tib-tibterm-project` | bo-to-en | 7,965 | 0 | 0.0% |
-| 76 | `tib-laine-abbreviations` | bo-to-en | 7,468 | 1 | 0.0% |
+| 76 | `tib-laine-abbreviations` | bo-to-en | 7,468 | 0 | 0.0% |
 | 77 | `tib-verbinator` | bo-to-en | 4,330 | 0 | 0.0% |
 | 78 | `tib-sera-textbook` | bo-to-en | 1,223 | 0 | 0.0% |
-| 79 | `tib-bialek` | bo-to-en | 2,145 | 1 | 0.0% |
-| 80 | `bloomfield-vedic-concordance` | skt-to-en | 88,837 | 5 | 0.0% |
-| 81 | `vedic-concordance-gretil` | skt-to-en | 80,654 | 117 | 0.1% |
-| 82 | `vedic-rituals-hillebrandt` | skt-to-en | 6,176 | 9 | 0.1% |
-| 83 | `puranic-encyclopaedia` | skt-to-en | 8,832 | 1 | 0.0% |
-| 84 | `dcs-frequency` | skt-to-en | 72,804 | 9 | 0.0% |
+| 79 | `tib-bialek` | bo-to-en | 2,145 | 0 | 0.0% |
+| 80 | `bloomfield-vedic-concordance` | skt-to-en | 88,837 | 0 | 0.0% |
+| 81 | `vedic-concordance-gretil` | skt-to-en | 80,654 | 0 | 0.0% |
+| 82 | `vedic-rituals-hillebrandt` | skt-to-en | 6,176 | 0 | 0.0% |
+| 83 | `puranic-encyclopaedia` | skt-to-en | 8,832 | 0 | 0.0% |
+| 84 | `dcs-frequency` | skt-to-en | 72,804 | 0 | 0.0% |
 | 85 | `tib-hopkins-comment` | bo-to-en | 1,958 | 0 | 0.0% |
 | 85 | `tib-hopkins-divisions` | bo-to-en | 185 | 0 | 0.0% |
 | 85 | `tib-hopkins-divisions-tib` | bo-to-bo | 178 | 0 | 0.0% |
@@ -123,11 +123,11 @@ Dicts where `target_lang` is DE/FR/LA/RU (non-English European) and Korean cover
 | 88 | `tib-brda-dkrol-gser-me-long` | bo-to-bo | 7,930 | 0 | 0.0% |
 | 88 | `tib-chos-rnam-kun-btus` | bo-to-bo | 11,512 | 0 | 0.0% |
 | 89 | `computer-terms-sanskrit` | skt-to-en | 1,499 | 0 | 0.0% |
-| 89 | `macdonell-sandic` | skt-to-en | 17,679 | 5 | 0.0% |
+| 89 | `macdonell-sandic` | skt-to-en | 17,679 | 0 | 0.0% |
 | 89 | `tib-gaeng-wetzel` | bo-to-en | 332 | 0 | 0.0% |
 | 89 | `tib-gangs-can-mkhas-grub` | bo-to-bo | 2,242 | 0 | 0.0% |
 | 89 | `tib-hopkins-def-2015` | bo-to-en | 237 | 0 | 0.0% |
-| 89 | `tib-hotl-1` | bo-to-en | 622 | 1 | 0.2% |
+| 89 | `tib-hotl-1` | bo-to-en | 622 | 0 | 0.0% |
 | 89 | `tib-hotl-2` | bo-to-en | 639 | 0 | 0.0% |
 | 89 | `tib-hotl-3` | bo-to-en | 249 | 0 | 0.0% |
 | 89 | `tib-li-shii-gur-khang` | bo-to-bo | 851 | 0 | 0.0% |

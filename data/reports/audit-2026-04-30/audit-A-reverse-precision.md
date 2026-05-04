@@ -1,7 +1,7 @@
 # audit-A-reverse-precision (v2 with full JSONL id resolution)
 
 - reverse_en tokens: **317,878**
-- reverse_ko tokens: **3,102**
+- reverse_ko tokens: **20,958**
 - JSONL id map size: **3,815,934**
 
 ## English seed precision (top-5 strict / top-20 loose)
@@ -28,25 +28,25 @@
 
 ## Korean seed precision (top-5 strict / top-20 loose)
 
-**Strict (top-5): 7/15** · **Loose (top-20): 10/15**
+**Strict (top-5): 4/15** · **Loose (top-20): 8/15**
 
 | Query | Expected | rev hits | Top-5 iast | Top-5 dicts | Strict | Loose |
 |---|---|---:|---|---|---|---|
-| `법` | dharma | 100 | dharm, dharmin, dharmāy, dhārmika, dharmasū | pwk, pwk, pwk, +2 | ✅ | ✅ |
-| `불` | agni, buddha | 100 | hu, jar, rūra, sāgni, vājay | pwk, pwk, pwk, +2 | ❌ | ✅ |
-| `물` | jala, ap | 100 | vār, jal, kam, irā, svap | pwk, pwk, pwk, +2 | ✅ | ✅ |
-| `지혜` | prajñā, jñāna | 73 | śūlikā, sukratūy, manīṣitā, vicakṣaṇatva, manīṣā | pwk, pwk, pwk, +2 | ❌ | ✅ |
-| `자비` | karuṇā, maitrī | 0 | — |  | ❌ | ❌ |
-| `마음` | manas, citta | 29 | medhā, cetas, citta, medhas, manīṣā | bopp-latin, bopp-latin, bopp-latin, +2 | ✅ | ✅ |
-| `공` | śūnyatā, kha | 0 | — |  | ❌ | ❌ |
-| `도` | mārga, panthan | 0 | — |  | ❌ | ❌ |
-| `신` | deva, īśvara | 100 | yaj, kāya, nākin, gaṇapa, sezvara | pwk, pwk, pwk, +2 | ❌ | ✅ |
-| `왕` | rāja, nṛpa | 100 | nṛpa, mahīpa, nṛpāla, nṛpati, kṣmeśa | pwk, pwk, pwk, +2 | ✅ | ✅ |
-| `인연` | nidāna, pratyaya | 0 | — |  | ❌ | ❌ |
-| `지옥` | naraka, niraya | 0 | — |  | ❌ | ❌ |
-| `天` | deva, svarga | 12 | devaḥ, deva, devaloka, sura, deva | equiv-mahavyutpatti, equiv-nti-reader, equiv-nti-reader, +2 | ✅ | ✅ |
-| `地` | pṛthivī, bhūmi | 9 | bhūtadhātrī, bhūmi, pṛthivī, mahī, bhūmi | equiv-mahavyutpatti, equiv-nti-reader, equiv-nti-reader, +2 | ✅ | ✅ |
-| `心` | citta, manas, hṛd | 14 | garbhaḥ, hṛdayam, jyeṣṭhā, citta, hṛdaya | equiv-mahavyutpatti, equiv-mahavyutpatti, equiv-mahavyutpatti, +2 | ✅ | ✅ |
+| `법` | dharma | 100 | sudharma, dharmavidyā, dharmadhātu, dharm, dharmin | monier-williams, monier-williams, monier-williams, +2 | ✅ | ✅ |
+| `불` | agni, buddha | 100 | raḥ, vami, homaḥ, dīpta, davaḥ | apte-sanskrit-english, apte-sanskrit-english, apte-sanskrit-english, +2 | ❌ | ❌ |
+| `물` | jala, ap | 100 | baḥ, rayi, pīvā, nāra, tūya | apte-sanskrit-english, apte-sanskrit-english, apte-sanskrit-english, +2 | ❌ | ❌ |
+| `지혜` | prajñā, jñāna | 100 | paṇḍitiman, śūlikā, sukratūy, manīṣitā, vicakṣaṇatva | monier-williams, pwk, pwk, +2 | ❌ | ✅ |
+| `자비` | karuṇā, maitrī | 34 | prasaadaḥ, rtse, snying rje tshad med, byams, thugs brtse ba | apte-bilingual, tib-rangjung-yeshe, tib-rangjung-yeshe, +2 | ❌ | ❌ |
+| `마음` | manas, citta | 100 | nigu, uccala, hṛdayam, ligu, yadvā | apte-sanskrit-english, apte-sanskrit-english, apte-sanskrit-english, +2 | ❌ | ✅ |
+| `공` | śūnyatā, kha | 59 | ḍiṃbaḥ, gulikā, aśūnya, vartula, guḍakaḥ | apte-sanskrit-english, apte-sanskrit-english, apte-sanskrit-english, +2 | ❌ | ❌ |
+| `도` | mārga, panthan | 100 | ay, sad, vac, tarj, garh | apte-sanskrit-english, apte-sanskrit-english, apte-sanskrit-english, +2 | ❌ | ❌ |
+| `신` | deva, īśvara | 100 | om, amla, suraḥ, nākin, viśvādhāyas | apte-sanskrit-english, apte-sanskrit-english, apte-sanskrit-english, +2 | ❌ | ✅ |
+| `왕` | rāja, nṛpa | 100 | praśāstṛ, harīśa, nṛpati, aṭṇāra, suvidat | apte-sanskrit-english, monier-williams, monier-williams, +2 | ✅ | ✅ |
+| `인연` | nidāna, pratyaya | 3 | rgyu'i rkyen, las 'phro, rang 'byor lnga | tib-ives-waldo, tib-rangjung-yeshe, tib-rangjung-yeshe | ❌ | ❌ |
+| `지옥` | naraka, niraya | 38 | ṛcīṣa, hahava, sakākola, śrītala, rasaa | monier-williams, monier-williams, monier-williams, +2 | ❌ | ❌ |
+| `天` | deva, svarga | 25 | gnam, lha tshogs, mtshe ma, rab 'thab bral, devaḥ | tib-rangjung-yeshe, tib-rangjung-yeshe, tib-84000-dict, +2 | ✅ | ✅ |
+| `地` | pṛthivī, bhūmi | 33 | mākī, brgyad pa'i sa, ring du song ba, nyan thos kyi sa, mngon du gyur pa | monier-williams, tib-rangjung-yeshe, tib-rangjung-yeshe, +2 | ❌ | ✅ |
+| `心` | citta, manas, hṛd | 18 | chitta, nyon yid, garbhaḥ, hṛdayam, jyeṣṭhā | apte-bilingual, tib-rangjung-yeshe, equiv-mahavyutpatti, +2 | ✅ | ✅ |
 
 ## Notes
 
