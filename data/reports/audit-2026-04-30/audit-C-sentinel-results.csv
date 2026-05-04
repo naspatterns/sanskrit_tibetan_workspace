@@ -1,0 +1,51 @@
+n,query,category,channel,expected,top_5,verdict
+1,dharma,skt-core,skt,dharma,dhārma,✅
+2,ātman,skt-core,skt,ātman,ātman,✅
+3,karman,skt-core,skt,karman,karman,✅
+4,agni,skt-core,skt,agni,agni,✅
+5,prajñā,skt-core,skt,prajñā,prajñā,✅
+6,śūnyatā,skt-core,skt,śūnyatā,(none),❌
+7,bodhicitta,skt-core,skt,bodhicitta,(none),❌
+8,tathāgata,skt-core,skt,tathāgata,(none),❌
+9,mokṣa,skt-core,skt,mokṣa,mokṣa,✅
+10,saṃskāra,skt-core,skt,saṃskāra,(none),❌
+11,dha,prefix,prefix,dharma | dhātu | dhana,dha | dhâ ͜ ana | dhā asi | dha du ra | dha man,⚠️
+12,bud,prefix,prefix,buddha | buddhi,buḍ | bud bsnyegs thob gsum | bud bud | བུད་དྷ་ | bud d+ha ba na,⚠️
+13,pra,prefix,prefix,prajñā | pratyaya,pra | pra ͜ â-rambha | pra ͜ adhi ͜ ita | pra ͜ adhva [fore-journey | pra ͜ ag-ika,⚠️
+14,ana,prefix,prefix,anātman | anitya | ānanda,anā | ĀNA I | ĀNA II | aṇa(na)ka | anaa,⚠️
+15,mahā,prefix,prefix,mahābhārata | mahāyāna | mahātman,mahā | mahâ ͜ aitareya | mahâ ͜ ikkha | mahâ ͜ indra | mahâ ͜ îsa,⚠️
+16,chos,bo-wylie,bo,chos,chos,✅
+17,byang chub sems dpa',bo-wylie,bo,byang chub sems dpa' | bodhisattva,byang chub sems dpa',✅
+18,klong chen,bo-wylie,bo,klong chen,klong chen,✅
+19,rdo rje,bo-wylie,bo,rdo rje | vajra,rdo rje,✅
+20,'jam dpal,bo-wylie,bo,'jam dpal | mañjuśrī,'jam dpal,✅
+21,fire,en-reverse,en,agni,raḥ | vami | sāgni | vāśiḥ | peruḥ,⚠️
+22,wisdom,en-reverse,en,prajñā | jñāna | buddhi,worldly-wisdom | mkhyen pa | ye shes kyi pha rol tu phyin pa | sher | ye shes pa,❌
+23,compassion,en-reverse,en,karuṇā | anukampā | dayā,ghṛṇā | karuṇā | u | dayā | mṛḍīka,✅
+24,emptiness,en-reverse,en,śūnyatā | śūnya,śūna | śūnyatā | riktatā | tucchya | śūnyatā,✅
+25,liberation,en-reverse,en,mokṣa | mukti,vimokṣaḥ | parimukti | nirmokṣaḥ | mocana | mokṣaṇa,⚠️
+26,meditation,en-reverse,en,dhyāna | samādhi,yogas | yogas | nididhyāsana | sa | yaḥ,⚠️
+27,enlightenment,en-reverse,en,bodhi | sambodhi,lokaḥ | kratuḥ | enlightenment | byang mchog | byang lnga po,❌
+28,suffering,en-reverse,en,duḥkha,vātakin | udvegin | vaisarpa | udāvartin | taapin,❌
+29,consciousness,en-reverse,en,vijñāna | citta,pramā | saṃjñā | pratisaṃkhyā | vitti | saṃvid,❌
+30,righteousness,en-reverse,en,dharma,righteousness | self-righteousness | righteousness | saudharm-ya | ṛta,❌
+31,법,ko-reverse,ko,dharma,sudharma | dharmavidyā | dharmadhātu | dharm | dharmin,⚠️
+32,자비,ko-reverse,ko,karuṇā | maitrī,prasaadaḥ | rtse | snying rje tshad med | byams | thugs brtse ba,❌
+33,지혜,ko-reverse,ko,prajñā | jñāna,paṇḍitiman | śūlikā | sukratūy | manīṣitā | vicakṣaṇatva,❌
+34,도,ko-reverse,ko,mārga | panthan,ay | sad | vac | tarj | garh,❌
+35,불,ko-reverse,ko,agni | buddha,raḥ | vami | homaḥ | dīpta | davaḥ,❌
+36,法,zh-reverse,zh,dharma,_1966 dharma; vidhi; bhava | 617290 anga; artha; akara; agama; alambana; karana; krama; guna; dravya; dharama; dharma-jiadna; dharmaté; dharmatva; dharmadeSana; dharman; dharma-naya; dharma-paryaya; dharma-prakrti; dharmamaya; dharma-Sabda; dharma-Sasana; dharma-samjfiaka; dharma-stha; dharma-svabhava; dharmakhya; dharmin; dharmaisgvarya; dharmépavicara; dharmya; dharma; dharmika; dharmya; naya; naya-dharma; paksa; pariskara; -puiija; prakara; prakrti; pratipad; pratisamyukta; prayoga; pravacana; prasangatva; dhana; Sabda; Siksd; samgati; sat; sad-dharma; sthana; 1yk—4> dharma-dhatv-eka-deSa; dharmardha | dharma | dharmaka | vidhāna,✅
+37,空,zh-reverse,zh,śūnyatā | śūnya,śūnyatā | antari-kṣa | nabha | vandhya | ākāśa,✅
+38,菩薩,zh-reverse,zh,bodhisattva,bodhisattva,✅
+39,涅槃,zh-reverse,zh,nirvāṇa,nirvāṇa | 涅槃 | nirvāṇa; nirvṛti; parinirvṛtaḥ; nirvāṇa-(bhūmi~),✅
+40,如來,zh-reverse,zh,tathāgata,tathāgataḥ | tathāgata,✅
+41,mahābhārata,edge,skt,mahābhārata,(none),❌
+42,jagannātha,edge,skt,jagannātha,(none),❌
+43,tat tvam asi,edge,skt,,(none),❌
+44,oṃ,edge,skt,oṃ | om,om,✅
+45,aham brahmāsmi,edge,skt,,(none),❌
+46,dharmaaa,typo,edge,,(none),✅
+47,aaa,typo,edge,,(none),✅
+48,   ,typo,edge,,(none),✅
+49,decl-a01,dead-zone,edge,,(none),✅
+50,aṃśanīya@aṃś,dead-zone,edge,,(none),✅
