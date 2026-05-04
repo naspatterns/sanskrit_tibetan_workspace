@@ -61,36 +61,47 @@ SUPER_SALIENCE = SALIENCE_TOP + 5  # = 10. Plenty of headroom for natural [0..4]
 # Path of optional Korean synonym table (Phase 3.7 P1-2 follow-up).
 KO_SYNONYM_PATH_DEFAULT = Path("data/sources/_kosynonym/synonyms.json")
 
+# Path of optional English synonym table (Phase 3.7 P1-1 follow-up).
+EN_SYNONYM_PATH_DEFAULT = Path("data/sources/_ensynonym/synonyms.json")
 
-def load_ko_synonyms(path: Path) -> dict[str, list[str]]:
-    """Load `iast → [Korean tokens]` mapping for canonical synonym injection.
+
+def load_synonyms(path: Path, label: str) -> dict[str, list[str]]:
+    """Load `iast → [synonym tokens]` mapping for canonical synonym injection.
 
     Returns empty dict if path doesn't exist (preserves backward compat with
     callers that don't ship the curated table). The schema is documented in
-    `data/sources/_kosynonym/synonyms.json:_meta`.
+    `data/sources/_kosynonym/synonyms.json:_meta` and the parallel
+    `data/sources/_ensynonym/synonyms.json:_meta`. Used for both KO and EN.
     """
     if not path.exists():
         return {}
     try:
         data = json.loads(path.read_text(encoding="utf-8"))
     except json.JSONDecodeError as exc:
-        print(f"WARN: failed to parse {path}: {exc}", file=sys.stderr)
+        print(f"WARN: failed to parse {label} synonyms at {path}: {exc}",
+              file=sys.stderr)
         return {}
     syns = data.get("synonyms", {})
     # Validate shape — keys are str, values are list[str]
     out: dict[str, list[str]] = {}
-    for iast, ko_list in syns.items():
-        if isinstance(iast, str) and isinstance(ko_list, list):
-            cleaned = [s for s in ko_list if isinstance(s, str) and s.strip()]
+    for iast, tok_list in syns.items():
+        if isinstance(iast, str) and isinstance(tok_list, list):
+            cleaned = [s for s in tok_list if isinstance(s, str) and s.strip()]
             if cleaned:
                 out[iast] = cleaned
     return out
+
+
+# Backward-compat shim — old name kept for any external scripts.
+def load_ko_synonyms(path: Path) -> dict[str, list[str]]:
+    return load_synonyms(path, label="KO")
 
 
 def collect_tokens(
     sources: Path,
     jsonl_dir: Path,
     ko_synonyms: dict[str, list[str]] | None = None,
+    en_synonyms: dict[str, list[str]] | None = None,
 ) -> tuple[dict[str, list], dict[str, list]]:
     """Single pass over all JSONL files.
 
@@ -148,13 +159,23 @@ def collect_tokens(
             # for the same synonym. Only the canonical entries get this
             # boost — entries with the same iast but different priority
             # naturally fall behind in priority sort.
+            iast = entry.get("headword_iast") or ""
             if ko_synonyms:
-                iast = entry.get("headword_iast") or ""
                 synonym_list = ko_synonyms.get(iast)
                 if synonym_list:
                     item = (SUPER_SALIENCE, -priority, -hw_len, entry_id)
                     for tok in synonym_list:
                         _bounded_push(ko_buckets[tok], item)
+            # Phase 3.7 P1-1 follow-up: parallel English synonym injection.
+            # Same mechanism as KO above. Fixes the audit-A-reverse-precision
+            # 9/15 stuck pattern (fire/earth/mind/sun/king don't surface
+            # canonical Apte iast despite being in body.plain).
+            if en_synonyms:
+                synonym_list = en_synonyms.get(iast)
+                if synonym_list:
+                    item = (SUPER_SALIENCE, -priority, -hw_len, entry_id)
+                    for tok in synonym_list:
+                        _bounded_push(en_buckets[tok.lower()], item)
 
     return en_buckets, ko_buckets
 
@@ -205,9 +226,13 @@ def main() -> int:
                         default=KO_SYNONYM_PATH_DEFAULT,
                         help="Optional Korean synonym table for canonical injection "
                              "(Phase 3.7 P1-2 follow-up). Pass /dev/null to disable.")
+    parser.add_argument("--en-synonyms", type=Path,
+                        default=EN_SYNONYM_PATH_DEFAULT,
+                        help="Optional English synonym table for canonical injection "
+                             "(Phase 3.7 P1-1 follow-up). Pass /dev/null to disable.")
     args = parser.parse_args()
 
-    ko_synonyms = load_ko_synonyms(args.ko_synonyms)
+    ko_synonyms = load_synonyms(args.ko_synonyms, label="KO")
     if ko_synonyms:
         n_tokens = sum(len(v) for v in ko_synonyms.values())
         print(f"Loaded {len(ko_synonyms):,} iast → KO synonym mappings "
@@ -216,8 +241,18 @@ def main() -> int:
         print(f"(No KO synonym table at {args.ko_synonyms}; natural body.ko only)",
               file=sys.stderr)
 
+    en_synonyms = load_synonyms(args.en_synonyms, label="EN")
+    if en_synonyms:
+        n_tokens = sum(len(v) for v in en_synonyms.values())
+        print(f"Loaded {len(en_synonyms):,} iast → EN synonym mappings "
+              f"({n_tokens:,} tokens) from {args.en_synonyms}", file=sys.stderr)
+    else:
+        print(f"(No EN synonym table at {args.en_synonyms}; natural body.plain only)",
+              file=sys.stderr)
+
     print("Collecting reverse tokens across 130 dicts…", file=sys.stderr)
-    en_buckets, ko_buckets = collect_tokens(args.sources, args.jsonl, ko_synonyms)
+    en_buckets, ko_buckets = collect_tokens(args.sources, args.jsonl,
+                                             ko_synonyms, en_synonyms)
 
     print(f"  raw tokens: en={len(en_buckets):,}  ko={len(ko_buckets):,}", file=sys.stderr)
 

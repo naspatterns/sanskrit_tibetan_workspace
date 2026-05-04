@@ -19,16 +19,16 @@ n,query,category,channel,expected,top_5,verdict
 18,klong chen,bo-wylie,bo,klong chen,klong chen,✅
 19,rdo rje,bo-wylie,bo,rdo rje | vajra,rdo rje,✅
 20,'jam dpal,bo-wylie,bo,'jam dpal | mañjuśrī,'jam dpal,✅
-21,fire,en-reverse,en,agni,raḥ | vami | sāgni | vāśiḥ | peruḥ,⚠️
-22,wisdom,en-reverse,en,prajñā | jñāna | buddhi,worldly-wisdom | mkhyen pa | ye shes kyi pha rol tu phyin pa | sher | ye shes pa,❌
-23,compassion,en-reverse,en,karuṇā | anukampā | dayā,ghṛṇā | karuṇā | u | dayā | mṛḍīka,✅
-24,emptiness,en-reverse,en,śūnyatā | śūnya,śūna | śūnyatā | riktatā | tucchya | śūnyatā,✅
-25,liberation,en-reverse,en,mokṣa | mukti,vimokṣaḥ | parimukti | nirmokṣaḥ | mocana | mokṣaṇa,⚠️
-26,meditation,en-reverse,en,dhyāna | samādhi,yogas | yogas | nididhyāsana | sa | yaḥ,⚠️
-27,enlightenment,en-reverse,en,bodhi | sambodhi,lokaḥ | kratuḥ | enlightenment | byang mchog | byang lnga po,❌
-28,suffering,en-reverse,en,duḥkha,vātakin | udvegin | vaisarpa | udāvartin | taapin,❌
-29,consciousness,en-reverse,en,vijñāna | citta,pramā | saṃjñā | pratisaṃkhyā | vitti | saṃvid,❌
-30,righteousness,en-reverse,en,dharma,righteousness | self-righteousness | righteousness | saudharm-ya | ṛta,❌
+21,fire,en-reverse,en,agni,pāvaka | agni | vahni | vahni | anala,✅
+22,wisdom,en-reverse,en,prajñā | jñāna | buddhi,vidyā | prajñā | prajñā | vidyā | jñāna,✅
+23,compassion,en-reverse,en,karuṇā | anukampā | dayā,karuṇā | karuṇā | karuṇā | karuṇā | karuṇā,✅
+24,emptiness,en-reverse,en,śūnyatā | śūnya,śūnyatā | śūnyatā | śūnyatā | śūnyatā | śūnyatā,✅
+25,liberation,en-reverse,en,mokṣa | mukti,mokṣa | mokṣa | mukti | mokṣa | mukti,✅
+26,meditation,en-reverse,en,dhyāna | samādhi,dhyāna | dhyāna | dhyāna | samādhi | samādhi,✅
+27,enlightenment,en-reverse,en,bodhi | sambodhi,bodhi | bodhi | bodhi | bodhi | bodhi,✅
+28,suffering,en-reverse,en,duḥkha,duḥkha | duḥkha | duḥkha | duḥkha | duḥkha,✅
+29,consciousness,en-reverse,en,vijñāna | citta,cetas | citta | saṃjñā | saṃjñā | cetas,✅
+30,righteousness,en-reverse,en,dharma,dharma | dharma | dharma | dharma | dharma,✅
 31,법,ko-reverse,ko,dharma,dharma | dharma | dharma | dharma | dharma,✅
 32,자비,ko-reverse,ko,karuṇā | maitrī,karuṇā | karuṇa | karuṇa | karuṇa | karuṇa,✅
 33,지혜,ko-reverse,ko,prajñā | jñāna,prajñā | prajñā | jñāna | jñāna | buddhi,✅

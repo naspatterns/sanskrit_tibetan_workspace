@@ -1,7 +1,7 @@
 # audit-C-sentinel — 50 query 자동 평가
 
-- **종합**: ✅ 29/50 · ⚠️ 8/50 · ❌ 13/50
-- 평가 시점: 인덱스 — tier0 10,000 keys · reverse_en 317,878 · reverse_ko 20,962
+- **종합**: ✅ 37/50 · ⚠️ 5/50 · ❌ 8/50
+- 평가 시점: 인덱스 — tier0 10,000 keys · reverse_en 317,883 · reverse_ko 20,962
 
 ## 카테고리별
 
@@ -10,7 +10,7 @@
 | bo-wylie | 5 | 0 | 0 | 5 |
 | dead-zone | 2 | 0 | 0 | 2 |
 | edge | 1 | 0 | 4 | 5 |
-| en-reverse | 2 | 3 | 5 | 10 |
+| en-reverse | 10 | 0 | 0 | 10 |
 | ko-reverse | 5 | 0 | 0 | 5 |
 | prefix | 0 | 5 | 0 | 5 |
 | skt-core | 6 | 0 | 4 | 10 |
@@ -41,16 +41,16 @@
 | 18 | `klong chen` | bo-wylie | bo | klong chen | klong chen | ✅ |
 | 19 | `rdo rje` | bo-wylie | bo | rdo rje \| vajra | rdo rje | ✅ |
 | 20 | `'jam dpal` | bo-wylie | bo | 'jam dpal \| mañjuśrī | 'jam dpal | ✅ |
-| 21 | `fire` | en-reverse | en | agni | raḥ \| vami \| sāgni \| vāśiḥ \| peruḥ | ⚠️ |
-| 22 | `wisdom` | en-reverse | en | prajñā \| jñāna \| buddhi | worldly-wisdom \| mkhyen pa \| ye shes kyi pha rol tu phyin pa | ❌ |
-| 23 | `compassion` | en-reverse | en | karuṇā \| anukampā \| dayā | ghṛṇā \| karuṇā \| u \| dayā \| mṛḍīka | ✅ |
-| 24 | `emptiness` | en-reverse | en | śūnyatā \| śūnya | śūna \| śūnyatā \| riktatā \| tucchya \| śūnyatā | ✅ |
-| 25 | `liberation` | en-reverse | en | mokṣa \| mukti | vimokṣaḥ \| parimukti \| nirmokṣaḥ \| mocana \| mokṣaṇa | ⚠️ |
-| 26 | `meditation` | en-reverse | en | dhyāna \| samādhi | yogas \| yogas \| nididhyāsana \| sa \| yaḥ | ⚠️ |
-| 27 | `enlightenment` | en-reverse | en | bodhi \| sambodhi | lokaḥ \| kratuḥ \| enlightenment \| byang mchog \| byang lnga po | ❌ |
-| 28 | `suffering` | en-reverse | en | duḥkha | vātakin \| udvegin \| vaisarpa \| udāvartin \| taapin | ❌ |
-| 29 | `consciousness` | en-reverse | en | vijñāna \| citta | pramā \| saṃjñā \| pratisaṃkhyā \| vitti \| saṃvid | ❌ |
-| 30 | `righteousness` | en-reverse | en | dharma | righteousness \| self-righteousness \| righteousness \| saudhar | ❌ |
+| 21 | `fire` | en-reverse | en | agni | pāvaka \| agni \| vahni \| vahni \| anala | ✅ |
+| 22 | `wisdom` | en-reverse | en | prajñā \| jñāna \| buddhi | vidyā \| prajñā \| prajñā \| vidyā \| jñāna | ✅ |
+| 23 | `compassion` | en-reverse | en | karuṇā \| anukampā \| dayā | karuṇā \| karuṇā \| karuṇā \| karuṇā \| karuṇā | ✅ |
+| 24 | `emptiness` | en-reverse | en | śūnyatā \| śūnya | śūnyatā \| śūnyatā \| śūnyatā \| śūnyatā \| śūnyatā | ✅ |
+| 25 | `liberation` | en-reverse | en | mokṣa \| mukti | mokṣa \| mokṣa \| mukti \| mokṣa \| mukti | ✅ |
+| 26 | `meditation` | en-reverse | en | dhyāna \| samādhi | dhyāna \| dhyāna \| dhyāna \| samādhi \| samādhi | ✅ |
+| 27 | `enlightenment` | en-reverse | en | bodhi \| sambodhi | bodhi \| bodhi \| bodhi \| bodhi \| bodhi | ✅ |
+| 28 | `suffering` | en-reverse | en | duḥkha | duḥkha \| duḥkha \| duḥkha \| duḥkha \| duḥkha | ✅ |
+| 29 | `consciousness` | en-reverse | en | vijñāna \| citta | cetas \| citta \| saṃjñā \| saṃjñā \| cetas | ✅ |
+| 30 | `righteousness` | en-reverse | en | dharma | dharma \| dharma \| dharma \| dharma \| dharma | ✅ |
 | 31 | `법` | ko-reverse | ko | dharma | dharma \| dharma \| dharma \| dharma \| dharma | ✅ |
 | 32 | `자비` | ko-reverse | ko | karuṇā \| maitrī | karuṇā \| karuṇa \| karuṇa \| karuṇa \| karuṇa | ✅ |
 | 33 | `지혜` | ko-reverse | ko | prajñā \| jñāna | prajñā \| prajñā \| jñāna \| jñāna \| buddhi | ✅ |

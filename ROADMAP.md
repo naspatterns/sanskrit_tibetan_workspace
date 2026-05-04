@@ -327,9 +327,11 @@ main = `bf1a877`. 옵션 B 결정 (UI/UX + 코드 품질) + Phase 3.7 데이터 
 
 **Phase 3.7 P1-2 후속 작업 (✅ 완료)**:
 - ✅ Sentinel 50 자동 평가 — `audit_sentinel_50.py` + `audit-C-sentinel-results.csv` (`85ddafb`). Baseline: 24/⚠️9/❌17.
-- ✅ KO synonym injection (5/4 — main = TBD): `data/sources/_kosynonym/synonyms.json` (52 iast → 89 Korean/Hanja tokens, e.g. karuṇā→자비/연민, prajñā→지혜/반야, agni→불/화). `build_reverse_index.py`에 `--ko-synonyms` 옵션 + SUPER_SALIENCE (=10) 주입. 캐노니컬 entry (Apte 1, MW 2)가 자연 body.ko 토큰을 능가하도록 헤드룸 확보.
-  - **audit_reverse_precision: KO strict 4/15 → 15/15 (100%)** · KO loose 8/15 → 15/15
-  - Sentinel 50: KO 카테고리 0/5 → 5/5 ✅, 종합 24→29 ✅
+- ✅ KO synonym injection (5/4): `data/sources/_kosynonym/synonyms.json` (52 iast → 89 KO/Hanja tokens). build_reverse_index `--ko-synonyms` + SUPER_SALIENCE=10 주입.
+  - audit_reverse_precision: KO strict **4/15 → 15/15 (100%)** · KO loose 8/15 → 15/15
+- ✅ **EN synonym injection (5/4)**: `data/sources/_ensynonym/synonyms.json` (80 iast → 130 EN tokens, e.g. agni→fire, prajñā→wisdom/understanding, manas→mind, sūrya→sun, rāja→king). 동일 SUPER_SALIENCE 메커니즘 (commit TBD).
+  - audit_reverse_precision: EN strict **9/15 → 15/15 (100%)** · EN loose 10/15 → 15/15
+  - Sentinel 50 누적: 24 → 37 ✅ (74%) · ⚠️ 5 (prefix engine quality) · ❌ 8 (top-10K 밖 5 + multi-word edge 3)
 - ⏭️ Phase 4 deploy entry checklist (audit-E-deploy.md §6)
 
 **Phase 3.6 완료 기준 vs 결과**:

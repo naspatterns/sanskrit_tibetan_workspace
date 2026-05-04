@@ -1,30 +1,30 @@
 # audit-A-reverse-precision (v2 with full JSONL id resolution)
 
-- reverse_en tokens: **317,878**
+- reverse_en tokens: **317,883**
 - reverse_ko tokens: **20,962**
 - JSONL id map size: **3,815,934**
 
 ## English seed precision (top-5 strict / top-20 loose)
 
-**Strict (top-5): 9/15** · **Loose (top-20): 10/15**
+**Strict (top-5): 15/15** · **Loose (top-20): 15/15**
 
 | Query | Expected | rev hits | Top-5 iast | Top-5 dicts | Strict | Loose |
 |---|---|---:|---|---|---|---|
-| `fire` | agni | 100 | raḥ, vami, sāgni, vāśiḥ, peruḥ | apte-sanskrit-english, apte-sanskrit-english, apte-sanskrit-english, +2 | ❌ | ❌ |
-| `water` | jala, ap, ambu, vāri, udaka | 100 | xap, xara, yoniḥ, xaṇaḥ, xaara | apte-bilingual, apte-bilingual, apte-bilingual, +2 | ✅ | ✅ |
-| `earth` | pṛthivī, bhūmi | 100 | ḷ, gmā, kuḥ, sahā, mahī | apte-sanskrit-english, apte-sanskrit-english, apte-sanskrit-english, +2 | ❌ | ❌ |
-| `duty` | dharma, kartavya, vrata | 100 | kartva, dutyupahāsa, kara, upadharma, kṛ | monier-williams, monier-williams, macdonell, +2 | ✅ | ✅ |
-| `soul` | ātman, jīva | 100 | vāsuḥ, vedātman, viśvātman, yajñātman, viśvātman | apte-sanskrit-english, monier-williams, monier-williams, +2 | ✅ | ✅ |
-| `knowledge` | jñāna, vidyā | 100 | ṇaḥ, vidyā, saṃvid, vidman, vāsanā | apte-sanskrit-english, apte-sanskrit-english, apte-sanskrit-english, +2 | ✅ | ✅ |
-| `compassion` | karuṇā, anukampā, dayā | 100 | ghṛṇā, karuṇā, u, dayā, mṛḍīka | apte-sanskrit-english, apte-sanskrit-english, monier-williams, +2 | ✅ | ✅ |
-| `wisdom` | prajñā, jñāna, buddhi | 100 | worldly-wisdom, mkhyen pa, ye shes kyi pha rol tu phyin pa, sher, ye shes pa | mw-english-sanskrit, tib-rangjung-yeshe, tib-rangjung-yeshe, +2 | ❌ | ✅ |
-| `mind` | manas, citta, cetas | 100 | tūṣṇīm, vyapekṣ, nitarām, tadānīm, viśvadānīm | apte-sanskrit-english, apte-sanskrit-english, apte-sanskrit-english, +2 | ❌ | ❌ |
+| `fire` | agni | 100 | pāvaka, agni, vahni, vahni, anala | apte-sanskrit-english, monier-williams, monier-williams, +2 | ✅ | ✅ |
+| `water` | jala, ap, ambu, vāri, udaka | 100 | ap, vāri, jala, ap, ap | apte-sanskrit-english, apte-sanskrit-english, apte-sanskrit-english, +2 | ✅ | ✅ |
+| `earth` | pṛthivī, bhūmi | 100 | pṛthivī, bhūmi, bhūmi, bhūmi, bhūmi | apte-sanskrit-english, monier-williams, monier-williams, +2 | ✅ | ✅ |
+| `duty` | dharma, kartavya, vrata | 100 | kartavya, kartavya, vrata, vrata, vrata | apte-sanskrit-english, apte-sanskrit-english, monier-williams, +2 | ✅ | ✅ |
+| `soul` | ātman, jīva | 100 | jīva, ātman, jīva, jīva, jīva | apte-sanskrit-english, apte-sanskrit-english, monier-williams, +2 | ✅ | ✅ |
+| `knowledge` | jñāna, vidyā | 100 | vidyā, vidyā, jñāna, jñāna, vidyā | apte-sanskrit-english, monier-williams, monier-williams, +2 | ✅ | ✅ |
+| `compassion` | karuṇā, anukampā, dayā | 100 | karuṇā, karuṇā, karuṇā, karuṇā, karuṇā | apte-sanskrit-english, bhsd, sabda-kalpa-druma, +2 | ✅ | ✅ |
+| `wisdom` | prajñā, jñāna, buddhi | 100 | vidyā, prajñā, prajñā, vidyā, jñāna | apte-sanskrit-english, apte-sanskrit-english, apte-sanskrit-english, +2 | ✅ | ✅ |
+| `mind` | manas, citta, cetas | 100 | hṛd, manas, cetas, citta, hṛd | apte-sanskrit-english, apte-sanskrit-english, apte-sanskrit-english, +2 | ✅ | ✅ |
 | `buddha` | buddha, tathāgata, sambuddha | 100 | buddha, tāra, jina, gaya, kāla | apte-sanskrit-english, monier-williams, monier-williams, +2 | ✅ | ✅ |
-| `love` | preman, rāga, kāma, sneha | 100 | śṛṃgārakaḥ, pratisnehaḥ, zuci, vena, māra | apte-sanskrit-english, apte-sanskrit-english, monier-williams, +2 | ✅ | ✅ |
-| `death` | mṛtyu, marana, yama | 100 | viṣya, mṛtiḥ, maraḥ, haṃtuḥ, mṛtyuḥ | apte-sanskrit-english, apte-sanskrit-english, apte-sanskrit-english, +2 | ✅ | ✅ |
-| `king` | rāja, nṛpa, narendra | 100 | rāyaḥ, kuṃtiḥ, mūleraḥ, malikaḥ, nahuṣaḥ | apte-sanskrit-english, apte-sanskrit-english, apte-sanskrit-english, +2 | ❌ | ❌ |
-| `moon` | candra, soma, indu | 100 | soman, sumaḥ, papiḥ, tṛpat, snehuḥ | apte-sanskrit-english, apte-sanskrit-english, apte-sanskrit-english, +2 | ✅ | ✅ |
-| `sun` | sūrya, āditya, savitṛ, ravi | 100 | śuṣṇaḥ, varṇuḥ, suvanaḥ, tapasaḥ, vivasvat | apte-sanskrit-english, apte-sanskrit-english, apte-sanskrit-english, +2 | ❌ | ❌ |
+| `love` | preman, rāga, kāma, sneha | 100 | preman, kāma, kāma, kāma, kāma | apte-sanskrit-english, monier-williams, monier-williams, +2 | ✅ | ✅ |
+| `death` | mṛtyu, marana, yama | 100 | yama, yama, yama, yama, yama | apte-sanskrit-english, monier-williams, monier-williams, +2 | ✅ | ✅ |
+| `king` | rāja, nṛpa, narendra | 100 | rājan, rāja, rāja, nṛpa, nṛpa | apte-sanskrit-english, monier-williams, monier-williams, +2 | ✅ | ✅ |
+| `moon` | candra, soma, indu | 100 | soma, soma, soma, soma, soma | monier-williams, monier-williams, monier-williams, +2 | ✅ | ✅ |
+| `sun` | sūrya, āditya, savitṛ, ravi | 100 | savitṛ, āditya, ravi, ravi, sūrya | apte-sanskrit-english, apte-sanskrit-english, monier-williams, +2 | ✅ | ✅ |
 
 ## Korean seed precision (top-5 strict / top-20 loose)
 
