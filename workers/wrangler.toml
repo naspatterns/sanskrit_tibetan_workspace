@@ -1,0 +1,22 @@
+name = "stw-api"
+main = "src/index.ts"
+compatibility_date = "2026-05-05"
+compatibility_flags = ["nodejs_compat"]
+
+# Cloudflare Pages Functions or Workers — Phase 5 Edge API + D1.
+# This Worker exposes /api/search/:norm and /api/entry/:id, queried by the
+# SvelteKit client in src/lib/search/engine.ts when an exact lookup misses
+# the local tier0 indices.
+
+[[d1_databases]]
+binding = "DB"                                  # accessed as `env.DB` in code
+database_name = "stw-entries"
+database_id = "b53085a2-bece-419b-85c7-491df9dadd35"
+
+# Disable observability for free tier (avoid surprise charges).
+[observability]
+enabled = false
+
+# Production deploy — once Pages is set up, this gets re-bound to the
+# Pages project so /api/* routes through the same domain.
+# Bind via wrangler pages deploy (Phase 5d).

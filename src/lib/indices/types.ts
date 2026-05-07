@@ -22,6 +22,25 @@ export interface Tier0Entry {
 	entries: Tier0Result[];
 }
 
+/** Phase 5 — Edge API fallback row from D1 (workers/src/index.ts).
+ * Subset of full entry; full body lazy-fetched via /api/entry/:id (Phase 5e). */
+export interface ApiSearchRow {
+	id: string;
+	headword_norm: string;
+	headword_iast: string;
+	dict_slug: string;
+	priority: number;
+	snippet_short: string | null;
+	body_ko: string | null;
+	target_lang: string;
+}
+
+export interface ApiSearchResponse {
+	query: string;
+	count: number;
+	results: ApiSearchRow[];
+}
+
 export interface EquivRow {
 	sources: string[];
 	skt_iast?: string;

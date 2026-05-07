@@ -70,3 +70,12 @@ CLAUDE.md
 # ─── Phase 4 deploy build outputs (Cloudflare Pages / Workers) ─
 .output
 .wrangler
+
+# Phase 5 — Workers/D1 build artifacts
+workers/node_modules/
+workers/sql/data-*.sql
+workers/sql/data-*.sql.done
+workers/.wrangler/
+
+# 22MB rank table — regenerable via `frequency.py --out-full`
+data/reports/frequency.json

@@ -6,7 +6,13 @@
 	import { entryLang, langBalancedTop, langBalancedRest, type EntryLang } from '$lib/search/lang';
 	import { isIndexLoaded, getIndexBundle } from '$lib/indices/store';
 	import { chipStyle, styleFor } from '$lib/search/source-colors';
-	import type { EquivRow, HeadwordEntry, Tier0Result } from '$lib/indices/types';
+	import { searchEdgeApi } from '$lib/search/apiSearch';
+	import type {
+		ApiSearchRow,
+		EquivRow,
+		HeadwordEntry,
+		Tier0Result
+	} from '$lib/indices/types';
 	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
 	import EntryFull from '$lib/components/EntryFull.svelte';
 	import EquivDetail from '$lib/components/EquivDetail.svelte';
@@ -32,6 +38,31 @@
 
 	const result = $derived(performSearch(query));
 	let modalEntry = $state<Tier0Result | null>(null);
+
+	// Phase 5 — Edge API fallback. When local search misses (no tier0 hit
+	// AND no equivalents row), fetch from D1 Workers. Debounced + cancelable.
+	let apiResults = $state<ApiSearchRow[] | null>(null);
+	let apiLoading = $state(false);
+	$effect(() => {
+		const q = query.trim();
+		// Reset state on every query change.
+		apiResults = null;
+		apiLoading = false;
+		if (!q || q.length < 2) return;
+		// Local hit? Skip API.
+		if (result?.exact || (result?.equivalents.length ?? 0) > 0) return;
+		const ctrl = new AbortController();
+		const id = window.setTimeout(async () => {
+			apiLoading = true;
+			const data = await searchEdgeApi(q, { limit: 20, signal: ctrl.signal });
+			apiLoading = false;
+			if (data && !ctrl.signal.aborted) apiResults = data.results;
+		}, 250);
+		return () => {
+			window.clearTimeout(id);
+			ctrl.abort();
+		};
+	});
 
 	// 3.2.1 fix — popstate listener instead of reactive $effect. The reactive
 	// effect raced with our own goto(): each goto touches $page.url, the
@@ -214,11 +245,45 @@
 			<span class="dim">· {result.detectedScript} · {result.durationMs.toFixed(2)}ms</span>
 		</div>
 
-		{#if !result.exact && result.equivalents.length > 0}
+		{#if !result.exact && result.equivalents.length === 0 && apiLoading}
+			<p class="hint api-loading">⌁ Edge에서 검색 중…</p>
+		{/if}
+
+		{#if !result.exact && apiResults && apiResults.length > 0}
+			<section class="zone zone-edge">
+				<h2>
+					Edge 검색 결과
+					<span class="count">{apiResults.length}</span>
+					<span class="dim">(D1 fallback · Phase 5)</span>
+				</h2>
+				<ul class="api-list">
+					{#each apiResults as row}
+						<li class="api-row">
+							<button
+								type="button"
+								class="lang skt term-link"
+								onclick={() => setQuery(row.headword_iast)}
+								title="이 단어로 새 검색">{row.headword_iast}</button
+							>
+							<span class="chip" style={chipStyle(row.dict_slug)} title={row.dict_slug}>
+								{styleFor(row.dict_slug).label}
+							</span>
+							{#if row.snippet_short}
+								<p class="api-snippet">{row.snippet_short}</p>
+							{/if}
+							{#if row.body_ko}
+								<p class="api-ko">{row.body_ko}</p>
+							{/if}
+						</li>
+					{/each}
+				</ul>
+			</section>
+		{/if}
+
+		{#if !result.exact && result.equivalents.length === 0 && !apiLoading && (apiResults === null || apiResults.length === 0)}
 			<div class="notice">
-				ⓘ 이 단어는 <strong>top-10K 정의 인덱스</strong> 밖입니다 — 대응어(Zone B)는 표시되지만,
-				전문 prose 정의(Zone C)는 Phase 5 Edge API 도입 후 제공 예정. (티벳어 단어는 현재 약 0.5%만
-				cover. Phase 3.3에서 별도 `tier0-bo` 인덱스로 50%+ 확장 예정.)
+				ⓘ "{result.query}"에 해당하는 항목을 찾지 못했습니다. <br />
+				<small class="dim">철자 확인 / 다른 표기 시도 / 영어·한국어로 의미 검색 (역검색)</small>
 			</div>
 		{/if}
 
@@ -502,6 +567,33 @@
 		margin: 0 0 0.4rem;
 		padding-bottom: 0.2rem;
 		border-bottom: 1px solid var(--border);
+	}
+	/* Phase 5 — Edge API fallback section */
+	.zone-edge h2 {
+		color: var(--accent);
+	}
+	.api-loading {
+		color: var(--accent);
+		font-style: italic;
+	}
+	.api-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	.api-row {
+		padding: 0.4rem 0;
+		border-bottom: 1px dashed var(--border);
+	}
+	.api-snippet {
+		font-size: 0.88rem;
+		color: var(--fg-muted);
+		margin: 0.2rem 0 0;
+		line-height: 1.4;
+	}
+	.api-ko {
+		font-size: 0.88rem;
+		margin: 0.2rem 0 0;
 	}
 	.count {
 		color: var(--fg-muted);
