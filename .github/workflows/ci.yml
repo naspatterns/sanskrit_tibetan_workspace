@@ -1,0 +1,101 @@
+# CI — Phase 4 deploy track.
+#
+# What this workflow does:
+#   - pytest (79 Python tests) on every push/PR
+#   - vitest (104 TypeScript tests) on every push/PR
+#   - svelte-check (258 files, 0 errors) on every push/PR
+#   - dry-build (skips static/indices) — verifies SvelteKit + adapter
+#
+# What this workflow does NOT do:
+#   - Production deploy. Indices (89 MB) live only on the maintainer's
+#     local machine (regenerable from v1 sqlite via `scripts/`); they are
+#     gitignored. Production deploys go through `wrangler pages deploy`
+#     run locally (see REPRODUCIBLE.md §10).
+#
+# Why no deploy step? See CLAUDE.md §7 "Pages routes 결정 필요" — current
+# answer is "옵션 A": Pages serves static + Worker (stw-api) serves D1.
+# Both are independent. CI just guards code quality.
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  python-tests:
+    name: pytest (79)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          version: latest
+
+      - name: Set up Python 3.12
+        run: uv python install 3.12
+
+      - name: Install dependencies
+        run: uv sync
+
+      - name: Run pytest
+        run: uv run pytest -q
+
+  typescript-tests:
+    name: vitest + svelte-check (104 + 258)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run vitest
+        run: npm test
+
+      - name: Run svelte-check
+        run: npx svelte-check --threshold error
+
+  dry-build:
+    name: dry build (no indices)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Replace static/indices symlink with empty dir
+        # The symlink points to ../public/indices, which is gitignored
+        # (89 MB local-only). Without this, adapter-static crashes on
+        # broken-symlink copy.
+        run: |
+          rm static/indices
+          mkdir -p static/indices
+
+      - name: Build
+        run: npm run build
+
+      - name: Verify build artifacts
+        run: |
+          test -f build/index.html
+          test -f build/_headers
+          test -f build/sw.js
+          test -f build/robots.txt
+          ls -la build/
