@@ -452,62 +452,92 @@ main = `bf1a877`. 옵션 B 결정 (UI/UX + 코드 품질) + Phase 3.7 데이터 
 
 ---
 
-## Phase 4: 배포 + 운영 (1주)
+## Phase 5: Edge API + D1 ✅ 완료 (commit c615b0a, 2026-05-05)
+
+**사용자 결정**: Phase 4 ↔ 5 swap. Phase 5를 먼저 해서 첫 사용자가 "완전한 검색"
+인상을 받도록.
+
+### 5.1 D1 셋업 ✅
+- ✅ Wrangler CLI 설치 (사용자 직접) + 인증 OAuth (`wrangler login`)
+- ✅ `wrangler d1 create stw-entries` → region APAC/ICN (한국 가까움)
+- ✅ 스키마: `workers/sql/schema.sql` (light columns, ~580B/row)
+  - `entries(id PK, headword_norm, headword_iast, dict_slug, priority, snippet_short, body_ko, target_lang)`
+  - `idx_norm`, `idx_dict_priority`
+- ✅ JSONL → SQL import 스크립트: `scripts/build_d1_dump.py`
+  - 60 chunks · 50K rows/file · 50 rows/INSERT (SQLITE_TOOBIG safety)
+  - 2,978,861 rows total · 565 MB SQL
+- ✅ Resumable bulk import: `workers/import_all.sh` (60 chunks 모두 ✅)
+
+### 5.2 Worker API ✅
+- ✅ `GET /api/search/:norm` — exact + prefix LIKE fallback, top-20
+- ✅ `GET /api/entry/:id` — single entry by id
+- ✅ `GET /api/health` — liveness probe
+- ✅ CORS (`Access-Control-Allow-Origin: *`)
+- ✅ Cache-Control (`max-age=86400` for hits, `300` for 404s)
+- ⏭️ Rate limiting (deferred — Workers free tier 100K/일 충분)
+- 배포: `https://stw-api.naspatterns.workers.dev` (`wrangler deploy`)
+
+### 5.3 클라이언트 통합 ✅
+- ✅ `src/lib/search/apiSearch.ts` — fetch wrapper with AbortSignal
+- ✅ `src/lib/indices/types.ts` — `ApiSearchRow` / `ApiSearchResponse`
+- ✅ `src/routes/+page.svelte` — `$effect` triggers API on local miss
+  - Debounce 250ms · AbortController on query change
+  - UI section `zone-edge` (Phase 5 fallback 표시)
+- ✅ Loading state · graceful 404 ("결과 없음" notice)
+
+### 5.4 검증 ✅
+- ✅ `scripts/audit_d1_integrity.py` (User-Agent for Cloudflare bot bypass)
+- ✅ 8/8 ✅ probes:
+  - dharma/agni/prajna/buddha/bodhisattva → 10 results each
+  - **vajracchedika/surangama → 2 results each (Sentinel 215 ❌→✅)**
+  - 404 path 정상
+- ✅ Latency: ~600ms cold (Korea→ICN), ~50ms cached (per Cache-Control)
+- ✅ Free tier 사용량: D1 780MB / 5GB · Workers <100 req/일
+
+**완료 기준**: 모든 3.81M entry 검색 가능. **달성** (long-tail 100% 커버).
+
+---
+
+## Phase 4: 배포 + 운영 (다음, ~1-2일)
 
 **목표**: 프로덕션 배포, 사용자 점진 이전.
 
 ### 4.1 배포
-- Cloudflare Pages 연결
-- 도메인 (선택): `workspace.haMsa.io` 또는 `skt-tib.pages.dev`
+- Cloudflare Pages 프로젝트 (Pages connect to GitHub repo)
+- Build settings:
+  - Build command: `npm run build`
+  - Build output: `build/`
+- 도메인 (선택): `workspace.haMsa.io` 또는 자동 `*.pages.dev`
+- Pages routes 결정:
+  - 옵션 A: 그대로 (Pages 정적 + Worker 별 도메인 — 현재 작동)
+  - 옵션 B: Pages Functions로 통합 (`functions/api/[[path]].ts` proxy)
 - v1과 병렬 운영 (별도 도메인 또는 `/v2`)
 
 ### 4.2 CI/CD
-- GitHub Actions:
-  - PR: 빌드 + 테스트 + Lighthouse + verify
-  - main push: 자동 deploy to Pages
-  - 데이터 변경 시 인덱스 재빌드 + cache bust
+- GitHub Actions (`.github/workflows/build.yml`):
+  - PR: 빌드 + tests (pytest 79 + vitest 104) + svelte-check + audit_random_lookup
+  - main push: 자동 deploy to Pages (또는 Pages auto-deploy GitHub trigger)
+  - 데이터 변경 시 인덱스 재빌드 + cache bust (SW v6)
 
 ### 4.3 모니터링
-- Cloudflare Analytics 연결
-- Sentry 셋업
-- Web Vitals 대시보드
+- Cloudflare Analytics 자동 (Pages free tier 포함)
+- Sentry (선택, 무료 5K req/월)
+- Web Vitals 대시보드 (Cloudflare Web Analytics)
 
 ### 4.4 문서
-- `docs/USER_GUIDE.md`: 사용자 가이드
-- `docs/CONTRIBUTING.md`: 개발자 가이드
-- `docs/DATA.md`: 데이터 출처 + 라이선스
+- ✅ `REPRODUCIBLE.md` 단계별 빌드 (이미 있음)
+- ✅ `PROJECT_STATUS.md` 종합 상태 (이미 있음)
+- ⏭️ `docs/USER_GUIDE.md` 사용자 가이드
+- ⏭️ `docs/CONTRIBUTING.md` 개발자 가이드
+- ✅ `LICENSES.md` 148 dicts 라이선스 표
 
 ### 4.5 사용자 이전
 - v1 홈페이지에 v2 배너 추가
 - 기존 검색 URL → v2 redirect (선택)
 - 한 달 후 v1 deprecation 공지
 
-**완료 기준**: v2 일일 사용자가 v1 추월.
-
----
-
-## Phase 5: Edge API (Tier 2) (1주)
-
-**목표**: 희귀 단어 검색을 위한 Cloudflare Workers + D1.
-
-### 5.1 D1 셋업
-- Wrangler CLI 설치
-- D1 데이터베이스 생성
-- 스키마 (entries, dictionaries, fts)
-- JSONL → SQL import 스크립트
-
-### 5.2 Worker API
-- `GET /api/search?q=...&limit=...`
-- `GET /api/entry/:id`
-- Rate limiting (분당 100 req)
-- CORS 설정
-
-### 5.3 클라이언트 통합
-- Tier 0/1 miss 시 Tier 2 호출
-- 응답 타임아웃 처리
-- 에러 UX (오프라인 시 안내)
-
-**완료 기준**: 모든 사전 단어 검색 가능 (Tier 0/1/2 합쳐서).
+**완료 기준**: v2 production URL에서 vajracchedikā 검색 → ✅ 결과 surface
+(local tier0 + Edge API + D1 통합 동작).
 
 ---
 

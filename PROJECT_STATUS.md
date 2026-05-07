@@ -1,18 +1,20 @@
-# PROJECT_STATUS.md — Sanskrit-Tibetan Workspace v2 (state at 2026-05-04)
+# PROJECT_STATUS.md — Sanskrit-Tibetan Workspace v2 (state at 2026-05-05)
 
-**Repository commit**: `64eb0ee` (main)
-**Phases complete**: 0, 1, 2, 2.5, 3.1, 3.2, 3.3, 3.4, 3.5, 3.5b, 3.6, **3.7 (with 5+1 follow-ups)**
-**Phases pending**: 4 (deploy), 5 (Edge API), 6 (Reader), 7 (Vocab)
+**Repository commit**: `c615b0a` (main)
+**Phases complete**: 0, 1, 2, 2.5, 3.1, 3.2, 3.3, 3.4, 3.5, 3.5b, 3.6, **3.7 (with 5+1 follow-ups)**, **5 (Edge API + D1)**
+**Phases pending**: **4 (deploy)** ← 다음, 6 (Reader), 7 (Vocab)
+**순서 변경**: 사용자 결정으로 Phase 4 ↔ 5 swap (Phase 5를 먼저)
 
 ---
 
 ## Executive snapshot
 
-A multi-dictionary Sanskrit/Tibetan/Pali search + declension + reader
-web app rewritten from v1. **3.81M entries** across **148 dictionaries**
-ship as **9 compressed indices (~89 MB)** loaded eagerly into the browser.
-Search latency is **<1 ms** (Map.get + binary search) with first-paint
-~3 s cold / ~50 ms cached (Service Worker).
+A multi-dictionary Sanskrit/Tibetan/Pali search + declension + reader web
+app rewritten from v1. **3.81M entries** across **148 dictionaries** ship
+as **9 compressed indices (~89 MB)** loaded eagerly into the browser, with
+**Edge API + D1 fallback (Phase 5)** for the long-tail 2.98M entries
+beyond top-20K. Search latency is **<1 ms** local (Map.get) and **~600ms
+cold / ~50 ms cached** for D1 fallback (Korea→ICN edge).
 
 | Quality dimension | Metric | Target | Status |
 |---|---:|---:|---|
@@ -22,11 +24,14 @@ Search latency is **<1 ms** (Map.get + binary search) with first-paint
 | Reverse precision KO | 15/15 strict, 15/15 loose | ≥8  | ✅ |
 | Sentinel 50 (curated) | 50/50 ✅ (100%) | ≥40 | ✅ |
 | Sentinel 215 (extended) | 202/215 ✅ (94.0%) | ≥80% | ✅ |
+| **D1 + Edge API (Phase 5)** | **8/8 ✅ probes** | 100% | ✅ |
+| **Long-tail coverage** | **2.98M / 3.81M searchable** | full corpus | ✅ |
 | Korean coverage | 12.79% (of all 3.36M searchable) | ≥10% | ✅ |
 | Test suite | 79 pytest + 104 vitest = 183 | all green | ✅ |
-| TypeScript strict | 0 errors / 257 files | 0 | ✅ |
+| TypeScript strict | 0 errors / 258 files | 0 | ✅ |
 | Lighthouse a11y | 95 / 100 | ≥90 | ✅ |
 | Cloudflare 25 MiB cap | All 9 indices fit | each ≤25 | ✅ |
+| **D1 free tier headroom** | **780MB / 5GB · <100 req/일** | <80% | ✅ |
 
 ---
 
@@ -127,7 +132,7 @@ Repo structure, design docs, schema, license inventory.
 - 3.5b: Comprehensive audit (5 tracks · 22+ reports)
 - 3.6: P0/P1 fixes (reverse_meta, Cloudflare 25MB cap, mobile, a11y)
 
-### Phase 3.7 — Data quality + Sentinel polish ✅ (this session's focus)
+### Phase 3.7 — Data quality + Sentinel polish ✅
 
 | Sub-step | Outcome | Commit |
 |---|---|---|
@@ -139,6 +144,23 @@ Repo structure, design docs, schema, license inventory.
 | EN synonym injection | EN reverse 9/15 → 15/15 (100%) | `4cac0cb` |
 | **5 follow-ups** B+D+A+E+C | Sentinel 50: 19→50 (100%), 215: 95.5% | `559393a` |
 | **Upasarga tagging (Depth 2)** | 23 SA + 30 BO canonical prefix recognition | `64eb0ee` |
+
+### Phase 5 — Edge API + D1 ✅ (사용자 결정으로 Phase 4 swap)
+
+| Sub-step | Outcome | Detail |
+|---|---|---|
+| **5.1** D1 setup | `wrangler d1 create stw-entries` | region APAC/ICN (한국 가까움), id `b53085a2-…` |
+| **5.1** Schema design | `workers/sql/schema.sql` | light cols (id, norm, iast, dict, priority, snippet, ko, target_lang) |
+| **5.1** SQL dump | `scripts/build_d1_dump.py` | 60 chunks · 50K rows/file · 50 rows/INSERT (SQLITE_TOOBIG safety) |
+| **5.1** Bulk import | `workers/import_all.sh` | 2,978,861 rows imported · 780 MB · resumable |
+| **5.2** Worker API | `workers/src/index.ts` | `/api/search/:norm` exact + prefix · `/api/entry/:id` · `/api/health` |
+| **5.2** CORS + Cache | response headers | `Access-Control-Allow-Origin: *` · `max-age=86400` |
+| **5.2** Deploy | `wrangler deploy` | `https://stw-api.naspatterns.workers.dev` |
+| **5.3** Client fallback | `src/lib/search/apiSearch.ts` | AbortSignal · 250ms debounce |
+| **5.3** UI | `+page.svelte` zone-edge section | loading state · graceful 404 |
+| **5.4** Audit | `scripts/audit_d1_integrity.py` | 8/8 ✅ · vajracchedikā/śūraṅgama Sentinel ❌→✅ |
+
+All in commit `c615b0a`. Free tier 사용량: D1 780MB / 5GB · Workers <100 req/일.
 
 #### Phase 3.7 quality lifts (cumulative)
 
@@ -231,6 +253,8 @@ For full rebuild from v1 SQLite (~10 minutes): see `REPRODUCIBLE.md`.
 ## Recent commits (last 10)
 
 ```
+c615b0a  feat(Phase 5): Edge API + D1 — long-tail entries via Cloudflare Workers
+7f91dda  docs: PROJECT_STATUS.md + REPRODUCIBLE.md — 총체적 점검 + 재현 문서
 64eb0ee  feat: upasarga tagging (Depth 2) — Sanskrit 23 + Tibetan 30 canonical prefixes
 559393a  feat: Phase 3.7 5 follow-ups — Sentinel 50/50 (100%), 200/200 (95.5%)
 4cac0cb  feat: EN synonym injection — EN reverse precision 9/15 → 15/15 (100%)
@@ -238,18 +262,30 @@ e4c8f0f  feat: KO synonym injection — KO reverse precision 4/15 → 15/15 (100
 85ddafb  feat: audit_sentinel_50.py — 50 query 자동 평가 (Phase 3.7 baseline)
 a403d2f  feat(P1-2): en-extended sub-agent 39,873 + JSONL apply + 인덱스 재빌드
 c4e5921  feat: scripts/batch_status.py — one-screen progress for in-flight batches
-5b8b104  docs: Phase 3.7 진입 + P1-1/P1-3 결과 + batch ready 안내
-a8c7a28  feat(P1-2): translate_en_extended.py — top-50K batch + top50k.txt
 c0972e1  fix(P1-1, P1-3): reverse salience boost + equivalents.zh sanitize
 ```
 
 ---
 
-## Next session priorities (suggested)
+## Next session priorities (Phase 4 — 마지막 큰 단계)
 
-1. **Phase 4 deploy** — Cloudflare Pages + adapter-static + CI
-2. **P0-2 EU $451 batch** (or sub-agent path) — DE/FR/LA quality lift
-3. **Multiprocessing builders** — Phase 5 prerequisite optimization
-4. **Devanagari/Hanzi auto-conversion** — Sentinel 215's 2 remaining ❌
+### Phase 4 entry checklist
+1. **Cloudflare Pages 프로젝트** 생성 (Pages connect to GitHub repo)
+2. **Build settings**:
+   - Build command: `npm run build`
+   - Build output: `build/`
+   - Node version: 20
+3. **Pages routing decision**:
+   - 옵션 A: 그대로 (Pages 정적 + Worker 별 도메인 — 현재 작동, 코드 변경 X)
+   - 옵션 B: Pages Functions 통합 (`functions/api/[[path]].ts` proxy → Worker)
+4. **Custom domain** (선택, ~$10-15/년)
+5. **CI workflow** (`.github/workflows/build.yml`)
+6. **Production SW 검증** (`stw-indices-v5` cache 정상 동작)
+7. **Lighthouse 재측정** (a11y 95 유지, perf 측정)
+
+### 참고 자료
+- `REPRODUCIBLE.md §9` — Phase 4 deploy preparation
+- `data/reports/audit-2026-04-30/audit-E-deploy.md §6` — 체크리스트
+- `CLAUDE.md §7` — 다음 세션 진입 가이드 (Phase 4)
 
 — end —

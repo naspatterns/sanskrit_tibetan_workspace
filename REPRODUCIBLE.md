@@ -2,9 +2,10 @@
 
 This document captures the **exact** sequence of commands to take the
 repository from a fresh clone to a fully functional `npm run preview`,
-identical to the production build at the date below.
+identical to the production build at the date below. Includes Phase 5
+(Edge API + D1) setup as of 2026-05-05.
 
-**Last verified**: 2026-05-04 · main `64eb0ee`
+**Last verified**: 2026-05-05 · main `c615b0a`
 
 ---
 
@@ -267,7 +268,72 @@ print('✓ All reproducibility invariants hold')
 
 ---
 
-## 9. Phase 4 — production deploy (Cloudflare Pages)
+## 9. Phase 5 — Cloudflare Workers + D1 (already deployed)
+
+Phase 5 was completed in commit `c615b0a` (2026-05-05). The Worker is
+deployed at `https://stw-api.naspatterns.workers.dev` backed by D1
+database `stw-entries` (id `b53085a2-bece-419b-85c7-491df9dadd35`).
+
+### To rebuild Phase 5 from scratch (or fork)
+
+```bash
+# 0. Wrangler auth (once per machine)
+npm install -g wrangler
+wrangler login                           # OAuth via browser (or CLOUDFLARE_API_TOKEN env var)
+wrangler whoami                          # verify
+
+# 1. Create D1 database
+cd workers
+wrangler d1 create stw-entries
+# → copy the printed `database_id` to wrangler.toml
+
+# 2. Apply schema
+wrangler d1 execute stw-entries --remote --file=sql/schema.sql
+
+# 3. Generate SQL chunks (60 files, ~2.98M rows, ~565 MB)
+cd ..
+uv run python -m scripts.frequency --out-full data/reports/frequency.json
+uv run python -m scripts.build_d1_dump --rank-cutoff 9999999999
+
+# 4. Bulk import (resumable; ~5 min total at 10s per chunk)
+cd workers
+bash import_all.sh
+
+# 5. Deploy Worker
+wrangler deploy
+
+# 6. Verify (8/8 ✅ expected)
+cd ..
+uv run python -m scripts.audit_d1_integrity
+```
+
+### To re-import after schema change
+
+```bash
+# Drop + re-create
+cd workers
+wrangler d1 execute stw-entries --remote --command="DROP TABLE entries"
+wrangler d1 execute stw-entries --remote --file=sql/schema.sql
+
+# Clear .done markers and re-run
+rm -f sql/*.done
+bash import_all.sh
+```
+
+### Cloudflare D1 free tier limits (as of 2026)
+
+| Quota | Free | Used (current) | Headroom |
+|---|---:|---:|---:|
+| Storage | 5 GB | 780 MB | 84% free |
+| Reads/day | 5M rows | <1K | 99.99% free |
+| Writes/day | 100K rows | 0 (read-only after import) | 100% free |
+| Workers requests/day | 100K | <100 | 99.9% free |
+
+→ No paid plan needed for current scale.
+
+---
+
+## 10. Phase 4 — production deploy (Cloudflare Pages, NEXT)
 
 The production build (`npm run build`) outputs `./build/` (adapter-static).
 This directory is the deploy artifact:
@@ -289,12 +355,18 @@ Deploy via:
 - Cloudflare Pages (recommended — global edge, free tier supports 87 MB)
 - Or any static-host (Vercel/Netlify) — adapter-static is portable
 
+**Pages routing**:
+- The Worker (`stw-api.naspatterns.workers.dev`) currently runs as a
+  separate domain. Client `apiSearch.ts` hardcodes the URL.
+- For unified domain, set up Pages Functions (`functions/api/[[path]].ts`)
+  that proxies to the Worker. Optional but cleaner.
+
 See `data/reports/audit-2026-04-30/audit-E-deploy.md §6` for the full
 checklist.
 
 ---
 
-## 10. Known reproducibility caveats
+## 11. Known reproducibility caveats
 
 1. **`extract_from_v1.py`** depends on `dict.sqlite` from v1 workspace
    (immutable reference). If absent, JSONL cannot be regenerated.
