@@ -9,19 +9,19 @@
 
 | # | Name | Query | Expected ≥ | Got | Latency | Verdict |
 |---|---|---|---:|---:|---:|---|
-| 1 | dharma (canonical, in tier0) | `dharma` | 5 | 10 | 602ms | ✅ |
-| 2 | agni (canonical) | `agni` | 5 | 10 | 584ms | ✅ |
-| 3 | vajracchedika (Sentinel ❌ → ✅) | `vajracchedika` | 1 | 2 | 732ms | ✅ |
-| 4 | surangama (Sentinel ❌ → ✅) | `surangama` | 1 | 2 | 772ms | ✅ |
-| 5 | prajna | `prajna` | 5 | 10 | 586ms | ✅ |
-| 6 | buddha | `buddha` | 5 | 10 | 610ms | ✅ |
-| 7 | bodhisattva | `bodhisattva` | 5 | 10 | 599ms | ✅ |
-| 8 | rabidlydoesntexistaaa | `rabidlydoesntexistaaa` | 0 | 0 | 729ms | ✅ |
+| 1 | dharma (canonical, in tier0) | `dharma` | 5 | 10 | 2209ms | ✅ |
+| 2 | agni (canonical) | `agni` | 5 | 10 | 614ms | ✅ |
+| 3 | vajracchedika (Sentinel ❌ → ✅) | `vajracchedika` | 1 | 2 | 757ms | ✅ |
+| 4 | surangama (Sentinel ❌ → ✅) | `surangama` | 1 | 2 | 760ms | ✅ |
+| 5 | prajna | `prajna` | 5 | 10 | 614ms | ✅ |
+| 6 | buddha | `buddha` | 5 | 10 | 581ms | ✅ |
+| 7 | bodhisattva | `bodhisattva` | 5 | 10 | 604ms | ✅ |
+| 8 | rabidlydoesntexistaaa | `rabidlydoesntexistaaa` | 0 | 0 | 749ms | ✅ |
 
 ## Latency stats
 
-- p50: 606ms
-- max: 772ms
-- mean: 652ms
+- p50: 681ms
+- max: 2209ms
+- mean: 861ms
 - N: 8
 
