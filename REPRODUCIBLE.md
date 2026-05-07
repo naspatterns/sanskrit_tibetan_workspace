@@ -333,36 +333,95 @@ bash import_all.sh
 
 ---
 
-## 10. Phase 4 — production deploy (Cloudflare Pages, NEXT)
+## 10. Phase 4 — production deploy (Cloudflare Pages, ✅ first deploy)
 
-The production build (`npm run build`) outputs `./build/` (adapter-static).
-This directory is the deploy artifact:
+**Live**: https://sanskrit-tibetan-workspace.pages.dev (commit `ba8e5f6`)
+
+### 10.1 Pre-flight
 
 ```bash
-# Pre-flight (must all pass)
-uv run pytest -q
-npm test
-npx svelte-check --threshold error
-npm run build  # Should exit 0
-
-# Deploy artifact size check (Cloudflare Pages limits)
-du -sh build/                          # Total bundle
-ls -lh build/indices/*.zst | awk '$5+0 > 25 { exit 1 }' \
-  && echo "✓ All indices under 25 MiB"
+# All must pass
+uv run pytest -q                        # 79
+npm test                                # 104
+npx svelte-check --threshold error      # 0/0
+npm run build                           # build/ 89 MB
 ```
 
-Deploy via:
-- Cloudflare Pages (recommended — global edge, free tier supports 87 MB)
-- Or any static-host (Vercel/Netlify) — adapter-static is portable
+### 10.2 Build artifact size guard
 
-**Pages routing**:
-- The Worker (`stw-api.naspatterns.workers.dev`) currently runs as a
-  separate domain. Client `apiSearch.ts` hardcodes the URL.
-- For unified domain, set up Pages Functions (`functions/api/[[path]].ts`)
-  that proxies to the Worker. Optional but cleaner.
+```bash
+du -sh build/                           # ~89 MB total
+ls -lh build/indices/*.zst | awk '$5+0 > 25 { exit 1 }' \
+  && echo "✓ All indices under 25 MiB Cloudflare per-file limit"
+```
 
-See `data/reports/audit-2026-04-30/audit-E-deploy.md §6` for the full
-checklist.
+### 10.3 First-time Pages project setup (one-off)
+
+In Cloudflare dashboard → Workers & Pages → Create application → Pages →
+Connect to Git, then:
+- Framework preset: **None** (the auto-detect will fail because of the
+  symlink — see §10.5)
+- Build command: leave empty (we deploy via wrangler)
+- Build output directory: `build/`
+
+Confirm project exists:
+```bash
+npx wrangler pages project list
+# sanskrit-tibetan-workspace · sanskrit-tibetan-workspace.pages.dev
+```
+
+### 10.4 Production deploy (every release)
+
+```bash
+npm run build
+npx wrangler pages deploy ./build \
+  --project-name=sanskrit-tibetan-workspace \
+  --branch=main \
+  --commit-message="Phase 4: <ASCII description>" \
+  --commit-hash=$(git rev-parse --short HEAD)
+```
+
+**중요**: `--commit-message` 명시 필수.
+미지정시 wrangler가 `git log -1`을 읽어서 commit message를 attach 시도하는데,
+한글/em-dash가 포함된 메시지에서 UTF-8 인코딩 오류 (`code: 8000111`)로 deploy
+실패 (파일 업로드는 성공한 뒤 commit attach 단계에서). ASCII-only 명시 시
+정상 동작.
+
+### 10.5 GitHub auto-build이 실패하는 이유 (의도적)
+
+GitHub push trigger로 발생하는 자동 빌드는 항상 실패함. 원인:
+- `static/indices` is a symlink → `../public/indices`
+- `public/indices/*.zst` is gitignored (89 MB, regenerable)
+- GitHub clone에서 심볼릭 링크는 보존되지만 target dir이 없음
+- `adapter-static`이 broken symlink 따라가다 빌드 실패
+
+해결: 자동 빌드는 무시하고 manual `wrangler pages deploy`만 사용. CI가
+`pytest` + `vitest` + `svelte-check` + `dry-build` (broken symlink을
+empty dir로 대체) 통해서 빌드 가능성만 검증.
+
+### 10.6 CSP allow Worker API origin
+
+`static/_headers`의 `Content-Security-Policy: ... connect-src 'self'`만
+있으면 Phase 5 Edge API (`stw-api.naspatterns.workers.dev`)로의
+cross-origin fetch가 차단되어 long-tail entries (vajracchedikā, śūraṅgama)
+가 production에서 silent-fail. Fix: `connect-src 'self'
+https://stw-api.naspatterns.workers.dev` (commit `8664e9a`).
+
+### 10.7 Verify live deploy
+
+```bash
+# HTTP 200 + CSP 확인
+curl -sI -A "Mozilla/5.0 verify" \
+  https://sanskrit-tibetan-workspace.pages.dev/ \
+  | grep -E "(HTTP/|content-security-policy:|server:)"
+
+# Indices served correctly (cache-control: immutable, 1 year)
+curl -sI -A "Mozilla/5.0 verify" \
+  https://sanskrit-tibetan-workspace.pages.dev/indices/headwords.txt.zst
+
+# Worker API end-to-end (8/8 ✅)
+uv run python -m scripts.audit_d1_integrity
+```
 
 ---
 

@@ -1,9 +1,9 @@
-# PROJECT_STATUS.md — Sanskrit-Tibetan Workspace v2 (state at 2026-05-05)
+# PROJECT_STATUS.md — Sanskrit-Tibetan Workspace v2 (state at 2026-05-08)
 
-**Repository commit**: `c615b0a` (main)
-**Phases complete**: 0, 1, 2, 2.5, 3.1, 3.2, 3.3, 3.4, 3.5, 3.5b, 3.6, **3.7 (with 5+1 follow-ups)**, **5 (Edge API + D1)**
-**Phases pending**: **4 (deploy)** ← 다음, 6 (Reader), 7 (Vocab)
-**순서 변경**: 사용자 결정으로 Phase 4 ↔ 5 swap (Phase 5를 먼저)
+**Repository commit**: `ba8e5f6` (main)
+**Phases complete**: 0, 1, 2, 2.5, 3.1, 3.2, 3.3, 3.4, 3.5, 3.5b, 3.6, **3.7 (with 5+1 follow-ups)**, **5 (Edge API + D1)**, **4 (Cloudflare Pages first deploy)**
+**Phases pending**: 6 (Reader), 7 (Vocab) — 잔여 검증: SW + Lighthouse
+**Production**: https://sanskrit-tibetan-workspace.pages.dev
 
 ---
 
@@ -253,6 +253,9 @@ For full rebuild from v1 SQLite (~10 minutes): see `REPRODUCIBLE.md`.
 ## Recent commits (last 10)
 
 ```
+ba8e5f6  ci(Phase 4): GitHub Actions — pytest + vitest + svelte-check + dry-build
+8664e9a  fix(Phase 4): CSP allow Worker API origin for cross-origin Edge fetch
+6c083d8  docs: Phase 5 종결 반영 — ROADMAP/PROJECT_STATUS/REPRODUCIBLE 동기화
 c615b0a  feat(Phase 5): Edge API + D1 — long-tail entries via Cloudflare Workers
 7f91dda  docs: PROJECT_STATUS.md + REPRODUCIBLE.md — 총체적 점검 + 재현 문서
 64eb0ee  feat: upasarga tagging (Depth 2) — Sanskrit 23 + Tibetan 30 canonical prefixes
@@ -260,32 +263,67 @@ c615b0a  feat(Phase 5): Edge API + D1 — long-tail entries via Cloudflare Worke
 4cac0cb  feat: EN synonym injection — EN reverse precision 9/15 → 15/15 (100%)
 e4c8f0f  feat: KO synonym injection — KO reverse precision 4/15 → 15/15 (100%)
 85ddafb  feat: audit_sentinel_50.py — 50 query 자동 평가 (Phase 3.7 baseline)
-a403d2f  feat(P1-2): en-extended sub-agent 39,873 + JSONL apply + 인덱스 재빌드
-c4e5921  feat: scripts/batch_status.py — one-screen progress for in-flight batches
-c0972e1  fix(P1-1, P1-3): reverse salience boost + equivalents.zh sanitize
 ```
 
 ---
 
-## Next session priorities (Phase 4 — 마지막 큰 단계)
+## Phase 4 — Cloudflare Pages first deploy ✅ (2026-05-08)
 
-### Phase 4 entry checklist
-1. **Cloudflare Pages 프로젝트** 생성 (Pages connect to GitHub repo)
-2. **Build settings**:
-   - Build command: `npm run build`
-   - Build output: `build/`
-   - Node version: 20
-3. **Pages routing decision**:
-   - 옵션 A: 그대로 (Pages 정적 + Worker 별 도메인 — 현재 작동, 코드 변경 X)
-   - 옵션 B: Pages Functions 통합 (`functions/api/[[path]].ts` proxy → Worker)
-4. **Custom domain** (선택, ~$10-15/년)
-5. **CI workflow** (`.github/workflows/build.yml`)
-6. **Production SW 검증** (`stw-indices-v5` cache 정상 동작)
-7. **Lighthouse 재측정** (a11y 95 유지, perf 측정)
+### What's live now
+- **URL**: https://sanskrit-tibetan-workspace.pages.dev
+- **Edge**: ICN/APAC (server: cloudflare, cf-ray ICN)
+- **Build artifact**: 89 MB (9 indices + app shell + sw.js + _headers)
+- **Routing decision**: 옵션 A (Pages 정적 + Worker 별 도메인) — 코드 변경 0줄
+- **CSP fix** (`8664e9a`): connect-src allows stw-api.naspatterns.workers.dev
+  — without this Phase 5 long-tail fallback silent-fails in production
+- **CI** (`ba8e5f6`): pytest + vitest + svelte-check + dry-build (broken
+  static/indices symlink replaced with empty dir for CI build)
+
+### Verified
+- ✅ `curl -sI /` HTTP 200 + CSP includes Worker origin
+- ✅ `curl -sI /indices/headwords.txt.zst` cache-control max-age=31536000 immutable
+- ✅ `audit_d1_integrity` 8/8 ✅ (vajracchedika·surangama via Edge API)
+- ✅ Local CI sim (clone /tmp + remove symlink + npm run build) → 216 KB shell
+
+### Deploy command (every release)
+```bash
+npm run build
+npx wrangler pages deploy ./build \
+  --project-name=sanskrit-tibetan-workspace \
+  --branch=main \
+  --commit-message="<ASCII description>" \
+  --commit-hash=$(git rev-parse --short HEAD)
+```
+
+⚠ `--commit-message` 명시 필수 — wrangler가 한글/em-dash 포함 commit
+message에서 UTF-8 인코딩 오류 (`code: 8000111`)로 deploy fail.
+
+---
+
+## Next session priorities (잔여 + Phase 6/7)
+
+### Phase 4 잔여 (단순 검증, ~30-60분)
+1. **브라우저 SW 검증** — devtools Application → Cache Storage →
+   `stw-indices-v5` populated, network idle 후 indices Cache Hit
+2. **Lighthouse** Production URL 재측정 vs Phase 3.6 baseline
+   (a11y 95 / perf 45 / BP 100 / SEO 82)
+3. **Sentinel 50/215** production URL에서 재실행 (manual 또는 audit script)
+4. **Mobile 시뮬** (≤768px breakpoint)
+5. **Custom domain** (선택, ~$10-15/년)
+
+### Phase 6 Reader tab (~3-5일)
+- `/reader` route
+- 텍스트 import (paste/file)
+- 어휘 lookup overlay (click → tier0 entry modal)
+
+### Phase 7 Vocab tab (~3-5일)
+- 어휘 학습 (FSRS spaced repetition)
+- localStorage progress
+- export/import deck
 
 ### 참고 자료
-- `REPRODUCIBLE.md §9` — Phase 4 deploy preparation
-- `data/reports/audit-2026-04-30/audit-E-deploy.md §6` — 체크리스트
-- `CLAUDE.md §7` — 다음 세션 진입 가이드 (Phase 4)
+- `REPRODUCIBLE.md §10` — Phase 4 deploy 단계 + 검증 명령
+- `CLAUDE.md §7` — 다음 세션 진입 가이드
+- `ROADMAP.md §Phase 4` — 체크리스트 + 잔여
 
 — end —

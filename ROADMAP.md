@@ -498,46 +498,60 @@ main = `bf1a877`. 옵션 B 결정 (UI/UX + 코드 품질) + Phase 3.7 데이터 
 
 ---
 
-## Phase 4: 배포 + 운영 (다음, ~1-2일)
+## Phase 4: 배포 + 운영 ✅ first deploy (2026-05-08)
 
 **목표**: 프로덕션 배포, 사용자 점진 이전.
 
-### 4.1 배포
-- Cloudflare Pages 프로젝트 (Pages connect to GitHub repo)
-- Build settings:
-  - Build command: `npm run build`
-  - Build output: `build/`
-- 도메인 (선택): `workspace.haMsa.io` 또는 자동 `*.pages.dev`
-- Pages routes 결정:
-  - 옵션 A: 그대로 (Pages 정적 + Worker 별 도메인 — 현재 작동)
-  - 옵션 B: Pages Functions로 통합 (`functions/api/[[path]].ts` proxy)
-- v1과 병렬 운영 (별도 도메인 또는 `/v2`)
+### 4.1 배포 ✅
+- ✅ Cloudflare Pages 프로젝트 `sanskrit-tibetan-workspace` (ICN/APAC edge)
+- ✅ **Live**: https://sanskrit-tibetan-workspace.pages.dev
+- ✅ **Pages routing 결정**: 옵션 A 채택
+  (Pages 정적 + Worker 별 도메인 — 코드 변경 0줄)
+- ✅ **CSP fix** (`8664e9a`): `connect-src` allows
+  `https://stw-api.naspatterns.workers.dev` — Phase 3.6 P1-E2의 strict
+  CSP가 cross-origin Edge API를 차단했음. live 검증 중 발견 + 수정.
+- ✅ **Deploy method**: `wrangler pages deploy ./build` (manual/CI).
+  GitHub auto-build은 `static/indices` 심볼릭 링크가 깨져서
+  (`public/indices/` gitignored) 사용 불가 — 의도적.
+- ⏭️ Custom domain (선택, ~$10-15/년)
+- ⏭️ v1과 병렬 운영 결정 (별도 도메인 vs `/v2` redirect)
 
-### 4.2 CI/CD
-- GitHub Actions (`.github/workflows/build.yml`):
-  - PR: 빌드 + tests (pytest 79 + vitest 104) + svelte-check + audit_random_lookup
-  - main push: 자동 deploy to Pages (또는 Pages auto-deploy GitHub trigger)
-  - 데이터 변경 시 인덱스 재빌드 + cache bust (SW v6)
+### 4.2 CI/CD ✅
+- ✅ `.github/workflows/ci.yml` (commit `ba8e5f6`):
+  - **python-tests**: uv sync + pytest -q (79 ✅)
+  - **typescript-tests**: npm ci + vitest + svelte-check (104 + 258 ✅)
+  - **dry-build**: replace broken `static/indices` symlink with empty
+    dir → adapter-static build (216 KB shell, no indices)
+- ✅ Production deploys: `wrangler pages deploy ./build` (local-only —
+  indices 89 MB live on maintainer's machine)
+- ⏭️ Lighthouse 재측정 (Phase 3.6 baseline: a11y 95, perf 45)
 
-### 4.3 모니터링
-- Cloudflare Analytics 자동 (Pages free tier 포함)
-- Sentry (선택, 무료 5K req/월)
-- Web Vitals 대시보드 (Cloudflare Web Analytics)
+### 4.3 모니터링 ⏭️
+- ✅ Cloudflare Analytics 자동 (Pages free tier 포함, dashboard에서 확인)
+- ⏭️ Sentry (선택, 무료 5K req/월)
+- ⏭️ Web Vitals 대시보드 (Cloudflare Web Analytics)
 
-### 4.4 문서
-- ✅ `REPRODUCIBLE.md` 단계별 빌드 (이미 있음)
-- ✅ `PROJECT_STATUS.md` 종합 상태 (이미 있음)
+### 4.4 문서 ✅
+- ✅ `REPRODUCIBLE.md` §10: Phase 4 deploy 단계 (commit ba8e5f6+)
+- ✅ `PROJECT_STATUS.md` 종합 상태
+- ✅ `LICENSES.md` 148 dicts 라이선스 표
 - ⏭️ `docs/USER_GUIDE.md` 사용자 가이드
 - ⏭️ `docs/CONTRIBUTING.md` 개발자 가이드
-- ✅ `LICENSES.md` 148 dicts 라이선스 표
 
-### 4.5 사용자 이전
+### 4.5 사용자 이전 ⏭️
 - v1 홈페이지에 v2 배너 추가
 - 기존 검색 URL → v2 redirect (선택)
 - 한 달 후 v1 deprecation 공지
 
-**완료 기준**: v2 production URL에서 vajracchedikā 검색 → ✅ 결과 surface
-(local tier0 + Edge API + D1 통합 동작).
+### 4.6 잔여 검증 (next session)
+- ⏭️ 브라우저 SW (`stw-indices-v5`) 정상 동작 (devtools Application → Cache)
+- ⏭️ Lighthouse 재측정 vs Phase 3.6 baseline
+- ⏭️ Sentinel 50/215 production URL에서 재검증
+- ⏭️ Mobile 시뮬레이션 (≤768px breakpoint)
+
+**완료 기준 (4.1)**: ✅ v2 production URL에서 vajracchedikā 검색 →
+local tier0 (없음) → Edge API D1 fallback ✅ count=2 (audit_d1_integrity
+8/8 통과). CSP fix 적용 후.
 
 ---
 
