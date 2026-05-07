@@ -11,7 +11,11 @@
 // v4: Phase 3.6 P0-1 added reverse_meta (id → iast/dict for reverse hits UI).
 // v5: Phase 3.7 (Option A) added tier0-extended (top-10K..20K Sanskrit),
 //     plus headwords format change to 3-column TSV (norm\tiast\trank).
-const CACHE_NAME = 'stw-indices-v5';
+// v6: Phase 4 fix (2026-05-08) — tier0.msgpack.zst rebuilt at zstd level 19
+//     (was level 22) because fzstd 0.1.1 silently misdecodes level-22 streams.
+//     Also dropped snippet_medium cap from 350→200 chars to fit 25 MiB at
+//     level 19. Stale v5 cache would serve the broken file.
+const CACHE_NAME = 'stw-indices-v6';
 
 const PRECACHE_URLS = [
 	'/indices/tier0.msgpack.zst',

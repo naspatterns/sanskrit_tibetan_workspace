@@ -109,12 +109,16 @@ def build_index(
                 "tier": meta["tier"],
                 "id": entry["id"],
                 "snippet_short": body.get("snippet_short", ""),
-                # P0-3 (Phase 3.6): cap snippet_medium at 350 chars in tier0
-                # (JSONL keeps full ≤500, accessible via Phase 5 D1 Edge API).
-                # snippet_medium has median 88, p95 438, so 95% of entries
-                # are unaffected. Brings tier0 from 25.7 MiB (over Cloudflare
-                # 25 MiB cap) → ~24.5 MiB.
-                "snippet_medium": body.get("snippet_medium", "")[:350],
+                # P0-3 (Phase 3.6) + Phase 4 fix (2026-05-08): cap snippet_medium
+                # at 200 chars in tier0 (JSONL keeps full ≤500, full body
+                # available via Phase 5 D1 Edge API `/api/entry/:id`).
+                #
+                # Phase 4 size budget: must fit at zstd level 19 within
+                # Cloudflare 25 MiB single-file cap because fzstd 0.1.1 silently
+                # misdecodes level-22 streams (see compression call below).
+                # snippet_medium total raw was 46 MB at cap=350; cap=200 trims
+                # to ~26 MB → fits at level 19 with margin.
+                "snippet_medium": body.get("snippet_medium", "")[:200],
                 # ko outlier cap — a handful of long-form dictionary entries
                 # (e.g. Apte's 'a' definition) leaked 10-45K chars from v1
                 # body.ko. Cap at 2000 chars to preserve typical translations
@@ -164,12 +168,19 @@ def main() -> int:
           f"({total_entries:,} entries, avg {total_entries/max(1,len(index)):.1f}/hw)",
           file=sys.stderr)
 
-    # P0-3 (Phase 3.6): zstd level 22 + long-range mode (window 27) to fit
-    # Cloudflare Pages 25 MiB single-file limit. Tier0 at level 19 was
-    # 28.78 MB → level 22 alone 25.7 MB → +long-range targets ~24 MB.
-    # Decompression speed is unchanged (zstd asymmetry); fzstd 0.1.x supports
-    # standard window sizes.
-    raw, compressed = write_msgpack_zst(index, args.out, level=22, long_range=True)
+    # Phase 4 fix (2026-05-08): use zstd level 19, NOT 22 — fzstd 0.1.1
+    # silently misdecodes level-22 streams. The decompressed length matches
+    # but the contents are corrupted (verified by SHA256 mismatch vs Python
+    # `zstandard`), causing the JS msgpack decoder to explode with
+    # "The type of key must be string or number but object" because the byte
+    # misalignment shifts value-objects into key-positions. Python's
+    # `zstandard` library decodes level-22 correctly, which masked the bug
+    # at build time — it only surfaced in the live browser.
+    #
+    # To fit the Cloudflare Pages 25 MiB per-file limit at level 19, this
+    # script also caps snippet_medium at 200 chars (was 350). Full body is
+    # served by the Phase 5 Edge API at `/api/entry/:id`.
+    raw, compressed = write_msgpack_zst(index, args.out, level=19, long_range=False)
     print(f"\n✓ Wrote {args.out}")
     print(f"  raw msgpack:  {raw/1024/1024:.1f} MB")
     print(f"  compressed:   {compressed/1024/1024:.1f} MB ({compressed/raw:.1%})")
