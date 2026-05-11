@@ -45,6 +45,14 @@ jobs:
       - name: Run pytest
         run: uv run pytest -q
 
+      # Phase 4-C (2026-05-12): runtime invariants for the built index.
+      # We can't rebuild the index in CI (no v1 sqlite + indices are 89 MB,
+      # gitignored), but the audit script can run against the JSONL when
+      # available. Skipped gracefully if data/jsonl/ isn't present.
+      - name: Audit equivalents schema (best-effort)
+        if: hashFiles('data/jsonl/*.jsonl') != ''
+        run: uv run python -m scripts.audit_all_sources_schema --strict
+
   typescript-tests:
     name: vitest + svelte-check (104 + 258)
     runs-on: ubuntu-latest
