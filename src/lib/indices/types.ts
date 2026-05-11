@@ -132,3 +132,37 @@ export interface LoadProgress {
 	totalCompressedBytes: number;
 	totalDecompressedBytes: number;
 }
+
+// ─── Phase 4.1 Mobile Rescue ────────────────────────────────────────────
+// Empty bundle factory + key-set tracking so the app can render before
+// indices are loaded. Search engine sees empty Maps → returns no local
+// results → +page.svelte falls back to the Phase 5 Edge API.
+
+export function createEmptyBundle(): IndexBundle {
+	return {
+		tier0: new Map(),
+		tier0Bo: new Map(),
+		tier0Extended: new Map(),
+		equivalents: new Map(),
+		reverseEn: new Map(),
+		reverseKo: new Map(),
+		headwords: [],
+		declension: new Map(),
+		reverseMeta: { dicts: [], ids: new Map() }
+	};
+}
+
+/** Distinct loading tiers. Allow the UI to render and search via Edge API
+ * before *anything* is loaded, then progressively enrich. */
+export type LoadTier = 'core' | 'extra' | 'auxiliary';
+
+/** Maps each tier to the IndexBundle keys it owns. The `core` tier is the
+ * minimum set required to serve a useful local search: headword list (for
+ * prefix autocomplete) + tier0 (Sanskrit top-10K) + tier0Bo (Tibetan top-10K).
+ * `extra` adds Sanskrit 10K..20K + equivalents (Zone B cross-language).
+ * `auxiliary` adds reverse search (EN/KO gloss → entry) + Heritage Declension. */
+export const TIER_KEYS: Record<LoadTier, ReadonlyArray<keyof IndexBundle>> = {
+	core: ['headwords', 'tier0', 'tier0Bo'],
+	extra: ['tier0Extended', 'equivalents'],
+	auxiliary: ['reverseEn', 'reverseKo', 'reverseMeta', 'declension']
+};

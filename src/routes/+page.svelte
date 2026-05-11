@@ -4,7 +4,7 @@
 	import { goto } from '$app/navigation';
 	import { performSearch } from '$lib/stores/search';
 	import { entryLang, langBalancedTop, langBalancedRest, type EntryLang } from '$lib/search/lang';
-	import { isIndexLoaded, getIndexBundle } from '$lib/indices/store';
+	import { isCoreReady, getIndexBundle } from '$lib/indices/store';
 	import { chipStyle, styleFor } from '$lib/search/source-colors';
 	import { searchEdgeApi } from '$lib/search/apiSearch';
 	import type {
@@ -41,6 +41,12 @@
 
 	// Phase 5 — Edge API fallback. When local search misses (no tier0 hit
 	// AND no equivalents row), fetch from D1 Workers. Debounced + cancelable.
+	//
+	// Phase 4.1 (2026-05-08) — this same path also serves first-paint and
+	// mobile/lazy mode searches, because performSearch() now runs on an
+	// initially-empty bundle (result.exact undefined, result.equivalents [])
+	// so the condition below falls through and we hit the API. As tiers
+	// load, subsequent keystrokes start hitting local first.
 	let apiResults = $state<ApiSearchRow[] | null>(null);
 	let apiLoading = $state(false);
 	$effect(() => {
@@ -52,12 +58,15 @@
 		// Local hit? Skip API.
 		if (result?.exact || (result?.equivalents.length ?? 0) > 0) return;
 		const ctrl = new AbortController();
+		// 120ms debounce (down from 250ms) — mobile/lazy mode relies on the API
+		// for every query, so we want it to feel snappy. The Worker's own
+		// edge cache absorbs the duplicate keystrokes.
 		const id = window.setTimeout(async () => {
 			apiLoading = true;
 			const data = await searchEdgeApi(q, { limit: 20, signal: ctrl.signal });
 			apiLoading = false;
 			if (data && !ctrl.signal.aborted) apiResults = data.results;
-		}, 250);
+		}, 120);
 		return () => {
 			window.clearTimeout(id);
 			ctrl.abort();
@@ -104,7 +113,11 @@
 		};
 		window.addEventListener('popstate', onPop);
 
-		if (isIndexLoaded()) {
+		// Phase 4.1 (2026-05-08): bundle.tier0 may be empty on first mount
+		// (lazy mode or core tier still loading) — the iteration is a safe no-op.
+		// If the user landed via `?from=entry-id` before core loaded, they'll
+		// just see the search view; the deep-link UX gracefully degrades.
+		if (isCoreReady()) {
 			const fromId = page.url.searchParams.get('from');
 			if (fromId) {
 				for (const info of bundle.tier0.values()) {

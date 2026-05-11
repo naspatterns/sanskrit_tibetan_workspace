@@ -139,3 +139,68 @@ describe('recomputeOverall', () => {
 // so we can't build zstd fixtures inside the test runner without a separate
 // encoder dependency. End-to-end is verified via `npm run preview` + the
 // Phase 3.5b Track C sentinel demo (audit-C-demo-guide.md).
+
+// ─── Phase 4.1 Mobile Rescue ────────────────────────────────────────────
+// Verify the empty-bundle factory + tier-loading guards behave correctly
+// so the search engine can run before any tier has loaded.
+
+import { createEmptyBundle, TIER_KEYS } from './types';
+import { search } from '$lib/search/engine';
+
+describe('createEmptyBundle (Phase 4.1)', () => {
+	it('returns a bundle with every key present as an empty Map / array', () => {
+		const b = createEmptyBundle();
+		expect(b.tier0.size).toBe(0);
+		expect(b.tier0Bo.size).toBe(0);
+		expect(b.tier0Extended.size).toBe(0);
+		expect(b.equivalents.size).toBe(0);
+		expect(b.reverseEn.size).toBe(0);
+		expect(b.reverseKo.size).toBe(0);
+		expect(b.declension.size).toBe(0);
+		expect(b.headwords).toEqual([]);
+		expect(b.reverseMeta.dicts).toEqual([]);
+		expect(b.reverseMeta.ids.size).toBe(0);
+	});
+
+	it('search() does not throw against an empty bundle (drives Edge API fallback)', () => {
+		const b = createEmptyBundle();
+		// dharma is a valid normalised query — engine still has to run all
+		// its lookup paths without crashing. The engine returns null when
+		// the bundle has no headwords at all (treated by +page.svelte as
+		// "no local hit" → fires the Phase 5 Edge API path).
+		expect(() => search(b, 'dharma')).not.toThrow();
+		const out = search(b, 'dharma');
+		// null OR a result with no exact/equivalents is acceptable — both
+		// trigger the API fallback. What matters is no exception.
+		if (out !== null) {
+			expect(out.exact).toBeFalsy();
+			expect(out.equivalents).toEqual([]);
+		}
+	});
+});
+
+describe('TIER_KEYS (Phase 4.1)', () => {
+	it('partitions every IndexBundle key across exactly one tier', () => {
+		const all = [...TIER_KEYS.core, ...TIER_KEYS.extra, ...TIER_KEYS.auxiliary];
+		// no duplicates
+		expect(new Set(all).size).toBe(all.length);
+		// covers exactly the 9 keys of IndexBundle
+		expect(all.length).toBe(9);
+		const expected = [
+			'headwords',
+			'tier0',
+			'tier0Bo',
+			'tier0Extended',
+			'equivalents',
+			'reverseEn',
+			'reverseKo',
+			'reverseMeta',
+			'declension'
+		];
+		expect(new Set(all)).toEqual(new Set(expected));
+	});
+
+	it('core tier holds only the keys needed for first-screen autocomplete + top hits', () => {
+		expect(TIER_KEYS.core).toEqual(['headwords', 'tier0', 'tier0Bo']);
+	});
+});

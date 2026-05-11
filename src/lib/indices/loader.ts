@@ -1,19 +1,27 @@
-// Eager loader for all 5 indices (ADR-011 D). Fetches in parallel, decompresses
-// with fzstd, decodes with @msgpack/msgpack (or TextDecoder for headwords).
-// Returns an IndexBundle whose Map.get is the search engine's hot path (<1 ms).
+// Tiered loader for the index bundle (ADR-011 D + Phase 4.1 Mobile Rescue).
+//
+// Phase 4.1 (2026-05-08) — previously a single Promise.all over all 9 files
+// blocked the UI behind a splash for 7s on desktop / 45s on mobile 4G. Now
+// the loader exposes three tiers (core / extra / auxiliary) and the caller
+// can stage them. The shared store starts empty so the search page renders
+// immediately and routes early queries through the Edge API; loaded tiers
+// then enrich local search progressively.
 
 import { decompress } from 'fzstd';
 import { decode } from '@msgpack/msgpack';
-import type {
-	DeclensionRow,
-	EquivRow,
-	HeadwordEntry,
-	IndexBundle,
-	IndexLoadStatus,
-	LoadProgress,
-	ReverseMetaBundle,
-	Tier0Entry,
+import {
+	TIER_KEYS,
+	type DeclensionRow,
+	type EquivRow,
+	type HeadwordEntry,
+	type IndexBundle,
+	type IndexLoadStatus,
+	type LoadProgress,
+	type LoadTier,
+	type ReverseMetaBundle,
+	type Tier0Entry,
 } from './types';
+import { markTierLoaded, setBundleSlice } from './store';
 
 interface IndexSpec {
 	key: keyof IndexBundle;
@@ -131,58 +139,135 @@ export function recomputeOverall(status: IndexLoadStatus[]): LoadProgress['overa
 	return 'pending';
 }
 
-export async function loadAllIndices(
-	onProgressUpdate: (progress: LoadProgress) => void
-): Promise<IndexBundle> {
-	const status: IndexLoadStatus[] = INDICES.map((s) => ({
-		name: s.key,
-		stage: 'pending',
-		bytesFetched: 0,
-		compressedSize: 0,
-		decompressedSize: 0
-	}));
+/** Hydrate a decoded payload onto the live shared bundle. Keeps the
+ * object-to-Map / array-of-headwords / nested-reverseMeta plumbing in one
+ * place so callers don't need to know the per-key shape. */
+function applyToBundle(key: keyof IndexBundle, raw: unknown): void {
+	switch (key) {
+		case 'tier0':
+		case 'tier0Bo':
+		case 'tier0Extended':
+			setBundleSlice(key, objectToMap<Tier0Entry>(raw));
+			return;
+		case 'equivalents':
+			setBundleSlice('equivalents', objectToMap<EquivRow[]>(raw));
+			return;
+		case 'reverseEn':
+			setBundleSlice('reverseEn', objectToMap<string[]>(raw));
+			return;
+		case 'reverseKo':
+			setBundleSlice('reverseKo', objectToMap<string[]>(raw));
+			return;
+		case 'reverseMeta':
+			setBundleSlice('reverseMeta', parseReverseMeta(raw));
+			return;
+		case 'declension':
+			setBundleSlice('declension', objectToMap<DeclensionRow[]>(raw));
+			return;
+		case 'headwords':
+			setBundleSlice('headwords', parseHeadwords(raw as string));
+			return;
+	}
+}
 
-	const emit = () => {
-		const totalCompressedBytes = status.reduce((acc, s) => acc + s.compressedSize, 0);
-		const totalDecompressedBytes = status.reduce((acc, s) => acc + s.decompressedSize, 0);
+/** Internal: load one tier and stream progress. Resolves to the union of
+ * status rows so the caller can fold them into a global progress report. */
+async function loadTier(
+	tier: LoadTier,
+	allStatus: Map<keyof IndexBundle, IndexLoadStatus>,
+	onProgress: () => void
+): Promise<void> {
+	const keys = TIER_KEYS[tier];
+	const specs = INDICES.filter((s) => (keys as readonly (keyof IndexBundle)[]).includes(s.key));
+	await Promise.all(
+		specs.map(async (spec) => {
+			const status = allStatus.get(spec.key);
+			if (!status) return;
+			try {
+				const raw = await fetchAndDecode(spec, status, onProgress);
+				applyToBundle(spec.key, raw);
+				status.stage = 'done';
+				onProgress();
+			} catch (e) {
+				status.stage = 'error';
+				status.errorMessage = e instanceof Error ? e.message : String(e);
+				onProgress();
+				throw e;
+			}
+		})
+	);
+	markTierLoaded(tier);
+}
+
+/** Initialise per-key status rows for every known index. The map is shared
+ * across tiers so a single progress emit covers them all. */
+function initStatus(): Map<keyof IndexBundle, IndexLoadStatus> {
+	const m = new Map<keyof IndexBundle, IndexLoadStatus>();
+	for (const spec of INDICES) {
+		m.set(spec.key, {
+			name: spec.key,
+			stage: 'pending',
+			bytesFetched: 0,
+			compressedSize: 0,
+			decompressedSize: 0
+		});
+	}
+	return m;
+}
+
+function makeEmit(
+	status: Map<keyof IndexBundle, IndexLoadStatus>,
+	onProgressUpdate: (progress: LoadProgress) => void
+): () => void {
+	return () => {
+		const rows = Array.from(status.values());
+		const totalCompressedBytes = rows.reduce((acc, s) => acc + s.compressedSize, 0);
+		const totalDecompressedBytes = rows.reduce((acc, s) => acc + s.decompressedSize, 0);
 		onProgressUpdate({
-			status: status.map((s) => ({ ...s })),
-			overallStage: recomputeOverall(status),
+			status: rows.map((s) => ({ ...s })),
+			overallStage: recomputeOverall(rows),
 			totalCompressedBytes,
 			totalDecompressedBytes
 		});
 	};
+}
+
+/** Phase 4.1 staged loader. Tiers fire in priority order — core first so
+ * local search lights up for the typical headword query, then extra (Tibetan
+ * extended + cross-language equivalents), then auxiliary (reverse search +
+ * declension). Caller may invoke as `await loadTiered(['core'])` and let the
+ * rest happen in the background.
+ *
+ * Throws only if a tier was requested *and* every one of its files failed
+ * to load. Per-key failures surface via the per-index status row.
+ */
+export async function loadTiered(
+	tiers: ReadonlyArray<LoadTier>,
+	onProgressUpdate: (progress: LoadProgress) => void
+): Promise<void> {
+	const status = initStatus();
+	const emit = makeEmit(status, onProgressUpdate);
 	emit();
+	for (const tier of tiers) {
+		await loadTier(tier, status, emit);
+	}
+}
 
-	const results = await Promise.all(
-		INDICES.map((spec, i) => fetchAndDecode(spec, status[i], emit))
-	);
-
-	const [
-		tier0Raw,
-		tier0BoRaw,
-		tier0ExtendedRaw,
-		equivRaw,
-		revEnRaw,
-		revKoRaw,
-		revMetaRaw,
-		declRaw,
-		headwordsRaw
-	] = results;
-	const bundle: IndexBundle = {
-		tier0: objectToMap<Tier0Entry>(tier0Raw),
-		tier0Bo: objectToMap<Tier0Entry>(tier0BoRaw),
-		tier0Extended: objectToMap<Tier0Entry>(tier0ExtendedRaw),
-		equivalents: objectToMap<EquivRow[]>(equivRaw),
-		reverseEn: objectToMap<string[]>(revEnRaw),
-		reverseKo: objectToMap<string[]>(revKoRaw),
-		reverseMeta: parseReverseMeta(revMetaRaw),
-		declension: objectToMap<DeclensionRow[]>(declRaw),
-		headwords: parseHeadwords(headwordsRaw as string)
-	};
-
+/** Back-compat (Phase 3.1..3.7). Loads everything sequentially-by-tier so
+ * existing callers that just want a fully-loaded bundle still work, but
+ * now they don't block on auxiliary files before core is usable. */
+export async function loadAllIndices(
+	onProgressUpdate: (progress: LoadProgress) => void
+): Promise<IndexBundle> {
+	const status = initStatus();
+	const emit = makeEmit(status, onProgressUpdate);
 	emit();
-	return bundle;
+	await loadTier('core', status, emit);
+	await loadTier('extra', status, emit);
+	await loadTier('auxiliary', status, emit);
+	// The shared bundle has been mutated in place — return the live ref
+	// so callers using the return value continue to work.
+	return (await import('./store')).getIndexBundle();
 }
 
 /** Decode reverse_meta.msgpack.zst payload into a typed ReverseMetaBundle. */
