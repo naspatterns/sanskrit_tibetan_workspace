@@ -154,6 +154,21 @@ def _row_from_entry(entry: dict, slug: str) -> dict | None:
     if tib_val and _looks_like_ocr_noise(tib_val):
         del row["tib_wylie"]
 
+    # Phase 4-B audit (2026-05-12): generic column-type guard. If skt_iast
+    # contains CJK or Tibetan script the field is not Sanskrit — strip it
+    # rather than poison the search index. The yogacara source was the
+    # 67%-violation outlier (handled separately in fix_yogacarabhumi_columns.py)
+    # but hirakawa / nti-reader / bodkye-hamsa together had ~1044 stray rows
+    # too (OCR junk like 'aprameya-近ana' or cross-refs '15. See 兩 221'
+    # bleeding into the Sanskrit column). Likewise drop CJK that snuck into
+    # tib_wylie.
+    skt = row.get("skt_iast", "")
+    if skt and (_has_cjk(skt) or _has_tibetan_script(skt)):
+        del row["skt_iast"]
+    tib = row.get("tib_wylie", "")
+    if tib and _has_cjk(tib):
+        del row["tib_wylie"]
+
     if not any(row.get(c) for c in SEARCHABLE_CHANNELS):
         return None
     return row

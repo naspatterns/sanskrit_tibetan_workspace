@@ -10,6 +10,5 @@
   "license": "research-use",
   "source": "v1 bilex.sqlite/equiv table",
   "entry_count": 86899,
-  "exclude_from_search": true,
-  "exclude_reason": "Phase 4 audit (2026-05-12): 67% of rows have CJK or Tibetan chars in skt_iast column due to v1 extraction pipeline bug — column mapping confused source/target. Re-extraction queued for Phase B."
+  "phase4_fix": "2026-05-12: 79.8% of rows re-balanced via scripts/fix_yogacarabhumi_columns.py (swap_skt_zh 48,194 + drop_tib_from_skt 21,092 + drop_tib_from_zh 21,092 + merge_dual_cjk 82). Post-fix audit: 0 schema violations."
 }
