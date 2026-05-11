@@ -91,10 +91,20 @@ export function search(
 	// merge tier0 entries for each token. Useful for upaniṣadic mahāvākyas
 	// and short Sanskrit citations. Skip if exact already hit (single-word
 	// behaviour preserved).
+	//
+	// Phase 4 fix (2026-05-12): require at least TWO distinct tokens to
+	// hit. Previously a single token match was enough, which produced
+	// confusing results for typo'd compounds — e.g. typing `chos 'byung`
+	// with a smart quote (`chos ’byung`) used to fall back to the bare
+	// `chos` entry (59 definitions) and silently hide the fact that the
+	// user's specific compound wasn't found. With ≥2 required, near-misses
+	// fall through to the prefix/equivalents/API channels instead, which
+	// give clearer signals about what the user actually asked for.
 	if (!exact && iastKey.includes(' ')) {
+		const tokens = iastKey.split(/\s+/).filter(Boolean);
 		const multiSources: Tier0Entry[] = [];
 		const seenIasts = new Set<string>();
-		for (const token of iastKey.split(/\s+/).filter(Boolean)) {
+		for (const token of tokens) {
 			for (const map of [bundle.tier0, bundle.tier0Extended, bundle.tier0Bo]) {
 				const slot = map.get(token);
 				if (slot && !seenIasts.has(slot.iast)) {
@@ -104,7 +114,8 @@ export function search(
 				}
 			}
 		}
-		if (multiSources.length > 0) {
+		// Require ≥2 token matches; single-token hits are too noisy.
+		if (multiSources.length >= 2 && tokens.length >= 2) {
 			exact = {
 				iast: multiSources.map((s) => s.iast).join(' '),
 				entries: multiSources.flatMap((s) => s.entries)

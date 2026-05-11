@@ -148,4 +148,56 @@ describe('search engine', () => {
 		expect(r.durationMs).toBeGreaterThan(0);
 		expect(r.durationMs).toBeLessThan(50); // way more than enough headroom
 	});
+
+	// Phase 4 fix (2026-05-12) — multi-word fallback no longer triggers
+	// when only one token matches. Previously a smart-quoted "chos ’byung"
+	// missed the compound key, fell through to the fallback, hit just
+	// "chos", and silently returned 59 unrelated definitions.
+	it('multi-word fallback requires ≥2 token hits', () => {
+		const bundle = makeBundle();
+		bundle.tier0.set('chos', {
+			iast: 'chos',
+			entries: [
+				{
+					dict: 'tib-rangjung-yeshe',
+					short: 'RY',
+					priority: 20,
+					tier: 1,
+					id: 'tib-rangjung-yeshe-001',
+					snippet_short: 'dharma',
+					snippet_medium: '',
+					ko: '',
+					target_lang: 'en'
+				}
+			]
+		});
+		// Single token hit ('chos') — must NOT promote to exact.
+		const r = search(bundle, "chos ’byung"); // smart quote → '’byung' won't match
+		expect(r.exact).toBeNull();
+		// (the prefix channel may still surface something, that's fine —
+		// we just don't want a misleading "exact" match)
+	});
+
+	it('multi-word fallback DOES fire on a true 2-word match', () => {
+		const bundle = makeBundle();
+		const stubEntry = {
+			dict: 'apte-sanskrit-english',
+			short: 'Apte',
+			priority: 1,
+			tier: 1,
+			id: 'apte-sanskrit-english-002',
+			snippet_short: 'that',
+			snippet_medium: '',
+			ko: '',
+			target_lang: 'en'
+		};
+		bundle.tier0.set('tat', { iast: 'tat', entries: [stubEntry] });
+		bundle.tier0.set('tvam', {
+			iast: 'tvam',
+			entries: [{ ...stubEntry, id: 'apte-sanskrit-english-003' }]
+		});
+		const r = search(bundle, 'tat tvam'); // both tokens hit
+		expect(r.exact).not.toBeNull();
+		expect(r.exact?.iast).toBe('tat tvam');
+	});
 });

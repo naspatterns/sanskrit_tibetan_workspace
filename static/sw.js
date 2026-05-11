@@ -21,7 +21,12 @@
 //     synchronously before opening a new one, and (b) uses individual
 //     `cache.put` calls so a single failed fetch doesn't void the whole
 //     install. The fetch handler also self-heals on decode failure.
-const CACHE_NAME = 'stw-indices-v7';
+// v8: Phase 4 fix (2026-05-12) — smart-quote canonicalisation in
+//     normalize() means clients still on v7 mis-search Wylie like
+//     `chos 'byung` (smart quote silently routed to a `chos` fallback).
+//     Bumping invalidates the v7 cache so they pick up the corrected
+//     bundle on next load. Indices themselves are unchanged.
+const CACHE_NAME = 'stw-indices-v8';
 
 const PRECACHE_URLS = [
 	'/indices/tier0.msgpack.zst',
