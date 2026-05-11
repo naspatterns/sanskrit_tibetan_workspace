@@ -289,6 +289,14 @@
 			<span class="meta">역검색 {result.reverse.length}</span>
 			<span class="meta">완성 {result.partial.length}</span>
 			<span class="dim">· {result.detectedScript} · {result.durationMs.toFixed(2)}ms</span>
+			{#if result.query !== query.trim()}
+				<!-- Diagnostic (Phase 4): surfaces a desync between the
+				     input rune and the value the engine actually ran. Should
+				     never appear in normal operation. -->
+				<span class="dim" style="color:var(--danger)">
+					· DESYNC input={query.length}ch result={result.query.length}ch
+				</span>
+			{/if}
 		</div>
 
 		{#if !result.exact && result.equivalents.length === 0 && apiLoading}
