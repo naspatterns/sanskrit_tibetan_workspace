@@ -6,6 +6,8 @@
 	import { resolveDataMode } from '$lib/indices/detect';
 	import type { LoadProgress } from '$lib/indices/types';
 	import ProgressBanner from '$lib/components/ProgressBanner.svelte';
+	import SiteHeader from '$lib/components/SiteHeader.svelte';
+	import SiteFooter from '$lib/components/SiteFooter.svelte';
 	import '$lib/../styles/theme.css';
 	import { applyTheme, getStoredTheme } from '$lib/stores/theme';
 
@@ -53,7 +55,64 @@
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
+	<title>haMsa · Sanskrit-Tibetan Workspace</title>
+	<meta
+		name="description"
+		content="Sanskrit · Tibetan · Pali · Chinese · Korean multi-dictionary lexicon. 3.8M entries across 148 dictionaries."
+	/>
+	<link
+		rel="preconnect"
+		href="https://fonts.googleapis.com"
+		crossorigin="anonymous"
+	/>
+	<link
+		rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&display=swap"
+	/>
 </svelte:head>
 
-{@render children()}
+<div class="app-shell">
+	<div class="content">
+		<SiteHeader />
+		{@render children()}
+	</div>
+	<SiteFooter />
+</div>
 <ProgressBanner {progress} {mode} />
+
+<style>
+	.app-shell {
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
+	}
+	.content {
+		max-width: 760px;
+		margin: 0 auto;
+		padding: 1.25rem 1rem 0;
+		width: 100%;
+		flex: 1;
+	}
+	/* Subtle background flourish — a very soft radial accent in the top-right.
+	   Pure CSS, gradient is intentionally low-opacity so it doesn't compete
+	   with text. */
+	:global(body)::before {
+		content: '';
+		position: fixed;
+		inset: 0;
+		pointer-events: none;
+		z-index: -1;
+		background:
+			radial-gradient(
+				ellipse 800px 600px at 90% -10%,
+				var(--accent-soft) 0%,
+				transparent 60%
+			);
+		opacity: 0.45;
+	}
+	@media (max-width: 600px) {
+		.content {
+			padding: 0.75rem 0.85rem 0;
+		}
+	}
+</style>

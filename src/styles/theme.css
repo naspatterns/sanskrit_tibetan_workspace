@@ -91,3 +91,55 @@ body {
 		background-color 0.15s ease,
 		color 0.15s ease;
 }
+
+/* ─── Phase 4 UI polish (2026-05-12) ───────────────────────────────────
+ * Brand & layout tokens. Shadows are double-layered (close + ambient)
+ * for a "lifted card" feel without going heavy. Surface tokens are a
+ * touch off from --bg so cards subtly recede.
+ */
+:root {
+	--surface: oklch(0.985 0 0);
+	--surface-soft: oklch(0.97 0 0);
+	--accent-soft: oklch(0.95 0.04 255);
+	--shadow-close: 0 1px 2px rgba(15, 23, 42, 0.06);
+	--shadow-ambient: 0 8px 24px -8px rgba(15, 23, 42, 0.08);
+	--shadow-card: var(--shadow-close), var(--shadow-ambient);
+	--gradient-accent: linear-gradient(
+		135deg,
+		oklch(0.6 0.13 255) 0%,
+		oklch(0.55 0.16 290) 100%
+	);
+	--font-display: 'Noto Sans Devanagari', 'Apple SD Gothic Neo',
+		-apple-system, ui-serif, serif;
+	--radius-sm: 6px;
+	--radius-md: 10px;
+	--radius-lg: 14px;
+}
+
+:root[data-theme='dark'] {
+	--surface: oklch(0.21 0.006 250);
+	--surface-soft: oklch(0.24 0.006 250);
+	--accent-soft: oklch(0.3 0.06 255);
+	--shadow-close: 0 1px 2px rgba(0, 0, 0, 0.4);
+	--shadow-ambient: 0 8px 24px -8px rgba(0, 0, 0, 0.5);
+	--gradient-accent: linear-gradient(
+		135deg,
+		oklch(0.72 0.15 255) 0%,
+		oklch(0.7 0.16 290) 100%
+	);
+}
+
+@media (prefers-color-scheme: dark) {
+	:root[data-theme='auto'] {
+		--surface: oklch(0.21 0.006 250);
+		--surface-soft: oklch(0.24 0.006 250);
+		--accent-soft: oklch(0.3 0.06 255);
+		--shadow-close: 0 1px 2px rgba(0, 0, 0, 0.4);
+		--shadow-ambient: 0 8px 24px -8px rgba(0, 0, 0, 0.5);
+		--gradient-accent: linear-gradient(
+			135deg,
+			oklch(0.72 0.15 255) 0%,
+			oklch(0.7 0.16 290) 100%
+		);
+	}
+}

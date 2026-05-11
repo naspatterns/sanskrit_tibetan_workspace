@@ -481,9 +481,6 @@
 
 <style>
 	main {
-		max-width: 760px;
-		margin: 1.5rem auto;
-		padding: 0 1rem;
 		font-family: -apple-system, ui-sans-serif, sans-serif;
 		color: var(--fg);
 	}
@@ -491,7 +488,12 @@
 		display: flex;
 		gap: 0.5rem;
 		align-items: stretch;
-		margin-bottom: 1rem;
+		margin-bottom: 1.25rem;
+		padding: 0.55rem;
+		background: var(--surface);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-md);
+		box-shadow: var(--shadow-card);
 	}
 	.tabs {
 		display: flex;

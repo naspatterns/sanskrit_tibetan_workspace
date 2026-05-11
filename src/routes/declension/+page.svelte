@@ -111,9 +111,6 @@
 
 <style>
 	main {
-		max-width: 760px;
-		margin: 1.5rem auto;
-		padding: 0 1rem;
 		font-family: -apple-system, ui-sans-serif, sans-serif;
 		color: var(--fg);
 	}
@@ -233,10 +230,6 @@
 
 	/* Phase 3.6 — mobile responsive (≤768px). */
 	@media (max-width: 768px) {
-		main {
-			margin: 0.75rem auto;
-			padding: 0 0.75rem;
-		}
 		.topbar {
 			flex-wrap: wrap;
 			gap: 0.4rem;
