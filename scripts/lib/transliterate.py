@@ -271,8 +271,15 @@ def detect_and_convert_to_iast(s: str) -> str:
 def normalize(s: str) -> str:
     """NFD + strip combining marks + lowercase.
 
-    This MUST match the normalization in lookup.js (client side).
+    This MUST match the normalization in src/lib/search/transliterate.ts
+    (client side). Phase 4 fix (2026-05-12) — canonicalise typographic
+    quote characters (’ ‘ ʼ ′) to ASCII apostrophe before NFD so that
+    Tibetan Wylie like `chos 'byung` round-trips even when a source
+    document (or an iOS user) supplied smart quotes.
     """
+    # Smart quotes → ASCII apostrophe
+    for q in ('‘', '’', 'ʼ', '′'):
+        s = s.replace(q, "'")
     s = unicodedata.normalize("NFD", s)
     s = "".join(c for c in s if not unicodedata.combining(c))
     return s.lower().strip()

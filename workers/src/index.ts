@@ -50,8 +50,11 @@ function json(body: unknown, init: ResponseInit = {}): Response {
 
 function normalize(s: string): string {
 	// Match client `normalize()` in src/lib/search/transliterate.ts —
-	// NFD strip combining marks + lowercase + trim.
+	// canonical-quote replace + NFD strip combining marks + lowercase + trim.
+	// Phase 4 fix (2026-05-12): typographic quotes → ASCII apostrophe so
+	// Wylie like `chos 'byung` matches even when iOS smart-quoted the input.
 	return s
+		.replace(/[‘’ʼ′]/g, "'")
 		.normalize('NFD')
 		.replace(/\p{M}/gu, '')
 		.toLowerCase()

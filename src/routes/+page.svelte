@@ -134,8 +134,28 @@
 	});
 
 	function setQuery(next: string) {
+		// Phase 4 fix (2026-05-12): also sync the URL synchronously so the
+		// in-flight debounced effect (120 ms) doesn't race with a quick
+		// follow-up click; and bring focus back to the input so the user
+		// can refine the new query without reaching for it. Smart-quote
+		// canonicalisation is handled at the normalize layer (no need to
+		// pre-process `next` here — it might legitimately be a Wylie form
+		// like `chos 'byung` that we want to preserve verbatim in the URL).
 		query = next;
-		if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: 'smooth' });
+		if (typeof window !== 'undefined') {
+			window.scrollTo({ top: 0, behavior: 'smooth' });
+			inputEl?.focus();
+			// Optimistic URL sync — the debounced $effect will repeat this
+			// safely if `query` changes again before it fires.
+			try {
+				const url = new URL(window.location.href);
+				if (next.trim()) url.searchParams.set('q', next);
+				else url.searchParams.delete('q');
+				window.history.replaceState({}, '', url.pathname + url.search);
+			} catch {
+				/* non-fatal — debounced effect will catch up */
+			}
+		}
 	}
 
 	function dictFromEntryId(id: string): string {

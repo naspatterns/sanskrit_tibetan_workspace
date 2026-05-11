@@ -218,7 +218,19 @@ export function toIAST(s: string, script?: Script): string {
  */
 export function normalize(s: string): string {
 	if (!s) return '';
-	return s.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase().trim();
+	// Phase 4 fix (2026-05-12): iOS / macOS auto-substitute typographic
+	// single quotes `’` `‘` `ʼ` `′` for the ASCII apostrophe `'`. Tibetan
+	// Wylie uses the ASCII form (e.g. `chos 'byung`, `'gro ba`), and so
+	// do our on-disk indices. Without canonicalising back here, a query
+	// that went through smart-quote correction would miss the index and
+	// fall back to a useless prefix match like `chos`. Convert before the
+	// NFD/casefold pipeline so downstream comparisons line up.
+	return s
+		.replace(/[‘’ʼ′]/g, "'")
+		.normalize('NFD')
+		.replace(/\p{M}/gu, '')
+		.toLowerCase()
+		.trim();
 }
 
 /**

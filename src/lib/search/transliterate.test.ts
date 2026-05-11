@@ -127,6 +127,25 @@ describe('normalize (NFD + strip combining + lowercase + trim, no script conv)',
 	});
 	it('CJK passes through unchanged', () => expect(normalize('般若')).toBe('般若'));
 	it('empty → empty', () => expect(normalize('')).toBe(''));
+
+	// Phase 4 fix (2026-05-12) — smart quote canonicalisation. iOS / macOS
+	// auto-substitute ’ ‘ ʼ ′ for ASCII '. Without these we'd miss Wylie
+	// headwords like `chos 'byung` and fall back to a `chos`-only match.
+	it("right single quote ’ → ASCII '", () => {
+		expect(normalize("chos ’byung")).toBe("chos 'byung");
+	});
+	it("left single quote ‘ → ASCII '", () => {
+		expect(normalize("chos ‘byung")).toBe("chos 'byung");
+	});
+	it("modifier letter apostrophe ʼ → ASCII '", () => {
+		expect(normalize("chos ʼbyung")).toBe("chos 'byung");
+	});
+	it("prime ′ → ASCII '", () => {
+		expect(normalize("chos ′byung")).toBe("chos 'byung");
+	});
+	it('ASCII apostrophe passthrough', () => {
+		expect(normalize("chos 'byung")).toBe("chos 'byung");
+	});
 });
 
 describe('normalizeHeadword (full Sanskrit pipeline)', () => {
