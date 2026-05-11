@@ -170,7 +170,20 @@
 		if (priorityMax < 100) xs = xs.filter((e) => e.priority <= priorityMax);
 		return xs;
 	});
-	const zoneCEntries = $derived(langBalancedTop(filteredEntries, 3));
+	// Phase 4 fix (2026-05-12): a previous bug surfaced where users saw
+	// FilterBar reporting "56 / 56" but the entries section disappeared —
+	// the lang-balanced grouper was returning [] for an entry set that
+	// shouldn't have been empty. As a defensive fallback, if the balanced
+	// top is empty while filteredEntries isn't, just use the first 12
+	// filteredEntries directly so the user always sees the dictionary
+	// entries they expect.
+	const zoneCEntries = $derived.by(() => {
+		const balanced = langBalancedTop(filteredEntries, 3);
+		if (balanced.length === 0 && filteredEntries.length > 0) {
+			return filteredEntries.slice(0, 12);
+		}
+		return balanced;
+	});
 	const zoneDEntries = $derived(langBalancedRest(filteredEntries, 3));
 
 	// 3.2.2 — autocomplete suggestions (debounced via timer below).
