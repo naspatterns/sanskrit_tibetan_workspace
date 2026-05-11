@@ -26,6 +26,7 @@ weighting — that script filters role∈{equivalents, thesaurus} out.
 from __future__ import annotations
 
 import argparse
+import re
 import sys
 from collections import defaultdict
 from pathlib import Path
@@ -90,6 +91,29 @@ def _has_tibetan_script(s: str) -> bool:
     return any('ༀ' <= ch <= '࿿' for ch in s)
 
 
+# Phase 4 audit (2026-05-12): OCR noise detection for tib_wylie.
+# `equiv-tib-chn-great` was OCR-extracted from a PDF and 232 rows survived
+# the Phase 2.5 spawn cleanup with garbage like `[\' -"]6[ ° ]67218888498617`
+# in tib_wylie. Valid Wylie is mostly [a-z\s\-\']+ with occasional digits
+# (verse refs). Reject rows where the Wylie field is dominated by OCR
+# artifact glyphs (°›ˆ‹–— etc.) or has fewer than 2 consecutive letters.
+_OCR_NOISE_CHARS = re.compile(r'[°›ˆ‹‒–—„‟]')
+_WYLIE_LETTER_RUN = re.compile(r'[a-zA-Z]{2,}')
+
+def _looks_like_ocr_noise(wylie: str) -> bool:
+    """True if a tib_wylie value reads as OCR garbage rather than Wylie."""
+    if not wylie:
+        return False
+    if _OCR_NOISE_CHARS.search(wylie):
+        return True
+    # No 2-letter run anywhere → almost certainly not Wylie.
+    if not _WYLIE_LETTER_RUN.search(wylie):
+        return True
+    # Brackets dominating the string (`[...]N[...]N` patterns from page refs).
+    bracket_count = wylie.count('[') + wylie.count(']')
+    return bracket_count >= 4 and len(wylie) < 60
+
+
 def _row_from_entry(entry: dict, slug: str) -> dict | None:
     """Project a JSONL entry's body.equivalents into a flat row.
 
@@ -120,6 +144,15 @@ def _row_from_entry(entry: dict, slug: str) -> dict | None:
             # Tibetan-in-zh also have proper tib_wylie set).
             pass
         del row["zh"]
+
+    # Phase 4 audit (2026-05-12): drop OCR-noise Wylie. ~232 rows in
+    # equiv-tib-chn-great had garbage like `[\' -"]6[ ° ]67218888498617[-]4`
+    # in tib_wylie after the Phase 2.5 cleanup spawn. Strip the field here
+    # rather than rejecting the whole row — the zh side is often legitimate
+    # and worth keeping as a one-way Chinese index entry.
+    tib_val = row.get("tib_wylie", "")
+    if tib_val and _looks_like_ocr_noise(tib_val):
+        del row["tib_wylie"]
 
     if not any(row.get(c) for c in SEARCHABLE_CHANNELS):
         return None

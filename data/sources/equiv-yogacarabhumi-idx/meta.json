@@ -9,5 +9,7 @@
   "direction": "skt-to-tib-zh",
   "license": "research-use",
   "source": "v1 bilex.sqlite/equiv table",
-  "entry_count": 86899
+  "entry_count": 86899,
+  "exclude_from_search": true,
+  "exclude_reason": "Phase 4 audit (2026-05-12): 67% of rows have CJK or Tibetan chars in skt_iast column due to v1 extraction pipeline bug — column mapping confused source/target. Re-extraction queued for Phase B."
 }

@@ -217,7 +217,7 @@
 				bind:this={inputEl}
 				type="search"
 				bind:value={query}
-				placeholder="dharma · धर्म · chos · 般若 · 법    (/ 누르면 포커스)"
+				placeholder="dharma · धर्म · chos · 法 · 법    (/ 누르면 포커스)"
 				autocomplete="off"
 				autocorrect="off"
 				autocapitalize="off"
