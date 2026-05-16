@@ -47,3 +47,42 @@ export async function searchEdgeApi(
 		return null;
 	}
 }
+
+// Sprint 1 A4 — Edge-served autocomplete for lazy-mode users. Local
+// autocomplete reads from `bundle.headwords` which is part of the core
+// tier; lazy users never load that file so the dropdown is empty until
+// a query lands. This RPC closes the gap.
+
+export interface AutocompleteEdgeItem {
+	norm: string;
+	iast: string;
+}
+
+export interface AutocompleteEdgeResponse {
+	prefix: string;
+	count: number;
+	results: AutocompleteEdgeItem[];
+}
+
+export async function autocompleteEdgeApi(
+	prefix: string,
+	options: SearchEdgeOptions = {}
+): Promise<AutocompleteEdgeResponse | null> {
+	const trimmed = prefix.trim();
+	if (trimmed.length < 2) return null;
+	const limit = Math.min(20, Math.max(1, options.limit ?? 10));
+	const url = `${API_ORIGIN}/api/autocomplete/${encodeURIComponent(trimmed)}?limit=${limit}`;
+	try {
+		const res = await fetch(url, { signal: options.signal });
+		if (!res.ok) {
+			console.warn(`[apiSearch] autocomplete HTTP ${res.status} for ${trimmed}`);
+			return null;
+		}
+		const data = (await res.json()) as AutocompleteEdgeResponse;
+		return data;
+	} catch (err) {
+		if (err instanceof Error && err.name === 'AbortError') return null;
+		console.warn('[apiSearch] autocomplete fetch failed:', err);
+		return null;
+	}
+}

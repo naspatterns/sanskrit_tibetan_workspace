@@ -1,9 +1,11 @@
 // Edge API — Phase 5 D1 lookup fallback for SvelteKit client.
 //
 // Endpoints:
-//   GET /api/search/:norm       → exact + prefix match, top-20 entries
-//   GET /api/entry/:id          → single entry by id
-//   GET /api/health             → liveness probe
+//   GET /api/search/:norm           → exact + prefix match, top-20 entries
+//   GET /api/entry/:id              → single entry by id
+//   GET /api/autocomplete/:prefix   → top-10 unique headwords by priority
+//                                     (Sprint 1 A4 — lazy-mode autocomplete)
+//   GET /api/health                 → liveness probe
 //
 // CORS: allows same-origin (SvelteKit dev) and Pages production deploy.
 // Cache: public, max-age=86400 (1 day) on successful responses.
@@ -103,6 +105,38 @@ async function searchEntries(env: Env, q: string, limit = 20): Promise<EntryRow[
 	return rows;
 }
 
+/** Sprint 1 A4 — Edge-side autocomplete for lazy-mode users.
+ *
+ * Local search runs on `bundle.headwords` (sorted HeadwordEntry array).
+ * Lazy-mode users never load that file, so autocomplete was inert. This
+ * D1 query returns the top-10 unique headwords whose `headword_norm`
+ * starts with the prefix, ordered by best-priority entry under each
+ * group so the rare-but-popular wins over many-but-obscure.
+ *
+ * Index: idx_norm on (headword_norm). GROUP BY uses the same index for
+ * the leftmost prefix scan. With LIMIT 10 this stays sub-50ms even for
+ * common prefixes like "dha". */
+interface AutocompleteRow {
+	norm: string;
+	iast: string;
+}
+
+async function autocomplete(env: Env, prefix: string, limit = 10): Promise<AutocompleteRow[]> {
+	const norm = normalize(prefix);
+	if (!norm || norm.length < 2) return []; // pathological prefixes blocked
+
+	const upper = norm + '￿';
+	const sql =
+		'SELECT headword_norm AS norm, MIN(headword_iast) AS iast ' +
+		'FROM entries ' +
+		'WHERE headword_norm >= ?1 AND headword_norm < ?2 ' +
+		'GROUP BY headword_norm ' +
+		'ORDER BY MIN(priority) ASC, headword_norm ASC ' +
+		'LIMIT ?3';
+	const res = await env.DB.prepare(sql).bind(norm, upper, limit).all<AutocompleteRow>();
+	return res.results ?? [];
+}
+
 async function getEntry(env: Env, id: string): Promise<EntryRow | null> {
 	const r = await env.DB.prepare(
 		'SELECT id, headword_norm, headword_iast, dict_slug, priority, ' +
@@ -144,6 +178,31 @@ export default {
 				return json(
 					{ query: q, count: results.length, results },
 					{ headers: { 'Cache-Control': results.length > 0 ? CACHE_OK : CACHE_404 } }
+				);
+			} catch (e) {
+				return json({ error: String(e) }, { status: 500 });
+			}
+		}
+
+		// /api/autocomplete/:prefix — Sprint 1 A4
+		if (path.startsWith('/api/autocomplete/')) {
+			const prefix = decodeURIComponent(path.slice('/api/autocomplete/'.length));
+			if (!prefix) return json({ error: 'Empty prefix' }, { status: 400 });
+			const limit = Math.min(20, Math.max(1, Number(url.searchParams.get('limit') ?? '10')));
+			try {
+				const results = await autocomplete(env, prefix, limit);
+				return json(
+					{ prefix, count: results.length, results },
+					{
+						headers: {
+							// Autocomplete responses change frequently as users explore
+							// the prefix space; keep CDN cache short (5 min) but allow
+							// the browser to reuse for the same exact keystroke
+							// (StreamlitCache scenario). 300s is comfortably above the
+							// typical typing-debounce dwell time.
+							'Cache-Control': 'public, max-age=300, s-maxage=300'
+						}
+					}
 				);
 			} catch (e) {
 				return json({ error: String(e) }, { status: 500 });

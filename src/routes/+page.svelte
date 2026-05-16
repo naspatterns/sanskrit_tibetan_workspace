@@ -8,7 +8,7 @@
 	import { loadTiered } from '$lib/indices/loader';
 	import { resolveDataMode } from '$lib/indices/detect';
 	import { chipStyle, styleFor } from '$lib/search/source-colors';
-	import { searchEdgeApi } from '$lib/search/apiSearch';
+	import { searchEdgeApi, autocompleteEdgeApi } from '$lib/search/apiSearch';
 	import type {
 		ApiSearchRow,
 		EquivRow,
@@ -243,9 +243,49 @@
 	});
 	const zoneDEntries = $derived(langBalancedRest(filteredEntries, 3));
 
-	// 3.2.2 — autocomplete suggestions (debounced via timer below).
+	// Sprint 1 A4 — lazy-mode autocomplete fallback. Local autocomplete reads
+	// from bundle.headwords (core tier). Lazy users never load that file, so
+	// when local matches come back empty we ask the Edge API to fill the
+	// dropdown. Cancels stale requests when the query changes faster than the
+	// network resolves; the 80ms debounce hides per-keystroke RTT.
+	let apiPartial = $state<HeadwordEntry[]>([]);
+	$effect(() => {
+		const q = query.trim();
+		// Reset whenever the query changes so a stale list never lingers.
+		apiPartial = [];
+		if (!q || q.length < 2) return;
+		// Skip Edge call when local autocomplete already has matches —
+		// `result.partial` is populated whenever headwords loaded into bundle.
+		if (result && result.partial.length > 0) return;
+		const ctrl = new AbortController();
+		const id = window.setTimeout(async () => {
+			const data = await autocompleteEdgeApi(q, { limit: 10, signal: ctrl.signal });
+			if (!data || ctrl.signal.aborted) return;
+			apiPartial = data.results.map((r) => ({
+				norm: r.norm,
+				iast: r.iast,
+				// Long-tail rank + empty upasarga so it sorts after any local hits
+				// when the two later merge (rare; only if headwords finishes
+				// loading while the API call is in flight).
+				rank: 999_999,
+				upasarga: ''
+			}));
+		}, 80);
+		return () => {
+			window.clearTimeout(id);
+			ctrl.abort();
+		};
+	});
+
+	// 3.2.2 — autocomplete suggestions (debounced via timer below). Sprint 1
+	// A4 adds the API fallback path: when local `result.partial` is empty we
+	// surface `apiPartial` from the Edge API instead.
 	const autocompleteItems = $derived<HeadwordEntry[]>(
-		query.trim() && result ? result.partial.slice(0, 12) : []
+		query.trim() && result
+			? result.partial.length > 0
+				? result.partial.slice(0, 12)
+				: apiPartial.slice(0, 12)
+			: []
 	);
 	const showAutocomplete = $derived(
 		inputFocused && autocompleteItems.length > 0 && query.trim().length > 0
