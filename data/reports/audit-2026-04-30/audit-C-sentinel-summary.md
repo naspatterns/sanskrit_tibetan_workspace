@@ -59,7 +59,7 @@
 | 36 | `法` | zh-reverse | zh | dharma | _1966 dharma; vidhi; bhava \| 617290 anga; artha; akara; agam | ✅ |
 | 37 | `空` | zh-reverse | zh | śūnyatā \| śūnya | śūnyatā \| antari-kṣa \| nabha \| vandhya \| ākāśa | ✅ |
 | 38 | `菩薩` | zh-reverse | zh | bodhisattva | bodhisattva | ✅ |
-| 39 | `涅槃` | zh-reverse | zh | nirvāṇa | nirvāṇa \| 涅槃 \| nirvāṇa; nirvṛti; parinirvṛtaḥ; nirvāṇa-(bhūm | ✅ |
+| 39 | `涅槃` | zh-reverse | zh | nirvāṇa | nirvāṇa \| nirvṛti \| MYA NGAN LAS 'DA' BA \| MYA NGAN LAS 'DAS | ✅ |
 | 40 | `如來` | zh-reverse | zh | tathāgata | tathāgataḥ \| tathāgata | ✅ |
 | 41 | `mahābhārata` | edge | skt | mahābhārata | mahābhārata | ✅ |
 | 42 | `jagannātha` | edge | skt | jagannātha | jagannātha | ✅ |

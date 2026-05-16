@@ -1,8 +1,8 @@
-# PROJECT_STATUS.md — Sanskrit-Tibetan Workspace v2 (state at 2026-05-08)
+# PROJECT_STATUS.md — Sanskrit-Tibetan Workspace v2 (state at 2026-05-16)
 
-**Repository commit**: `ba8e5f6` (main)
-**Phases complete**: 0, 1, 2, 2.5, 3.1, 3.2, 3.3, 3.4, 3.5, 3.5b, 3.6, **3.7 (with 5+1 follow-ups)**, **5 (Edge API + D1)**, **4 (Cloudflare Pages first deploy)**
-**Phases pending**: 6 (Reader), 7 (Vocab) — 잔여 검증: SW + Lighthouse
+**Repository commit**: `0b041ec` (main)
+**Phases complete**: 0, 1, 2, 2.5, 3.1, 3.2, 3.3, 3.4, 3.5, 3.5b, 3.6, **3.7 (with 5+1 follow-ups)**, **5 (Edge API + D1)**, **4 (Cloudflare Pages first deploy)**, **Sprint 1 (perf overhaul — Lighthouse 45→85 desktop / 96 mobile)**
+**Phases pending**: 6 (Reader), 7 (Vocab)
 **Production**: https://sanskrit-tibetan-workspace.pages.dev
 
 ---
@@ -30,6 +30,10 @@ cold / ~50 ms cached** for D1 fallback (Korea→ICN edge).
 | Test suite | 79 pytest + 104 vitest = 183 | all green | ✅ |
 | TypeScript strict | 0 errors / 258 files | 0 | ✅ |
 | Lighthouse a11y | 95 / 100 | ≥90 | ✅ |
+| **Lighthouse perf (desktop)** | **85 / 100** (was 45) | ≥80 | ✅ |
+| **Lighthouse perf (mobile)** | **96 / 100** (was 45) | ≥80 | ✅ |
+| **TBT (desktop)** | **205 ms** (was ~3000 ms) | <300 ms | ✅ |
+| **TBT (mobile)** | **0 ms** (lazy mode) | <300 ms | ✅ |
 | Cloudflare 25 MiB cap | All 9 indices fit | each ≤25 | ✅ |
 | **D1 free tier headroom** | **780MB / 5GB · <100 req/일** | <80% | ✅ |
 
@@ -228,8 +232,15 @@ Total: **183 tests, all green**.
 - `frequency.py`, `build_tier0.py`, `build_reverse_index.py` are
   single-process. Multiprocessing.Pool would yield 3-5× speedup.
   Not blocking — total build time ~5 min.
-- Decompression on main thread; Web Worker offload for Lighthouse
-  Performance ≥80 (currently 45 with cold-load splash).
+- ~~Decompression on main thread; Web Worker offload for Lighthouse
+  Performance ≥80 (currently 45 with cold-load splash).~~ **Resolved
+  in Sprint 1 A1 (commit `495937d`)** — score now 85 desktop / 96
+  mobile (see `data/reports/audit-2026-04-30/audit-sprint1-lighthouse.md`).
+- Edge API autocomplete results sort by `priority` only; ties fall
+  back to alphabetical. Adding a `rank` column to D1 (mirror of
+  headwords.txt rank field) would lift `dharma` above `dha`, `dhah` …
+  in the lazy-mode autocomplete dropdown. Not blocking — lazy mode
+  users still get *working* autocomplete after Sprint 1 A4.
 
 ---
 
@@ -253,16 +264,16 @@ For full rebuild from v1 SQLite (~10 minutes): see `REPRODUCIBLE.md`.
 ## Recent commits (last 10)
 
 ```
+0b041ec  fix(Sprint 1): preload hints in app.html, not svelte:head (SPA fallback)
+9c54a71  docs(Sprint 1 C5): document HTTP/3 + Early Hints activation on Cloudflare
+c749a54  perf(Sprint 1 A4): Edge API autocomplete — /api/autocomplete/:prefix
+3cb73e5  perf(Sprint 1 A6): focus prefetch — lazy mode warms core tier on first input
+9f6ff58  perf(Sprint 1 A5): self-host Noto Sans Devanagari (Google Fonts removed)
+0c68ed8  perf(Sprint 1 A3): reverse_meta lazy load (auxiliary → on-demand)
+198caaf  perf(Sprint 1 A2): static preload of core tier indices in HTML head
+495937d  perf(Sprint 1 A1): offload fzstd decompress + msgpack decode to module Worker
 ba8e5f6  ci(Phase 4): GitHub Actions — pytest + vitest + svelte-check + dry-build
 8664e9a  fix(Phase 4): CSP allow Worker API origin for cross-origin Edge fetch
-6c083d8  docs: Phase 5 종결 반영 — ROADMAP/PROJECT_STATUS/REPRODUCIBLE 동기화
-c615b0a  feat(Phase 5): Edge API + D1 — long-tail entries via Cloudflare Workers
-7f91dda  docs: PROJECT_STATUS.md + REPRODUCIBLE.md — 총체적 점검 + 재현 문서
-64eb0ee  feat: upasarga tagging (Depth 2) — Sanskrit 23 + Tibetan 30 canonical prefixes
-559393a  feat: Phase 3.7 5 follow-ups — Sentinel 50/50 (100%), 200/200 (95.5%)
-4cac0cb  feat: EN synonym injection — EN reverse precision 9/15 → 15/15 (100%)
-e4c8f0f  feat: KO synonym injection — KO reverse precision 4/15 → 15/15 (100%)
-85ddafb  feat: audit_sentinel_50.py — 50 query 자동 평가 (Phase 3.7 baseline)
 ```
 
 ---
@@ -300,16 +311,24 @@ message에서 UTF-8 인코딩 오류 (`code: 8000111`)로 deploy fail.
 
 ---
 
-## Next session priorities (잔여 + Phase 6/7)
+## Next session priorities (Sprint 2 / Phase 6 / Phase 7)
 
-### Phase 4 잔여 (단순 검증, ~30-60분)
-1. **브라우저 SW 검증** — devtools Application → Cache Storage →
-   `stw-indices-v5` populated, network idle 후 indices Cache Hit
-2. **Lighthouse** Production URL 재측정 vs Phase 3.6 baseline
-   (a11y 95 / perf 45 / BP 100 / SEO 82)
+### Sprint 2 (perf — optional, gates on real-user metrics)
+- **B1** Top-1K instant tier — push desktop TTI < 1.0 s
+- **B2** zstd-wasm replacing fzstd — combined with A1 worker offload,
+  push desktop TBT below 100 ms
+- **B3** SW manifest.json — partial index updates instead of full
+  88 MB re-cache on every cache bump
+- **B4** D1 covering index `(headword_norm, priority)` — shave 100-
+  200 ms off Edge API cold path
+
+### Phase 4 잔여 (verify on real users, ~30 min)
+1. **브라우저 SW 검증** — DevTools Application → Cache Storage →
+   `stw-indices-v8` populated, network idle 후 indices Cache Hit
+2. ~~**Lighthouse**~~ ✅ Done — see Sprint 1 commit `0b041ec` /
+   `audit-sprint1-lighthouse.md`. Desktop 85, Mobile 96.
 3. **Sentinel 50/215** production URL에서 재실행 (manual 또는 audit script)
-4. **Mobile 시뮬** (≤768px breakpoint)
-5. **Custom domain** (선택, ~$10-15/년)
+4. **Custom domain** (선택, ~$10-15/년)
 
 ### Phase 6 Reader tab (~3-5일)
 - `/reader` route

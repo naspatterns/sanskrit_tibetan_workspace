@@ -1,0 +1,78 @@
+{
+  "desktop": {
+    "score": 85,
+    "metrics": {
+      "first-contentful-paint": {
+        "ms": 1129.0,
+        "display": "1.1 s"
+      },
+      "largest-contentful-paint": {
+        "ms": 1384.8,
+        "display": "1.4 s"
+      },
+      "speed-index": {
+        "ms": 1727.4,
+        "display": "1.7 s"
+      },
+      "total-blocking-time": {
+        "ms": 204.5,
+        "display": "200 ms"
+      },
+      "cumulative-layout-shift": {
+        "ms": 0,
+        "display": "0"
+      },
+      "interactive": {
+        "ms": 1433.8,
+        "display": "1.4 s"
+      },
+      "max-potential-fid": {
+        "ms": 171.5,
+        "display": "170 ms"
+      }
+    },
+    "env": {
+      "lighthouseVersion": "13.3.0",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/",
+      "fetchTime": "2026-05-16T08:16:04.288Z"
+    }
+  },
+  "mobile": {
+    "score": 96,
+    "metrics": {
+      "first-contentful-paint": {
+        "ms": 1864.9,
+        "display": "1.9 s"
+      },
+      "largest-contentful-paint": {
+        "ms": 2615.9,
+        "display": "2.6 s"
+      },
+      "speed-index": {
+        "ms": 1864.9,
+        "display": "1.9 s"
+      },
+      "total-blocking-time": {
+        "ms": 0,
+        "display": "0 ms"
+      },
+      "cumulative-layout-shift": {
+        "ms": 0,
+        "display": "0"
+      },
+      "interactive": {
+        "ms": 2615.9,
+        "display": "2.6 s"
+      },
+      "max-potential-fid": {
+        "ms": 47,
+        "display": "50 ms"
+      }
+    },
+    "env": {
+      "lighthouseVersion": "13.3.0",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/",
+      "fetchTime": "2026-05-16T08:16:20.609Z"
+    }
+  }
+}
