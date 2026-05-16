@@ -423,6 +423,36 @@ curl -sI -A "Mozilla/5.0 verify" \
 uv run python -m scripts.audit_d1_integrity
 ```
 
+### 10.8 HTTP/3 + Early Hints (Sprint 1 C5)
+
+Cloudflare Pages serves HTTP/2 by default. Enabling HTTP/3 saves 1 RTT on
+connection establishment (~50-100ms on first visit), and Early Hints (HTTP
+103) lets the CDN advise the browser to start preloading critical assets
+before the origin response finalises. Together these knock ~100-200ms off
+TTFB for a fresh user.
+
+**HTTP/3 (QUIC)** — dashboard-only, no code change:
+1. Cloudflare dashboard → your zone → Network
+2. Toggle **HTTP/3 (with QUIC)** to ON (default for most zones since 2022)
+3. Toggle **0-RTT Connection Resumption** to ON
+4. Verify: `curl -sI --http3 https://sanskrit-tibetan-workspace.pages.dev/ | head -1`
+   → `HTTP/3 200`
+5. Also visible via `alt-svc: h3=":443"; ma=86400` header on HTTP/2 responses
+
+**Early Hints (103)** — Cloudflare Pages auto-emits these for `<link
+rel="preload">` and `<link rel="preconnect">` declarations in the document
+head. Our +layout.svelte already declares preload hints (Sprint 1 A2);
+Cloudflare will mirror them as HTTP 103 responses. Enable via:
+
+1. Cloudflare dashboard → your zone → Speed → Optimization → Early Hints
+2. Toggle **Early Hints** to ON
+3. Verify in browser DevTools → Network → first request: a 103 response
+   precedes the 200 with `Link:` headers naming the preload URLs
+
+Both are zero-cost on free tier. No code change required after the
+dashboard toggles. If the dashboard already shows them as ON (account
+default) no action needed.
+
 ---
 
 ## 11. Known reproducibility caveats
