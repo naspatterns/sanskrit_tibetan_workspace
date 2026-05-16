@@ -69,6 +69,47 @@
 		rel="stylesheet"
 		href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&display=swap"
 	/>
+	<!--
+		Sprint 1 A2 (2026-05-16): preload the three `core` tier index files in
+		parallel with the JS bundle. HTTP/2 multiplex pays the latency tax once
+		and shaves ~200-500ms off TTI on desktop.
+
+		`media="(min-width: 769px)"` mirrors detect.ts `isProbablySlow()` — the
+		same threshold that flips users to lazy mode. Phones / narrow viewports
+		skip the preload entirely so we don't waste their data plan downloading
+		~38 MB they're not going to use.
+
+		`fetchpriority="low"` keeps these from competing with the JS bundle for
+		the first connection slots; browsers will still saturate the pipe with
+		them in parallel afterwards.
+	-->
+	<link
+		rel="preload"
+		href="/indices/headwords.txt.zst"
+		as="fetch"
+		type="application/octet-stream"
+		crossorigin="anonymous"
+		media="(min-width: 769px)"
+		fetchpriority="low"
+	/>
+	<link
+		rel="preload"
+		href="/indices/tier0.msgpack.zst"
+		as="fetch"
+		type="application/octet-stream"
+		crossorigin="anonymous"
+		media="(min-width: 769px)"
+		fetchpriority="low"
+	/>
+	<link
+		rel="preload"
+		href="/indices/tier0-bo.msgpack.zst"
+		as="fetch"
+		type="application/octet-stream"
+		crossorigin="anonymous"
+		media="(min-width: 769px)"
+		fetchpriority="low"
+	/>
 </svelte:head>
 
 <div class="app-shell">
