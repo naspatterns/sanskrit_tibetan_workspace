@@ -6,6 +6,7 @@
 	import { entryLang, langBalancedTop, langBalancedRest, type EntryLang } from '$lib/search/lang';
 	import { isCoreReady, isKeyLoaded, getIndexBundle } from '$lib/indices/store';
 	import { loadTiered } from '$lib/indices/loader';
+	import { resolveDataMode } from '$lib/indices/detect';
 	import { chipStyle, styleFor } from '$lib/search/source-colors';
 	import { searchEdgeApi } from '$lib/search/apiSearch';
 	import type {
@@ -39,6 +40,35 @@
 
 	const result = $derived(performSearch(query));
 	let modalEntry = $state<Tier0Result | null>(null);
+
+	// Sprint 1 A6 — Lazy mode users (mobile / saveData / slow connections)
+	// would otherwise pay 600ms Edge API latency on every single query. The
+	// moment they touch the search bar we kick off a background core-tier
+	// load so by the time they finish typing their second query the local
+	// bundle is already populated and Map.get serves <1ms. Single-fire to
+	// avoid duplicate fetches in full mode (+layout already loaded core).
+	let coreBackfillTriggered = false;
+	function maybeBackfillCore() {
+		if (coreBackfillTriggered) return;
+		if (isCoreReady()) {
+			coreBackfillTriggered = true;
+			return;
+		}
+		if (resolveDataMode() !== 'lazy') return; // full mode already loading
+		coreBackfillTriggered = true;
+		const start = () =>
+			loadTiered(['core'], () => {}).catch((e) => {
+				console.warn('focus-prefetch core load failed:', e);
+				coreBackfillTriggered = false;
+			});
+		const ric = (
+			window as unknown as {
+				requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number;
+			}
+		).requestIdleCallback;
+		if (ric) ric(start, { timeout: 1000 });
+		else setTimeout(start, 0);
+	}
 
 	// Sprint 1 A3 — reverseMeta is a 8.9MB index used only to render iast +
 	// dict labels for reverse-hit entry IDs. Defer its load until the user
@@ -283,7 +313,11 @@
 				autocapitalize="off"
 				spellcheck="false"
 				class="search-input"
-				onfocus={() => (inputFocused = true)}
+				onfocus={() => {
+					inputFocused = true;
+					maybeBackfillCore(); // Sprint 1 A6
+				}}
+				onpointerenter={maybeBackfillCore}
 				onblur={() => (inputFocused = false)}
 				onkeydown={onInputKey}
 			/>
