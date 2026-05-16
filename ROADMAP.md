@@ -275,7 +275,7 @@ Phase 4 배포 직전 데이터 정합성·완전성·UX·코드 품질·배포 
 - D5 Latency: Map.get 모두 < 1µs ✅, cold load 2.35s (Python)
 - D6 Service Worker: v3 cache, 7 indices precache, scope-limited ✅
 - D9 Declension HMR race: production code path 분석 — race 부재 ✅
-- Lighthouse (production preview): Performance 45 (측정 artifact, splash + SW cold), **Accessibility 95 ✅ (목표 달성)**, Best Practices 100, SEO 82
+- Lighthouse (production preview at Phase 3.5b): Performance 45 (측정 artifact, splash + SW cold), **Accessibility 95 ✅ (목표 달성)**, Best Practices 100, SEO 82 — *Sprint 1 (2026-05-16) 이후 desktop 85 / mobile 96으로 개선됨; `data/reports/audit-2026-04-30/audit-sprint1-lighthouse.md` 참조*
 - Sentinel 50 queries draft + 사용자 #15 정정 (mahā)
 - 사용자 시연 가이드 작성 (`audit-C-demo-guide.md`)
 
@@ -394,7 +394,7 @@ main = `bf1a877`. 옵션 B 결정 (UI/UX + 코드 품질) + Phase 3.7 데이터 
 
 **Original 3.6 polish**:
 - 모바일 반응형 (≤768px) — devtools 시뮬 (audit-C-demo-guide.md)
-- Lighthouse Performance fix — 현재 45 (측정 artifact, splash + SW cold load main thread block). zstd Web Worker 이전 시 80+ 예상
+- ~~Lighthouse Performance fix — 현재 45 (측정 artifact, splash + SW cold load main thread block). zstd Web Worker 이전 시 80+ 예상~~ **✅ Resolved in Sprint 1 A1 (commit `495937d`): 85 desktop / 96 mobile**
 - Accessibility ≥ 95 ✅ (Day 3 production preview 측정 완료)
 - 키보드 navigation 완성 (tab order, focus rings)
 - Loading state 고도화 (per-channel progress)
@@ -402,7 +402,7 @@ main = `bf1a877`. 옵션 B 결정 (UI/UX + 코드 품질) + Phase 3.7 데이터 
 **Phase 3.6 완료 기준**:
 - v1 대비 모든 검색 채널 + 곡용 탭 + 역검색이 의미 있게 동작 (P0-1, P0-2, P1-1, P1-2 fix 후)
 - query latency <1ms 유지 (ADR-011 D)
-- Lighthouse Performance ≥ 80 (zstd Worker 후 80+, deployed CDN으로 90+)
+- Lighthouse Performance ≥ 80 ✅ (Sprint 1 measured: desktop 85, mobile 96)
 - Accessibility ≥ 95 ✅
 - 모바일 반응형 정상
 - vitest ≥ 80 cases (parse.ts + loader.ts 테스트 추가)
@@ -524,7 +524,7 @@ main = `bf1a877`. 옵션 B 결정 (UI/UX + 코드 품질) + Phase 3.7 데이터 
     dir → adapter-static build (216 KB shell, no indices)
 - ✅ Production deploys: `wrangler pages deploy ./build` (local-only —
   indices 89 MB live on maintainer's machine)
-- ⏭️ Lighthouse 재측정 (Phase 3.6 baseline: a11y 95, perf 45)
+- ✅ Lighthouse 재측정 완료 — Sprint 1 (2026-05-16): a11y 95, **desktop perf 85**, **mobile perf 96**. 상세: `data/reports/audit-2026-04-30/audit-sprint1-lighthouse.md`
 
 ### 4.3 모니터링 ⏭️
 - ✅ Cloudflare Analytics 자동 (Pages free tier 포함, dashboard에서 확인)
@@ -544,9 +544,10 @@ main = `bf1a877`. 옵션 B 결정 (UI/UX + 코드 품질) + Phase 3.7 데이터 
 - 한 달 후 v1 deprecation 공지
 
 ### 4.6 잔여 검증 (next session)
-- ⏭️ 브라우저 SW (`stw-indices-v5`) 정상 동작 (devtools Application → Cache)
-- ⏭️ Lighthouse 재측정 vs Phase 3.6 baseline
-- ⏭️ Sentinel 50/215 production URL에서 재검증
+- ⏭️ 브라우저 SW (`stw-indices-v8`) 정상 동작 (devtools Application → Cache)
+- ✅ Lighthouse 재측정 — Sprint 1 (2026-05-16): desktop 85, mobile 96. `data/reports/audit-2026-04-30/audit-sprint1-lighthouse.md`
+- ✅ Sentinel 50 production URL 재검증 — Sprint 1 deploy (50/50 ✅)
+- ⏭️ Sentinel 215 production URL에서 재검증
 - ⏭️ Mobile 시뮬레이션 (≤768px breakpoint)
 
 **완료 기준 (4.1)**: ✅ v2 production URL에서 vajracchedikā 검색 →
