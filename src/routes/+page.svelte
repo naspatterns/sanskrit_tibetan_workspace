@@ -4,7 +4,8 @@
 	import { goto } from '$app/navigation';
 	import { performSearch } from '$lib/stores/search';
 	import { entryLang, langBalancedTop, langBalancedRest, type EntryLang } from '$lib/search/lang';
-	import { isCoreReady, getIndexBundle } from '$lib/indices/store';
+	import { isCoreReady, isKeyLoaded, getIndexBundle } from '$lib/indices/store';
+	import { loadTiered } from '$lib/indices/loader';
 	import { chipStyle, styleFor } from '$lib/search/source-colors';
 	import { searchEdgeApi } from '$lib/search/apiSearch';
 	import type {
@@ -38,6 +39,32 @@
 
 	const result = $derived(performSearch(query));
 	let modalEntry = $state<Tier0Result | null>(null);
+
+	// Sprint 1 A3 — reverseMeta is a 8.9MB index used only to render iast +
+	// dict labels for reverse-hit entry IDs. Defer its load until the user
+	// actually sees a reverse hit. `reverseMetaVersion` is the cache-busting
+	// key the {#each (eid + ver)} block reads so Svelte re-renders the list
+	// once the lazy load resolves. Until then the UI shows `(미상)` +
+	// `dictFromEntryId()` fallback — already supported in the template.
+	let reverseMetaVersion = $state(0);
+	let lazyLoadTriggered = $state(false);
+	$effect(() => {
+		if (lazyLoadTriggered) return;
+		if (!result || result.reverse.length === 0) return;
+		if (isKeyLoaded('reverseMeta')) {
+			reverseMetaVersion = 1; // already there — flag visible for template
+			return;
+		}
+		lazyLoadTriggered = true;
+		loadTiered(['lazy'], () => {})
+			.then(() => {
+				reverseMetaVersion = Date.now();
+			})
+			.catch((e) => {
+				console.warn('reverseMeta lazy load failed:', e);
+				lazyLoadTriggered = false; // permit retry next render
+			});
+	});
 
 	// Phase 5 — Edge API fallback. When local search misses (no tier0 hit
 	// AND no equivalents row), fetch from D1 Workers. Debounced + cancelable.
@@ -481,8 +508,8 @@
 							<code>{hit.language}</code> · <code>{hit.token}</code> →
 							<strong>{hit.entryIds.length}</strong> matches
 						</summary>
-						<ul class="rev-list">
-							{#each hit.entryIds.slice(0, 30) as eid}
+						<ul class="rev-list" data-meta-version={reverseMetaVersion}>
+							{#each hit.entryIds.slice(0, 30) as eid (eid + '@' + reverseMetaVersion)}
 								{@const meta = bundle.reverseMeta.ids.get(eid)}
 								{@const iast = meta ? meta[0] : '(미상)'}
 								{@const dictSlug = meta

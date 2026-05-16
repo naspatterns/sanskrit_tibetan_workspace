@@ -179,9 +179,15 @@ describe('createEmptyBundle (Phase 4.1)', () => {
 	});
 });
 
-describe('TIER_KEYS (Phase 4.1)', () => {
+describe('TIER_KEYS (Phase 4.1 + Sprint 1 A3)', () => {
 	it('partitions every IndexBundle key across exactly one tier', () => {
-		const all = [...TIER_KEYS.core, ...TIER_KEYS.extra, ...TIER_KEYS.auxiliary];
+		// Sprint 1 A3: reverseMeta moved from auxiliary to new `lazy` tier.
+		const all = [
+			...TIER_KEYS.core,
+			...TIER_KEYS.extra,
+			...TIER_KEYS.auxiliary,
+			...TIER_KEYS.lazy
+		];
 		// no duplicates
 		expect(new Set(all).size).toBe(all.length);
 		// covers exactly the 9 keys of IndexBundle
@@ -202,5 +208,14 @@ describe('TIER_KEYS (Phase 4.1)', () => {
 
 	it('core tier holds only the keys needed for first-screen autocomplete + top hits', () => {
 		expect(TIER_KEYS.core).toEqual(['headwords', 'tier0', 'tier0Bo']);
+	});
+
+	it('auxiliary tier no longer carries reverseMeta (Sprint 1 A3)', () => {
+		expect(TIER_KEYS.auxiliary).not.toContain('reverseMeta');
+		expect(TIER_KEYS.auxiliary).toEqual(['reverseEn', 'reverseKo', 'declension']);
+	});
+
+	it('lazy tier holds reverseMeta only — opt-in via explicit loadTiered call', () => {
+		expect(TIER_KEYS.lazy).toEqual(['reverseMeta']);
 	});
 });

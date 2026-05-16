@@ -154,15 +154,24 @@ export function createEmptyBundle(): IndexBundle {
 
 /** Distinct loading tiers. Allow the UI to render and search via Edge API
  * before *anything* is loaded, then progressively enrich. */
-export type LoadTier = 'core' | 'extra' | 'auxiliary';
+export type LoadTier = 'core' | 'extra' | 'auxiliary' | 'lazy';
 
-/** Maps each tier to the IndexBundle keys it owns. The `core` tier is the
- * minimum set required to serve a useful local search: headword list (for
- * prefix autocomplete) + tier0 (Sanskrit top-10K) + tier0Bo (Tibetan top-10K).
- * `extra` adds Sanskrit 10K..20K + equivalents (Zone B cross-language).
- * `auxiliary` adds reverse search (EN/KO gloss → entry) + Heritage Declension. */
+/** Maps each tier to the IndexBundle keys it owns.
+ *
+ * - **core**: minimum set for useful local search — headword list (prefix
+ *   autocomplete) + tier0 (Sanskrit top-10K) + tier0Bo (Tibetan top-10K).
+ * - **extra**: Sanskrit 10K..20K + equivalents (Zone B cross-language).
+ * - **auxiliary**: reverse search (EN/KO gloss → entry) + Heritage Declension.
+ * - **lazy** *(Sprint 1 A3)*: NOT auto-loaded. Caller invokes
+ *   `loadTiered(['lazy'])` only when the feature lights up. Currently holds
+ *   `reverseMeta` (8.9 MB) which renders the `iast` + `dict_slug` for a
+ *   reverse hit's entry IDs. Reverse hits are rare in typical sessions; the
+ *   UI already falls back to `(미상)` + `dictFromEntryId()` when this index
+ *   is missing, so deferring it costs nothing for users who never see a
+ *   reverse hit. */
 export const TIER_KEYS: Record<LoadTier, ReadonlyArray<keyof IndexBundle>> = {
 	core: ['headwords', 'tier0', 'tier0Bo'],
 	extra: ['tier0Extended', 'equivalents'],
-	auxiliary: ['reverseEn', 'reverseKo', 'reverseMeta', 'declension']
+	auxiliary: ['reverseEn', 'reverseKo', 'declension'],
+	lazy: ['reverseMeta']
 };
