@@ -9,6 +9,7 @@
 	import SiteHeader from '$lib/components/SiteHeader.svelte';
 	import SiteFooter from '$lib/components/SiteFooter.svelte';
 	import '$lib/../styles/theme.css';
+	import '$lib/../styles/fonts.css';
 	import { applyTheme, getStoredTheme } from '$lib/stores/theme';
 
 	let { children } = $props();
@@ -60,14 +61,18 @@
 		name="description"
 		content="Sanskrit · Tibetan · Pali · Chinese · Korean multi-dictionary lexicon. 3.8M entries across 148 dictionaries."
 	/>
+	<!--
+		Sprint 1 A5 (2026-05-16): Noto Sans Devanagari is now self-hosted from
+		/fonts/NotoSansDevanagari-subset.woff2 via src/styles/fonts.css.
+		Removed fonts.googleapis.com (render-blocking stylesheet) and
+		fonts.gstatic.com (font payload) — both also drop out of CSP.
+	-->
 	<link
-		rel="preconnect"
-		href="https://fonts.googleapis.com"
+		rel="preload"
+		href="/fonts/NotoSansDevanagari-subset.woff2"
+		as="font"
+		type="font/woff2"
 		crossorigin="anonymous"
-	/>
-	<link
-		rel="stylesheet"
-		href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&display=swap"
 	/>
 	<!--
 		Sprint 1 A2 (2026-05-16): preload the three `core` tier index files in
