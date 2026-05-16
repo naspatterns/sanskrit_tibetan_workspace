@@ -62,59 +62,13 @@
 		content="Sanskrit · Tibetan · Pali · Chinese · Korean multi-dictionary lexicon. 3.8M entries across 148 dictionaries."
 	/>
 	<!--
-		Sprint 1 A5 (2026-05-16): Noto Sans Devanagari is now self-hosted from
-		/fonts/NotoSansDevanagari-subset.woff2 via src/styles/fonts.css.
-		Removed fonts.googleapis.com (render-blocking stylesheet) and
-		fonts.gstatic.com (font payload) — both also drop out of CSP.
+		Sprint 1 A2 + A5 preload hints (font + index files) live in
+		src/app.html instead of here. Reason: adapter-static emits an
+		SPA-fallback HTML where `<svelte:head>` only applies after JS
+		hydrates — too late to win the parallel-download race against the JS
+		bundle. app.html puts them in the initial HTML where the browser
+		sees them before any JS runs.
 	-->
-	<link
-		rel="preload"
-		href="/fonts/NotoSansDevanagari-subset.woff2"
-		as="font"
-		type="font/woff2"
-		crossorigin="anonymous"
-	/>
-	<!--
-		Sprint 1 A2 (2026-05-16): preload the three `core` tier index files in
-		parallel with the JS bundle. HTTP/2 multiplex pays the latency tax once
-		and shaves ~200-500ms off TTI on desktop.
-
-		`media="(min-width: 769px)"` mirrors detect.ts `isProbablySlow()` — the
-		same threshold that flips users to lazy mode. Phones / narrow viewports
-		skip the preload entirely so we don't waste their data plan downloading
-		~38 MB they're not going to use.
-
-		`fetchpriority="low"` keeps these from competing with the JS bundle for
-		the first connection slots; browsers will still saturate the pipe with
-		them in parallel afterwards.
-	-->
-	<link
-		rel="preload"
-		href="/indices/headwords.txt.zst"
-		as="fetch"
-		type="application/octet-stream"
-		crossorigin="anonymous"
-		media="(min-width: 769px)"
-		fetchpriority="low"
-	/>
-	<link
-		rel="preload"
-		href="/indices/tier0.msgpack.zst"
-		as="fetch"
-		type="application/octet-stream"
-		crossorigin="anonymous"
-		media="(min-width: 769px)"
-		fetchpriority="low"
-	/>
-	<link
-		rel="preload"
-		href="/indices/tier0-bo.msgpack.zst"
-		as="fetch"
-		type="application/octet-stream"
-		crossorigin="anonymous"
-		media="(min-width: 769px)"
-		fetchpriority="low"
-	/>
 </svelte:head>
 
 <div class="app-shell">

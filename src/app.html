@@ -4,6 +4,65 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="text-scale" content="scale" />
+
+		<!--
+			Sprint 1 A5 (2026-05-16) — self-hosted Noto Sans Devanagari preload.
+			Lives in app.html (not +layout.svelte's <svelte:head>) because the
+			static adapter ships an SPA-fallback `index.html`; svelte:head only
+			applies after hydration, by which time the font request has already
+			fired. Putting the preload here means it kicks off in parallel with
+			the JS bundle.
+		-->
+		<link
+			rel="preload"
+			href="/fonts/NotoSansDevanagari-subset.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin="anonymous"
+		/>
+
+		<!--
+			Sprint 1 A2 (2026-05-16) — preload the three `core` tier index files.
+			Same SSR-vs-SPA reason as above: app.html guarantees the hints make
+			it into the initial HTML.
+
+			`media="(min-width: 769px)"` mirrors src/lib/indices/detect.ts
+			isProbablySlow() — phones / narrow viewports default to lazy mode
+			and would never load these locally, so skip the ~38 MB fetch on
+			their data plans.
+
+			`fetchpriority="low"` keeps these from competing with the JS bundle
+			for the first HTTP/2 slots while still letting the connection
+			saturate with them in parallel afterwards.
+		-->
+		<link
+			rel="preload"
+			href="/indices/headwords.txt.zst"
+			as="fetch"
+			type="application/octet-stream"
+			crossorigin="anonymous"
+			media="(min-width: 769px)"
+			fetchpriority="low"
+		/>
+		<link
+			rel="preload"
+			href="/indices/tier0.msgpack.zst"
+			as="fetch"
+			type="application/octet-stream"
+			crossorigin="anonymous"
+			media="(min-width: 769px)"
+			fetchpriority="low"
+		/>
+		<link
+			rel="preload"
+			href="/indices/tier0-bo.msgpack.zst"
+			as="fetch"
+			type="application/octet-stream"
+			crossorigin="anonymous"
+			media="(min-width: 769px)"
+			fetchpriority="low"
+		/>
+
 		%sveltekit.head%
 	</head>
 	<body data-sveltekit-preload-data="hover">
